@@ -2,7 +2,7 @@
 // tcpdf();
 $hs = ' <table style="text-align:center">
             <tr>
-                <td style="font-size: 18px; font-weight: bold;">PT DIGITAL GOLDEN COMMUNICATION</td>
+                <td style="font-size: 18px; font-weight: bold;">PT GOLDEN COMMUNICATION</td>
             </tr>
             <tr>
                 <td style="font-size: 12px; font-weight: normal;">Jalan Teuku Umar No 10 G Penengahan - Kedaton Bandar Lampung</td>
@@ -71,6 +71,7 @@ ob_start();
     </style>
 </head>
 <body>
+    <?php if ($this->uri->segment(3) == 'fetchmarket') : ?>
     <h2>Laporan Marketshare</h2>
     <table>
         <thead>
@@ -135,6 +136,7 @@ ob_start();
         <?php endforeach; ?>
         </tbody>
     </table>
+    <?php elseif ($this->uri->segment(3) == 'fetchrecharge') : ?>
     <h2>Laporan Rechargeshare</h2>
     <table>
         <thead>
@@ -199,6 +201,72 @@ ob_start();
         <?php endforeach; ?>
         </tbody>
     </table>
+    <?php elseif ($this->uri->segment(3) == 'fetchsales') : ?>
+    <h2>Laporan Salesshare</h2>
+    <table>
+        <thead>
+            <tr style="text-align: center">         
+                <th rowspan="2">No</th>
+                <th rowspan="2">Tanggal</th>
+                <th rowspan="2">Kecamatan</th>
+                <th colspan="3">Mount Telkomsel</th>
+                <th colspan="2">Mount Indosat</th>
+                <th rowspan="2">Mount XL</th>
+                <th rowspan="2">Mount Tri</th>
+                <th rowspan="2">Mount Smartfrend</th>
+                <th rowspan="2">Total</th>
+                <th rowspan="2">Presentase Telkomsel</th>
+                <th rowspan="2">Presentase Indosat</th>
+                <th rowspan="2">Presentase XL</th>
+                <th rowspan="2">Presentase Tri</th>
+                <th rowspan="2">Presentase Smartfrend</th>
+                <th rowspan="2">Total Presentase</th>
+            </tr>
+            <tr>
+                <th>Simpati</th>
+                <th>AS</th>
+                <th>Loop</th>
+                <th>Mentari</th>
+                <th>IM3</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php $no = 1;?>
+        <?php foreach($export as $ex) : ?>
+        <tr>
+            <?php
+            $total = $ex->qty_telkomsel_salesshare + $ex->qty_indosat_salesshare + $ex->qty_xl_salesshare + $ex->qty_tri_salesshare + $ex->qty_smartfrend_salesshare;
+            $tel = round(($ex->qty_telkomsel_salesshare / $total) * 100, 2);
+            $ind = round(($ex->qty_indosat_salesshare / $total) * 100, 2);
+            $xl = round(($ex->qty_xl_salesshare / $total) * 100, 2);
+            $tri = round(($ex->qty_tri_salesshare / $total) * 100, 2);
+            $smart = round(($ex->qty_smartfrend_salesshare / $total) * 100, 2);
+            $persentage = round($tel + $ind + $xl + $tri + $smart);
+            ?>
+            <td><?php echo $no ?></td>
+            <td><?php echo $ex->tanggal ?></td>
+            <td><?php echo $ex->kecamatan ?></td>
+            <td style="text-align:right"><?php echo $ex->qty_simpati_salesshare ?></td>
+            <td style="text-align:right"><?php echo $ex->qty_as_salesshare ?></td>
+            <td style="text-align:right"><?php echo $ex->qty_loop_salesshare ?></td>
+            <td style="text-align:right"><?php echo $ex->qty_mentari_salesshare ?></td>
+            <td style="text-align:right"><?php echo $ex->qty_im3_salesshare ?></td>
+            <td style="text-align:right"><?php echo $ex->qty_xl_salesshare ?></td>
+            <td style="text-align:right"><?php echo $ex->qty_tri_salesshare ?></td>
+            <td style="text-align:right"><?php echo $total ?></td>
+            <td style="text-align:right"><?php echo $total ?></td>
+            <td style="text-align:right"><?php echo $tel . "%"?></td>
+            <td style="text-align:right"><?php echo $ind . "%"?></td>
+            <td style="text-align:right"><?php echo $xl . "%"?></td>
+            <td style="text-align:right"><?php echo $tri . "%"?></td>
+            <td style="text-align:right"><?php echo $smart . "%"?></td>
+            <td style="text-align:right"><?php echo $persentage . "%"?></td>
+        </tr>
+        <?php $no++; ?>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php endif;?>
     <br><br><br>
     <table class="ttd">
         <tr><td colspan="7"></td><td colspan="2">Mengetahui,</td></tr>

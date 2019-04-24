@@ -14,19 +14,43 @@
 	<section class="content">
 
 		<div class="container-fluid">
-
+			<div class="card">
+				<div class="header">
+					<div class="row">
+						<form action="<?php echo site_url('adminindirect/scorecardcollector/fetchperiode') ?>" method="post">
+							<div class="col-md-5">
+								<div class="form-group form-float">
+									<div class="form-line" id="bs_datepicker_container">
+										<input class="form-control" type="text" name="start" required/>
+										<label class="form-label" for="start">Periode Awal*</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-group form-float">
+									<div class="form-line" id="bs_datepicker_container">
+										<input class="form-control" type="text" name="end" required/>
+										<label class="form-label" for="end">Periode Akhir*</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<button name="xls" class="btn btn-success waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
+								<span>Export Excel</span></button>
+								<button name="pdf" class="btn btn-danger waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
+								<span>Export PDF</span></button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 			<!-- DataTables -->
 			<div class="card">
 				<div class="header">
 					<div class="row">
 						<div class="col-md-6"><h2>Scorecard Collector</h2></div>
 						<div class="col-md-6" style="text-align: right">
-							<h2><a href="<?php echo site_url('adminindirect/scorecardcollector/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-							<span>Tambah<span></a>
-							<a href="<?php echo site_url('adminindirect/scorecardcollector/export') ?>" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
-							<span>Export Excel<span></a>
-							<a href="<?php echo site_url('adminindirect/scorecardcollector/exportpdf') ?>" class="btn btn-danger waves-effect" target="blank"><i class="material-icons">save_alt</i>
-							<span>Export PDF<span></a></h2>
+							
 						</div>
 					</div>				
 				</div>

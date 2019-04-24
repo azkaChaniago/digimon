@@ -138,13 +138,63 @@ class Sharebroadband_model extends CI_Model
     /**
      * method for admin indirect
      */
-    public function displayBroadband() 
+    public function displayBroadband($start=null, $end=null) 
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS b');
         $this->db->join('tbl_user AS u', 'u.kode_user = b.kode_user', 'inner');
         $this->db->join('tbl_tdc AS t', 't.kode_tdc = u.kode_tdc', 'inner');
+        if ($start && $end) :
+            $this->db->where("b.tanggal BETWEEN '$start' AND '$end'");
+        endif;
         return $this->db->get()->result(); 
+    }
+
+    public function chartBroadband($month)
+    {
+        $sql = $this->db->query("SELECT 
+                                    sum(qty_telkomsel_marketshare) AS Telkomsel, 
+                                    sum(qty_indosat_marketshare) AS Indosat, 
+                                    sum(qty_xl_marketshare) AS XL, 
+                                    sum(qty_tri_marketshare) AS Tri, 
+                                    sum(qty_smartfrend_marketshare) AS Smartfrend
+                                FROM tbl_market_share_broadband
+                                WHERE monthname(tanggal) = '$month'");
+        $res = $sql->result();
+        // mysqli_next_result($this->db->conn_id);
+        return $res;
+    }
+
+    public function chartBroadbandKab($month)
+    {
+        $sql = $this->db->query("SELECT
+                                    kabupaten,
+                                    sum(qty_telkomsel_marketshare) AS Telkomsel, 
+                                    sum(qty_indosat_marketshare) AS Indosat, 
+                                    sum(qty_xl_marketshare) AS XL, 
+                                    sum(qty_tri_marketshare) AS Tri, 
+                                    sum(qty_smartfrend_marketshare) AS Smartfrend 
+                                FROM tbl_market_share_broadband
+                                WHERE monthname(tanggal) = '$month'
+                                GROUP BY kabupaten");
+        $res = $sql->result();
+        // mysqli_next_result($this->db->conn_id);
+        return $res;
+    }
+
+    public function chartBroadbandKec($kab,$month)
+    {
+        $sql = $this->db->query("select
+                                    kecamatan,
+                                    sum(qty_telkomsel_marketshare) AS Telkomsel, 
+                                    sum(qty_indosat_marketshare) AS Indosat, 
+                                    sum(qty_xl_marketshare) AS XL, 
+                                    sum(qty_tri_marketshare) AS Tri, 
+                                    sum(qty_smartfrend_marketshare) AS Smartfrend 
+                                from tbl_market_share_broadband where kabupaten = '$kab'
+                                AND monthname(tanggal) = '$month'
+                                group by kecamatan");
+        return $sql->result();
     }
 
 }

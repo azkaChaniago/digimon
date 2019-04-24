@@ -1,31 +1,59 @@
+<?php
+if ($this->session->userdata('access') != 'adm_indirect' && $this->session->userdata('access') != 'ADM_INDIRECT')
+{
+    $this->session->sess_destroy();
+    redirect(site_url('login'));
+}
+?>
 
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<title><?php echo SITE_NAME ?></title>
+<!-- Favicon-->
+<link rel="icon" href="<?php echo base_url('assets/favicon.ico') ?>" type="image/x-icon">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
-    <title><?php echo SITE_NAME .": ". ucfirst($this->uri->segment(1)) ." - ". ucfirst($this->uri->segment(2)) ?></title>
+<link href="https://www.jsdelivr.com/package/npm/pdfjs-dist" />
 
-    <!-- My own css -->
-    <link href="<?php echo base_url('assets/old_template/css/styles.css');?>" rel="stylesheet">
-    
-    <!-- Bootstrap core CSS-->
-    <link href="<?php echo base_url('assets/old_template/assets/bootstrap/css/bootstrap.min.css');?>" rel="stylesheet">
+<!-- Bootstrap Core Css -->
+<link href="<?php echo base_url('assets/plugins/bootstrap/css/bootstrap.css') ?>" rel="stylesheet">
 
-    <!-- Custom fonts for this template-->
-    <link href="<?php echo base_url('assets/old_template/assets/fontawesome-free/css/all.min.css');?>" rel="stylesheet" type="text/css">
+<!-- Waves Effect Css -->
+<link href="<?php echo base_url('assets/plugins/node-waves/waves.css') ?>" rel="stylesheet" />
 
-    <!-- Page level plugin CSS-->
-    <link href="<?php echo base_url('assets/old_template/assets/datatables/dataTables.bootstrap4.css');?>" rel="stylesheet">
+<!-- Animation Css -->
+<link href="<?php echo base_url('assets/plugins/animate-css/animate.css') ?>" rel="stylesheet" />
 
-    <!-- Custom styles for this template-->
-    <link href="<?php echo base_url('assets/old_template/css/sb-admin.css');?>" rel="stylesheet">
+<!-- Bootstrap Material Datetime Picker Css -->
+<link href="<?php echo base_url('assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') ?>" rel="stylesheet" />
 
-    <!-- bootstrap-wysiwyg -->
-    <link href="<?php echo base_url('assets/old_template/assets/google-code-prettify/bin/prettify.min.css') ?>" rel="stylesheet">
-    <!-- Custom Theme Style -->
-    <link href="<?php echo base_url('assets/old_template/css/custom.min.css') ?>" rel="stylesheet">
+<!-- Bootstrap DatePicker Css -->
+<link href="<?php echo base_url('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css') ?>" rel="stylesheet" />
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<!-- Wait Me Css -->
+<link href="<?php echo base_url('assets/plugins/waitme/waitMe.css') ?>" rel="stylesheet" />
+
+<!-- Bootstrap Select Css -->
+<link href="<?php echo base_url('assets/plugins/bootstrap-select/css/bootstrap-select.css') ?>" rel="stylesheet" />
+
+<?php if ($this->uri->segment(2) == 'indirect'): ?>
+    <!-- Morris Chart Css-->
+    <link href="<?php echo base_url('assets/plugins/morrisjs/morris.css') ?>" rel="stylesheet" />
+<?php endif; ?>
+
+<!-- Sweet Alert Css -->
+<link href="<?php echo base_url('assets/plugins/sweetalert/sweetalert.css') ?>" rel="stylesheet" />
+
+<!-- JQuery DataTable Css -->
+<link href="<?php echo base_url('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') ?>" rel="stylesheet">
+
+<!-- Custom Css -->
+<link href="<?php echo base_url('assets/css/style.css') ?>" rel="stylesheet">
+
+<!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+<link href="<?php echo base_url('assets/css/themes/all-themes.css') ?>" rel="stylesheet" />
+

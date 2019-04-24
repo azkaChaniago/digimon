@@ -2,7 +2,7 @@
 // tcpdf();
 $hs = ' <table style="text-align:center">
             <tr>
-                <td style="font-size: 18px; font-weight: bold;">PT DIGITAL GOLDEN COMMUNICATION</td>
+                <td style="font-size: 18px; font-weight: bold;">PT GOLDEN COMMUNICATION</td>
             </tr>
             <tr>
                 <td style="font-size: 12px; font-weight: normal;">Jalan Teuku Umar No 10 G Penengahan - Kedaton Bandar Lampung</td>
@@ -55,17 +55,19 @@ ob_start();
     </style>
 </head>
 <body>
+
     <h2>Laporan Histori Order</h2>
     <table>
         <tr style="text-align: center"> 
             <thead>
-            <th>Tahun</th><th>Bulan</th><th>Nama Marketing</th><th>Nama Outlet</th><th>Simpati</th><th>AS</th><th>Loop</th><th>NSB</th><th>MKIOS Reguler</th><th>MKIOS Bulk</th><th>GT Pulsa</th>
+            <th>Tahun</th><th>Bulan</th><th>Nama TDC</th><th>Nama Marketing</th><th>Nama Outlet</th><th>Simpati</th><th>AS</th><th>Loop</th><th>NSB</th><th>MKIOS Reguler</th><th>MKIOS Bulk</th><th>GT Pulsa</th>
             </thead>
         </tr>
         <?php foreach($histori as $hist) : ?>
         <tr>
             <td><?php echo date('Y', strtotime($hist->tanggal)) ?></td>
             <td><?php echo date('F', strtotime($hist->tanggal)) ?></td>
+            <td><?php echo $hist->nama_tdc ?></td>
             <td><?php echo $hist->nama_marketing ?></td>
             <td><?php echo $hist->nama_outlet ?></td>
             <td style="text-align:right"><?php echo $hist->simpati ?></td>

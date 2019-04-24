@@ -1,58 +1,77 @@
-<!-- Bootstrap core JavaScript-->
-<script src="<?php echo base_url('assets/old_template/jquery/jquery.min.js') ?>"></script>
+<!-- Jquery Core Js -->
+<script src="<?php echo base_url('assets/plugins/jquery/jquery.min.js') ?>"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
-<script src="<?php echo base_url('assets/old_template/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="<?php echo base_url('assets/old_template/jquery-easing/jquery.easing.min.js') ?>"></script>
-<!-- Page level plugin JavaScript-->
-<script src="<?php echo base_url('assets/old_template/chart.js/Chart.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/old_template/datatables/jquery.dataTables.js') ?>"></script>
-<script src="<?php echo base_url('assets/old_template/datatables/dataTables.bootstrap4.js') ?>"></script>
-<!-- Custom scripts for all pages-->
-<script src="<?php echo base_url('assets/old_template/js/sb-admin.min.js') ?>"></script>
-<!-- Demo scripts for this page-->
-<script src="<?php echo base_url('assets/old_template/js/demo/datatables-demo.js') ?>"></script>
-<!-- <script src="<?php echo base_url('assets/old_template/js/demo/chart-bar-demo.js') ?>"></script> -->
-<!-- CKEditor -->
-<script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
-<!--script src="<?php echo base_url('assets/old_template/ckeditor/ckeditor.js')?>"></script-->
+<!-- Bootstrap Core Js -->
+<script src="<?php echo base_url('assets/plugins/bootstrap/js/bootstrap.js') ?>"></script>
 
-<!--cript src="<?php echo base_url('assets/old_template/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js') ?>"></script>
-<script src="<?php echo base_url('assets/old_template/jquery.hotkeys/jquery.hotkeys.js') ?>"></script>
-<script src="<?php echo base_url('assets/old_template/google-code-prettify/src/prettify.js') ?>"></script-->
+<!-- Select Plugin Js -->
+<script src="<?php echo base_url('assets/plugins/bootstrap-select/js/bootstrap-select.js') ?>"></script>
 
-<!-- Custom Theme Scripts -->
-<script src="<?php echo base_url('assets/old_template/js/custom.min.js') ?>"></script>
+<!-- Slimscroll Plugin Js -->
+<script src="<?php echo base_url('assets/plugins/jquery-slimscroll/jquery.slimscroll.js') ?>"></script>
+
+<!-- Waves Effect Plugin Js -->
+<script src="<?php echo base_url('assets/plugins/node-waves/waves.js') ?>"></script>
+
+<?php if ($this->uri->segment(2) == 'indirect' || $this->uri->segment(2) == 'sharereguler' || $this->uri->segment(2) == 'sharebroadband' || $this->uri->segment(2) == 'home') : ?>
+    
+    <!-- ChartJs -->
+    <!-- <script src="<?php echo base_url('assets/plugins/chartjs/Chart.bundle.js') ?>"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@1" type="module"></script>     -->
+    
+<?php endif; ?>
+
+<!-- Jquery Validation Plugin Css -->
+<script src="<?php echo base_url('assets/plugins/jquery-validation/jquery.validate.js') ?>"></script>
+
+<!-- JQuery Steps Plugin Js -->
+<script src="<?php echo base_url('assets/plugins/jquery-steps/jquery.steps.js') ?>"></script>
+
+<!-- Sweet Alert Plugin Js -->
+<script src="<?php echo base_url('assets/plugins/sweetalert/sweetalert.min.js') ?>"></script>
+
+ <!-- Jquery DataTable Plugin Js -->
+<script src="<?php echo base_url('assets/plugins/jquery-datatable/jquery.dataTables.js') ?>"></script>
+<script src="<?php echo base_url('assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') ?>"></script>
+<!-- <script src="<?php echo base_url('assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/plugins/jquery-datatable/extensions/export/jszip.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js') ?>"></script>
+<script src="<?php echo base_url('assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js') ?>"></script> -->
+
+<!-- Autosize Plugin Js -->
+<script src="<?php echo base_url('assets/plugins/autosize/autosize.js') ?>"></script>
+
+<!-- Moment Plugin Js -->
+<script src="<?php echo base_url('assets/plugins/momentjs/moment.js') ?>"></script>
+
+<!-- Bootstrap Material Datetime Picker Plugin Js -->
+<script src="<?php echo base_url('assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') ?>"></script>
+
+<!-- Bootstrap Datepicker Plugin Js -->
+<script src="<?php echo base_url('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') ?>"></script>
+
+<!-- Custom Js -->
+<script src="<?php echo base_url('assets/js/admin.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/pages/tables/jquery-datatable.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/pages/forms/form-validation.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/pages/forms/basic-form-elements.js') ?>"></script>
+<!-- <script src="<?php echo base_url('assets/js/pages/forms/advanced-form-elements.js') ?>"></script> -->
+
+<!-- Demo Js -->
+<script src="<?php echo base_url('assets/js/demo.js') ?>"></script>
 
 <script>
-
-// // Restricts input for the given textbox to the given inputFilter.
-// function setInputFilter(textbox, inputFilter) {
-//   ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
-//     textbox.addEventListener(event, function() {
-//       if (inputFilter(this.value)) {
-//         this.oldValue = this.value;
-//         this.oldSelectionStart = this.selectionStart;
-//         this.oldSelectionEnd = this.selectionEnd;
-//       } else if (this.hasOwnProperty("oldValue")) {
-//         this.value = this.oldValue;
-//         this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-//       }
-//     });
-//   });
-// }
-
-// // Restrict input to digits and '.' by using a regular expression filter.
-// setInputFilter(document.getElementsByClassName("myTextBox"), function(value) {
-//   return /^\d*$/.test(value);
-// });
-
 function isNumberKey(evt)
 {
     var charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57))
-    return false;
+        return false;
 
     return true;
 }

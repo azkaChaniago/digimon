@@ -48,7 +48,6 @@
 											<th>Foto</th>
 											<th>Keterangan</th>
 											<th>Tanggal</th>
-											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -60,14 +59,8 @@
 											</td>
 											<td> <?php echo $gal->keterangan ?> </td>
 											<td> <?php echo $gal->tanggal ?> </td>
-											<td width='180' class="text-center" >
-												<a id="toForm" href="#"><i class="material-icons">edit</i></a>
-												<a onclick="deleteConfirm('<?php echo site_url('adminindirect/galeri/remove/'.$gal->id) ?>')" href="#!"><i class="material-icons">delete</i></a>
-												<!-- <a href="<?php echo site_url('adminindirect/galeri/detail/'.$gal->id) ?>"><i class="material-icons">description</i></a>	 -->
-											</td>
 										</tr>
 										<?php endforeach; ?>
-
 									</tbody>
 								</table>
 							</div>

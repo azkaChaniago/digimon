@@ -2,7 +2,7 @@
 // tcpdf();
 $hs = ' <table style="text-align:center">
             <tr>
-                <td style="font-size: 18px; font-weight: bold;">PT DIGITAL GOLDEN COMMUNICATION</td>
+                <td style="font-size: 18px; font-weight: bold;">PT GOLDEN COMMUNICATION</td>
             </tr>
             <tr>
                 <td style="font-size: 12px; font-weight: normal;">Jalan Teuku Umar No 10 G Penengahan - Kedaton Bandar Lampung</td>
@@ -60,6 +60,8 @@ ob_start();
         <thead>
             <tr style="text-align: center">         
                 <th>Tanggal</th>
+                <th>Nama TDC</th>
+                <th>Kabupaten</th>
                 <th>Kecamatan</th>
                 <th>QTY Telkomsel Marketshare</th>
                 <th>QTY Indosat Marketshare</th>
@@ -72,6 +74,8 @@ ob_start();
         <?php foreach($export as $ex) : ?>
         <tr>
             <td><?php echo $ex->tanggal ?></td>
+            <td><?php echo $ex->nama_tdc ?></td>
+            <td><?php echo $ex->kabupaten ?></td>
             <td><?php echo $ex->kecamatan ?></td>
             <td><?php echo $ex->qty_telkomsel_marketshare ?></td>
             <td><?php echo $ex->qty_indosat_marketshare ?></td>

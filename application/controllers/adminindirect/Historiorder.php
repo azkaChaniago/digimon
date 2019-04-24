@@ -121,20 +121,37 @@ class Historiorder extends CI_Controller
         $this->load->view('adminindirect/historiorder/detail', $data);
     }
 
-    public function exportpdf()
+    public function fetchperiode()
+    {
+        $post = $this->input->post();
+        if (isset($post['pdf']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->exportpdf($start, $end);
+        }
+        else if (isset($post['xls']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->export($start, $end);
+        }
+    }
+
+    public function exportpdf($start, $end)
     {
         $data = $this->userSession();
         $data += [
-            'histori' => $this->historiorder_model->getHistori($data['tdc'])
+            'histori' => $this->historiorder_model->displayHistoriOrder($start, $end)
         ];
 
         $this->load->view('adminindirect/historiorder/pdf_export', $data);
     }
 
-    public function export()
+    public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->historiorder_model->getHistori($data['tdc']);
+        $export = $this->historiorder_model->displayHistoriOrder($start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()
@@ -148,28 +165,30 @@ class Historiorder extends CI_Controller
 
         $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue('A1', 'Tanggal')
-            ->setCellValue('B1', 'Nama Marketing')
-            ->setCellValue('C1', 'Nama Outlet')
-            ->setCellValue('D1', 'Simpati')
-            ->setCellValue('E1', 'AS')
-            ->setCellValue('F1', 'Loop')
-            ->setCellValue('G1', 'MKIOS Bulk')
-            ->setCellValue('H1', 'MKIOS Reguler')
-            ->setCellValue('I1', 'GT Pulsa');
+            ->setCellValue('B1', 'Nama TDC')
+            ->setCellValue('C1', 'Nama Marketing')
+            ->setCellValue('D1', 'Nama Outlet')
+            ->setCellValue('E1', 'Simpati')
+            ->setCellValue('F1', 'AS')
+            ->setCellValue('G1', 'Loop')
+            ->setCellValue('H1', 'MKIOS Bulk')
+            ->setCellValue('I1', 'MKIOS Reguler')
+            ->setCellValue('J1', 'GT Pulsa');
 
         $i = 2;
         foreach ($export as $ex)
         {
             $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue('A'. $i , date('Y-m-d', strtotime($ex->tanggal)))
-            ->setCellValue('B'. $i , $ex->nama_marketing)
-            ->setCellValue('C'. $i , $ex->nama_outlet)
-            ->setCellValue('D'. $i , $ex->simpati)
-            ->setCellValue('E'. $i , $ex->as)
-            ->setCellValue('F'. $i , $ex->loop)
-            ->setCellValue('G'. $i , $ex->mkios_bulk)
-            ->setCellValue('H'. $i , $ex->mkios_reguler)
-            ->setCellValue('I'. $i , $ex->gt_pulsa);
+            ->setCellValue('B'. $i , $ex->nama_tdc)
+            ->setCellValue('C'. $i , $ex->nama_marketing)
+            ->setCellValue('D'. $i , $ex->nama_outlet)
+            ->setCellValue('E'. $i , $ex->simpati)
+            ->setCellValue('F'. $i , $ex->as)
+            ->setCellValue('G'. $i , $ex->loop)
+            ->setCellValue('H'. $i , $ex->mkios_bulk)
+            ->setCellValue('I'. $i , $ex->mkios_reguler)
+            ->setCellValue('J'. $i , $ex->gt_pulsa);
             $i++;
         }
         

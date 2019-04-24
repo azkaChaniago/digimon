@@ -154,12 +154,15 @@ class Scorecardcollector_model extends CI_Model {
         return $this->db->get()->row();
     }
 
-    public function displayTargetAssignment()
+    public function displayTargetAssignment($start=null, $end=null)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS ta');
         $this->db->join('tbl_marketing AS m', 'm.kode_marketing = ta.kode_marketing', 'inner');
         $this->db->join('tbl_tdc AS u', 'u.kode_tdc = m.kode_tdc', 'inner');
+        if ($start && $end) :
+            $this->db->where("ta.tanggal BETWEEN '$start' AND '$end'");
+        endif;
         return $this->db->get()->result();
     }
 

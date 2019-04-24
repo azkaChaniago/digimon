@@ -416,12 +416,15 @@ class Sharereguler_model extends CI_Model
     /**
      * 
      */
-    public function getThisTableRecord($table)
+    public function getThisTableRecord($table, $start=null, $end=null)
     {
         $this->db->select('*');
         $this->db->from($table . ' AS sr');
         $this->db->join('tbl_user AS u', 'sr.kode_user = u.kode_user', 'inner');
         $this->db->join('tbl_tdc AS t', 't.kode_tdc = u.kode_tdc', 'inner');
+        if ($start && $end) :
+            $this->db->where("sr.tanggal BETWEEN '$start' AND '$end'");
+        endif;
         return $this->db->get()->result();
     }
 
@@ -455,7 +458,7 @@ class Sharereguler_model extends CI_Model
         return $res;
     }
 
-    public function listGraphKecamaatan($kab)
+    public function chartMarketKec($kab)
     {
         $sql = $this->db->query("select
                                     kecamatan,
@@ -465,6 +468,94 @@ class Sharereguler_model extends CI_Model
                                     sum(qty_tri_marketshare) AS Tri, 
                                     sum(qty_smartfrend_marketshare) AS Smartfrend 
                                 from tbl_reg_marketshare where kabupaten = '$kab'
+                                group by kecamatan");
+        return $sql->result();
+    }
+
+    public function chartRechargeshare()
+    {
+        $sql = $this->db->query("select 
+                                    sum(mount_telkomsel_rechargeshare) AS Telkomsel, 
+                                    sum(mount_indosat_rechargeshare) AS Indosat, 
+                                    sum(mount_xl_rechargeshare) AS XL, 
+                                    sum(mount_tri_rechargeshare) AS Tri, 
+                                    sum(mount_smartfrend_rechargeshare) AS Smartfrend 
+                                from tbl_reg_rechargeshare");
+        $res = $sql->result();
+        // mysqli_next_result($this->db->conn_id);
+        return $res;
+    }
+
+    public function chartRechargeshareKab()
+    {
+        $sql = $this->db->query("select
+                                    kabupaten,
+                                    sum(mount_telkomsel_rechargeshare) AS Telkomsel, 
+                                    sum(mount_indosat_rechargeshare) AS Indosat, 
+                                    sum(mount_xl_rechargeshare) AS XL, 
+                                    sum(mount_tri_rechargeshare) AS Tri, 
+                                    sum(mount_smartfrend_rechargeshare) AS Smartfrend 
+                                from tbl_reg_rechargeshare
+                                group by kabupaten");
+        $res = $sql->result();
+        // mysqli_next_result($this->db->conn_id);
+        return $res;
+    }
+
+    public function chartRechargeKec($kab)
+    {
+        $sql = $this->db->query("select
+                                    kecamatan,
+                                    sum(mount_telkomsel_rechargeshare) AS Telkomsel, 
+                                    sum(mount_indosat_rechargeshare) AS Indosat, 
+                                    sum(mount_xl_rechargeshare) AS XL, 
+                                    sum(mount_tri_rechargeshare) AS Tri, 
+                                    sum(mount_smartfrend_rechargeshare) AS Smartfrend 
+                                from tbl_reg_rechargeshare where kabupaten = '$kab'
+                                group by kecamatan");
+        return $sql->result();
+    }
+
+    public function chartSalesshare()
+    {
+        $sql = $this->db->query("select 
+                                    sum(qty_telkomsel_salesshare) AS Telkomsel, 
+                                    sum(qty_indosat_salesshare) AS Indosat, 
+                                    sum(qty_xl_salesshare) AS XL, 
+                                    sum(qty_tri_salesshare) AS Tri, 
+                                    sum(qty_smartfrend_salesshare) AS Smartfrend 
+                                from tbl_reg_salesshare");
+        $res = $sql->result();
+        // mysqli_next_result($this->db->conn_id);
+        return $res;
+    }
+
+    public function chartSalesshareKab()
+    {
+        $sql = $this->db->query("select
+                                    kabupaten,
+                                    sum(qty_telkomsel_salesshare) AS Telkomsel, 
+                                    sum(qty_indosat_salesshare) AS Indosat, 
+                                    sum(qty_xl_salesshare) AS XL, 
+                                    sum(qty_tri_salesshare) AS Tri, 
+                                    sum(qty_smartfrend_salesshare) AS Smartfrend 
+                                from tbl_reg_salesshare
+                                group by kabupaten");
+        $res = $sql->result();
+        // mysqli_next_result($this->db->conn_id);
+        return $res;
+    }
+
+    public function chartSalesKec($kab)
+    {
+        $sql = $this->db->query("select
+                                    kecamatan,
+                                    sum(qty_telkomsel_salesshare) AS Telkomsel, 
+                                    sum(qty_indosat_salesshare) AS Indosat, 
+                                    sum(qty_xl_salesshare) AS XL, 
+                                    sum(qty_tri_salesshare) AS Tri, 
+                                    sum(qty_smartfrend_salesshare) AS Smartfrend 
+                                from tbl_reg_salesshare where kabupaten = '$kab'
                                 group by kecamatan");
         return $sql->result();
     }

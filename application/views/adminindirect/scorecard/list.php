@@ -12,14 +12,44 @@
 	<?php $this->load->view("adminindirect/_parts/sidebar.php") ?>
 
 	<section class="content">
-	<div class="container-fluid">
-		<!-- DataTables -->
 		<div class="container-fluid">
 			<?php if  ($this->session->flashdata('error')): ?>
 			<div class="alert alert-danger">
 				<?php echo $this->session->flashdata('error') ?>
 			</div>
 			<?php endif; ?>
+
+			<div class="card">
+				<div class="header">
+					<div class="row">
+						<form action="<?php echo site_url('adminindirect/scorecard/fetchperiode') ?>" method="post">
+							<div class="col-md-5">
+								<div class="form-group form-float">
+									<div class="form-line" id="bs_datepicker_container">
+										<input class="form-control" type="text" name="start" required/>
+										<label class="form-label" for="start">Periode Awal*</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-group form-float">
+									<div class="form-line" id="bs_datepicker_container">
+										<input class="form-control" type="text" name="end" required/>
+										<label class="form-label" for="end">Periode Akhir*</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<button name="xls" class="btn btn-success waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
+								<span>Export Excel</span></button>
+								<button name="pdf" class="btn btn-danger waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
+								<span>Export PDF</span></button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
 			<!-- DataTables -->
 			<div class="card">
 				<div class="header">

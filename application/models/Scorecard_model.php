@@ -167,12 +167,15 @@ class Scorecard_model extends CI_Model
     /**
      * From here the method are for Admin Indirect Pages
      */
-    public function displayTargetAssignment()
+    public function displayTargetAssignment($start=null, $end=null)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS sc');
         $this->db->join('tbl_marketing AS m', 'm.kode_marketing = sc.kode_marketing', 'inner');
         $this->db->join('tbl_tdc AS u', 'u.kode_tdc = m.kode_tdc', 'inner');
+        if ($start && $end) :
+            $this->db->where("sc.tanggal BETWEEN '$start' AND '$end'");
+        endif;
         return $this->db->get()->result();
     }
 

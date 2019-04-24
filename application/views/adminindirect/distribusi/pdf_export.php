@@ -2,7 +2,7 @@
 // tcpdf();
 $hs = ' <table style="text-align:center">
             <tr>
-                <td style="font-size: 18px; font-weight: bold;">PT DIGITAL GOLDEN COMMUNICATION</td>
+                <td style="font-size: 18px; font-weight: bold;">PT GOLDEN COMMUNICATION</td>
             </tr>
             <tr>
                 <td style="font-size: 12px; font-weight: normal;">Jalan Teuku Umar No 10 G Penengahan - Kedaton Bandar Lampung</td>
@@ -56,14 +56,16 @@ ob_start();
     <head>
     <body>
         <h2>Laporan Target Assignment</h2>
+        
         <table>
             <tr style="text-align: center">
-                <th>Tahun</th><th>Bulan</th><th>Nama Marketing</th><th>New Opening Outlet</th><th>Outlet Aktif Digital</th><th>Outlet Aktif Voucher</th><th>Outlet Aktif Bang Tcash</th><th>Sales Perdana</th><th>NSB</th><th>MKIOS Reguler</th><th>MKIOS Bulk</th><th>GT Pulsa</th>
+                <th>Tahun</th><th>Bulan</th><th>Nama TDC</th><th>Nama Marketing</th><th>New Opening Outlet</th><th>Outlet Aktif Digital</th><th>Outlet Aktif Voucher</th><th>Outlet Aktif Bang Tcash</th><th>Sales Perdana</th><th>NSB</th><th>MKIOS Reguler</th><th>MKIOS Bulk</th><th>GT Pulsa</th>
             </tr>
             <?php foreach($distribusi as $dist) : ?>
             <tr>
                 <td><?php echo date('Y', strtotime($dist->tanggal)) ?></td>
                 <td><?php echo date('F', strtotime($dist->tanggal)) ?></td>
+                <td><?php echo $dist->nama_tdc ?></td>
                 <td><?php echo $dist->nama_marketing ?></td>
                 <td style="text-align:right"><?php echo $dist->new_opening_outlet ?></td>
                 <td style="text-align:right"><?php echo $dist->outlet_aktif_digital ?></td>

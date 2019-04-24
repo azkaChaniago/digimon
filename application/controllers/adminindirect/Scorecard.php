@@ -137,20 +137,37 @@ class Scorecard extends CI_Controller
         $this->load->view('adminindirect/scorecard/detail', $data);
     }
 
-    public function exportpdf()
+    public function fetchperiode()
+    {
+        $post = $this->input->post();
+        if (isset($post['pdf']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->exportpdf($start, $end);
+        }
+        else if (isset($post['xls']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->export($start, $end);
+        }
+    }
+
+    public function exportpdf($start, $end)
     {
         $data = $this->userSession();   
         $data += [
-            'scorecard' => $this->scorecard_model->getAll($data['tdc'])
+            'scorecard' => $this->scorecard_model->displayTargetAssignment($start, $end)
         ];
 
         $this->load->view('adminindirect/scorecard/pdf_export', $data);
     }
 
-    public function export()
+    public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->scorecard_model->getAll($data['tdc']);
+        $export = $this->scorecard_model->displayTargetAssignment($start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()

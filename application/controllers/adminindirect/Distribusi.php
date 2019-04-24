@@ -138,7 +138,7 @@ class Distribusi extends CI_Controller {
         // die($start . $end);
         $data = $this->userSession();
         $data += [
-            'distribusi' => $this->distribusi_model->getDistribusi($data['tdc'], $start, $end)
+            'distribusi' => $this->distribusi_model->displayTargetAssignment($start, $end)
         ];
 
         $this->load->view('adminindirect/distribusi/pdf_export', $data);
@@ -147,7 +147,7 @@ class Distribusi extends CI_Controller {
     public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->distribusi_model->getDistribusi($data['tdc'], $start, $end);
+        $export = $this->distribusi_model->displayTargetAssignment($start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()
@@ -161,32 +161,34 @@ class Distribusi extends CI_Controller {
 
         $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue('A1', 'Tahun')
-            ->setCellValue('B1', 'Nama Marketing')
-            ->setCellValue('C1', 'New Opening Outlet')
-            ->setCellValue('D1', 'Outlet Aktif Digital')
-            ->setCellValue('E1', 'Outlet Aktif Voucher')
-            ->setCellValue('F1', 'Outlet Aktif Bang Tcash')
-            ->setCellValue('G1', 'Sales Perdana')
-            ->setCellValue('H1', 'NSB')
-            ->setCellValue('I1', 'MKIOS Bulk')
-            ->setCellValue('J1', 'GT Pulsa')
-            ->setCellValue('K1', 'MKIOS Reguler');
+            ->setCellValue('B1', 'Nama TDC')
+            ->setCellValue('C1', 'Nama Marketing')
+            ->setCellValue('D1', 'New Opening Outlet')
+            ->setCellValue('E1', 'Outlet Aktif Digital')
+            ->setCellValue('F1', 'Outlet Aktif Voucher')
+            ->setCellValue('G1', 'Outlet Aktif Bang Tcash')
+            ->setCellValue('H1', 'Sales Perdana')
+            ->setCellValue('I1', 'NSB')
+            ->setCellValue('J1', 'MKIOS Bulk')
+            ->setCellValue('K1', 'GT Pulsa')
+            ->setCellValue('L1', 'MKIOS Reguler');
 
         $i = 2;
         foreach ($export as $ex)
         {
             $spreadsheet->setActiveSheetIndex(0)
                 ->setCellValue('A'. $i , date('Y-m-d', strtotime($ex->tanggal)))
-                ->setCellValue('B'. $i , $ex->nama_marketing)
-                ->setCellValue('C'. $i , $ex->new_opening_outlet)
-                ->setCellValue('D'. $i , $ex->outlet_aktif_digital)
-                ->setCellValue('E'. $i , $ex->outlet_aktif_voucher)
-                ->setCellValue('F'. $i , $ex->outlet_aktif_bang_tcash)
-                ->setCellValue('G'. $i , $ex->sales_perdana)
-                ->setCellValue('H'. $i , $ex->nsb)
-                ->setCellValue('I'. $i , $ex->mkios_bulk)
-                ->setCellValue('J'. $i , $ex->gt_pulsa)
-                ->setCellValue('K'. $i , $ex->mkios_reguler);
+                ->setCellValue('B'. $i , $ex->nama_tdc)
+                ->setCellValue('C'. $i , $ex->nama_marketing)
+                ->setCellValue('D'. $i , $ex->new_opening_outlet)
+                ->setCellValue('E'. $i , $ex->outlet_aktif_digital)
+                ->setCellValue('F'. $i , $ex->outlet_aktif_voucher)
+                ->setCellValue('G'. $i , $ex->outlet_aktif_bang_tcash)
+                ->setCellValue('H'. $i , $ex->sales_perdana)
+                ->setCellValue('I'. $i , $ex->nsb)
+                ->setCellValue('J'. $i , $ex->mkios_bulk)
+                ->setCellValue('K'. $i , $ex->gt_pulsa)
+                ->setCellValue('L'. $i , $ex->mkios_reguler);
             $i++;
         }
         

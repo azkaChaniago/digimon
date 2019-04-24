@@ -138,7 +138,7 @@ class Distribusicollector extends CI_Controller {
     {
         $data = $this->userSession();
         $data += [
-            'distribusi' => $this->distribusicollector_model->getCollector($data['tdc'], $start, $end)
+            'distribusi' => $this->distribusicollector_model->getCollector(null, $start, $end)
         ];
 
         $this->load->view('adminindirect/distribusi/pdf_export_collector', $data);
@@ -147,7 +147,7 @@ class Distribusicollector extends CI_Controller {
     public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->distribusicollector_model->getCollector($data['tdc'], $start, $end);
+        $export = $this->distribusicollector_model->getCollector(null, $start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()

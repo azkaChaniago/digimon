@@ -2,7 +2,7 @@
 // tcpdf();
 $hs = ' <table style="text-align:center">
             <tr>
-                <td style="font-size: 18px; font-weight: bold;">PT DIGITAL GOLDEN COMMUNICATION</td>
+                <td style="font-size: 18px; font-weight: bold;">PT GOLDEN COMMUNICATION</td>
             </tr>
             <tr>
                 <td style="font-size: 12px; font-weight: normal;">Jalan Teuku Umar No 10 G Penengahan - Kedaton Bandar Lampung</td>
@@ -60,15 +60,16 @@ ob_start();
     <table>
         <thead>
             <tr style="text-align: center">
-                <th>Tahun</th><th>Bulan</th><th>Nama Marketing</th><th>New RS Non Outlet</th><th>NSB</th><th>GT Pulsa</th><th>Collecting</th>
+                <th>Tahun</th><th>Bulan</th><th>Nama TDC</th><th>Nama Marketing</th><th>New RS Non Outlet</th><th>NSB</th><th>GT Pulsa</th><th>Collecting</th>
             </tr>
         </thead>
         <tbody>
         
         <?php foreach($scorecard as $dist) : ?>
         <tr>
-            <td><?php echo $dist->tahun ?></td>
-            <td><?php echo $dist->bulan ?></td>
+            <td><?php echo date('Y', strtotime($dist->tanggal)) ?></td>
+            <td><?php echo date('F', strtotime($dist->tanggal)) ?></td>
+            <td><?php echo $dist->nama_tdc ?></td>
             <td><?php echo $dist->nama_marketing ?></td>
             <td style="text-align:right"><?php echo $dist->new_rs_non_outlet ?></td>
             <td style="text-align:right"><?php echo $dist->nsb ?></td>

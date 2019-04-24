@@ -46,13 +46,15 @@ class Distribusicollector_model extends CI_Model {
        return $this->db->get()->result();
     }
 
-    public function getCollector($kode, $start, $end)
+    public function getCollector($kode=null, $start, $end)
     {
         $this->db->select('*');
         $this->db->from('tbl_marketing AS m');
         $this->db->join('tbl_target_assignment_collector ta', 'm.kode_marketing = ta.kode_marketing');
         $this->db->where('m.divisi', 'collector');
-        $this->db->where('m.kode_tdc', $kode);
+        if ($kode=null) :
+            $this->db->where('m.kode_tdc', $kode);
+        endif;
         $this->db->where('ta.tanggal >=', $start);
         $this->db->where('ta.tanggal <=', $end);
         return $this->db->get()->result();

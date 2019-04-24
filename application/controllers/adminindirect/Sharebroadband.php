@@ -32,14 +32,23 @@ class Sharebroadband extends CI_Controller
         return $data;
     }
 
-    public function index()
+    public function index($kab=null)
     {
         is_logged_in();
         // $data['posts'] = $this->sharebroadband_model->getAll();
         $data = $this->userSession();
+        $month = date('F');
         $data += [
             'sharebroadband' => $this->sharebroadband_model->displayBroadband(),
+            'broadband' => $this->sharebroadband_model->chartBroadband($month),
+            'kabupaten' => $this->sharebroadband_model->chartBroadbandKab($month)
         ];
+        if($kab)
+        {
+            $kab = str_replace('%20', ' ', $kab);
+            $data['kecamatan'] = $this->sharebroadband_model->chartBroadbandKec($kab, $month);
+            $data['kab'] = str_replace(' ', '%20', $kab);
+        }
         $this->load->view('adminindirect/sharebroadband/list', $data);
     }
 
@@ -117,20 +126,37 @@ class Sharebroadband extends CI_Controller
         $this->load->view('adminindirect/sharebroadband/detail', $data);
     }
 
-    public function exportpdf()
+    public function fetchperiode()
+    {
+        $post = $this->input->post();
+        if (isset($post['pdf']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->exportpdf($start, $end);
+        }
+        else if (isset($post['xls']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->export($start, $end);
+        }
+    }
+
+    public function exportpdf($start, $end)
     {
         $data = $this->userSession();
         $data += [
-            'export' => $this->sharebroadband_model->getAll($data['tdc'])
+            'export' => $this->sharebroadband_model->displayBroadband($start, $end)
         ];
 
         $this->load->view('adminindirect/sharebroadband/pdf_export', $data);
     }
 
-    public function export()
+    public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->sharebroadband_model->getAll($data['tdc']);
+        $export = $this->sharebroadband_model->displayBroadband($start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()
@@ -144,24 +170,28 @@ class Sharebroadband extends CI_Controller
 
         $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue('A1', 'Tanggal')
-            ->setCellValue('B1', 'Kecamatan')
-            ->setCellValue('C1', 'QTY Telkomsel Marketshare')
-            ->setCellValue('D1', 'QTY Indosat Marketshare')
-            ->setCellValue('E1', 'QTY XL Marketshare')
-            ->setCellValue('F1', 'QTY Tri Marketshare')
-            ->setCellValue('G1', 'QTY Smartfrend Marketshare');
+            ->setCellValue('B1', 'Nama TDC')
+            ->setCellValue('C1', 'Kabupaten')
+            ->setCellValue('D1', 'Kecamatan')
+            ->setCellValue('E1', 'QTY Telkomsel Marketshare')
+            ->setCellValue('F1', 'QTY Indosat Marketshare')
+            ->setCellValue('G1', 'QTY XL Marketshare')
+            ->setCellValue('H1', 'QTY Tri Marketshare')
+            ->setCellValue('I1', 'QTY Smartfrend Marketshare');
 
         $i = 2;
         foreach ($export as $ex)
         {
             $spreadsheet->setActiveSheetIndex(0)
                 ->setCellValue('A'. $i , $ex->tanggal)
-                ->setCellValue('B'. $i , $ex->kecamatan)
-                ->setCellValue('C'. $i , $ex->qty_telkomsel_marketshare)
-                ->setCellValue('D'. $i , $ex->qty_indosat_marketshare)
-                ->setCellValue('E'. $i , $ex->qty_xl_marketshare)
-                ->setCellValue('F'. $i , $ex->qty_tri_marketshare)
-                ->setCellValue('G'. $i , $ex->qty_smartfrend_marketshare);
+                ->setCellValue('B'. $i , $ex->nama_tdc)
+                ->setCellValue('C'. $i , $ex->kecamatan)
+                ->setCellValue('D'. $i , $ex->kabupaten)
+                ->setCellValue('E'. $i , $ex->qty_telkomsel_marketshare)
+                ->setCellValue('F'. $i , $ex->qty_indosat_marketshare)
+                ->setCellValue('G'. $i , $ex->qty_xl_marketshare)
+                ->setCellValue('H'. $i , $ex->qty_tri_marketshare)
+                ->setCellValue('I'. $i , $ex->qty_smartfrend_marketshare);
             $i++;
         }
         

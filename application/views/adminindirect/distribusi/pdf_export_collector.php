@@ -72,6 +72,12 @@ ob_start();
             </tr>
             <?php endforeach; ?>
         </table>
+        <br><br><br>
+        <table class="ttd">
+            <tr><td colspan="7"></td><td colspan="2">Mengetahui,</td></tr>
+            <tr><td colspan="7" height="50"></td><td colspan="2" height="50">Bendahara TDC Kedaton</td></tr>
+            <tr><td colspan="7"></td><td colspan="2"><?php echo $user; ?></td></tr>
+        </table>
     </body>
 </html>
 <?php

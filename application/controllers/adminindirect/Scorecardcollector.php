@@ -116,20 +116,37 @@ class Scorecardcollector extends CI_Controller {
         $this->load->view('adminindirect/scorecard/detail_collector', $data);
     }
 
-    public function exportpdf()
+    public function fetchperiode()
+    {
+        $post = $this->input->post();
+        if (isset($post['pdf']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->exportpdf($start, $end);
+        }
+        else if (isset($post['xls']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->export($start, $end);
+        }
+    }
+
+    public function exportpdf($start, $end)
     {
         $data = $this->userSession();
         $data += [
-            'scorecard' => $this->scorecardcollector_model->getAll($data['tdc'])
+            'scorecard' => $this->scorecardcollector_model->displayTargetAssignment($start, $end)
         ];
 
         $this->load->view('adminindirect/scorecard/pdf_export_collector', $data);
     }
 
-    public function export()
+    public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->scorecardcollector_model->getAll($data['tdc']);
+        $export = $this->scorecardcollector_model->displayTargetAssignment($start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()
@@ -143,22 +160,23 @@ class Scorecardcollector extends CI_Controller {
 
         $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue('A1', 'Tanggal')
-            ->setCellValue('B1', 'Nama Marketing')
-            ->setCellValue('C1', 'New RS Non Outlet')
-            ->setCellValue('D1', 'NSB')
-            ->setCellValue('E1', 'GT Pulsa')
-            ->setCellValue('F1', 'Collecting');
+            ->setCellValue('B1', 'Nama TDC')
+            ->setCellValue('C1', 'Nama Marketing')
+            ->setCellValue('D1', 'New RS Non Outlet')
+            ->setCellValue('E1', 'NSB')
+            ->setCellValue('F1', 'GT Pulsa')
+            ->setCellValue('G1', 'Collecting');
 
         $i = 2;
         foreach ($export as $ex)
         {
             $spreadsheet->setActiveSheetIndex(0)
                 ->setCellValue('A'. $i , date('Y-m-d', strtotime($ex->tanggal)))
-                ->setCellValue('B'. $i , $ex->nama_marketing)
-                ->setCellValue('C'. $i , $ex->new_rs_non_outlet)
-                ->setCellValue('D'. $i , $ex->nsb)
-                ->setCellValue('E'. $i , $ex->gt_pulsa)
-                ->setCellValue('F'. $i , $ex->collecting);
+                ->setCellValue('B'. $i , $ex->nama_tdc)                ->setCellValue('C'. $i , $ex->nama_marketing)
+                ->setCellValue('D'. $i , $ex->new_rs_non_outlet)
+                ->setCellValue('E'. $i , $ex->nsb)
+                ->setCellValue('F'. $i , $ex->gt_pulsa)
+                ->setCellValue('G'. $i , $ex->collecting);
             $i++;
         }
         

@@ -137,13 +137,16 @@ class Historiorder_model extends CI_Model
     /**
      * Method for Admin Indirect
      */
-    public function displayHistoriOrder()
+    public function displayHistoriOrder($start=null, $end=null)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS ho');
         $this->db->join('tbl_marketing AS m', 'ho.kode_marketing = m.kode_marketing', 'inner');
         $this->db->join('tbl_outlet AS o', 'ho.id_outlet = o.id_outlet', 'inner');
         $this->db->join('tbl_tdc AS u', 'm.kode_tdc = u.kode_tdc', 'inner');
+        if($start && $end) :
+            $this->db->where("ho.tanggal BETWEEN '$start' AND '$end'");
+        endif;
         return $this->db->get()->result();
     }
 }
