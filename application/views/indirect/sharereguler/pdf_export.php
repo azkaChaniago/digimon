@@ -2,7 +2,7 @@
 // tcpdf();
 $hs = ' <table style="text-align:center">
             <tr>
-                <td style="font-size: 18px; font-weight: bold;">PT DIGITAL GOLDEN COMMUNICATION</td>
+                <td style="font-size: 18px; font-weight: bold;">PT GOLDEN COMMUNICATION</td>
             </tr>
             <tr>
                 <td style="font-size: 12px; font-weight: normal;">Jalan Teuku Umar No 10 G Penengahan - Kedaton Bandar Lampung</td>
@@ -71,6 +71,7 @@ ob_start();
     </style>
 </head>
 <body>
+    <?php if ($this->uri->segment(3) == 'fetchmarket') : ?>
     <h2>Laporan Marketshare</h2>
     <table>
         <thead>
@@ -135,6 +136,7 @@ ob_start();
         <?php endforeach; ?>
         </tbody>
     </table>
+    <?php elseif ($this->uri->segment(3) == 'fetchrecharge') : ?>
     <h2>Laporan Rechargeshare</h2>
     <table>
         <thead>
@@ -199,6 +201,7 @@ ob_start();
         <?php endforeach; ?>
         </tbody>
     </table>
+    <?php elseif ($this->uri->segment(3) == 'fetchsales') : ?>
     <h2>Laporan Salesshare</h2>
     <table>
         <thead>
@@ -263,6 +266,7 @@ ob_start();
         <?php endforeach; ?>
         </tbody>
     </table>
+    <?php endif; ?>
     <br><br><br>
     <table class="ttd">
         <tr><td colspan="7"></td><td colspan="2">Mengetahui,</td></tr>

@@ -117,20 +117,37 @@ class Sharebroadband extends CI_Controller
         $this->load->view('indirect/sharebroadband/detail', $data);
     }
 
-    public function exportpdf()
+    public function fetchperiode()
+    {
+        $post = $this->input->post();
+        if (isset($post['pdf']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->exportpdf($start, $end);
+        }
+        else if (isset($post['xls']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->export($start, $end);
+        }
+    }
+
+    public function exportpdf($start, $end)
     {
         $data = $this->userSession();
         $data += [
-            'export' => $this->sharebroadband_model->getAll($data['tdc'])
+            'export' => $this->sharebroadband_model->getAll($data['tdc'],$start, $end)
         ];
 
         $this->load->view('indirect/sharebroadband/pdf_export', $data);
     }
 
-    public function export()
+    public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->sharebroadband_model->getAll($data['tdc']);
+        $export = $this->sharebroadband_model->getAll($data['tdc'], $start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()

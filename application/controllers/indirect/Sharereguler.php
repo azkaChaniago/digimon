@@ -323,14 +323,65 @@ class Sharereguler extends CI_Controller
         $this->load->view('indirect/sharereguler/detail', $data);
     }
 
-    public function exportpdf()
+    public function fetchmarket()
+    {
+        $post = $this->input->post();
+        if (isset($post['pdf']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->exportpdf($start, $end);
+        }
+        else if (isset($post['xls']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->exportMarket($start, $end);
+        }
+    }
+
+    public function fetchrecharge()
+    {
+        $post = $this->input->post();
+        if (isset($post['pdf']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->exportpdf($start, $end);
+        }
+        else if (isset($post['xls']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->exportRecharge($start, $end);
+        }
+    }
+
+    public function fetchsales()
+    {
+        $post = $this->input->post();
+        if (isset($post['pdf']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->exportpdf($start, $end);
+        }
+        else if (isset($post['xls']))
+        {
+            $start = date('Y-m-d', strtotime($post['start']));
+            $end = date('Y-m-d', strtotime($post['end']));
+            $this->exportSales($start, $end);
+        }
+    }
+
+    public function exportpdf($start, $end)
     {
         $data = $this->userSession();
         $data += [
-            'export' => $this->sharereguler_model->getAll('tbl_market_share_regular', $data['tdc']),
-            'market' => $this->sharereguler_model->getAll('tbl_reg_marketshare', $data['tdc']),
-            'recharge' => $this->sharereguler_model->getAll('tbl_reg_rechargeshare', $data['tdc']),
-            'sales' => $this->sharereguler_model->getAll('tbl_reg_salesshare', $data['tdc']),
+            'export' => $this->sharereguler_model->getAll('tbl_market_share_regular', $data['tdc'], $start, $end),
+            'market' => $this->sharereguler_model->getAll('tbl_reg_marketshare', $data['tdc'], $start, $end),
+            'recharge' => $this->sharereguler_model->getAll('tbl_reg_rechargeshare', $data['tdc'], $start, $end),
+            'sales' => $this->sharereguler_model->getAll('tbl_reg_salesshare', $data['tdc'], $start, $end),
 
         ];
 
@@ -416,10 +467,10 @@ class Sharereguler extends CI_Controller
         exit;
     }
 
-    public function exportMarket()
+    public function exportMarket($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->sharereguler_model->getAll('tbl_reg_marketshare', $data['tdc']);
+        $export = $this->sharereguler_model->getAll('tbl_reg_marketshare', $data['tdc'], $start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()
@@ -477,10 +528,10 @@ class Sharereguler extends CI_Controller
         exit;
     }
 
-    public function exportRecharge()
+    public function exportRecharge($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->sharereguler_model->getAll('tbl_reg_rechargeshare', $data['tdc']);
+        $export = $this->sharereguler_model->getAll('tbl_reg_rechargeshare', $data['tdc'], $start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()
@@ -538,10 +589,10 @@ class Sharereguler extends CI_Controller
         exit;
     }
 
-    public function exportsales()
+    public function exportsales($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->sharereguler_model->getAll('tbl_reg_salesshare', $data['tdc']);
+        $export = $this->sharereguler_model->getAll('tbl_reg_salesshare', $data['tdc'], $start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()

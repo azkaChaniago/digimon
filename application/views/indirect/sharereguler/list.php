@@ -18,7 +18,7 @@
 		<div class="card">
 			<div class="header">
 				<div class="row">
-					<form action="<?php echo site_url('indirect/scorecardcollector/fetchmarket') ?>" method="post">
+					<form action="<?php echo site_url('indirect/sharereguler/fetchmarket') ?>" method="post">
 						<div class="col-md-5">
 							<div class="form-group form-float">
 								<div class="form-line" id="bs_datepicker_container">
@@ -36,9 +36,9 @@
 							</div>
 						</div>
 						<div class="col-md-2">
-							<button name="xls" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
+							<button name="xls" class="btn btn-success waves-effect"><i class="material-icons" formtarget="_blank">save_alt</i>
 							<span>Export Excel</span></button>
-							<button name="pdf" class="btn btn-danger waves-effect" target="blank"><i class="material-icons">save_alt</i>
+							<button name="pdf" class="btn btn-danger waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
 							<span>Export PDF</span></button>
 						</div>
 					</form>
@@ -119,7 +119,7 @@
 		<div class="card">
 			<div class="header">
 				<div class="row">
-					<form action="<?php echo site_url('indirect/scorecardcollector/fetchrecharge') ?>" method="post">
+					<form action="<?php echo site_url('indirect/sharereguler/fetchrecharge') ?>" method="post">
 						<div class="col-md-5">
 							<div class="form-group form-float">
 								<div class="form-line" id="bs_datepicker_container">
@@ -139,7 +139,7 @@
 						<div class="col-md-2">
 							<button name="xls" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
 							<span>Export Excel</span></button>
-							<button name="pdf" class="btn btn-danger waves-effect" target="blank"><i class="material-icons">save_alt</i>
+							<button name="pdf" class="btn btn-danger waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
 							<span>Export PDF</span></button>
 						</div>
 					</form>
@@ -220,7 +220,7 @@
 		<div class="card">
 			<div class="header">
 				<div class="row">
-					<form action="<?php echo site_url('indirect/scorecardcollector/fetchsales') ?>" method="post">
+					<form action="<?php echo site_url('indirect/sharereguler/fetchsales') ?>" method="post">
 						<div class="col-md-5">
 							<div class="form-group form-float">
 								<div class="form-line" id="bs_datepicker_container">
@@ -240,7 +240,7 @@
 						<div class="col-md-2">
 							<button name="xls" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
 							<span>Export Excel</span></button>
-							<button name="pdf" class="btn btn-danger waves-effect" target="blank"><i class="material-icons">save_alt</i>
+							<button name="pdf" class="btn btn-danger waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
 							<span>Export PDF</span></button>
 						</div>
 					</form>

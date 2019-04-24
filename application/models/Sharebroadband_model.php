@@ -29,11 +29,14 @@ class Sharebroadband_model extends CI_Model
         ];
     }
 
-    public function getAll($kode)
+    public function getAll($kode, $start=null, $end=null)
     {
         $this->db->select('*');
         $this->db->from($this->table. ' as sb');
         $this->db->join('tbl_user as u', 'sb.kode_user = u.kode_user');
+        if ($start && $end) :
+            $this->db->where("sb.tanggal BETWEEN '$start' AND '$end'");
+        endif;
         $this->db->where('u.kode_tdc', $kode);
         return $this->db->get()->result();
     }

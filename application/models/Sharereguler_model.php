@@ -76,11 +76,14 @@ class Sharereguler_model extends CI_Model
         ];
     }
 
-    public function getAll($table, $kode)
+    public function getAll($table, $kode, $start=null, $end=null)
     {
         $this->db->select('*');
         $this->db->from($table . ' as msr');
         $this->db->join('tbl_user as u', 'msr.kode_user = u.kode_user', 'left');
+        if ($start && $end) :
+            $this->db->where("msr.tanggal BETWEEN '$start' AND '$end'");
+        endif;
         $this->db->where('u.kode_tdc', $kode);
         return $this->db->get()->result();
     }
