@@ -1,5 +1,5 @@
 <?php
-if ($this->session->userdata('access') != 'adm_indirect' && $this->session->userdata('access') != 'ADM_INDIRECT')
+if ($this->session->userdata('access') != 'direct' && $this->session->userdata('access') != 'DIRECT')
 {
     $this->session->sess_destroy();
     redirect(site_url('login'));

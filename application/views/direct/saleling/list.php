@@ -2,94 +2,117 @@
 <html lang="en">
 
 <head>
-	<?php $this->load->view("admin/direct/_parts/head.php") ?>
+	<?php $this->load->view("direct/_parts/head.php") ?>
 </head>
 
-<body id="page-top">
+<body class="theme-red">
 
-	<?php $this->load->view("admin/direct/_parts/navbar.php") ?>
-	<div id="wrapper">
+	<?php $this->load->view("direct/_parts/navbar.php") ?>
+	
+	<?php $this->load->view("direct/_parts/sidebar.php") ?>
 
-		<?php $this->load->view("admin/direct/_parts/sidebar.php") ?>
+	<section class="content">
+		<div class="container-fluid">
 
-		<div id="content-wrapper">
-
-			<div class="container-fluid">
-
-				<?php $this->load->view("admin/direct/_parts/breadcrumb.php") ?>
-
-				<!-- DataTables -->
-				<div class="card mb-3">
-					<div class="card-header">
-						<h2>Foto Saleling</h2><hr>
-						<a href="<?php echo site_url('direct/saleling/add') ?>"><i class="fas fa-plus"></i> Add New</a>						
+			<div class="card">
+				<div class="header">
+					<div class="row">
+						<form action="<?php echo site_url('direct/event/fetchperiode') ?>" method="post">
+							<div class="col-md-5">
+								<div class="form-group form-float">
+									<div class="form-line" id="bs_datepicker_container">
+										<input class="form-control" type="text" name="start" required/>
+										<label class="form-label" for="start">Periode Awal*</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-group form-float">
+									<div class="form-line" id="bs_datepicker_container">
+										<input class="form-control" type="text" name="end" required/>
+										<label class="form-label" for="end">Periode Akhir*</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<button name="xls" class="btn btn-success waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
+								<span>Export Excel</span></button>							
+								<button name="pdf" class="btn btn-danger waves-effect" target="blank" formtarget="_blank"><i class="material-icons">save_alt</i>
+								<span>Export PDF</span></button>
+							</div>
+						</form>
 					</div>
-					<div class="card-body">
+				</div>
+			</div>
 
-						<div class="table-responsive">
-							<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
-								<thead>
-									<tr>
-										<th>Nama TDC</th>
-										<th>Divisi</th>
-										<th>Tanggal</th>
-										<th>Nama Marketing</th>
-										<th>Lokasi Saleling</th>
-                                        <th>Aksi</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($saleling as $sale): ?>
-									<tr>
-										<td>
-											<?php echo $sale->nama_tdc ?>
-										</td>
-										<td>
-											<?php echo $sale->divisi ?>	
-										</td>
-										<td class="small">
-											<?php echo $sale->tanggal ?>
-										</td>
-										<td class="small">
-											<?php echo $sale->nama_marketing ?>
-										</td>
-										<td class="small">
-											<?php echo $sale->lokasi_saleling ?>
-										</td>
-										<td width='180'>
-											<a href="<?php echo site_url('direct/saleling/edit/'.$sale->id_saleling) ?>"
-											 class="btn btn-small"><i class="fas fa-edit"></i></a>
-											<a onclick="deleteConfirm('<?php echo site_url('direct/saleling/remove/'.$sale->id_saleling) ?>')"
-											 href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i></a>
-											 <a href="<?php echo site_url('direct/saleling/detail/'.$sale->id_saleling) ?>" 
-											 class="btn btn-small text-success"><i class="fas fa-info"></i> Detail</a>
-										</td>
-									</tr>
-									<?php endforeach; ?>
-
-								</tbody>
-							</table>
+			<!-- DataTables -->
+			<div class="card">
+				<div class="header">
+					<div class="row">
+						<div class="col-md-6">
+							<h2>Event</h2>
+							<div class="clearfix"></div>
 						</div>
+						<div class="col-md-6" style='text-align: right'>							
+							<h2><a href="<?php echo site_url('direct/event/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+							<span>Tambah</span></a></h2>
+						</div> 						
 					</div>
 				</div>
 
-			</div>
-			<!-- /.container-fluid -->
+				<div class="body">
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+							<thead>
+								<tr>
+									<th>Nama TDC</th>
+									<th>Divisi</th>
+									<th>Tanggal</th>
+									<th>Nama Marketing</th>
+									<th>Lokasi Saleling</th>
+									<th>Aksi</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach ($saleling as $sale): ?>
+								<tr>
+									<td>
+										<?php echo $sale->nama_tdc ?>
+									</td>
+									<td>
+										<?php echo $sale->divisi ?>	
+									</td>
+									<td class="small">
+										<?php echo $sale->tanggal ?>
+									</td>
+									<td class="small">
+										<?php echo $sale->nama_marketing ?>
+									</td>
+									<td class="small">
+										<?php echo $sale->lokasi_saleling ?>
+									</td>
+									<td width='180' class="text-center" >
+										<a href="<?php echo site_url('direct/event/edit/'.$sale->id_saleling) ?>"><i class="material-icons">edit</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('direct/deventdelete/'.$sale->id_saleling) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<a href="<?php echo site_url('direct/event/detail/'.$sale->id_saleling) ?>"><i class="material-icons">description</i></a>	
+									</td>
+								</tr>
+								<?php endforeach; ?>
 
-			<!-- Sticky Footer -->
-			<?php $this->load->view("admin/direct/_parts/footer.php") ?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>			
+			</div>
 
 		</div>
-		<!-- /.content-wrapper -->
-
-	</div>
+	</section>
 	<!-- /#wrapper -->
 
+	<?php $this->load->view("direct/_parts/modal.php") ?>
 
-	<?php $this->load->view("admin/direct/_parts/scrolltop.php") ?>
-	<?php $this->load->view("admin/direct/_parts/modal.php") ?>
-
-	<?php $this->load->view("admin/direct/_parts/js.php") ?>
+	<?php $this->load->view("direct/_parts/js.php") ?>
 
 	<script>
 		function deleteConfirm(url)

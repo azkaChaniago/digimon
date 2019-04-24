@@ -18,7 +18,7 @@ class Downlinegt extends CI_Controller
         is_logged_in();
         
         $data['downlinegt'] = $this->downlinegt_model->getRelated();
-        $this->load->view('admin/direct/downlinegt/list', $data);
+        $this->load->view('direct/downlinegt/list', $data);
     }
 
     public function add()
@@ -32,7 +32,7 @@ class Downlinegt extends CI_Controller
         {
             $downlinegt->save();
             $this->session->set_flashdata('success', 'Berhasil disimpan');
-            $this->load->view('admin/direct/downlinegt/detail', $data);
+            $this->load->view('direct/downlinegt/detail', $data);
         }
         // else
         // {
@@ -42,13 +42,13 @@ class Downlinegt extends CI_Controller
         $data['tdc'] = $this->downlinegt_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->downlinegt_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->downlinegt_model->getThisTableRecord('tbl_user');
-        $this->load->view('admin/direct/downlinegt/new_form', $data);
+        $this->load->view('direct/downlinegt/new_form', $data);
     }
 
     public function edit($id)
     {
         is_logged_in();
-        if (!isset($id)) redirect('admin/direct/tdc');
+        if (!isset($id)) redirect('direct/tdc');
         
         $downlinegt = $this->downlinegt_model;
         $validation = $this->form_validation;
@@ -58,7 +58,7 @@ class Downlinegt extends CI_Controller
         {
             $downlinegt->update($id);
             $this->session->set_flashdata('success', 'Berhasil diubah');
-            $this->load->view('admin/direct/downlinegt/detail', $data);
+            $this->load->view('direct/downlinegt/detail', $data);
         }
         // else
         // {
@@ -72,7 +72,7 @@ class Downlinegt extends CI_Controller
         $data['user'] = $this->downlinegt_model->getThisTableRecord('tbl_user');
         if (!$data['downlinegt']) show_404();
 
-        $this->load->view('admin/direct/downlinegt/edit_form', $data);
+        $this->load->view('direct/downlinegt/edit_form', $data);
     }
 
     public function remove($id)
@@ -89,7 +89,7 @@ class Downlinegt extends CI_Controller
     {
         is_logged_in();
         $data['downlinegt'] = $this->downlinegt_model->getDetail($id);
-        $this->load->view('admin/direct/downlinegt/detail', $data);
+        $this->load->view('direct/downlinegt/detail', $data);
     }
 
 }

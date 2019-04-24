@@ -18,7 +18,7 @@ class Mercent extends CI_Controller
         is_logged_in();
         
         $data['mercent'] = $this->mercent_model->getRelated();
-        $this->load->view('admin/direct/mercent/list', $data);
+        $this->load->view('direct/mercent/list', $data);
     }
 
     public function add()
@@ -42,13 +42,13 @@ class Mercent extends CI_Controller
         $data['tdc'] = $this->mercent_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->mercent_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->mercent_model->getThisTableRecord('tbl_user');
-        $this->load->view('admin/direct/mercent/new_form', $data);
+        $this->load->view('direct/mercent/new_form', $data);
     }
 
     public function edit($id)
     {
         is_logged_in();
-        if (!isset($id)) redirect('admin/direct/tdc');
+        if (!isset($id)) redirect('direct/tdc');
         
         $mercent = $this->mercent_model;
         $validation = $this->form_validation;
@@ -72,7 +72,7 @@ class Mercent extends CI_Controller
         $data['user'] = $this->mercent_model->getThisTableRecord('tbl_user');
         if (!$data['mercent']) show_404();
 
-        $this->load->view('admin/direct/mercent/edit_form', $data);
+        $this->load->view('direct/mercent/edit_form', $data);
     }
 
     public function remove($id)
@@ -89,7 +89,7 @@ class Mercent extends CI_Controller
     {
         is_logged_in();
         $data['mercent'] = $this->mercent_model->getDetail($id);
-        $this->load->view('admin/direct/mercent/detail', $data);
+        $this->load->view('direct/mercent/detail', $data);
     }
 
 }

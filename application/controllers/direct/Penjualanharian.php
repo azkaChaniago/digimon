@@ -18,7 +18,7 @@ class Penjualanharian extends CI_Controller
         is_logged_in();
         
         $data['penjualanharian'] = $this->penjualanharian_model->getRelated();
-        $this->load->view('admin/direct/penjualanharian/list', $data);
+        $this->load->view('direct/penjualanharian/list', $data);
     }
 
     public function add()
@@ -42,13 +42,13 @@ class Penjualanharian extends CI_Controller
         $data['tdc'] = $this->penjualanharian_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->penjualanharian_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->penjualanharian_model->getThisTableRecord('tbl_user');
-        $this->load->view('admin/direct/penjualanharian/new_form', $data);
+        $this->load->view('direct/penjualanharian/new_form', $data);
     }
 
     public function edit($id)
     {
         is_logged_in();
-        if (!isset($id)) redirect('admin/direct/tdc');
+        if (!isset($id)) redirect('direct/tdc');
         
         $penjualanharian = $this->penjualanharian_model;
         $validation = $this->form_validation;
@@ -71,7 +71,7 @@ class Penjualanharian extends CI_Controller
         $data['marketing'] = $this->penjualanharian_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->penjualanharian_model->getThisTableRecord('tbl_user');
 
-        $this->load->view('admin/direct/penjualanharian/edit_form', $data);
+        $this->load->view('direct/penjualanharian/edit_form', $data);
     }
 
     public function remove($id)
@@ -88,7 +88,7 @@ class Penjualanharian extends CI_Controller
     {
         is_logged_in();
         $data['penjualanharian'] = $this->penjualanharian_model->getDetail($id);
-        $this->load->view('admin/direct/penjualanharian/detail', $data);
+        $this->load->view('direct/penjualanharian/detail', $data);
     }
 
 }

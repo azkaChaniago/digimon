@@ -33,7 +33,6 @@ class Event_model extends CI_Model
     public function rules()
     {
         return [
-            ['field' => 'id_event', 'label' => 'ID Event','rules' => 'required'],
             ['field' => 'kode_tdc', 'label' => 'Kode TDC','rules' => 'required'],
             ['field' => 'divisi', 'label' => 'Divisi','rules' => 'required'],
             ['field' => 'tgl_event', 'label' => 'Tanggal Event','rules' => 'required'],
@@ -57,7 +56,7 @@ class Event_model extends CI_Model
             ['field' => 'qty_simpati_nsb', 'label' => 'QTY simpati NSB','rules' => 'required'],
             ['field' => 'qty_loop_nsb', 'label' => 'QTY loop NSB','rules' => 'required'],
             // ['field' => 'foto_kegiatan', 'label' => 'Foto Kegiatan','rules' => 'required'],
-            ['field' => 'kode_user', 'label' => 'Kode User','rules' => 'required'],
+            // ['field' => 'kode_user', 'label' => 'Kode User','rules' => 'required'],
         ];
     }
 
@@ -76,14 +75,14 @@ class Event_model extends CI_Model
         return $this->db->get($table)->result();
     }
 
-    public function getRelated()
+    public function getRelated($tdc)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS ev');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = ev.kode_tdc', 'left');
         $this->db->join('tbl_marketing AS m', 'm.kode_marketing = ev.kode_marketing', 'left');
         $this->db->join('tbl_user AS usr', 'usr.kode_user = ev.kode_user', 'left');
-        // $this->db->where('o.id_target', $id);
+        // $this->db->where('tdc.kode_tdc', $tdc);
         return $this->db->get()->result();
     }
 
@@ -102,13 +101,12 @@ class Event_model extends CI_Model
     {
         $post = $this->input->post();
         $data = array(
-            'id_event' => $this->id_event = $post['id_event'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'divisi' => $this->divisi = $post['divisi'],
-            'tgl_event' => $this->tgl_event = $post['tgl_event'],
+            'divisi' => $this->divisi = strtoupper($post['divisi']),
+            'tgl_event' => $this->tgl_event = date('Y-m-d', strtotime($post['tgl_event'])),
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
-            'nama_event' => $this->nama_event = $post['nama_event'],
-            'lokasi_penjualan' => $this->lokasi_penjualan = $post['lokasi_penjualan'],
+            'nama_event' => $this->nama_event = strtoupper($post['nama_event']),
+            'lokasi_penjualan' => $this->lokasi_penjualan = strtoupper($post['lokasi_penjualan']),
             'qty_5k' => $this->qty_5k = $post['qty_5k'],
             'qty_10k' => $this->qty_10k = $post['qty_10k'],
             'qty_20k' => $this->qty_20k = $post['qty_20k'],
@@ -126,7 +124,7 @@ class Event_model extends CI_Model
             'qty_simpati_nsb' => $this->qty_simpati_nsb = $post['qty_simpati_nsb'],
             'qty_loop_nsb' => $this->qty_loop_nsb = $post['qty_loop_nsb'],
             'foto_kegiatan' => $this->foto_kegiatan = $this->uploadImage(),
-            'kode_user' => $this->kode_user = $post['kode_user'],
+            'kode_user' => $this->kode_user = $this->session->userdata['tdc'],
         );
         
         $this->db->set($data);
@@ -147,11 +145,11 @@ class Event_model extends CI_Model
         $data = array(
             // 'id_event' => $this->id_event = $post['id_event'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'divisi' => $this->divisi = $post['divisi'],
-            'tgl_event' => $this->tgl_event = $post['tgl_event'],
+            'divisi' => $this->divisi = strtoupper($post['divisi']),
+            'tgl_event' => $this->tgl_event = date('Y-m-d', strtotime($post['tgl_event'])),
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
-            'nama_event' => $this->nama_event = $post['nama_event'],
-            'lokasi_penjualan' => $this->lokasi_penjualan = $post['lokasi_penjualan'],
+            'nama_event' => $this->nama_event = strtoupper($post['nama_event']),
+            'lokasi_penjualan' => $this->lokasi_penjualan = strtoupper($post['lokasi_penjualan']),
             'qty_5k' => $this->qty_5k = $post['qty_5k'],
             'qty_10k' => $this->qty_10k = $post['qty_10k'],
             'qty_20k' => $this->qty_20k = $post['qty_20k'],
@@ -169,7 +167,6 @@ class Event_model extends CI_Model
             'qty_simpati_nsb' => $this->qty_simpati_nsb = $post['qty_simpati_nsb'],
             'qty_loop_nsb' => $this->qty_loop_nsb = $post['qty_loop_nsb'],
             'foto_kegiatan' => $this->foto_kegiatan,
-            'kode_user' => $this->kode_user = $post['kode_user'],
         );
         
         $this->db->set($data);
@@ -194,7 +191,7 @@ class Event_model extends CI_Model
         if (!$this->upload->do_upload('foto_kegiatan'))
         {
             $error = array('error' => $this->upload->display_errors());
-            $this->load->view('admin/direct/event/add', $error);
+            $this->load->view('direct/event/add', $error);
             return "default.png";
         } 
         else
@@ -211,6 +208,17 @@ class Event_model extends CI_Model
             $filename = explode('.', $post->foto_kegiatan)[0];
             return array_map('unlink', glob(FCPATH."upload/event/$filename.*"));
         }
+    }
+
+    public function getRecord($kode, $start, $end)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table . ' AS ev');
+        $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = ev.kode_tdc', 'left');
+        $this->db->join('tbl_marketing AS m', 'm.kode_marketing = ev.kode_marketing', 'left');
+        $this->db->where("ev.tgl_event BETWEEN '$start' AND '$end'");
+        // $this->db->where('tdc.kode_tdc', $kode);
+        return $this->db->get()->result();
     }
 
 }

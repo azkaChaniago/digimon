@@ -2,106 +2,129 @@
 <html lang="en">
 
 <head>
-	<?php $this->load->view("admin/direct/_parts/head.php") ?>
+	<?php $this->load->view("direct/_parts/head.php") ?>
 </head>
 
-<body id="page-top">
+<body class="theme-red">
 
-	<?php $this->load->view("admin/direct/_parts/navbar.php") ?>
-	<div id="wrapper">
+	<?php $this->load->view("direct/_parts/navbar.php") ?>
+	
+	<?php $this->load->view("direct/_parts/sidebar.php") ?>
 
-		<?php $this->load->view("admin/direct/_parts/sidebar.php") ?>
+	<section class="content">
+		<div class="container-fluid">
 
-		<div id="content-wrapper">
-
-			<div class="container-fluid">
-
-				<?php $this->load->view("admin/direct/_parts/breadcrumb.php") ?>
-
-				<!-- DataTables -->
-				<div class="card mb-3">
-					<div class="card-header">
-						<h2>Downline GT</h2><hr>
-						<a href="<?php echo site_url('direct/downlinegt/add') ?>"><i class="fas fa-plus"></i> Add New</a>						
+			<div class="card">
+				<div class="header">
+					<div class="row">
+						<form action="<?php echo site_url('direct/downlinegt/fetchperiode') ?>" method="post">
+							<div class="col-md-5">
+								<div class="form-group form-float">
+									<div class="form-line" id="bs_datepicker_container">
+										<input class="form-control" type="text" name="start" required/>
+										<label class="form-label" for="start">Periode Awal*</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-group form-float">
+									<div class="form-line" id="bs_datepicker_container">
+										<input class="form-control" type="text" name="end" required/>
+										<label class="form-label" for="end">Periode Akhir*</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<button name="xls" class="btn btn-success waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
+								<span>Export Excel</span></button>							
+								<button name="pdf" class="btn btn-danger waves-effect" target="blank" formtarget="_blank"><i class="material-icons">save_alt</i>
+								<span>Export PDF</span></button>
+							</div>
+						</form>
 					</div>
-					<div class="card-body">
+				</div>
+			</div>
 
-						<div class="table-responsive">
-							<table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
-								<thead>
-									<tr>
-										<th>Nama TDC</th>
-										<th>Divisi</th>
-										<th>Tanggal</th>
-										<th>Nama Canvasser</th>
-										<th>Nama Downline</th>
-										<th>Alamat</th>
-										<th>Nomor GT</th>
-										<th>Deposit</th>
-                                        <th>Aksi</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($downlinegt as $gt): ?>
-									<tr>
-										<td>
-											<?php echo $gt->nama_tdc ?>
-										</td>
-										<td>
-											<?php echo $gt->divisi ?>	
-										</td>
-										<td class="small">
-											<?php echo $gt->tanggal ?>
-										</td>
-										<td class="small">
-											<?php echo $gt->nama_marketing ?>
-										</td>
-										<td class="small">
-											<?php echo $gt->nama_downline ?>
-										</td>
-										<td class="small">
-											<?php echo $gt->alamat ?>
-										</td>
-										<td class="small">
-											<?php echo $gt->nomor_gt ?>
-										</td>
-										<td class="small">
-											<?php echo $gt->deposit ?>
-										</td>
-										<td width='180'>
-											<a href="<?php echo site_url('direct/downlinegt/edit/'.$gt->id_downline_gt) ?>"
-											 class="btn btn-small"><i class="fas fa-edit"></i></a>
-											<a onclick="deleteConfirm('<?php echo site_url('direct/downlinegt/remove/'.$gt->id_downline_gt) ?>')"
-											 href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i></a>
-											 <a href="<?php echo site_url('direct/downlinegt/detail/'.$gt->id_downline_gt) ?>" 
-											 class="btn btn-small text-success"><i class="fas fa-info"></i> Detail</a>
-										</td>
-									</tr>
-									<?php endforeach; ?>
-
-								</tbody>
-							</table>
+			<!-- DataTables -->
+			<div class="card">
+				<div class="header">
+					<div class="row">
+						<div class="col-md-6">
+							<h2>Event</h2>
+							<div class="clearfix"></div>
 						</div>
+						<div class="col-md-6" style='text-align: right'>							
+							<h2><a href="<?php echo site_url('direct/event/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+							<span>Tambah</span></a></h2>
+						</div> 						
 					</div>
 				</div>
 
-			</div>
-			<!-- /.container-fluid -->
+				<div class="body">
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+							<thead>
+								<tr>
+									<th>Nama TDC</th>
+									<th>Divisi</th>
+									<th>Tanggal</th>
+									<th>Nama Canvasser</th>
+									<th>Nama Downline</th>
+									<th>Alamat</th>
+									<th>Nomor GT</th>
+									<th>Deposit</th>
+									<th>Aksi</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach ($downlinegt as $gt): ?>
+								<tr>
+									<td>
+										<?php echo $gt->nama_tdc ?>
+									</td>
+									<td>
+										<?php echo $gt->divisi ?>	
+									</td>
+									<td class="small">
+										<?php echo $gt->tanggal ?>
+									</td>
+									<td class="small">
+										<?php echo $gt->nama_marketing ?>
+									</td>
+									<td class="small">
+										<?php echo $gt->nama_downline ?>
+									</td>
+									<td class="small">
+										<?php echo $gt->alamat ?>
+									</td>
+									<td class="small">
+										<?php echo $gt->nomor_gt ?>
+									</td>
+									<td class="small">
+										<?php echo $gt->deposit ?>
+									</td>
+									<td width='180' class="text-center" >
+										<a href="<?php echo site_url('direct/event/edit/'.$gt->id_downline_gt) ?>"><i class="material-icons">edit</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('direct/deventdelete/'.$gt->id_downline_gt) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<a href="<?php echo site_url('direct/event/detail/'.$gt->id_downline_gt) ?>"><i class="material-icons">description</i></a>	
+									</td>
+								</tr>
+								<?php endforeach; ?>
 
-			<!-- Sticky Footer -->
-			<?php $this->load->view("admin/direct/_parts/footer.php") ?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>			
+			</div>
 
 		</div>
-		<!-- /.content-wrapper -->
-
-	</div>
+	</section>
 	<!-- /#wrapper -->
 
+	<?php $this->load->view("direct/_parts/modal.php") ?>
 
-	<?php $this->load->view("admin/direct/_parts/scrolltop.php") ?>
-	<?php $this->load->view("admin/direct/_parts/modal.php") ?>
-
-	<?php $this->load->view("admin/direct/_parts/js.php") ?>
+	<?php $this->load->view("direct/_parts/js.php") ?>
 
 	<script>
 		function deleteConfirm(url)

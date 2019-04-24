@@ -18,6 +18,6 @@ class Direct extends CI_Controller {
             'user' => $this->session->userdata('user'),
             'direct' => $this->admin_model->getDirectPerformance()
         );
-        $this->load->view('admin/direct', $data);
+        $this->load->view('direct/direct', $data);
     }
 }

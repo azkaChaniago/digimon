@@ -12,7 +12,6 @@
 	<?php $this->load->view("indirect/_parts/sidebar.php") ?>
 
 	<section class="content">
-
 		<div class="container-fluid">
 
 			<div class="card">
@@ -102,12 +101,8 @@
 				</div>
 			</div>			
 			</div>
-		</div>
-		<!-- /.container-fluid -->
 
 		</div>
-		<!-- /.content-wrapper -->
-
 	</section>
 	<!-- /#wrapper -->
 
