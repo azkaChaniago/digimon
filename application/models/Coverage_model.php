@@ -65,13 +65,13 @@ class Coverage_model extends CI_Model
         }
     }
 
-    public function getRelated()
+    public function getRelated($tdc)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS o');
+        $this->db->join('tbl_marketing AS mar', 'mar.kode_marketing = o.kode_marketing', 'left');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = o.kode_tdc', 'left');
-        $this->db->join('tbl_user AS u', 'u.kode_user = o.kode_user', 'left');
-        // $this->db->where('o.id_target', $id);
+        $this->db->where('tdc.kode_tdc', $tdc);
         return $this->db->get()->result();
     }
 

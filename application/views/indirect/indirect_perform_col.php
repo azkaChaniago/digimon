@@ -36,13 +36,14 @@
         delete perf_json.bulan;
         delete perf_json.nama_marketing;
         delete perf_json.tahun;
-        console.log(perf_json);
+        delete perf_json.kode_marketing;
+        console.log(Object.keys(perf_json).map((key) => key.replace('_',' ').replace(/\b\w/g, l => l.toUpperCase())));
         
         var ctx = document.getElementById("canvas").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'horizontalBar',
             data: {
-                labels: Object.keys(perf_json),
+                labels: Object.keys(perf_json).map((key) => key.replace('_',' ').replace(/\b\w/g, l => l.toUpperCase())),
                 datasets: [{
                     label: 'Performansi <?php echo isset($perform->nama_marketing) ? $perform->nama_marketing : "" ?> ',
                     data: Object.values(perf_json),

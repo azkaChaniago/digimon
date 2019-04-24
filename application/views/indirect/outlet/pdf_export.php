@@ -8,10 +8,9 @@ $hs = ' <table style="text-align:center">
                 <td style="font-size: 12px; font-weight: normal;">Jalan Teuku Umar No 10 G Penengahan - Kedaton Bandar Lampung</td>
             </tr>
         </table>';
-
 $obj_pdf = new DigiPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 $obj_pdf->SetCreator(PDF_CREATOR);
-$title = "Laporan Rekapitulasi";
+$title = "Laporan Rekapitulasi Outlet";
 $obj_pdf->SetTitle($title);
 $obj_pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, $title, $hs);
 $obj_pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -26,7 +25,6 @@ $obj_pdf->setFontSubsetting(false);
 $obj_pdf->AddPage();
 ob_start();
 // we can have any view part here like HTML, PHP etc
-
 ?>
 <html>
     <head>
@@ -35,7 +33,7 @@ ob_start();
             {
                 border-spacing: 0;
                 /* border: 0.5px solid #000; */
-                border-collapse: collapse;
+                /* border-collapse: collapse; */
             }
             td, th 
             {
@@ -56,40 +54,45 @@ ob_start();
             }
         </style>
     <head>
-<body>
-    <h2>Laporan Scorecard Canvasser</h2>
-    <table class="table table-responsive">
-        <thead>
-            <tr style="text-align: center">         
-                <th>Tahun</th><th>Bulan</th><th>Nama Marketing</th><th>New Opening Outlet</th><th>Outlet Aktif Digital</th><th>Outlet Aktif Voucher</th><th>Outlet Aktif Bang Tcash</th><th>Sales Perdana</th><th>NSB</th><th>MKIOS Reguler</th><th>MKIOS Bulk</th><th>GT Pulsa</th>
+    <body>
+        <h2>DAFTAR OUTLET</h2>
+        <table>
+            <tr style="text-align: center">
+                <th>NAMA OUTLET</th>
+                <th>KABUPATEN</th>
+                <th>KECAMATAN</th>
+                <th>ALAMAT</th>
+                <th>NAMA PEMILIK</th>
+                <th>NO HP</th>
+                <th>NAMA MARKETING</th>
+                <th>HARI KUNJUNGAN</th>
+                <th>NAMA thC</th>
+                <th>NO RS</th>
+                <th>KATEGORI OUTLET</th>
             </tr>
-        </thead>
-        <tbody>
-        <?php foreach($scorecard as $score) : ?>
-        <tr>
-            <td><?php echo date('Y', strtotime($score->tanggal)) ?></td>
-            <td><?php echo date('F', strtotime($score->tanggal)) ?></td>
-            <td><?php echo $score->nama_marketing ?></td>
-            <td style="text-align:right"><?php echo $score->new_opening_outlet ?></td>
-            <td style="text-align:right"><?php echo $score->outlet_aktif_digital ?></td>
-            <td style="text-align:right"><?php echo $score->outlet_aktif_voucher ?></td>
-            <td style="text-align:right"><?php echo $score->outlet_aktif_bang_tcash ?></td>
-            <td style="text-align:right"><?php echo $score->sales_perdana ?></td>
-            <td style="text-align:right"><?php echo $score->nsb ?></td>
-            <td style="text-align:right"><?php echo $score->mkios_reguler ?></td>
-            <td style="text-align:right"><?php echo $score->mkios_bulk ?></td>
-            <td style="text-align:right"><?php echo $score->gt_pulsa ?></td>
-        </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-    <br><br><br>
-    <table class="ttd">
-        <tr><td colspan="7"></td><td colspan="2">Mengetahui,</td></tr>
-        <tr><td colspan="7" height="50"></td><td colspan="2" height="50">Bendahara TDC Kedaton</td></tr>
-        <tr><td colspan="7"></td><td colspan="2"><?php echo $user; ?></td></tr>
-    </table>
-</body>
+            <?php foreach($outlet as $out) : ?>
+            <tr>
+                <td><?php echo $out->nama_outlet ?></td>
+                <td><?php echo $out->kabupaten ?></td>
+                <td><?php echo $out->kecamatan ?></td>
+                <td><?php echo $out->alamat ?></td>
+                <td><?php echo $out->nama_pemilik ?></td>
+                <td style="text-align:right"><?php echo $out->no_hp ?></td>
+                <td><?php echo $out->nama_marketing ?></td>
+                <td><?php echo $out->hari_kunjungan ?></td>
+                <td><?php echo $out->nama_tdc ?></td>
+                <td><?php echo $out->nomor_rs ?></td>
+                <td><?php echo $out->kategori_outlet ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <br><br><br>
+        <table class="ttd">
+            <tr><td colspan="7"></td><td colspan="2">Mengetahui,</td></tr>
+            <tr><td colspan="7" height="50"></td><td colspan="2" height="50">Bendahara TDC Kedaton</td></tr>
+            <tr><td colspan="7"></td><td colspan="2"><?php echo $user; ?></td></tr>
+        </table>
+    </body>
 </html>
 <?php
 $content = ob_get_contents();

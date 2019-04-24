@@ -164,16 +164,16 @@
         });
         var can_month = data_kpi.map(k => k.bulan)[0];
         
-        document.getElementById("canvasser").onclick = function(evt){
+        document.getElementById("canvasser").onclick = evt => {
             var activePoints = kpi_ch.getElementsAtEvent(evt);
             var firstPoint = activePoints[0];
             var label = kpi_ch.data.labels[firstPoint._index];
-            data_kpi.map(function(e){
+            data_kpi.map(e => {
                 lbl = e.kode_marketing;
                 date = e.tanggal;
-                post(<?php echo site_url('indirect/canperformance'); ?>, {kode_marketing: lbl, tanggal: date}));
+                post("<?php echo site_url('indirect/indirect/canperformance'); ?>", {kode_marketing: lbl, tanggal: date});
             });
-            window.location.href = "<?php echo site_url('indirect/indirect/canperformance/') ?>" + label + "/" + can_month;
+            // window.location.href = "<?php echo site_url('indirect/indirect/canperformance/') ?>" + label + "/" + can_month;
         };
 
 
@@ -219,12 +219,17 @@
             }
         });
         var col_month = data_collector.map(k => k.bulan)[0];
-        document.getElementById("collector").onclick = function(evt){
+        document.getElementById("collector").onclick = evt => {
             var activePoints = kpi_col.getElementsAtEvent(evt);
             var firstPoint = activePoints[0];
             var label = kpi_col.data.labels[firstPoint._index];
+            data_collector.map(e => {
+                lbl = e.kode_marketing;
+                date = e.tanggal;
+                post("<?php echo site_url('indirect/indirect/colperformance'); ?>", {kode_marketing: lbl, tanggal: date});
+            })
             // var value = kpi_col.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
-            window.location.href = "<?php echo site_url('indirect/indirect/colperformance/') ?>" + label + "/" + col_month;
+            // window.location.href = "<?php echo site_url('indirect/indirect/colperformance/') ?>" + label + "/" + col_month;
         };
 
     </script>

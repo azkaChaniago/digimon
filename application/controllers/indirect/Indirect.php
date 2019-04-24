@@ -52,11 +52,14 @@ class Indirect extends CI_Controller {
         $this->load->view('indirect/indirect', $data);
     }
 
-    public function canPerformance($nama, $bulan)
+    public function canPerformance()
     {
-        $nama = str_replace('%20', ' ', $nama);
-        $data['perform'] = $this->admin_model->performanceCanvasser($nama, $bulan);
-        $data['nama'] = str_replace(' ', '%20', $nama);
+        $post = $this->input->post();
+        $kode_marketing = $post['kode_marketing'];
+        $bulan = date('F', strtotime($post['tanggal']));
+
+        $data['perform'] = $this->admin_model->performanceCanvasser($kode_marketing, $bulan);
+        // $data['nama'] = str_replace(' ', '%20', $nama);
         
         if ($data['perform'])
         {
@@ -70,11 +73,13 @@ class Indirect extends CI_Controller {
         }
     }
 
-    public function colPerformance($nama, $bulan)
+    public function colPerformance()
     {
-        $nama = str_replace('%20', ' ', $nama);
-        $data['perform'] = $this->admin_model->performanceCollector($nama, $bulan);
-        $data['nama'] = str_replace(' ', '%20', $nama);
+        $post = $this->input->post();
+        $kode_marketing = $post['kode_marketing'];
+        $bulan = date('F', strtotime($post['tanggal']));
+
+        $data['perform'] = $this->admin_model->performanceCollector($kode_marketing, $bulan);
         
         if ($data['perform'])
         {
@@ -89,3 +94,19 @@ class Indirect extends CI_Controller {
     }
 
 }
+
+
+
+
+// Filename: indirect/Indirect.php
+
+// Line Number: 63
+
+// Backtrace:
+
+// File: E:\xampp\htdocs\digimon\application\controllers\indirect\Indirect.php
+// Line: 63
+// Function: _error_handler
+
+// File: E:\xampp\htdocs\digimon\index.php
+// Line: 315

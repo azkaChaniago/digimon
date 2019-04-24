@@ -20,7 +20,7 @@
 					<?php echo $this->session->flashdata('status_msg') ?>
 				</div>
 			<?php endif; ?>
-			<div class="card">
+			<!-- <div class="card">
 				<div class="header">
 					<div class="row">
 						<form action="<?php echo site_url('indirect/outlet/fetchperiode') ?>" method="post">
@@ -49,19 +49,23 @@
 						</form>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!-- DataTables -->
 			<div class="card">
 				<div class="header">
 					<div class="row">
 						<div class="col-md-6"><h2>Outlet</h2></div>
 						<div class="col-md-6" style="text-align: right">
-							<h2><a href="<?php echo site_url('indirect/outlet/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-							<span>Tambah<span></a></h2>
-							<!-- <a href="<?php echo site_url('indirect/outlet/export') ?>" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
+							<h2>
+							<a href="<?php echo site_url('indirect/outlet/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+							<span>Tambah<span></a>
+
+							<a href="<?php echo site_url('indirect/outlet/export') ?>" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
 							<span>Export Excel<span></a>
+							
 							<a href="<?php echo site_url('indirect/outlet/exportpdf') ?>" class="btn btn-danger waves-effect" target="blank"><i class="material-icons">save_alt</i>
-							<span>Export PDF<span></a></h2> -->
+							<span>Export PDF<span></a>
+							</h2>
 						</div>
 					</div>
 				</div>

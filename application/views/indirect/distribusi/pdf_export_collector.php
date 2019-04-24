@@ -2,7 +2,7 @@
 // tcpdf();
 $hs = ' <table style="text-align:center">
             <tr>
-                <td style="font-size: 18px; font-weight: bold;">PT DIGITAL GOLDEN COMMUNICATION</td>
+                <td style="font-size: 18px; font-weight: bold;">PT GOLDEN COMMUNICATION</td>
             </tr>
             <tr>
                 <td style="font-size: 12px; font-weight: normal;">Jalan Teuku Umar No 10 G Penengahan - Kedaton Bandar Lampung</td>

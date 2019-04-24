@@ -36,6 +36,7 @@
         delete perf_json.bulan;
         delete perf_json.nama_marketing;
         delete perf_json.tahun;
+        delete perf_json.kode_marketing;
         console.log(perf_json);
         
         var ctx = document.getElementById("canvas").getContext('2d');

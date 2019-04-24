@@ -2,7 +2,7 @@
 // tcpdf();
 $hs = ' <table style="text-align:center">
             <tr>
-                <td style="font-size: 18px; font-weight: bold;">PT DIGITAL GOLDEN COMMUNICATION</td>
+                <td style="font-size: 18px; font-weight: bold;">PT GOLDEN COMMUNICATION</td>
             </tr>
             <tr>
                 <td style="font-size: 12px; font-weight: normal;">Jalan Teuku Umar No 10 G Penengahan - Kedaton Bandar Lampung</td>
@@ -63,13 +63,25 @@ ob_start();
         <table>
         <thead>
             <tr>
-                <th>Nama Marketing</th><th>Nama Outlet</th><th>As</th><th>Simpati</th><th>Loop</th><th>NSB</th><th>MKIOS Reguler</th><th>MKIOS Bulk</th><th>GT Pulsa</th>
+                <th>Kode Marketing</th>
+                <th>Nama Marketing</th>
+                <th>ID Outlet</th>
+                <th>Nama Outlet</th>
+                <th>As</th>
+                <th>Simpati</th>
+                <th>Loop</th>
+                <th>NSB</th>
+                <th>MKIOS Reguler</th>
+                <th>MKIOS Bulk</th>
+                <th>GT Pulsa</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach($pivot as $piv => $p) : ?>
             <tr>
-                <td><?php if($piv == $len - 1) { echo "<b>Total</b>"; } else { echo $p['nama_marketing']; } ?></td>
+                <td><?php if($piv == $len - 1) { echo "<b>Total</b>"; } else { echo $p['kd_marketing']; } ?></td>
+                <td><?php echo $p['nama_marketing']; ?></td>
+                <td><?php echo $p['id_outlet']; ?></td>
                 <td><?php echo $p['nama_outlet'] ?></td>
                 <td style="text-align:right"><?php echo $obj_pdf->rupiah($p['sum_of_as']) ?></td>
                 <td style="text-align:right"><?php echo $obj_pdf->rupiah($p['sum_of_simpati']) ?></td>
@@ -77,8 +89,7 @@ ob_start();
                 <td style="text-align:right"><?php echo $obj_pdf->rupiah($p['sum_of_nsb']) ?></td>
                 <td style="text-align:right"><?php echo $obj_pdf->rupiah($p['sum_of_mkios_bulk']) ?></td>
                 <td style="text-align:right"><?php echo $obj_pdf->rupiah($p['sum_of_mkios_reguler']) ?></td>
-                <td style="text-align:right"><?php echo $obj_pdf->rupiah($p['sum_of_gt_pulsa']) ?></td>
-                
+                <td style="text-align:right"><?php echo $obj_pdf->rupiah($p['sum_of_gt_pulsa']) ?></td>                
             </tr>
             <?php endforeach; ?>
         </tbody>
