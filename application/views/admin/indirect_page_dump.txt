@@ -1,0 +1,79 @@
+// var ctx = document.getElementById("myChart");
+        // var myChart = new Chart(ctx, {
+        //     type: 'bar',
+        //     data: {
+        //         labels: [
+        //           <?php 
+        //           foreach ($canvasser as $c) {
+        //             echo "'" . $c->nama_marketing . "',";
+        //           }?>
+        //         ],
+        //         datasets: [{
+        //             label: 'Scorecard NSB',
+        //             data: [
+        //               <?php 
+        //               foreach ($canvasser as $c) {
+        //                 echo "'" . $c->sc_nsb . "',";
+        //               }
+        //               ?>
+        //             ],
+        //             backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        //             borderColor: 'rgba(255,99,132,1)',
+        //             borderWidth: 1
+        //         }, {
+        //             label: 'Target Assignment NSB',
+        //             data: [
+        //               <?php 
+        //               foreach ($canvasser as $c) {
+        //                 echo "'" . $c->ta_nsb . "',";
+        //               }
+        //               ?>
+        //             ],
+        //             backgroundColor: 'rgba(99, 255, 132, 0.2)',
+        //             borderColor: 'rgba(99,255,132,1)',
+        //             borderWidth: 1
+        //         }]
+        //     },
+        //     options: {
+        //         elements: {
+        //           line: {
+        //               tension: 0, // disables bezier curves
+        //           }
+        //       }
+        //     }
+        // });
+      </script>
+
+      <script>
+        // var ctx = document.getElementById("performanceChart");
+        // var myChart = new Chart(ctx, {
+        //     type: 'horizontalBar',
+        //     data: {
+        //         labels: ['Jumlah Outlet', 'New Opening Outlet', 'Outlet Aktif Digital', 'NSB', 'MKIOS Bulk','GT Pulsa','MKIOS Reguler'],
+        //         datasets: [{
+        //             label: 'Grafik Performansi <?php echo $performance->nama_marketing ." Bulan ". $performance->bulan?>' ,
+        //             data: [
+        //               <?php
+        //               echo "'" . $performance->jumlah_outlet . "',";
+        //               echo "'" . $performance->new_opening_outlet . "',";
+        //               echo "'" . $performance->outlet_aktif_digital . "',";
+        //               echo "'" . $performance->nsb . "',";
+        //               echo "'" . $performance->mkios_bulk . "',";
+        //               echo "'" . $performance->gt_pulsa . "',";
+        //               echo "'" . $performance->mkios_reguler . "',";
+        //               ?>
+        //             ],
+        //             backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        //             borderColor: 'rgba(255,99,132,1)',
+        //             borderWidth: 1
+        //         }]
+        //     },
+        //     options: {
+        //         elements: {
+        //           line: {
+        //               tension: 0, // disables bezier curves
+        //           }
+        //       }
+        //     }
+        // });
+    </script>
