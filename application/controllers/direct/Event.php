@@ -87,7 +87,7 @@ class Event extends CI_Controller
         // }
 
         $data['event'] = $event->getById($id);
-        $data['related'] = $event->getRelated();
+        // $data['related'] = $event->getRelated();
         $data['tdc'] = $this->event_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->event_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->event_model->getThisTableRecord('tbl_user');

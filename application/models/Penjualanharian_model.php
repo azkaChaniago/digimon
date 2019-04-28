@@ -36,7 +36,6 @@ class Penjualanharian_model extends CI_Model
     public function rules()
     {
         return [
-            ['field' => 'id_penjualan', 'label' => 'ID Event','rules' => 'required'],
             ['field' => 'kode_tdc', 'label' => 'Kode TDC','rules' => 'required'],
             ['field' => 'divisi', 'label' => 'Divisi','rules' => 'required'],
             ['field' => 'tgl_penjualan', 'label' => 'Tanggal Event','rules' => 'required'],
@@ -60,8 +59,6 @@ class Penjualanharian_model extends CI_Model
             ['field' => 'qty_as_nsb', 'label' => 'QTY as NSB','rules' => 'required'],
             ['field' => 'qty_simpati_nsb', 'label' => 'QTY simpati NSB','rules' => 'required'],
             ['field' => 'qty_loop_nsb', 'label' => 'QTY loop NSB','rules' => 'required'],
-            // ['field' => 'foto_kegiatan', 'label' => 'Foto Kegiatan','rules' => 'required'],
-            ['field' => 'kode_user', 'label' => 'Kode User','rules' => 'required'],
         ];
     }
 
@@ -80,14 +77,16 @@ class Penjualanharian_model extends CI_Model
         return $this->db->get($table)->result();
     }
 
-    public function getRelated()
+    public function getRelated($start=null, $end=null)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS ev');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = ev.kode_tdc', 'left');
         $this->db->join('tbl_marketing AS m', 'm.kode_marketing = ev.kode_marketing', 'left');
         $this->db->join('tbl_user AS usr', 'usr.kode_user = ev.kode_user', 'left');
-        // $this->db->where('o.id_target', $id);
+        if ($start && $end) :
+            $this->db->where("ev.tgl_penjualan BETWEEN '$start' AND '$end'");
+        endif;
         return $this->db->get()->result();
     }
 
@@ -105,11 +104,14 @@ class Penjualanharian_model extends CI_Model
     public function save()
     {
         $post = $this->input->post();
+        if ($_FILES['foto_kegiatan']['name'] == !empty(array()))
+        {
+            $this->foto_kegiatan = $this->uploadMultipleImages();
+        }
         $data = array(
-            'id_penjualan' => $this->id_penjualan = $post['id_penjualan'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
             'divisi' => $this->divisi = $post['divisi'],
-            'tgl_penjualan' => $this->tgl_penjualan = $post['tgl_penjualan'],
+            'tgl_penjualan' => $this->tgl_penjualan = date('Y-m-d', strtotime($post['tgl_penjualan'])),
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
             'lokasi_penjualan' => $this->lokasi_penjualan = $post['lokasi_penjualan'],
             'qty_5k' => $this->qty_5k = $post['qty_5k'],
@@ -132,8 +134,8 @@ class Penjualanharian_model extends CI_Model
             'qty_as_nsb' => $this->qty_as_nsb = $post['qty_as_nsb'],
             'qty_simpati_nsb' => $this->qty_simpati_nsb = $post['qty_simpati_nsb'],
             'qty_loop_nsb' => $this->qty_loop_nsb = $post['qty_loop_nsb'],
-            'foto_kegiatan' => $this->foto_kegiatan = $this->uploadImage(),
-            'kode_user' => $this->kode_user = $post['kode_user'],
+            'foto_kegiatan' => $this->foto_kegiatan,
+            'kode_user' => $this->kode_user = $this->session->userdata('kode_user'),
         );
         
         $this->db->set($data);
@@ -143,19 +145,25 @@ class Penjualanharian_model extends CI_Model
     public function update($id)
     {
         $post = $this->input->post();
-        if (!empty($_FILES['foto_kegiatan']['name']))
+
+        // die(print_r($_FILES['foto_kegiatan']['name']));
+
+        if ($_FILES['foto_kegiatan']['name'] == (array(0 => NULL)))
         {
-            $this->foto_kegiatan = $this->uploadImage();
+            // die("aaaa");
+            $this->foto_kegiatan = $post['old_image'];
         } 
         else
         {
-            $this->foto_kegiatan = $post['old_image'];
+            // die("wwwwww");
+            $this->removeImage($id);
+            $this->foto_kegiatan = $this->uploadMultipleImages();
         }
         $data = array(
             // 'id_penjualan' => $this->id_penjualan = $post['id_penjualan'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
             'divisi' => $this->divisi = $post['divisi'],
-            'tgl_penjualan' => $this->tgl_penjualan = $post['tgl_penjualan'],
+            'tgl_penjualan' => $this->tgl_penjualan = date('Y-m-d', strtotime($post['tgl_penjualan'])),
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
             'lokasi_penjualan' => $this->lokasi_penjualan = $post['lokasi_penjualan'],
             'qty_5k' => $this->qty_5k = $post['qty_5k'],
@@ -191,35 +199,58 @@ class Penjualanharian_model extends CI_Model
         return $this->db->delete($this->table, array('id_penjualan' => $id));
     }
 
-    private function uploadImage()
+    private function uploadMultipleImages()
     {
-        $config['upload_path'] = './upload/penjualanharian/';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['file_name'] = uniqid();
-        $config['overwrite'] = true;
-        $config['max_size'] = 5120;
-
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload('foto_kegiatan'))
+        $data_info = array();
+        $img_ids = array();
+        $count = count($_FILES['foto_kegiatan']['name']);
+        for ($i = 0; $i < $count; $i++)
         {
-            $error = array('error' => $this->upload->display_errors());
-            $this->load->view('admin/direct/penjualanharian/new_form', $error);
-            return "default.png";
-        } 
-        else
-        {
-            return $this->upload->data('file_name');
-        }        
+            $_FILES['image']['name'] = $_FILES['foto_kegiatan']['name'][$i];
+            $_FILES['image']['type'] = $_FILES['foto_kegiatan']['type'][$i];
+            $_FILES['image']['tmp_name'] = $_FILES['foto_kegiatan']['tmp_name'][$i];
+            $_FILES['image']['error'] = $_FILES['foto_kegiatan']['error'][$i];
+            $_FILES['image']['size'] = $_FILES['foto_kegiatan']['size'][$i];
+            
+            $config['upload_path'] = './upload/penjualanharian/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['file_name'] = "PENJUALANHARIAN_" . uniqid();
+            $config['overwrite'] = true;
+            $config['max_size'] = 5120;
+
+            $this->load->library('upload', $config);            
+            $this->upload->initialize($config);
+
+            if (!$this->upload->do_upload('image'))
+            {
+                $error = array('error' => $this->upload->display_errors());
+                $this->load->view('direct/penjualanharian/new_form', $error);
+            }
+            else
+            {
+                $file_data = $this->upload->data();
+                array_push($img_ids, $file_data);
+            }
+        }
+        
+        return json_encode($img_ids);
     }
 
-    private function deleteImage($id)
+    private function removeImage($id) 
     {
-        $post = $this->getById($id);
-        if ($post->foto_kegiatan != 'default.png')
+        $ret = $this->db->get_where($this->table, array('id_penjualan' => $id));
+        
+        if ($ret->num_rows() > 0) 
         {
-            $filename = explode('.', $post->foto_kegiatan)[0];
-            return array_map('unlink', glob(FCPATH."upload/penjualanharian/$filename.*"));
+            $res = $ret->row();
+            $file_data = json_decode($res->foto_kegiatan);
+            for ($i=0; $i < count($file_data); $i++)
+            {
+                if (is_file($file_data[$i]->full_path)) 
+                {
+                    unlink($file_data[$i]->full_path);
+                }
+            }
         }
     }
 

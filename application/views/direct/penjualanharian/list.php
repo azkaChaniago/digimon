@@ -13,11 +13,10 @@
 
 	<section class="content">
 		<div class="container-fluid">
-
 			<div class="card">
 				<div class="header">
 					<div class="row">
-						<form action="<?php echo site_url('direct/event/fetchperiode') ?>" method="post">
+						<form action="<?php echo site_url('direct/penjualanharian/fetchperiode') ?>" method="post">
 							<div class="col-md-5">
 								<div class="form-group form-float">
 									<div class="form-line" id="bs_datepicker_container">
@@ -36,9 +35,9 @@
 							</div>
 							<div class="col-md-2">
 								<button name="xls" class="btn btn-success waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
-								<span>Export Excel</span></button>							
+								<span>Excel</span></button>							
 								<button name="pdf" class="btn btn-danger waves-effect" target="blank" formtarget="_blank"><i class="material-icons">save_alt</i>
-								<span>Export PDF</span></button>
+								<span>PDF</span></button>
 							</div>
 						</form>
 					</div>
@@ -52,8 +51,8 @@
 							<h2>Penjualan Harian</h2>
 							<div class="clearfix"></div>
 						</div>
-						<div class="col-md-6" style='text-align: right'>							
-							<h2><a href="<?php echo site_url('direct/event/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+						<div class="col-md-6" style='text-align: right'>					
+							<h2><a href="<?php echo site_url('direct/penjualanharian/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
 							<span>Tambah</span></a></h2>
 						</div> 						
 					</div>
@@ -91,9 +90,9 @@
 										<?php echo $jual->lokasi_penjualan ?>
 									</td>
 									<td width='180' class="text-center" >
-										<a href="<?php echo site_url('direct/event/edit/'.$jual->id_penjualan) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('direct/deventdelete/'.$jual->id_penjualan) ?>')" href="#!"><i class="material-icons">delete</i></a>
-										<a href="<?php echo site_url('direct/event/detail/'.$jual->id_penjualan) ?>"><i class="material-icons">description</i></a>	
+										<a href="<?php echo site_url('direct/penjualanharian/edit/'.$jual->id_penjualan) ?>"><i class="material-icons">edit</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('direct/dpenjualanhariandelete/'.$jual->id_penjualan) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<a href="<?php echo site_url('direct/penjualanharian/detail/'.$jual->id_penjualan) ?>"><i class="material-icons">description</i></a>	
 									</td>
 								</tr>
 								<?php endforeach; ?>

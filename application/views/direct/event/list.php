@@ -36,9 +36,9 @@
 							</div>
 							<div class="col-md-2">
 								<button name="xls" class="btn btn-success waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
-								<span>Export Excel</span></button>							
+								<span>Excel</span></button>							
 								<button name="pdf" class="btn btn-danger waves-effect" target="blank" formtarget="_blank"><i class="material-icons">save_alt</i>
-								<span>Export PDF</span></button>
+								<span>PDF</span></button>
 							</div>
 						</form>
 					</div>

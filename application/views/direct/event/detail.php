@@ -70,9 +70,21 @@
                             </tr>
                             <tr>
                                 <td>Foto Kegiatan<td>
-                                <th><img src="<?php echo base_url('upload/' . $event->foto_kegiatan) ?>" class="img img-responsive" width="50"></th>
-                                <td>Nama Pengguna<td>
-                                <th><?php echo $event->nama_user ?></th>
+                                <th colspan="3">
+                                    <?php 
+                                    $i = 0;
+                                    foreach (json_decode($event->foto_kegiatan) as $im):?>
+                                        <div class="col-md-3">
+                                            <img src="<?php echo base_url('upload/event/'.$im->file_name) ?>" class="img img-responsive" />
+                                        </div>
+                                        <?php
+                                        $i++;
+                                        if ($i == 4) {
+                                            echo "<div class='clearfix' ></div>";
+                                            $i = 0;
+                                        } 
+                                    endforeach; ?>
+                                </th>
                             </tr>
                         </table>
                     </div>

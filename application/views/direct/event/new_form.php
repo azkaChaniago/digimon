@@ -85,8 +85,7 @@
 
 								<div class="form-group form-float">
 									<div class="form-line">
-									<input class="form-control <?php echo form_error('foto_kegiatan') ? 'is-invalid':'' ?>"
-										type="file" name="foto_kegiatan" onkeypress="return isNumberKey(event)" required/>
+									<input class="form-control" type="file" name="foto_kegiatan[]" multiple/>
 									</div>
 								</div>
 

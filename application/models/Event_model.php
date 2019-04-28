@@ -100,6 +100,14 @@ class Event_model extends CI_Model
     public function save()
     {
         $post = $this->input->post();
+        if (!empty($_FILES['foto_galeri']['name']))
+        {
+            $this->galeri_foto = $this->uploadMultipleImages();
+        }
+        else
+        {
+            $this->galeri_foto = "NULL";
+        }
         $data = array(
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
             'divisi' => $this->divisi = strtoupper($post['divisi']),
@@ -136,7 +144,8 @@ class Event_model extends CI_Model
         $post = $this->input->post();
         if (!empty($_FILES['foto_kegiatan']['name']))
         {
-            $this->foto_kegiatan = $this->uploadImage();
+            $this->removeImage($id);
+            $this->foto_kegiatan = $this->uploadMultipleImages();
         } 
         else
         {
@@ -178,38 +187,62 @@ class Event_model extends CI_Model
         return $this->db->delete($this->table, array('id_event' => $id));
     }
 
-    private function uploadImage()
+    private function uploadMultipleImages()
     {
-        $config['upload_path'] = './upload/event/';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['file_name'] = uniqid();
-        $config['overwrite'] = true;
-        $config['max_size'] = 5120;
-
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload('foto_kegiatan'))
+        $data_info = array();
+        $img_ids = array();
+        $count = count($_FILES['foto_kegiatan']['name']);
+        for ($i = 0; $i < $count; $i++)
         {
-            $error = array('error' => $this->upload->display_errors());
-            $this->load->view('direct/event/add', $error);
-            return "default.png";
-        } 
-        else
-        {
-            return $this->upload->data('file_name');
-        }        
+            $_FILES['image']['name'] = $_FILES['foto_kegiatan']['name'][$i];
+            $_FILES['image']['type'] = $_FILES['foto_kegiatan']['type'][$i];
+            $_FILES['image']['tmp_name'] = $_FILES['foto_kegiatan']['tmp_name'][$i];
+            $_FILES['image']['error'] = $_FILES['foto_kegiatan']['error'][$i];
+            $_FILES['image']['size'] = $_FILES['foto_kegiatan']['size'][$i];
+            
+            $config['upload_path'] = './upload/event/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['file_name'] = "EVENT_" . uniqid();
+            $config['overwrite'] = true;
+            $config['max_size'] = 5120;
+
+            $this->load->library('upload', $config);            
+            $this->upload->initialize($config);
+
+            if (!$this->upload->do_upload('image'))
+            {
+                $error = array('error' => $this->upload->display_errors());
+                $this->load->view('indirect/outlet/new_form', $error);
+            }
+            else
+            {
+                $file_data = $this->upload->data();
+                // $upload_data[$i]['images_name'] = $file_data['file_name'];
+                array_push($img_ids, $file_data);
+            }
+        }
+        
+        return json_encode($img_ids);
     }
 
-    private function deleteImage($id)
+    private function removeImage($id) 
     {
-        $post = $this->getById($id);
-        if ($post->foto_kegiatan != 'default.png')
+        $ret = $this->db->get_where($this->table, array('id_event' => $id));
+        
+        if ($ret->num_rows() > 0) 
         {
-            $filename = explode('.', $post->foto_kegiatan)[0];
-            return array_map('unlink', glob(FCPATH."upload/event/$filename.*"));
+            $res = $ret->row();
+            $file_data = json_decode($res->foto_kegiatan);
+            for ($i=0; $i < count($file_data); $i++)
+            {
+                if (is_file($file_data[$i]->full_path)) 
+                {
+                    unlink($file_data[$i]->full_path);
+                }
+            }
         }
     }
-
+    
     public function getRecord($kode, $start, $end)
     {
         $this->db->select('*');
