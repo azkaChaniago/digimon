@@ -36,7 +36,7 @@ class Penjualanharian extends CI_Controller
         is_logged_in();
         $data = $this->userSession();
         $data['penjualanharian'] = $this->penjualanharian_model->getRelated($data['tdc']);
-        $this->load->view('direct/penjualanharian/list', $data);
+        $this->load->view('admindirect/penjualanharian/list', $data);
     }
 
     public function add()
@@ -52,7 +52,7 @@ class Penjualanharian extends CI_Controller
             {
                 $penjualanharian->save();
                 $this->session->set_flashdata('success', 'Berhasil disimpan');
-                redirect(site_url('direct/penjualanharian'));
+                redirect(site_url('admindirect/penjualanharian'));
             }
             else
             {
@@ -63,13 +63,13 @@ class Penjualanharian extends CI_Controller
         $data['tdc'] = $this->penjualanharian_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->penjualanharian_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->penjualanharian_model->getThisTableRecord('tbl_user');
-        $this->load->view('direct/penjualanharian/new_form', $data);
+        $this->load->view('admindirect/penjualanharian/new_form', $data);
     }
 
     public function edit($id)
     {
         is_logged_in();
-        if (!isset($id)) redirect('direct/tdc');
+        if (!isset($id)) redirect('admindirect/tdc');
         
         $penjualanharian = $this->penjualanharian_model;
         $validation = $this->form_validation;
@@ -81,12 +81,12 @@ class Penjualanharian extends CI_Controller
             {
                 $penjualanharian->update($id);
                 $this->session->set_flashdata('success', 'Berhasil diubah');
-                redirect(site_url('direct/penjualanharian'));
+                redirect(site_url('admindirect/penjualanharian'));
             }
             else
             {
                 $this->session->set_flashdata('error', validation_errors());
-                redirect(site_url('direct/penjualanharian'));
+                redirect(site_url('admindirect/penjualanharian'));
             }
         }
 
@@ -96,7 +96,7 @@ class Penjualanharian extends CI_Controller
         $data['marketing'] = $this->penjualanharian_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->penjualanharian_model->getThisTableRecord('tbl_user');
 
-        $this->load->view('direct/penjualanharian/edit_form', $data);
+        $this->load->view('admindirect/penjualanharian/edit_form', $data);
     }
 
     public function remove($id)
@@ -105,7 +105,7 @@ class Penjualanharian extends CI_Controller
 
         if ($this->penjualanharian_model->delete($id))
         {
-            redirect(site_url('direct/penjualanharian'));
+            redirect(site_url('admindirect/penjualanharian'));
         }
     }
 
@@ -113,7 +113,7 @@ class Penjualanharian extends CI_Controller
     {
         is_logged_in();
         $data['penjualanharian'] = $this->penjualanharian_model->getDetail($id);
-        $this->load->view('direct/penjualanharian/detail', $data);
+        $this->load->view('admindirect/penjualanharian/detail', $data);
     }
 
     public function fetchperiode()
@@ -141,7 +141,7 @@ class Penjualanharian extends CI_Controller
             'export' => $this->penjualanharian_model->getRelated($data['tdc'], $start, $end)
         ];
 
-        $this->load->view('direct/penjualanharian/pdf_export', $data);
+        $this->load->view('admindirect/penjualanharian/pdf_export', $data);
     }
 
     public function export($start, $end)

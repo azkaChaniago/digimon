@@ -36,7 +36,7 @@ class Sekolah extends CI_Controller
         is_logged_in();
         $data = $this->userSession();
         $data['sekolah'] = $this->sekolah_model->getRelated($data['tdc']);
-        $this->load->view('direct/sekolah/list', $data);
+        $this->load->view('admindirect/sekolah/list', $data);
     }
 
     public function add()
@@ -51,7 +51,7 @@ class Sekolah extends CI_Controller
             {
                 $sekolah->save();
                 $this->session->set_flashdata('success', 'Berhasil disimpan');
-                redirect(site_url('direct/sekolah'));
+                redirect(site_url('admindirect/sekolah'));
             }
             else
             {
@@ -62,13 +62,13 @@ class Sekolah extends CI_Controller
         $data['tdc'] = $this->sekolah_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->sekolah_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->sekolah_model->getThisTableRecord('tbl_user');
-        $this->load->view('direct/sekolah/new_form', $data);
+        $this->load->view('admindirect/sekolah/new_form', $data);
     }
 
     public function edit($id)
     {
         is_logged_in();
-        if (!isset($id)) redirect('direct/tdc');
+        if (!isset($id)) redirect('admindirect/tdc');
         
         $sekolah = $this->sekolah_model;
         $validation = $this->form_validation;
@@ -79,7 +79,7 @@ class Sekolah extends CI_Controller
             {
                 $sekolah->update($id);
                 $this->session->set_flashdata('success', 'Berhasil diubah');
-                redirect(site_url('direct/sekolah'));
+                redirect(site_url('admindirect/sekolah'));
             }
             else
             {
@@ -94,7 +94,7 @@ class Sekolah extends CI_Controller
         $data['user'] = $this->sekolah_model->getThisTableRecord('tbl_user');
         if (!$data['sekolah']) show_404();
 
-        $this->load->view('direct/sekolah/edit_form', $data);
+        $this->load->view('admindirect/sekolah/edit_form', $data);
     }
 
     public function remove($id)
@@ -103,7 +103,7 @@ class Sekolah extends CI_Controller
 
         if ($this->sekolah_model->delete($id))
         {
-            redirect(site_url('direct/sekolah'));
+            redirect(site_url('admindirect/sekolah'));
         }
     }
 
@@ -111,7 +111,7 @@ class Sekolah extends CI_Controller
     {
         is_logged_in();
         $data['sekolah'] = $this->sekolah_model->getDetail($id);
-        $this->load->view('direct/sekolah/detail', $data);
+        $this->load->view('admindirect/sekolah/detail', $data);
     }
 
     public function exportpdf()
@@ -122,7 +122,7 @@ class Sekolah extends CI_Controller
             'export' => $this->hvc_model->getRelated($data['tdc'])
         ];
 
-        $this->load->view('direct/sekolah/pdf_export', $data);
+        $this->load->view('admindirect/sekolah/pdf_export', $data);
     }
 
     public function export()

@@ -56,6 +56,10 @@ class Login extends CI_Controller
             {
                 redirect(base_url('index.php/direct/direct'));
             }
+            else if ($data['level'] == 'adm_direct' || $data['level'] == 'ADM_DIRECT')
+            {
+                redirect(base_url('index.php/admindirect/direct'));
+            }
             else
             {
                 $this->session->set_flashdata('failed', 'Anda tidak memiliki hak akses untuk mengakses situs ini');

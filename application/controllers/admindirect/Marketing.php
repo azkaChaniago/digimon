@@ -18,7 +18,7 @@ class Marketing extends CI_Controller
         is_logged_in();
         
         $data['marketing'] = $this->marketing_model->getRelated();
-        $this->load->view('admin/direct/marketing/list', $data);
+        $this->load->view('admindirect/marketing/list', $data);
     }
 
     public function add()
@@ -32,7 +32,7 @@ class Marketing extends CI_Controller
         {
             $marketing->save();
             $this->session->set_flashdata('success', 'Berhasil disimpan');
-            redirect(site_url('admin/direct/marketing'));
+            redirect(site_url('admindirect/marketing'));
         }
         // else
         // {
@@ -40,13 +40,13 @@ class Marketing extends CI_Controller
         // }
         $data['marketing'] = $this->marketing_model->getAll();
         $data['tdc'] = $this->marketing_model->getThisTableRecord('tbl_tdc');
-        $this->load->view('admin/direct/marketing/new_form', $data);
+        $this->load->view('admindirect/marketing/new_form', $data);
     }
 
     public function edit($id)
     {
         is_logged_in();
-        if (!isset($id)) redirect('admin/direct/tdc');
+        if (!isset($id)) redirect('admindirect/tdc');
         
         $marketing = $this->marketing_model;
         $validation = $this->form_validation;
@@ -56,7 +56,7 @@ class Marketing extends CI_Controller
         {
             $marketing->update($id);
             $this->session->set_flashdata('success', 'Berhasil diubah');
-            redirect(site_url('admin/direct/marketing'));
+            redirect(site_url('admindirect/marketing'));
         }
         // else
         // {
@@ -68,7 +68,7 @@ class Marketing extends CI_Controller
         $data['user'] = $this->marketing_model->getThisTableRecord('tbl_user');
         if (!$data['marketing']) show_404();
 
-        $this->load->view('admin/direct/marketing/edit_form', $data);
+        $this->load->view('admindirect/marketing/edit_form', $data);
     }
 
     public function remove($id)
@@ -77,7 +77,7 @@ class Marketing extends CI_Controller
 
         if ($this->marketing_model->delete($id))
         {
-            redirect(site_url('admin/direct/marketing'));
+            redirect(site_url('admindirect/marketing'));
         }
     }
 
@@ -85,7 +85,7 @@ class Marketing extends CI_Controller
     {
         is_logged_in();
         $data['marketing'] = $this->marketing_model->getDetail($id);
-        $this->load->view('admin/direct/marketing/detail', $data);
+        $this->load->view('admindirect/marketing/detail', $data);
     }
 
 }

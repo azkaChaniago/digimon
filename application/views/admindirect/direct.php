@@ -2,14 +2,14 @@
 <html lang="en">
 
   <head>
-    <?php $this->load->view("direct/_parts/head.php") ?>
+    <?php $this->load->view("admindirect/_parts/head.php") ?>
   </head>
    
   <body class="theme-red">
 
-    <?php $this->load->view("direct/_parts/navbar.php") ?>
+    <?php $this->load->view("admindirect/_parts/navbar.php") ?>
 
-    <?php $this->load->view("direct/_parts/sidebar.php") ?>
+    <?php $this->load->view("admindirect/_parts/sidebar.php") ?>
 
       <div class="content">
         <div class="container-fluid">
@@ -26,7 +26,7 @@
           </div>
         </div>
       </div>
-      <?php $this->load->view("direct/_parts/js.php") ?>
+      <?php $this->load->view("admindirect/_parts/js.php") ?>
     <script>
       // Set new default font family and font color to mimic Bootstrap's default styling
       Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -39,7 +39,7 @@
       data: {
           labels: [
             <?php 
-            foreach ($direct as $dr) {
+            foreach ($admindirect as $dr) {
                 echo "'" . $dr->nama_marketing . "',";
             }
           ?>
@@ -50,7 +50,7 @@
           borderColor: "rgba(2,117,216,1)",
           data: [
               <?php 
-              foreach ($direct as $dr) {
+              foreach ($admindirect as $dr) {
                 echo "'" . $dr->jumlah_outlet . "',";
               }
               ?>

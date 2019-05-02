@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-	<?php $this->load->view("direct/_parts/head.php") ?>
+	<?php $this->load->view("admindirect/_parts/head.php") ?>
 </head>
 
 <body class="theme-red">
 
-	<?php $this->load->view("direct/_parts/navbar.php") ?>
+	<?php $this->load->view("admindirect/_parts/navbar.php") ?>
 	
-	<?php $this->load->view("direct/_parts/sidebar.php") ?>
+	<?php $this->load->view("admindirect/_parts/sidebar.php") ?>
 
 	<section class="content">
 		<div class="container-fluid">
@@ -23,10 +23,10 @@
 						</div>
 						<div class="col-md-6" style='text-align: right'>							
 							<h2>
-								<a href="<?php echo site_url('direct/komunitas/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i><span>Tambah</span></a>
-								<a href="<?php echo site_url('direct/komunitas/export') ?>" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
+								<a href="<?php echo site_url('admindirect/komunitas/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i><span>Tambah</span></a>
+								<a href="<?php echo site_url('admindirect/komunitas/export') ?>" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
 								<span>Excel</span></a>							
-								<a href="<?php echo site_url('direct/komunitas/exportpdf') ?>" class="btn btn-danger waves-effect"><i class="material-icons">save_alt</i>
+								<a href="<?php echo site_url('admindirect/komunitas/exportpdf') ?>" class="btn btn-danger waves-effect"><i class="material-icons">save_alt</i>
 								<span>PDF</span></a>
 							</h2>
 						</div> 						
@@ -65,9 +65,9 @@
 										<?php echo $k->nama_sosmed ?>
 									</td>
 									<td width='180' class="text-center" >
-										<a href="<?php echo site_url('direct/komunitas/edit/'.$k->id_komunitas) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('direct/komunitas/remove/'.$k->id_komunitas) ?>')" href="#!"><i class="material-icons">delete</i></a>
-										<a href="<?php echo site_url('direct/komunitas/detail/'.$k->id_komunitas) ?>"><i class="material-icons">description</i></a>	
+										<a href="<?php echo site_url('admindirect/komunitas/edit/'.$k->id_komunitas) ?>"><i class="material-icons">edit</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('admindirect/komunitas/remove/'.$k->id_komunitas) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<a href="<?php echo site_url('admindirect/komunitas/detail/'.$k->id_komunitas) ?>"><i class="material-icons">description</i></a>	
 									</td>
 								</tr>
 								<?php endforeach; ?>
@@ -83,9 +83,9 @@
 	</section>
 	<!-- /#wrapper -->
 
-	<?php $this->load->view("direct/_parts/modal.php") ?>
+	<?php $this->load->view("admindirect/_parts/modal.php") ?>
 
-	<?php $this->load->view("direct/_parts/js.php") ?>
+	<?php $this->load->view("admindirect/_parts/js.php") ?>
 
 	<script>
 		function deleteConfirm(url)

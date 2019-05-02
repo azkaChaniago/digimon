@@ -37,7 +37,7 @@ class Hvc extends CI_Controller
         is_logged_in();
         $data = $this->userSession();    
         $data['hvc'] = $this->hvc_model->getRelated($data['tdc']);
-        $this->load->view('direct/hvc/list', $data);
+        $this->load->view('admindirect/hvc/list', $data);
     }
 
     public function add()
@@ -51,7 +51,7 @@ class Hvc extends CI_Controller
         {
             $hvc->save();
             $this->session->set_flashdata('success', 'Berhasil disimpan');
-            redirect(site_url('direct/hvc'));
+            redirect(site_url('admindirect/hvc'));
         }
         // else
         // {
@@ -61,13 +61,13 @@ class Hvc extends CI_Controller
         $data['tdc'] = $this->hvc_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->hvc_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->hvc_model->getThisTableRecord('tbl_user');
-        $this->load->view('direct/hvc/new_form', $data);
+        $this->load->view('admindirect/hvc/new_form', $data);
     }
 
     public function edit($id)
     {
         is_logged_in();
-        if (!isset($id)) redirect('direct/tdc');
+        if (!isset($id)) redirect('admindirect/tdc');
         
         $hvc = $this->hvc_model;
         $validation = $this->form_validation;
@@ -78,7 +78,7 @@ class Hvc extends CI_Controller
             {
                 $hvc->update($id);
                 $this->session->set_flashdata('success', 'Berhasil diubah');
-                redirect(site_url('direct/hvc'));
+                redirect(site_url('admindirect/hvc'));
             }
             else
             {
@@ -93,7 +93,7 @@ class Hvc extends CI_Controller
         $data['user'] = $this->hvc_model->getThisTableRecord('tbl_user');
         if (!$data['hvc']) show_404();
 
-        $this->load->view('direct/hvc/edit_form', $data);
+        $this->load->view('admindirect/hvc/edit_form', $data);
     }
 
     public function remove($id)
@@ -102,7 +102,7 @@ class Hvc extends CI_Controller
 
         if ($this->hvc_model->delete($id))
         {
-            redirect(site_url('direct/hvc'));
+            redirect(site_url('admindirect/hvc'));
         }
     }
 
@@ -110,7 +110,7 @@ class Hvc extends CI_Controller
     {
         is_logged_in();
         $data['hvc'] = $this->hvc_model->getDetail($id);
-        $this->load->view('direct/hvc/detail', $data);
+        $this->load->view('admindirect/hvc/detail', $data);
     }
 
     public function fetchperiode()
@@ -138,7 +138,7 @@ class Hvc extends CI_Controller
             'export' => $this->hvc_model->getRelated($data['tdc'], $start, $end)
         ];
 
-        $this->load->view('direct/hvc/pdf_export', $data);
+        $this->load->view('admindirect/hvc/pdf_export', $data);
     }
 
     public function export($start, $end)

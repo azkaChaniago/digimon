@@ -29,61 +29,61 @@
             <ul class="list">
                 <li class="header">MAIN NAVIGATION</li>
                 <li class="<?php echo $this->uri->segment(2) == 'direct' ? 'active': ''?>">
-                    <a href="<?php echo site_url('direct/direct') ?>">
+                    <a href="<?php echo site_url('admindirect/direct') ?>">
                         <i class="material-icons">home</i>
                         <span>Home</span>
                     </a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'event' ? 'active': ''?>">
-                    <a href="<?php echo site_url('direct/event') ?>">
+                    <a href="<?php echo site_url('admindirect/event') ?>">
                         <i class="material-icons">event</i>
                         <span>Event</span>
                     </a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'penjualanharian' ? 'active': ''?>">
-                    <a href="<?php echo site_url('direct/penjualanharian') ?>">
+                    <a href="<?php echo site_url('admindirect/penjualanharian') ?>">
                         <i class="material-icons">shopping_cart</i>
                         <span>Penjualan Harian</span>
                     </a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'saleling' ? 'active': ''?>">
-                    <a href="<?php echo site_url('direct/saleling') ?>">
+                    <a href="<?php echo site_url('admindirect/saleling') ?>">
                         <i class="material-icons">store</i>
                         <span>Foto Saleling</span>
                     </a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'downlinegt' ? 'active': ''?>">
-                    <a href="<?php echo site_url('direct/downlinegt') ?>">
+                    <a href="<?php echo site_url('admindirect/downlinegt') ?>">
                         <i class="material-icons">zoom_out_map</i>
                         <span>Downline GT</span>
                     </a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'hvc' ? 'active': ''?>">
-                    <a href="<?php echo site_url('direct/hvc') ?>">
+                    <a href="<?php echo site_url('admindirect/hvc') ?>">
                         <i class="material-icons">business_center</i>
                         <span>HVC</span>
                     </a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'mercent' ? 'active': ''?>">
-                    <a href="<?php echo site_url('direct/mercent') ?>">
+                    <a href="<?php echo site_url('admindirect/mercent') ?>">
                         <i class="material-icons">group</i>
                         <span>Mercent</span>
                     </a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'sekolah' ? 'active': ''?>">
-                    <a href="<?php echo site_url('direct/sekolah') ?>">
+                    <a href="<?php echo site_url('admindirect/sekolah') ?>">
                         <i class="material-icons">school</i>
                         <span>Sekolah</span>
                     </a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'marketsharesekolah' ? 'active': ''?>">
-                    <a href="<?php echo site_url('direct/marketsharesekolah') ?>">
+                    <a href="<?php echo site_url('admindirect/marketsharesekolah') ?>">
                         <i class="material-icons">share</i>
                         <span>Marketshare Sekolah</span>
                     </a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'komunitas' ? 'active': ''?>">
-                    <a href="<?php echo site_url('direct/komunitas') ?>">
+                    <a href="<?php echo site_url('admindirect/komunitas') ?>">
                         <i class="material-icons">group_add</i>
                         <span>Komunitas</span>
                     </a>

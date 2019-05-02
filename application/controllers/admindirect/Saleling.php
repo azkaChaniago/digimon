@@ -36,7 +36,7 @@ class Saleling extends CI_Controller
         is_logged_in();
         $data = $this->userSession();  
         $data['saleling'] = $this->saleling_model->getRelated($data['tdc']);
-        $this->load->view('direct/saleling/list', $data);
+        $this->load->view('admindirect/saleling/list', $data);
     }
 
     public function add()
@@ -51,7 +51,7 @@ class Saleling extends CI_Controller
             {
                 $saleling->save();
                 $this->session->set_flashdata('success', 'Berhasil disimpan');
-                redirect(site_url('direct/saleling'));
+                redirect(site_url('admindirect/saleling'));
             }
             else
             {
@@ -62,13 +62,13 @@ class Saleling extends CI_Controller
         $data['tdc'] = $this->saleling_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->saleling_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->saleling_model->getThisTableRecord('tbl_user');
-        $this->load->view('direct/saleling/new_form', $data);
+        $this->load->view('admindirect/saleling/new_form', $data);
     }
 
     public function edit($id)
     {
         is_logged_in();
-        if (!isset($id)) redirect('direct/tdc');
+        if (!isset($id)) redirect('admindirect/tdc');
         
         $saleling = $this->saleling_model;
         $validation = $this->form_validation;
@@ -80,7 +80,7 @@ class Saleling extends CI_Controller
             {
                 $saleling->update($id);
                 $this->session->set_flashdata('success', 'Berhasil diubah');
-                redirect(site_url('direct/saleling'));
+                redirect(site_url('admindirect/saleling'));
             }
             else
             {
@@ -96,7 +96,7 @@ class Saleling extends CI_Controller
         $data['user'] = $this->saleling_model->getThisTableRecord('tbl_user');
         if (!$data['saleling']) show_404();
 
-        $this->load->view('direct/saleling/edit_form', $data);
+        $this->load->view('admindirect/saleling/edit_form', $data);
     }
 
     public function remove($id)
@@ -105,7 +105,7 @@ class Saleling extends CI_Controller
 
         if ($this->saleling_model->delete($id))
         {
-            redirect(site_url('direct/saleling'));
+            redirect(site_url('admindirect/saleling'));
         }
     }
 
@@ -113,7 +113,7 @@ class Saleling extends CI_Controller
     {
         is_logged_in();
         $data['saleling'] = $this->saleling_model->getDetail($id);
-        $this->load->view('direct/saleling/detail', $data);
+        $this->load->view('admindirect/saleling/detail', $data);
     }
 
     public function fetchperiode()
@@ -141,7 +141,7 @@ class Saleling extends CI_Controller
             'export' => $this->saleling_model->getRelated($data['tdc'], $start, $end)
         ];
 
-        $this->load->view('direct/saleling/pdf_export', $data);
+        $this->load->view('admindirect/saleling/pdf_export', $data);
     }
 
     public function export($start, $end)

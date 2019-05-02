@@ -36,7 +36,7 @@ class Event extends CI_Controller
         is_logged_in();
         $data = $this->userSession();
         $data['event'] = $this->event_model->getRelated($data['tdc']);
-        $this->load->view('direct/event/list', $data);
+        $this->load->view('admindirect/event/list', $data);
     }
 
     public function add()
@@ -51,25 +51,25 @@ class Event extends CI_Controller
             // die();
             $event->save();
             $this->session->set_flashdata('success', 'Berhasil disimpan');
-            redirect(site_url('direct/event'));
+            redirect(site_url('admindirect/event'));
         }
         // else
         // {
         //     $this->session->set_flashdata('srrors', validation_errors());
         //     die(validation_errors());
-        //     // redirect(site_url('direct/event'));
+        //     // redirect(site_url('admindirect/event'));
         // }
         $data['event'] = $this->event_model->getAll();
         $data['tdc'] = $this->event_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->event_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->event_model->getThisTableRecord('tbl_user');
-        $this->load->view('direct/event/new_form', $data);
+        $this->load->view('admindirect/event/new_form', $data);
     }
 
     public function edit($id)
     {
         is_logged_in();
-        if (!isset($id)) redirect('direct/tdc');
+        if (!isset($id)) redirect('admindirect/tdc');
         
         $event = $this->event_model;
         $validation = $this->form_validation;
@@ -79,7 +79,7 @@ class Event extends CI_Controller
         {
             $event->update($id);
             $this->session->set_flashdata('success', 'Berhasil diubah');
-            redirect(site_url('direct/event'));
+            redirect(site_url('admindirect/event'));
         }
         // else
         // {
@@ -93,7 +93,7 @@ class Event extends CI_Controller
         $data['user'] = $this->event_model->getThisTableRecord('tbl_user');
         if (!$data['event']) show_404();
 
-        $this->load->view('direct/event/edit_form', $data);
+        $this->load->view('admindirect/event/edit_form', $data);
     }
 
     public function remove($id)
@@ -102,7 +102,7 @@ class Event extends CI_Controller
 
         if ($this->event_model->delete($id))
         {
-            redirect(site_url('direct/event'));
+            redirect(site_url('admindirect/event'));
         }
     }
 
@@ -110,7 +110,7 @@ class Event extends CI_Controller
     {
         is_logged_in();
         $data['event'] = $this->event_model->getDetail($id);
-        $this->load->view('direct/event/detail', $data);
+        $this->load->view('admindirect/event/detail', $data);
     }
 
     public function fetchperiode()
@@ -138,7 +138,7 @@ class Event extends CI_Controller
             'export' => $this->event_model->getRecord($data['tdc'], $start, $end)
         ];
 
-        $this->load->view('direct/event/pdf_export', $data);
+        $this->load->view('admindirect/event/pdf_export', $data);
     }
 
     public function export($start, $end)

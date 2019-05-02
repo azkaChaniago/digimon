@@ -37,7 +37,7 @@ class Komunitas extends CI_Controller
         is_logged_in();
         $data = $this->userSession();
         $data['komunitas'] = $this->komunitas_model->getRelated($data['tdc']);
-        $this->load->view('direct/komunitas/list', $data);
+        $this->load->view('admindirect/komunitas/list', $data);
     }
 
     public function add()
@@ -52,7 +52,7 @@ class Komunitas extends CI_Controller
             {
                 $komunitas->save();
                 $this->session->set_flashdata('success', 'Berhasil disimpan');
-                redirect(site_url('direct/komunitas'));
+                redirect(site_url('admindirect/komunitas'));
             }
             else
             {
@@ -63,13 +63,13 @@ class Komunitas extends CI_Controller
         $data['tdc'] = $this->komunitas_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->komunitas_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->komunitas_model->getThisTableRecord('tbl_user');
-        $this->load->view('direct/komunitas/new_form', $data);
+        $this->load->view('admindirect/komunitas/new_form', $data);
     }
 
     public function edit($id)
     {
         is_logged_in();
-        if (!isset($id)) redirect('direct/komunitas');
+        if (!isset($id)) redirect('admindirect/komunitas');
         
         $komunitas = $this->komunitas_model;
         $validation = $this->form_validation;
@@ -80,7 +80,7 @@ class Komunitas extends CI_Controller
             {
                 $komunitas->update($id);
                 $this->session->set_flashdata('success', 'Berhasil diubah');
-                redirect(site_url('direct/komunitas'));
+                redirect(site_url('admindirect/komunitas'));
             }
             else
             {
@@ -95,7 +95,7 @@ class Komunitas extends CI_Controller
         $data['user'] = $this->komunitas_model->getThisTableRecord('tbl_user');
         if (!$data['komunitas']) show_404();
 
-        $this->load->view('direct/komunitas/edit_form', $data);
+        $this->load->view('admindirect/komunitas/edit_form', $data);
     }
 
     public function remove($id)
@@ -104,7 +104,7 @@ class Komunitas extends CI_Controller
 
         if ($this->komunitas_model->delete($id))
         {
-            redirect(site_url('direct/komunitas'));
+            redirect(site_url('admindirect/komunitas'));
         }
     }
 
@@ -112,7 +112,7 @@ class Komunitas extends CI_Controller
     {
         is_logged_in();
         $data['komunitas'] = $this->komunitas_model->getDetail($id);
-        $this->load->view('direct/komunitas/detail', $data);
+        $this->load->view('admindirect/komunitas/detail', $data);
     }
 
     public function exportpdf()
@@ -123,7 +123,7 @@ class Komunitas extends CI_Controller
             'export' => $this->hvc_model->getRelated($data['tdc'])
         ];
 
-        $this->load->view('direct/hvc/pdf_export', $data);
+        $this->load->view('admindirect/hvc/pdf_export', $data);
     }
 
     public function export()

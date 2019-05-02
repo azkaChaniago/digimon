@@ -37,7 +37,7 @@ class Marketsharesekolah extends CI_Controller
         is_logged_in();
         $data = $this->userSession();
         $data['marketshare'] = $this->marketsharesekolah_model->getRelated($data['tdc']);
-        $this->load->view('direct/sharesekolah/list', $data);
+        $this->load->view('admindirect/sharesekolah/list', $data);
     }
 
     public function add()
@@ -52,7 +52,7 @@ class Marketsharesekolah extends CI_Controller
             {
                 $sekolah->save();
                 $this->session->set_flashdata('success', 'Berhasil disimpan');
-                redirect(site_url('direct/marketsharesekolah'));
+                redirect(site_url('admindirect/marketsharesekolah'));
             }
             else
             {
@@ -63,13 +63,13 @@ class Marketsharesekolah extends CI_Controller
         $data['tdc'] = $this->marketsharesekolah_model->getThisTableRecord('tbl_tdc');
         $data['sekolah'] = $this->marketsharesekolah_model->getThisTableRecord('tbl_sekolah');
         $data['user'] = $this->marketsharesekolah_model->getThisTableRecord('tbl_user');
-        $this->load->view('direct/sharesekolah/new_form', $data);
+        $this->load->view('admindirect/sharesekolah/new_form', $data);
     }
 
     public function edit($id)
     {
         is_logged_in();
-        if (!isset($id)) redirect('direct/marketsharesekolah');
+        if (!isset($id)) redirect('admindirect/marketsharesekolah');
         
         $sekolah = $this->marketsharesekolah_model;
         $validation = $this->form_validation;
@@ -80,7 +80,7 @@ class Marketsharesekolah extends CI_Controller
             {
                 $sekolah->update($id);
                 $this->session->set_flashdata('success', 'Berhasil disimpan');
-                redirect(site_url('direct/marketsharesekolah'));
+                redirect(site_url('admindirect/marketsharesekolah'));
             }
             else
             {
@@ -96,7 +96,7 @@ class Marketsharesekolah extends CI_Controller
         $data['user'] = $this->marketsharesekolah_model->getThisTableRecord('tbl_user');
         if (!$data['marketshare']) show_404();
 
-        $this->load->view('direct/sharesekolah/edit_form', $data);
+        $this->load->view('admindirect/sharesekolah/edit_form', $data);
     }
 
     public function remove($id)
@@ -105,7 +105,7 @@ class Marketsharesekolah extends CI_Controller
 
         if ($this->marketsharesekolah_model->delete($id))
         {
-            redirect(site_url('direct/marketsharesekolah'));
+            redirect(site_url('admindirect/marketsharesekolah'));
         }
     }
 
@@ -113,7 +113,7 @@ class Marketsharesekolah extends CI_Controller
     {
         is_logged_in();
         $data['marketshare'] = $this->marketsharesekolah_model->getDetail($id);
-        $this->load->view('direct/sharesekolah/detail', $data);
+        $this->load->view('admindirect/sharesekolah/detail', $data);
     }
 
     public function fetchperiode()
@@ -141,7 +141,7 @@ class Marketsharesekolah extends CI_Controller
             'export' => $this->hvc_model->getRelated($data['tdc'], $start, $end)
         ];
 
-        $this->load->view('direct/hvc/pdf_export', $data);
+        $this->load->view('admindirect/hvc/pdf_export', $data);
     }
 
     public function export($start, $end)

@@ -2,20 +2,20 @@
 <html lang="en">
 
 <head>
-	<?php $this->load->view("direct/_parts/head.php") ?>
+	<?php $this->load->view("admindirect/_parts/head.php") ?>
 </head>
 
 <body class="theme-red">
 
-    <?php $this->load->view("direct/_parts/navbar.php") ?>
-    <?php $this->load->view("direct/_parts/sidebar.php") ?>
+    <?php $this->load->view("admindirect/_parts/navbar.php") ?>
+    <?php $this->load->view("admindirect/_parts/sidebar.php") ?>
 	<section class="content">	
         <div class="container-fluid">
             <div class="container">
                 <div class="card">
                     <div class="header">   
                         <h2 class="text-center">Detail Sekolah</h2>
-                        <a href="<?php echo site_url('direct/sekolah') ?>" class="btn btn-danger waves-effect"><i class="material-icons">arrow_back</i>
+                        <a href="<?php echo site_url('admindirect/sekolah') ?>" class="btn btn-danger waves-effect"><i class="material-icons">arrow_back</i>
                         <span>Kembali<span></a>
                     </div>
                     <div class="body">
@@ -63,7 +63,7 @@
 		</div>
     </section>
 	<!-- /#wrapper -->
-	<?php $this->load->view("direct/_parts/js.php") ?>
+	<?php $this->load->view("admindirect/_parts/js.php") ?>
 
 	<script>
 		function deleteConfirm(url)

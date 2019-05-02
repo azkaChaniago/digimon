@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-	<?php $this->load->view("direct/_parts/head.php") ?>
+	<?php $this->load->view("admindirect/_parts/head.php") ?>
 </head>
 
 <body class="theme-red">
 
-	<?php $this->load->view("direct/_parts/navbar.php") ?>
+	<?php $this->load->view("admindirect/_parts/navbar.php") ?>
 	
-	<?php $this->load->view("direct/_parts/sidebar.php") ?>
+	<?php $this->load->view("admindirect/_parts/sidebar.php") ?>
 
 	<section class="content">
 		<div class="container-fluid">
@@ -17,7 +17,7 @@
 			<div class="card">
 				<div class="header">
 					<div class="row">
-						<form action="<?php echo site_url('direct/downlinegt/fetchperiode') ?>" method="post">
+						<form action="<?php echo site_url('admindirect/downlinegt/fetchperiode') ?>" method="post">
 							<div class="col-md-5">
 								<div class="form-group form-float">
 									<div class="form-line" id="bs_datepicker_container">
@@ -54,7 +54,7 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="col-md-6" style='text-align: right'>							
-							<h2><a href="<?php echo site_url('direct/downlinegt/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+							<h2><a href="<?php echo site_url('admindirect/downlinegt/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
 							<span>Tambah</span></a></h2>
 						</div> 						
 					</div>
@@ -104,9 +104,9 @@
 										<?php echo $gt->deposit ?>
 									</td>
 									<td width='180' class="text-center" >
-										<a href="<?php echo site_url('direct/downlinegt/edit/'.$gt->id_downline_gt) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('direct/downlinegt/remove/'.$gt->id_downline_gt) ?>')" href="#!"><i class="material-icons">delete</i></a>
-										<a href="<?php echo site_url('direct/downlinegt/detail/'.$gt->id_downline_gt) ?>"><i class="material-icons">description</i></a>	
+										<a href="<?php echo site_url('admindirect/downlinegt/edit/'.$gt->id_downline_gt) ?>"><i class="material-icons">edit</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('admindirect/downlinegt/remove/'.$gt->id_downline_gt) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<a href="<?php echo site_url('admindirect/downlinegt/detail/'.$gt->id_downline_gt) ?>"><i class="material-icons">description</i></a>	
 									</td>
 								</tr>
 								<?php endforeach; ?>
@@ -122,9 +122,9 @@
 	</section>
 	<!-- /#wrapper -->
 
-	<?php $this->load->view("direct/_parts/modal.php") ?>
+	<?php $this->load->view("admindirect/_parts/modal.php") ?>
 
-	<?php $this->load->view("direct/_parts/js.php") ?>
+	<?php $this->load->view("admindirect/_parts/js.php") ?>
 
 	<script>
 		function deleteConfirm(url)
