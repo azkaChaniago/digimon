@@ -6,6 +6,7 @@ require('./phpspreadsheet/vendor/autoload.php');
 use PhpOffice\PhpSpreadsheet\Helper\Example;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 class Downlinegt extends CI_Controller
 {
 
@@ -206,16 +207,3 @@ class Downlinegt extends CI_Controller
     }
 
 }
-
-
-
-
-// Line Number: 84
-
-// Backtrace:
-
-// File: E:\xampp\htdocs\digimon\application\controllers\direct\Downlinegt.php
-// Line: 84
-// Function: _error_handler
-
-// File: E:\xampp\htdocs\digimon\index.php
