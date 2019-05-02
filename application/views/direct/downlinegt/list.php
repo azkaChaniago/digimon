@@ -36,9 +36,9 @@
 							</div>
 							<div class="col-md-2">
 								<button name="xls" class="btn btn-success waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
-								<span>Export Excel</span></button>							
+								<span>Excel</span></button>							
 								<button name="pdf" class="btn btn-danger waves-effect" target="blank" formtarget="_blank"><i class="material-icons">save_alt</i>
-								<span>Export PDF</span></button>
+								<span>PDF</span></button>
 							</div>
 						</form>
 					</div>
@@ -50,11 +50,11 @@
 				<div class="header">
 					<div class="row">
 						<div class="col-md-6">
-							<h2>Event</h2>
+							<h2>Downline GT</h2>
 							<div class="clearfix"></div>
 						</div>
 						<div class="col-md-6" style='text-align: right'>							
-							<h2><a href="<?php echo site_url('direct/event/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+							<h2><a href="<?php echo site_url('direct/downlinegt/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
 							<span>Tambah</span></a></h2>
 						</div> 						
 					</div>
@@ -104,9 +104,9 @@
 										<?php echo $gt->deposit ?>
 									</td>
 									<td width='180' class="text-center" >
-										<a href="<?php echo site_url('direct/event/edit/'.$gt->id_downline_gt) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('direct/deventdelete/'.$gt->id_downline_gt) ?>')" href="#!"><i class="material-icons">delete</i></a>
-										<a href="<?php echo site_url('direct/event/detail/'.$gt->id_downline_gt) ?>"><i class="material-icons">description</i></a>	
+										<a href="<?php echo site_url('direct/downlinegt/edit/'.$gt->id_downline_gt) ?>"><i class="material-icons">edit</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('direct/downlinegt/remove/'.$gt->id_downline_gt) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<a href="<?php echo site_url('direct/downlinegt/detail/'.$gt->id_downline_gt) ?>"><i class="material-icons">description</i></a>	
 									</td>
 								</tr>
 								<?php endforeach; ?>
