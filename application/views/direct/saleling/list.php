@@ -17,7 +17,7 @@
 			<div class="card">
 				<div class="header">
 					<div class="row">
-						<form action="<?php echo site_url('direct/event/fetchperiode') ?>" method="post">
+						<form action="<?php echo site_url('direct/saleling/fetchperiode') ?>" method="post">
 							<div class="col-md-5">
 								<div class="form-group form-float">
 									<div class="form-line" id="bs_datepicker_container">
@@ -36,9 +36,9 @@
 							</div>
 							<div class="col-md-2">
 								<button name="xls" class="btn btn-success waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
-								<span>Export Excel</span></button>							
+								<span>Excel</span></button>							
 								<button name="pdf" class="btn btn-danger waves-effect" target="blank" formtarget="_blank"><i class="material-icons">save_alt</i>
-								<span>Export PDF</span></button>
+								<span>PDF</span></button>
 							</div>
 						</form>
 					</div>
@@ -50,11 +50,11 @@
 				<div class="header">
 					<div class="row">
 						<div class="col-md-6">
-							<h2>Event</h2>
+							<h2>Saleling</h2>
 							<div class="clearfix"></div>
 						</div>
 						<div class="col-md-6" style='text-align: right'>							
-							<h2><a href="<?php echo site_url('direct/event/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+							<h2><a href="<?php echo site_url('direct/saleling/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
 							<span>Tambah</span></a></h2>
 						</div> 						
 					</div>
@@ -92,9 +92,9 @@
 										<?php echo $sale->lokasi_saleling ?>
 									</td>
 									<td width='180' class="text-center" >
-										<a href="<?php echo site_url('direct/event/edit/'.$sale->id_saleling) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('direct/deventdelete/'.$sale->id_saleling) ?>')" href="#!"><i class="material-icons">delete</i></a>
-										<a href="<?php echo site_url('direct/event/detail/'.$sale->id_saleling) ?>"><i class="material-icons">description</i></a>	
+										<a href="<?php echo site_url('direct/saleling/edit/'.$sale->id_saleling) ?>"><i class="material-icons">edit</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('direct/saleling/remove/'.$sale->id_saleling) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<a href="<?php echo site_url('direct/saleling/detail/'.$sale->id_saleling) ?>"><i class="material-icons">description</i></a>	
 									</td>
 								</tr>
 								<?php endforeach; ?>

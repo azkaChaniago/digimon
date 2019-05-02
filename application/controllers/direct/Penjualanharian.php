@@ -34,8 +34,8 @@ class Penjualanharian extends CI_Controller
     public function index()
     {
         is_logged_in();
-        
-        $data['penjualanharian'] = $this->penjualanharian_model->getRelated();
+        $data = $this->userSession();
+        $data['penjualanharian'] = $this->penjualanharian_model->getRelated($data['tdc']);
         $this->load->view('direct/penjualanharian/list', $data);
     }
 
@@ -138,7 +138,7 @@ class Penjualanharian extends CI_Controller
         // die($start . $end);
         $data = $this->userSession();
         $data += [
-            'export' => $this->penjualanharian_model->getRelated($start, $end)
+            'export' => $this->penjualanharian_model->getRelated($data['tdc'], $start, $end)
         ];
 
         $this->load->view('direct/penjualanharian/pdf_export', $data);
@@ -147,7 +147,7 @@ class Penjualanharian extends CI_Controller
     public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->penjualanharian_model->getRelated($start, $end);
+        $export = $this->penjualanharian_model->getRelated($data['tdc'],$start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()

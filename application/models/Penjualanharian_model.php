@@ -77,7 +77,7 @@ class Penjualanharian_model extends CI_Model
         return $this->db->get($table)->result();
     }
 
-    public function getRelated($start=null, $end=null)
+    public function getRelated($tdc, $start=null, $end=null)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS ev');
@@ -87,6 +87,7 @@ class Penjualanharian_model extends CI_Model
         if ($start && $end) :
             $this->db->where("ev.tgl_penjualan BETWEEN '$start' AND '$end'");
         endif;
+        $this->db->where('tdc.kode_tdc', $tdc);
         return $this->db->get()->result();
     }
 
@@ -104,8 +105,12 @@ class Penjualanharian_model extends CI_Model
     public function save()
     {
         $post = $this->input->post();
-        if ($_FILES['foto_kegiatan']['name'] == !empty(array()))
+        if ($_FILES['foto_kegiatan']['name'] == (array(0 => NULL)))
         {
+            $this->foto_kegiatan = NULL;
+        }
+        else
+        { 
             $this->foto_kegiatan = $this->uploadMultipleImages();
         }
         $data = array(
@@ -145,22 +150,16 @@ class Penjualanharian_model extends CI_Model
     public function update($id)
     {
         $post = $this->input->post();
-
-        // die(print_r($_FILES['foto_kegiatan']['name']));
-
         if ($_FILES['foto_kegiatan']['name'] == (array(0 => NULL)))
         {
-            // die("aaaa");
             $this->foto_kegiatan = $post['old_image'];
         } 
         else
         {
-            // die("wwwwww");
             $this->removeImage($id);
             $this->foto_kegiatan = $this->uploadMultipleImages();
         }
         $data = array(
-            // 'id_penjualan' => $this->id_penjualan = $post['id_penjualan'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
             'divisi' => $this->divisi = $post['divisi'],
             'tgl_penjualan' => $this->tgl_penjualan = date('Y-m-d', strtotime($post['tgl_penjualan'])),
