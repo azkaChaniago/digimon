@@ -24,7 +24,6 @@ class Mercent_model extends CI_Model
     public function rules()
     {
         return [
-            ['field' => 'id_mercent', 'label' => 'ID mercent','rules' => 'required'],
             ['field' => 'kode_tdc', 'label' => 'Kode TDC','rules' => 'required'],
             ['field' => 'tanggal', 'label' => 'Tanggal mercent','rules' => 'required'],
             ['field' => 'nama_mercent', 'label' => 'Tanggal Event','rules' => 'required'],
@@ -37,8 +36,6 @@ class Mercent_model extends CI_Model
             ['field' => 'latitude', 'label' => 'Latitude','rules' => 'required'],
             ['field' => 'alamat', 'label' => 'Alamat','rules' => 'required'],
             ['field' => 'produk_diajukan', 'label' => 'Produk Diajukan','rules' => 'required'],
-            // ['field' => 'foto_mercent', 'label' => 'QTY 100K','rules' => 'required'],
-            ['field' => 'kode_user', 'label' => 'Kode User','rules' => 'required'],
         ];
     }
 
@@ -57,14 +54,17 @@ class Mercent_model extends CI_Model
         return $this->db->get($table)->result();
     }
 
-    public function getRelated()
+    public function getRelated($tdc, $start=null, $end=null)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS mer');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = mer.kode_tdc', 'left');
         $this->db->join('tbl_marketing AS m', 'm.kode_marketing = mer.kode_marketing', 'left');
         $this->db->join('tbl_user AS usr', 'usr.kode_user = mer.kode_user', 'left');
-        // $this->db->where('o.id_target', $id);
+        if ($start && $end) :
+            $this->db->where("mer.tgl_mercent BETWEEN '$start' AND '$end'");
+        endif;
+        $this->db->where('mer.kode_tdc', $tdc);
         return $this->db->get()->result();
     }
 
@@ -82,11 +82,18 @@ class Mercent_model extends CI_Model
     public function save()
     {
         $post = $this->input->post();
+        if ($_FILES['foto_mercent']['name'] == (array(0 => NULL)))
+        {
+            $this->foto_mercent = NULL;
+        }
+        else
+        { 
+            $this->foto_mercent = $this->uploadMultipleImages();
+        }
         $data = array(
-            'id_mercent' => $this->id_mercent = $post['id_mercent'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'tanggal' => $this->tanggal = $post['tanggal'],
-            'nama_mercent' => $this->nama_mercent = $post['nama_mercent'],
+            'tanggal' => $this->tanggal = date('Y-m-d', strtotime($post['tanggal'])),
+            'nama_mercent' => $this->nama_mercent = strtoupper($post['nama_mercent']),
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
             'nama_pic' => $this->nama_pic = $post['nama_pic'],
             'no_hp_pic' => $this->no_hp_pic = $post['no_hp_pic'],
@@ -94,9 +101,9 @@ class Mercent_model extends CI_Model
             'npwp' => $this->npwp = $post['npwp'],
             'longtitude' => $this->longtitude = $post['longtitude'],
             'latitude' => $this->latitude = $post['latitude'],
-            'alamat' => $this->alamat = $post['alamat'],
-            'produk_diajukan' => $this->produk_diajukan = $post['produk_diajukan'],
-            'foto_mercent' => $this->foto_mercent = $this->uploadImage(),
+            'alamat' => $this->alamat = strtoupper($post['alamat']),
+            'produk_diajukan' => $this->produk_diajukan = strtoupper($post['produk_diajukan']),
+            'foto_mercent' => $this->foto_mercent,
             'kode_user' => $this->kode_user = $post['kode_user'],
         );
         
@@ -107,19 +114,20 @@ class Mercent_model extends CI_Model
     public function update($id)
     {
         $post = $this->input->post();
-        if (!empty($_FILES['foto_mercent']['name']))
+        if ($_FILES['foto_mercent']['name'] == (array(0 => NULL)))
         {
-            $this->foto_mercent = $this->uploadImage();
+            $this->foto_mercent = $post['old_image'];
         } 
         else
         {
-            $this->foto_mercent = $post['old_image'];
+            $this->removeImage($id);
+            $this->foto_mercent = $this->uploadMultipleImages();
         }
         $data = array(
             // 'id_mercent' => $this->id_mercent = $post['id_mercent'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'tanggal' => $this->tanggal = $post['tanggal'],
-            'nama_mercent' => $this->nama_mercent = $post['nama_mercent'],
+            'tanggal' => $this->tanggal = date('Y-m-d', strtotime($post['tanggal'])),
+            'nama_mercent' => $this->nama_mercent = strtoupper($post['nama_mercent']),
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
             'nama_pic' => $this->nama_pic = $post['nama_pic'],
             'no_hp_pic' => $this->no_hp_pic = $post['no_hp_pic'],
@@ -127,8 +135,8 @@ class Mercent_model extends CI_Model
             'npwp' => $this->npwp = $post['npwp'],
             'longtitude' => $this->longtitude = $post['longtitude'],
             'latitude' => $this->latitude = $post['latitude'],
-            'alamat' => $this->alamat = $post['alamat'],
-            'produk_diajukan' => $this->produk_diajukan = $post['produk_diajukan'],
+            'alamat' => $this->alamat = strtoupper($post['alamat']),
+            'produk_diajukan' => $this->produk_diajukan = strtoupper($post['produk_diajukan']),
             'foto_mercent' => $this->foto_mercent,
             'kode_user' => $this->kode_user = $post['kode_user'],
         );
@@ -171,6 +179,69 @@ class Mercent_model extends CI_Model
         {
             $filename = explode('.', $post->foto_mercent)[0];
             return array_map('unlink', glob(FCPATH."upload/mercent/$filenammer.*"));
+        }
+    }
+
+    private function uploadMultipleImages()
+    {
+        $data_info = array();
+        $img_ids = array();
+        $count = count($_FILES['foto_mercent']['name']);
+        for ($i = 0; $i < $count; $i++)
+        {
+            $_FILES['image']['name'] = $_FILES['foto_mercent']['name'][$i];
+            $_FILES['image']['type'] = $_FILES['foto_mercent']['type'][$i];
+            $_FILES['image']['tmp_name'] = $_FILES['foto_mercent']['tmp_name'][$i];
+            $_FILES['image']['error'] = $_FILES['foto_mercent']['error'][$i];
+            $_FILES['image']['size'] = $_FILES['foto_mercent']['size'][$i];
+            
+            $config['upload_path'] = './upload/mercent/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['file_name'] = "MER_" . uniqid();
+            $config['overwrite'] = true;
+            $config['max_size'] = 5120;
+
+            $this->load->library('upload', $config);            
+            $this->upload->initialize($config);
+
+            if (!$this->upload->do_upload('image'))
+            {
+                die('sdsad');
+                $error = array('error' => $this->upload->display_errors());
+                $this->load->view('direct/mercent/new_form', $error);
+            }
+            else
+            {
+                $file_data = $this->upload->data();
+                array_push($img_ids, $file_data);
+            }
+        }
+        
+        return json_encode($img_ids);
+    }
+
+    private function removeImage($id) 
+    {
+        $ret = $this->db->get_where($this->table, array('id_mercent' => $id));
+        
+        if ($ret->num_rows() > 0) 
+        {
+            $res = $ret->row();
+            $file_data = json_decode($res->foto);
+            try 
+            {
+                for ($i=0; $i < count($file_data); $i++)
+                {
+                    if (is_file($file_data[$i]->full_path)) 
+                    {
+                        unlink($file_data[$i]->full_path);
+                    }
+                }
+            } 
+            catch (Exception $e)
+            {
+
+            }
         }
     }
 

@@ -19,7 +19,6 @@ class Komunitas_model extends CI_Model
     public function rules()
     {
         return [
-            ['field' => 'id_komunitas', 'label' => 'ID mercent','rules' => 'required'],
             ['field' => 'kode_tdc', 'label' => 'Kode TDC','rules' => 'required'],
             ['field' => 'nama_petugas', 'label' => 'Nama Petugas','rules' => 'required'],
             ['field' => 'nama_komunitas', 'label' => 'Nama Komunitas','rules' => 'required'],
@@ -28,7 +27,6 @@ class Komunitas_model extends CI_Model
             ['field' => 'no_hpketua', 'label' => 'No HP Ketua','rules' => 'required'],
             ['field' => 'jumlah_anggota', 'label' => 'Jumlah Anggota','rules' => 'required'],
             ['field' => 'nama_sosmed', 'label' => 'Nama Sssmed','rules' => 'required'],
-            ['field' => 'kode_user', 'label' => 'Kode User','rules' => 'required'],
         ];
     }
 
@@ -47,13 +45,13 @@ class Komunitas_model extends CI_Model
         return $this->db->get($table)->result();
     }
 
-    public function getRelated()
+    public function getRelated($tdc)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS k');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = k.kode_tdc', 'left');
         $this->db->join('tbl_user AS usr', 'usr.kode_user = k.kode_user', 'left');
-        // $this->db->where('o.id_target', $id);
+        $this->db->where('k.kode_tdc', $tdc);
         return $this->db->get()->result();
     }
 
@@ -71,16 +69,15 @@ class Komunitas_model extends CI_Model
     {
         $post = $this->input->post();
         $data = array(
-            'id_komunitas' => $this->id_komunitas = $post['id_komunitas'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'nama_petugas' => $this->nama_petugas = $post['nama_petugas'],
-            'nama_komunitas' => $this->nama_komunitas = $post['nama_komunitas'],
-            'nama_ketua' => $this->nama_ketua = $post['nama_ketua'],
-            'alamat' => $this->alamat = $post['alamat'],
-            'no_hpketua' => $this->no_hpketua = $post['no_hpketua'],
+            'nama_petugas' => $this->nama_petugas = strtoupper($post['nama_petugas']),
+            'nama_komunitas' => $this->nama_komunitas = strtoupper($post['nama_komunitas']),
+            'nama_ketua' => $this->nama_ketua = strtoupper($post['nama_ketua']),
+            'alamat' => $this->alamat = strtoupper($post['alamat']),
+            'no_hpketua' => $this->no_hpketua = strtoupper($post['no_hpketua']),
             'jumlah_anggota' => $this->jumlah_anggota = $post['jumlah_anggota'],
-            'nama_sosmed' => $this->nama_sosmed = $post['nama_sosmed'],
-            'kode_user' => $this->kode_user = $post['kode_user'],
+            'nama_sosmed' => $this->nama_sosmed = strtoupper($post['nama_sosmed']),
+            'kode_user' => $this->kode_user = $this->session->userdata['id'],
         );
         
         $this->db->set($data);
@@ -91,16 +88,14 @@ class Komunitas_model extends CI_Model
     {
         $post = $this->input->post();
         $data = array(
-            // 'id_komunitas' => $this->id_komunitas = $post['id_komunitas'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'nama_petugas' => $this->nama_petugas = $post['nama_petugas'],
-            'nama_komunitas' => $this->nama_komunitas = $post['nama_komunitas'],
-            'nama_ketua' => $this->nama_ketua = $post['nama_ketua'],
-            'alamat' => $this->alamat = $post['alamat'],
-            'no_hpketua' => $this->no_hpketua = $post['no_hpketua'],
+            'nama_petugas' => $this->nama_petugas = strtoupper($post['nama_petugas']),
+            'nama_komunitas' => $this->nama_komunitas = strtoupper($post['nama_komunitas']),
+            'nama_ketua' => $this->nama_ketua = strtoupper($post['nama_ketua']),
+            'alamat' => $this->alamat = strtoupper($post['alamat']),
+            'no_hpketua' => $this->no_hpketua = strtoupper($post['no_hpketua']),
             'jumlah_anggota' => $this->jumlah_anggota = $post['jumlah_anggota'],
-            'nama_sosmed' => $this->nama_sosmed = $post['nama_sosmed'],
-            'kode_user' => $this->kode_user = $post['kode_user'],
+            'nama_sosmed' => $this->nama_sosmed = strtoupper($post['nama_sosmed']),
         );
         
         $this->db->set($data);

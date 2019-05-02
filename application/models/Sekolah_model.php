@@ -20,7 +20,7 @@ class Sekolah_model extends CI_Model
     public function rules()
     {
         return [
-            ['field' => 'npsn', 'label' => 'ID mercent','rules' => 'required'],
+            ['field' => 'npsn', 'label' => 'NPSN','rules' => 'required'],
             ['field' => 'kode_tdc', 'label' => 'Kode TDC','rules' => 'required'],
             ['field' => 'kabupaten', 'label' => 'kabupaten mercent','rules' => 'required'],
             ['field' => 'kecamatan', 'label' => 'kabupaten Event','rules' => 'required'],
@@ -29,8 +29,7 @@ class Sekolah_model extends CI_Model
             ['field' => 'jumlah_siswa', 'label' => 'No HP Pic','rules' => 'required'],
             ['field' => 'longtitude', 'label' => 'Longitude','rules' => 'required'],
             ['field' => 'latitude', 'label' => 'Latitude','rules' => 'required'],
-            ['field' => 'kode_marketing', 'label' => 'Produk Diajukan','rules' => 'required'],
-            ['field' => 'kode_user', 'label' => 'Kode User','rules' => 'required'],
+            ['field' => 'kode_marketing', 'label' => 'Produk Diajukan','rules' => 'required']
         ];
     }
 
@@ -49,14 +48,14 @@ class Sekolah_model extends CI_Model
         return $this->db->get($table)->result();
     }
 
-    public function getRelated()
+    public function getRelated($tdc)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS s');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = s.kode_tdc', 'left');
         $this->db->join('tbl_marketing AS m', 'm.kode_marketing = s.kode_marketing', 'left');
         $this->db->join('tbl_user AS usr', 'usr.kode_user = s.kode_user', 'left');
-        // $this->db->where('o.id_target', $id);
+        $this->db->where('s.kode_tdc', $tdc);
         return $this->db->get()->result();
     }
 
@@ -77,15 +76,15 @@ class Sekolah_model extends CI_Model
         $data = array(
             'npsn' => $this->npsn = $post['npsn'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'kabupaten' => $this->kabupaten = $post['kabupaten'],
-            'kecamatan' => $this->kecamatan = $post['kecamatan'],
-            'nama_sekolah' => $this->nama_sekolah = $post['nama_sekolah'],
-            'alamat' => $this->alamat = $post['alamat'],
+            'kabupaten' => $this->kabupaten = strtoupper($post['kabupaten']),
+            'kecamatan' => $this->kecamatan = strtoupper($post['kecamatan']),
+            'nama_sekolah' => $this->nama_sekolah = strtoupper($post['nama_sekolah']),
+            'alamat' => $this->alamat = strtoupper($post['alamat']),
             'jumlah_siswa' => $this->jumlah_siswa = $post['jumlah_siswa'],
             'longtitude' => $this->longtitude = $post['longtitude'],
             'latitude' => $this->latitude = $post['latitude'],
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
-            'kode_user' => $this->kode_user = $post['kode_user'],
+            'kode_user' => $this->kode_user = $this->session->userdata['user'],
         );
         
         $this->db->set($data);
@@ -96,17 +95,15 @@ class Sekolah_model extends CI_Model
     {
         $post = $this->input->post();
         $data = array(
-            // 'npsn' => $this->npsn = $post['npsn'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'kabupaten' => $this->kabupaten = $post['kabupaten'],
-            'kecamatan' => $this->kecamatan = $post['kecamatan'],
-            'nama_sekolah' => $this->nama_sekolah = $post['nama_sekolah'],
-            'alamat' => $this->alamat = $post['alamat'],
+            'kabupaten' => $this->kabupaten = strtoupper($post['kabupaten']),
+            'kecamatan' => $this->kecamatan = strtoupper($post['kecamatan']),
+            'nama_sekolah' => $this->nama_sekolah = strtoupper($post['nama_sekolah']),
+            'alamat' => $this->alamat = strtoupper($post['alamat']),
             'jumlah_siswa' => $this->jumlah_siswa = $post['jumlah_siswa'],
             'longtitude' => $this->longtitude = $post['longtitude'],
             'latitude' => $this->latitude = $post['latitude'],
-            'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
-            'kode_user' => $this->kode_user = $post['kode_user'],
+            'kode_marketing' => $this->kode_marketing = $post['kode_marketing']
         );
         
         $this->db->set($data);
