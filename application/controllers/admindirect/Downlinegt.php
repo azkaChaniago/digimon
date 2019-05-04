@@ -36,7 +36,7 @@ class Downlinegt extends CI_Controller
     {
         is_logged_in();
         $data = $this->userSession();    
-        $data['downlinegt'] = $this->downlinegt_model->getRelated($data['tdc']);
+        $data['downlinegt'] = $this->downlinegt_model->getRelated();
         $this->load->view('admindirect/downlinegt/list', $data);
     }
 

@@ -36,7 +36,7 @@ class Marketsharesekolah extends CI_Controller
     {
         is_logged_in();
         $data = $this->userSession();
-        $data['marketshare'] = $this->marketsharesekolah_model->getRelated($data['tdc']);
+        $data['marketshare'] = $this->marketsharesekolah_model->getRelated();
         $this->load->view('admindirect/sharesekolah/list', $data);
     }
 

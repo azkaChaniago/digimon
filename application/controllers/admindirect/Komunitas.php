@@ -36,7 +36,7 @@ class Komunitas extends CI_Controller
     {
         is_logged_in();
         $data = $this->userSession();
-        $data['komunitas'] = $this->komunitas_model->getRelated($data['tdc']);
+        $data['komunitas'] = $this->komunitas_model->getRelated();
         $this->load->view('admindirect/komunitas/list', $data);
     }
 

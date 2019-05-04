@@ -36,7 +36,7 @@ class Mercent extends CI_Controller
     {
         is_logged_in();
         $data = $this->userSession();
-        $data['mercent'] = $this->mercent_model->getRelated($data['tdc']);
+        $data['mercent'] = $this->mercent_model->getRelated();
         $this->load->view('admindirect/mercent/list', $data);
     }
 

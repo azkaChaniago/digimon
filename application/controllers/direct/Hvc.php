@@ -46,17 +46,19 @@ class Hvc extends CI_Controller
         $hvc = $this->hvc_model;
         $validation = $this->form_validation;
         $validation->set_rules($hvc->rules());
-
-        if ($validation->run())
+        if (isset($_POST['btn']))
         {
-            $hvc->save();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
-            redirect(site_url('direct/hvc'));
+            if ($validation->run())
+            {
+                $hvc->save();
+                $this->session->set_flashdata('success', 'Berhasil disimpan');
+                redirect(site_url('direct/hvc'));
+            }
+            else
+            {
+                die(validation_errors());
+            }
         }
-        // else
-        // {
-        //     echo validation_errors();
-        // }
         $data['hvc'] = $this->hvc_model->getAll();
         $data['tdc'] = $this->hvc_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->hvc_model->getThisTableRecord('tbl_marketing');

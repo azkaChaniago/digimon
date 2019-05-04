@@ -48,7 +48,6 @@ class Event extends CI_Controller
 
         if ($validation->run())
         {
-            // die();
             $event->save();
             $this->session->set_flashdata('success', 'Berhasil disimpan');
             redirect(site_url('direct/event'));

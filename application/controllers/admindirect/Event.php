@@ -35,7 +35,7 @@ class Event extends CI_Controller
     {
         is_logged_in();
         $data = $this->userSession();
-        $data['event'] = $this->event_model->getRelated($data['tdc']);
+        $data['event'] = $this->event_model->getRelated();
         $this->load->view('admindirect/event/list', $data);
     }
 

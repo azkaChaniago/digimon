@@ -44,74 +44,88 @@
 					</div>
 				</div>
 			</div>
-
-			<!-- DataTables -->
-			<div class="card">
-				<div class="header">
-					<div class="row">
-						<div class="col-md-6">
-							<h2>Mercent</h2>
-							<div class="clearfix"></div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="header">
+							<h2>Mercent Chart</h2>
 						</div>
-						<div class="col-md-6" style='text-align: right'>							
-							<h2><a href="<?php echo site_url('admindirect/mercent/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-							<span>Tambah</span></a></h2>
-						</div> 						
+						<div class="body">
+							<canvas id="canvasser" width="100%" height="30"></canvas>
+						</div>
 					</div>
 				</div>
+				<div class="col-md-6">
+					<!-- DataTables -->
+					<div class="card">
+						<div class="header">
+							<div class="row">
+								<div class="col-md-6">
+									<h2>Mercent</h2>
+									<div class="clearfix"></div>
+								</div>
+								<div class="col-md-6" style='text-align: right'>							
+									<h2><a href="<?php echo site_url('admindirect/mercent/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+									<span>Tambah</span></a></h2>
+								</div> 						
+							</div>
+						</div>
 
-				<div class="body">
-					<div class="table-responsive">
-						<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-							<thead>
-								<tr>
-									<th>Nama TDC</th>
-									<th>Tanggal</th>
-									<th>Nama Canvasser</th>
-									<th>Nama Mercent</th>
-									<th>Nama Pic</th>
-									<th>No HP Pic</th>
-									<th>Alamat</th>
-									<th>Aksi</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php foreach ($mercent as $mer): ?>
-								<tr>
-									<td>
-										<?php echo $mer->nama_tdc ?>
-									</td>
-									<td>
-										<?php echo $mer->tanggal ?>	
-									</td>
-									<td class="small">
-										<?php echo $mer->nama_marketing ?>
-									</td>
-									<td class="small">
-										<?php echo $mer->nama_mercent ?>
-									</td>
-									<td class="small">
-										<?php echo $mer->nama_pic ?>
-									</td>
-									<td class="small">
-										<?php echo $mer->no_hp_pic ?>
-									</td>
-									<td class="small">
-										<?php echo $mer->alamat ?>
-									</td>
-									<td width='180' class="text-center" >
-										<a href="<?php echo site_url('admindirect/mercent/edit/'.$mer->id_mercent) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('admindirect/mercent/remove/'.$mer->id_mercent) ?>')" href="#!"><i class="material-icons">delete</i></a>
-										<a href="<?php echo site_url('admindirect/mercent/detail/'.$mer->id_mercent) ?>"><i class="material-icons">description</i></a>	
-									</td>
-								</tr>
-								<?php endforeach; ?>
+						<div class="body">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+									<thead>
+										<tr>
+											<th>Nama TDC</th>
+											<th>Tanggal</th>
+											<th>Nama Canvasser</th>
+											<th>Nama Mercent</th>
+											<th>Nama Pic</th>
+											<th>No HP Pic</th>
+											<th>Alamat</th>
+											<!-- <th>Aksi</th> -->
+										</tr>
+									</thead>
+									<tbody>
+										<?php foreach ($mercent as $mer): ?>
+										<tr>
+											<td>
+												<?php echo $mer->nama_tdc ?>
+											</td>
+											<td>
+												<?php echo $mer->tanggal ?>	
+											</td>
+											<td class="small">
+												<?php echo $mer->nama_marketing ?>
+											</td>
+											<td class="small">
+												<?php echo $mer->nama_mercent ?>
+											</td>
+											<td class="small">
+												<?php echo $mer->nama_pic ?>
+											</td>
+											<td class="small">
+												<?php echo $mer->no_hp_pic ?>
+											</td>
+											<td class="small">
+												<?php echo $mer->alamat ?>
+											</td>
+											<!-- <td width='180' class="text-center" >
+												<a href="<?php echo site_url('admindirect/mercent/edit/'.$mer->id_mercent) ?>"><i class="material-icons">edit</i></a>
+												<a onclick="deleteConfirm('<?php echo site_url('admindirect/mercent/remove/'.$mer->id_mercent) ?>')" href="#!"><i class="material-icons">delete</i></a>
+												<a href="<?php echo site_url('admindirect/mercent/detail/'.$mer->id_mercent) ?>"><i class="material-icons">description</i></a>	
+											</td> -->
+											<?php unset($mer->foto_mercent) ?>
+										</tr>
+										<?php endforeach; ?>
 
-							</tbody>
-						</table>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>			
 					</div>
 				</div>
-			</div>			
 			</div>
 
 		</div>
@@ -121,13 +135,59 @@
 	<?php $this->load->view("admindirect/_parts/modal.php") ?>
 
 	<?php $this->load->view("admindirect/_parts/js.php") ?>
-
+	
 	<script>
 		function deleteConfirm(url)
 		{
 			$('#btn-delete').attr('href', url);
 			$('#deleteModal').modal();
+		}	
+		
+		var data_kpi = JSON.parse(<?php echo "'" . json_encode($mercent) . "'" ?>);
+        var labels = data_kpi.map(k => k.nama_mercent); 
+        if (typeof data_kpi.map(k => k.nama_mercent)[0] === 'undefined') {
+            labels = data_kpi.map(k => k.nama_marketing);
+        }
+        
+        console.log(data_kpi);
+
+        var backgroundColor = [];
+		var borderColor = [];
+		var i = 0;
+		while(i < data_kpi.map(k => k.nama_tdc).length) {
+			var randR = Math.floor((Math.random()* 130) + 100);
+			var randG = Math.floor((Math.random()* 130) + 100);
+			var randB = Math.floor((Math.random()* 130) + 100);
+			var graphColor = "rgb("+ randR +","+ randG +","+ randB +")";
+			backgroundColor.push(graphColor);
+			var outlineColor = "rgb("+ (randR - 80) +","+ (randG - 80) +","+ (randB - 80) +")";
+			borderColor.push(outlineColor);
+			i++;
 		}
+
+        var kpiChart = document.getElementById('canvasser').getContext('2d');
+        var kpi_ch = new Chart(kpiChart, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "LATITUDE MERCENT",
+                    data: data_kpi.map(k => k.latitude),
+                    backgroundColor: backgroundColor,
+                    borderColor: borderColor,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true,
+                        }
+                    }]
+                }
+            }
+        });
 	</script>
 
 </body>

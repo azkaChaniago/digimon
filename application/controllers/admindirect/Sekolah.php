@@ -35,7 +35,7 @@ class Sekolah extends CI_Controller
     {
         is_logged_in();
         $data = $this->userSession();
-        $data['sekolah'] = $this->sekolah_model->getRelated($data['tdc']);
+        $data['sekolah'] = $this->sekolah_model->getRelated();
         $this->load->view('admindirect/sekolah/list', $data);
     }
 

@@ -70,7 +70,7 @@ class Hvc_model extends CI_Model
         return $this->db->get($table)->result();
     }
 
-    public function getRelated($tdc, $start=null, $end=null)
+    public function getRelated($tdc=null, $start=null, $end=null)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS ev');
@@ -80,7 +80,8 @@ class Hvc_model extends CI_Model
         if ($start && $end) :
             $this->db->where("ev.tgl_hvc BETWEEN '$start' AND '$end'");
         endif;
-        $this->db->where('ev.kode_tdc', $tdc);
+        if ($tdc)
+            $this->db->where('ev.kode_tdc', $tdc);
         return $this->db->get()->result();
     }
 

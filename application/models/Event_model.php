@@ -75,14 +75,15 @@ class Event_model extends CI_Model
         return $this->db->get($table)->result();
     }
 
-    public function getRelated($tdc)
+    public function getRelated($tdc=null)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS ev');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = ev.kode_tdc', 'left');
         $this->db->join('tbl_marketing AS m', 'm.kode_marketing = ev.kode_marketing', 'left');
         $this->db->join('tbl_user AS usr', 'usr.kode_user = ev.kode_user', 'left');
-        // $this->db->where('tdc.kode_tdc', $tdc);
+        if ($tdc)
+            $this->db->where('ev.kode_tdc', $tdc);
         return $this->db->get()->result();
     }
 
@@ -102,11 +103,11 @@ class Event_model extends CI_Model
         $post = $this->input->post();
         if (!empty($_FILES['foto_galeri']['name']))
         {
-            $this->galeri_foto = $this->uploadMultipleImages();
+            $this->foto_kegiatan = $this->uploadMultipleImages();
         }
         else
         {
-            $this->galeri_foto = "NULL";
+            $this->foto_kegiatan = "NULL";
         }
         $data = array(
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
@@ -131,7 +132,7 @@ class Event_model extends CI_Model
             'qty_as_nsb' => $this->qty_as_nsb = $post['qty_as_nsb'],
             'qty_simpati_nsb' => $this->qty_simpati_nsb = $post['qty_simpati_nsb'],
             'qty_loop_nsb' => $this->qty_loop_nsb = $post['qty_loop_nsb'],
-            'foto_kegiatan' => $this->foto_kegiatan = $this->uploadImage(),
+            'foto_kegiatan' => $this->foto_kegiatan,
             'kode_user' => $this->kode_user = $this->session->userdata['tdc'],
         );
         
@@ -243,14 +244,15 @@ class Event_model extends CI_Model
         }
     }
     
-    public function getRecord($kode, $start, $end)
+    public function getRecord($kode=null, $start, $end)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS ev');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = ev.kode_tdc', 'left');
         $this->db->join('tbl_marketing AS m', 'm.kode_marketing = ev.kode_marketing', 'left');
         $this->db->where("ev.tgl_event BETWEEN '$start' AND '$end'");
-        // $this->db->where('tdc.kode_tdc', $kode);
+        if ($kode)
+            $this->db->where('ev.kode_tdc', $kode);
         return $this->db->get()->result();
     }
 

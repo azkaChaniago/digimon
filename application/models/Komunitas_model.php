@@ -45,13 +45,14 @@ class Komunitas_model extends CI_Model
         return $this->db->get($table)->result();
     }
 
-    public function getRelated($tdc)
+    public function getRelated($tdc=null)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS k');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = k.kode_tdc', 'left');
         $this->db->join('tbl_user AS usr', 'usr.kode_user = k.kode_user', 'left');
-        $this->db->where('k.kode_tdc', $tdc);
+        if ($tdc)
+            $this->db->where('k.kode_tdc', $tdc);
         return $this->db->get()->result();
     }
 
