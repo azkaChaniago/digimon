@@ -160,27 +160,23 @@ class Marketsharesekolah extends CI_Controller
             ->setCategory('Marketshare Sekolah');
 
         $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A1', 'Nama TDC')
-            ->setCellValue('B1', 'Tanggal')
-            ->setCellValue('C1', 'Nama Mercent')
-            ->setCellValue('D1', 'Nama Marketing')
-            ->setCellValue('E1', 'Alamat')
-            ->setCellValue('F1', 'Longitude')
-            ->setCellValue('G1', 'Latitude')
-            ->setCellValue('H1', 'QTY 5K')
-            ->setCellValue('I1', 'QTY 10K')
-            ->setCellValue('J1', 'QTY 20K')
-            ->setCellValue('K1', 'QTY 25K')
-            ->setCellValue('L1', 'QTY 50K')
-            ->setCellValue('M1', 'QTY 100K')
-            ->setCellValue('N1', 'Mount Bulk')
-            ->setCellValue('O1', 'QTY Low NSB')
-            ->setCellValue('P1', 'QTY Middle NSB')
-            ->setCellValue('Q1', 'QTY High NSB')
-            ->setCellValue('R1', 'QTY AS NSB')
-            ->setCellValue('S1', 'QTY Simpati NSB')
-            ->setCellValue('T1', 'QTY Loop NSB')
-            ->setCellValue('U1', 'Keterangan Kegiatan');
+            ->setCellValue('A1', 'Tanggal')
+            ->setCellValue('B1', 'Nama TDC')
+            ->setCellValue('C1', 'NPSN')
+            ->setCellValue('D1', 'Nama Sekolah')
+            ->setCellValue('E1', 'Kabupaten')
+            ->setCellValue('F1', 'Kecamatan')
+            ->setCellValue('G1', 'Alamat')
+            ->setCellValue('H1', 'Jumlah Siswa')
+            ->setCellValue('I1', 'QTY Simpati')
+            ->setCellValue('J1', 'QTY AS')
+            ->setCellValue('K1', 'QTY Loop')
+            ->setCellValue('L1', 'QTY Mentari')
+            ->setCellValue('M1', 'QTY IM3')
+            ->setCellValue('N1', 'QTY XL')
+            ->setCellValue('O1', 'QTY Axsis')
+            ->setCellValue('P1', 'QTY Tri')
+            ->setCellValue('Q1', 'QTY Smartfrend');
 
         $i = 2;
         foreach ($export as $ex)
@@ -199,19 +195,15 @@ class Marketsharesekolah extends CI_Controller
                 ->setCellValue('K'. $i , $ex->qty_loop)
                 ->setCellValue('L'. $i , $ex->qty_mentari)
                 ->setCellValue('M'. $i , $ex->qty_im3)
-                ->setCellValue('N'. $i , $ex->qty_)
-                ->setCellValue('O'. $i , $ex->qty_low_nsb)
-                ->setCellValue('P'. $i , $ex->qty_middle_nsb)
-                ->setCellValue('Q'. $i , $ex->qty_high_nsb)
-                ->setCellValue('R'. $i , $ex->qty_as_nsb)
-                ->setCellValue('S'. $i , $ex->qty_simpati_nsb)
-                ->setCellValue('T'. $i , $ex->qty_loop_nsb)
-                ->setCellValue('U'. $i , $ex->keterangan_kegiatan);
+                ->setCellValue('N'. $i , $ex->qty_xl)
+                ->setCellValue('O'. $i , $ex->qty_axsis)
+                ->setCellValue('P'. $i , $ex->qty_tri)
+                ->setCellValue('Q'. $i , $ex->qty_smartfrend);
             $i++;
         }
         
         // Rename worksheet
-        $spreadsheet->getActiveSheet()->setTitle('marketsharesekolah '.date('d-m-Y H'));
+        $spreadsheet->getActiveSheet()->setTitle('sharesekolah '.date('d-m-Y H'));
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $spreadsheet->setActiveSheetIndex(0);
         // Redirect output to a client’s web browser (Xlsx)
