@@ -138,26 +138,26 @@ class Marketsharesekolah extends CI_Controller
         // die($start . $end);
         $data = $this->userSession();
         $data += [
-            'export' => $this->hvc_model->getRelated($data['tdc'], $start, $end)
+            'export' => $this->marketsharesekolah_model->getRelated($data['tdc'], $start, $end)
         ];
 
-        $this->load->view('direct/hvc/pdf_export', $data);
+        $this->load->view('direct/sharesekolah/pdf_export', $data);
     }
 
     public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->hvc_model->getRelated($data['tdc'], $start, $end);
+        $export = $this->marketsharesekolah_model->getRelated($data['tdc'], $start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()
             ->setCreator('Digimon')
             ->setLastModifiedBy($this->session->userdata('user'))
-            ->setTitle('Laporan HVC')
-            ->setSubject('Laporan HVC')
-            ->setDescription('Eksport HVC')
-            ->setKeywords('HVC')
-            ->setCategory('HVC');
+            ->setTitle('Laporan Marketshare Sekolah')
+            ->setSubject('Laporan Marketshare Sekolah')
+            ->setDescription('Eksport Marketshare Sekolah')
+            ->setKeywords('Marketshare Sekolah')
+            ->setCategory('Marketshare Sekolah');
 
         $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue('A1', 'Nama TDC')
@@ -186,20 +186,20 @@ class Marketsharesekolah extends CI_Controller
         foreach ($export as $ex)
         {
             $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A'. $i , $ex->nama_tdc)
-                ->setCellValue('B'. $i , date('Y-m-d', strtotime($ex->tgl_hvc)))
-                ->setCellValue('C'. $i , $ex->nama_mercent)
-                ->setCellValue('D'. $i , $ex->nama_marketing)
-                ->setCellValue('E'. $i , $ex->alamat)
-                ->setCellValue('F'. $i , $ex->longlat_lokasi_mercent)
-                ->setCellValue('G'. $i , $ex->latitude_lokasi_mercent)
-                ->setCellValue('H'. $i , $ex->qty_5k)
-                ->setCellValue('I'. $i , $ex->qty_10k)
-                ->setCellValue('J'. $i , $ex->qty_20k)
-                ->setCellValue('K'. $i , $ex->qty_25k)
-                ->setCellValue('L'. $i , $ex->qty_50k)
-                ->setCellValue('M'. $i , $ex->qty_100k)
-                ->setCellValue('N'. $i , $ex->mount_bulk)
+                ->setCellValue('A'. $i , date('Y-m-d', strtotime($ex->tgl_marketshare)))
+                ->setCellValue('B'. $i , $ex->nama_tdc)
+                ->setCellValue('C'. $i , $ex->npsn)
+                ->setCellValue('D'. $i , $ex->nama_sekolah)
+                ->setCellValue('E'. $i , $ex->kabupaten)
+                ->setCellValue('F'. $i , $ex->kecamatan)
+                ->setCellValue('G'. $i , $ex->alamat)
+                ->setCellValue('H'. $i , $ex->jumlah_siswa)
+                ->setCellValue('I'. $i , $ex->qty_simpati)
+                ->setCellValue('J'. $i , $ex->qty_as)
+                ->setCellValue('K'. $i , $ex->qty_loop)
+                ->setCellValue('L'. $i , $ex->qty_mentari)
+                ->setCellValue('M'. $i , $ex->qty_im3)
+                ->setCellValue('N'. $i , $ex->qty_)
                 ->setCellValue('O'. $i , $ex->qty_low_nsb)
                 ->setCellValue('P'. $i , $ex->qty_middle_nsb)
                 ->setCellValue('Q'. $i , $ex->qty_high_nsb)
@@ -211,7 +211,7 @@ class Marketsharesekolah extends CI_Controller
         }
         
         // Rename worksheet
-        $spreadsheet->getActiveSheet()->setTitle('HVC '.date('d-m-Y H'));
+        $spreadsheet->getActiveSheet()->setTitle('marketsharesekolah '.date('d-m-Y H'));
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $spreadsheet->setActiveSheetIndex(0);
         // Redirect output to a client’s web browser (Xlsx)

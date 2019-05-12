@@ -55,36 +55,49 @@ ob_start();
         </style>
     <head>
     <body>
-        <h2>Laporan Mercent</h2>
+        <h2>Laporan Market Share Sekolah</h2>
         <table>
             <tr style="text-align: center">
-                <th>Tanggal</th>
-                <th>Nama TDC</th>
-                <th>Nama Marketing</th>
-                <th>Nama Mercent</th>
-                <th>Nama Pic</th>
-                <th>No HP Pic</th>
-                <th>No KTP</th>
-                <th>NPWP</th>
-                <th>Longtitude</th>
-                <th>Latitude</th>
-                <th>Alamat</th>
-                <th>Produk diajukan</th>
+                <th rowspan="2">Tanggal</th>
+                <th rowspan="2">Nama TDC</th>
+                <th rowspan="2">NPSN</th>
+                <th rowspan="2">Nama Sekolah</th>
+                <th rowspan="2">Kabupaten</th>
+                <th rowspan="2">Kecamatan</th>
+                <th rowspan="2">Alamat</th>
+                <th rowspan="2">Jumlah Siswa</th>
+                <th colspan="9">Marketshare</th>
+            </tr>
+            <tr>
+                <th>Simpati</th>
+                <th>AS</th>
+                <th>Loop</th>
+                <th>Mentari</th>
+                <th>IM3</th>
+                <th>XL</th>
+                <th>Axsis</th>
+                <th>Tri</th>
+                <th>Smartfrend</th>
             </tr>
             <?php foreach($export as $exp) : ?>
             <tr>
-                <td><?php echo $exp->tanggal ?></td>
+                <td><?php echo $exp->tgl_marketshare ?></td>
                 <td><?php echo $exp->nama_tdc ?></td>
-                <td><?php echo $exp->nama_marketing ?></td>
-                <td><?php echo $exp->nama_mercent ?></td>
-                <td><?php echo $exp->nama_pic ?></td>
-                <td style="text-align:right"><?php echo $exp->no_hp_pic ?></td>
-                <td style="text-align:right"><?php echo $exp->no_ktp ?></td>
-                <td style="text-align:right"><?php echo $exp->npwp ?></td>
-                <td style="text-align:right"><?php echo $exp->longtitude ?></td>
-                <td style="text-align:right"><?php echo $exp->latitude ?></td>
+                <td><?php echo $exp->npsn ?></td>
+                <td><?php echo $exp->nama_sekolah ?></td>
+                <td><?php echo $exp->kabupaten ?></td>
+                <td><?php echo $exp->kecamatan ?></td>
                 <td><?php echo $exp->alamat ?></td>
-                <td><?php echo $exp->produk_diajukan ?></td>
+                <td style="text-align:right"><?php echo $exp->jumlah_siswa ?></td>
+                <td style="text-align:right"><?php echo $exp->qty_simpati ?></td>
+                <td style="text-align:right"><?php echo $exp->qty_as ?></td>
+                <td style="text-align:right"><?php echo $exp->qty_loop ?></td>
+                <td style="text-align:right"><?php echo $exp->qty_mentari ?></td>
+                <td style="text-align:right"><?php echo $exp->qty_im3 ?></td>
+                <td style="text-align:right"><?php echo $exp->qty_xl ?></td>
+                <td style="text-align:right"><?php echo $exp->qty_axsis ?></td>
+                <td style="text-align:right"><?php echo $exp->qty_tri ?></td>
+                <td style="text-align:right"><?php echo $exp->qty_smartfrend ?></td>
             </tr>
             <?php endforeach; ?>
         </table>
