@@ -137,80 +137,62 @@ class Mercent extends CI_Controller
         // die($start . $end);
         $data = $this->userSession();
         $data += [
-            'export' => $this->hvc_model->getRelated($data['tdc'], $start, $end)
+            'export' => $this->mercent_model->getRelated($data['tdc'], $start, $end)
         ];
 
-        $this->load->view('direct/hvc/pdf_export', $data);
+        $this->load->view('direct/mercent/pdf_export', $data);
     }
 
     public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->hvc_model->getRelated($data['tdc'], $start, $end);
+        $export = $this->mercent_model->getRelated($data['tdc'], $start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()
             ->setCreator('Digimon')
             ->setLastModifiedBy($this->session->userdata('user'))
-            ->setTitle('Laporan HVC')
-            ->setSubject('Laporan HVC')
-            ->setDescription('Eksport HVC')
-            ->setKeywords('HVC')
-            ->setCategory('HVC');
+            ->setTitle('Laporan Mercent')
+            ->setSubject('Laporan Mercent')
+            ->setDescription('Eksport Mercent')
+            ->setKeywords('Mercent')
+            ->setCategory('Mercent');
 
         $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A1', 'Nama TDC')
-            ->setCellValue('B1', 'Tanggal')
-            ->setCellValue('C1', 'Nama Mercent')
-            ->setCellValue('D1', 'Nama Marketing')
-            ->setCellValue('E1', 'Alamat')
-            ->setCellValue('F1', 'Longitude')
-            ->setCellValue('G1', 'Latitude')
-            ->setCellValue('H1', 'QTY 5K')
-            ->setCellValue('I1', 'QTY 10K')
-            ->setCellValue('J1', 'QTY 20K')
-            ->setCellValue('K1', 'QTY 25K')
-            ->setCellValue('L1', 'QTY 50K')
-            ->setCellValue('M1', 'QTY 100K')
-            ->setCellValue('N1', 'Mount Bulk')
-            ->setCellValue('O1', 'QTY Low NSB')
-            ->setCellValue('P1', 'QTY Middle NSB')
-            ->setCellValue('Q1', 'QTY High NSB')
-            ->setCellValue('R1', 'QTY AS NSB')
-            ->setCellValue('S1', 'QTY Simpati NSB')
-            ->setCellValue('T1', 'QTY Loop NSB')
-            ->setCellValue('U1', 'Keterangan Kegiatan');
+            ->setCellValue('A1', 'Tanggal')
+            ->setCellValue('B1', 'Nama TDC')
+            ->setCellValue('C1', 'Nama Maketing')
+            ->setCellValue('D1', 'Nama Mercent')
+            ->setCellValue('E1', 'Nama Pic')
+            ->setCellValue('F1', 'No HP Pic')
+            ->setCellValue('G1', 'No KTP')
+            ->setCellValue('H1', 'NPWP')
+            ->setCellValue('I1', 'Longtitude')
+            ->setCellValue('J1', 'Latitude')
+            ->setCellValue('K1', 'Alamat')
+            ->setCellValue('L1', 'Produk Diajukan');
 
         $i = 2;
         foreach ($export as $ex)
         {
             $spreadsheet->setActiveSheetIndex(0)
-                ->setCellValue('A'. $i , $ex->nama_tdc)
-                ->setCellValue('B'. $i , date('Y-m-d', strtotime($ex->tgl_hvc)))
-                ->setCellValue('C'. $i , $ex->nama_mercent)
-                ->setCellValue('D'. $i , $ex->nama_marketing)
-                ->setCellValue('E'. $i , $ex->alamat)
-                ->setCellValue('F'. $i , $ex->longlat_lokasi_mercent)
-                ->setCellValue('G'. $i , $ex->latitude_lokasi_mercent)
-                ->setCellValue('H'. $i , $ex->qty_5k)
-                ->setCellValue('I'. $i , $ex->qty_10k)
-                ->setCellValue('J'. $i , $ex->qty_20k)
-                ->setCellValue('K'. $i , $ex->qty_25k)
-                ->setCellValue('L'. $i , $ex->qty_50k)
-                ->setCellValue('M'. $i , $ex->qty_100k)
-                ->setCellValue('N'. $i , $ex->mount_bulk)
-                ->setCellValue('O'. $i , $ex->qty_low_nsb)
-                ->setCellValue('P'. $i , $ex->qty_middle_nsb)
-                ->setCellValue('Q'. $i , $ex->qty_high_nsb)
-                ->setCellValue('R'. $i , $ex->qty_as_nsb)
-                ->setCellValue('S'. $i , $ex->qty_simpati_nsb)
-                ->setCellValue('T'. $i , $ex->qty_loop_nsb)
-                ->setCellValue('U'. $i , $ex->keterangan_kegiatan);
+                ->setCellValue('A'. $i , date('Y-m-d', strtotime($ex->tanggal)) )
+                ->setCellValue('B'. $i , $ex->nama_tdc)
+                ->setCellValue('C'. $i , $ex->nama_marketing)
+                ->setCellValue('D'. $i , $ex->nama_mercent)
+                ->setCellValue('E'. $i , $ex->nama_pic)
+                ->setCellValue('F'. $i , $ex->no_hp_pic)
+                ->setCellValue('G'. $i , $ex->no_ktp)
+                ->setCellValue('H'. $i , $ex->npwp)
+                ->setCellValue('I'. $i , $ex->longtitude)
+                ->setCellValue('J'. $i , $ex->latitude)
+                ->setCellValue('K'. $i , $ex->alamat)
+                ->setCellValue('L'. $i , $ex->produk_diajukan);
             $i++;
         }
         
         // Rename worksheet
-        $spreadsheet->getActiveSheet()->setTitle('HVC '.date('d-m-Y H'));
+        $spreadsheet->getActiveSheet()->setTitle('Mercent '.date('d-m-Y H'));
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $spreadsheet->setActiveSheetIndex(0);
         // Redirect output to a client’s web browser (Xlsx)

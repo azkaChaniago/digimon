@@ -62,7 +62,7 @@ class Mercent_model extends CI_Model
         $this->db->join('tbl_marketing AS m', 'm.kode_marketing = mer.kode_marketing', 'left');
         $this->db->join('tbl_user AS usr', 'usr.kode_user = mer.kode_user', 'left');
         if ($start && $end) :
-            $this->db->where("mer.tgl_mercent BETWEEN '$start' AND '$end'");
+            $this->db->where("mer.tanggal BETWEEN '$start' AND '$end'");
         endif;
         if ($tdc)
             $this->db->where('mer.kode_tdc', $tdc);
