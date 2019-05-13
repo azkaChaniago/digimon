@@ -13,6 +13,12 @@
 	<section class="content">
 		<div class="container-fluid">
 
+			<?php if ($this->session->flashdata('error') !== null) : ?>
+				<div class="alert alert-danger">
+					<?= $this->session->flashdata('error') ?>
+				</div>
+			<?php endif; ?>
+
 			<!-- Card  -->
 			<div class="card">
 				<div class="header">
@@ -22,12 +28,7 @@
 				<div class="body">
 					<form action="<?php base_url('admin/tdc/edit') ?>" id="form_advanced_validation" method="post" enctype="multipart/form-data" autocomplete="on">
 
-						<div class="form-group form-float">
-							<div class="form-line">
-							<input class="form-control" type="text" name="kode_tdc" value="<?php echo $tdc->kode_tdc ?>" required/>
-								<label class="form-label" for="kode_tdc">Kode TDC*</label>
-							</div>
-						</div>
+						<input class="form-control" type="hidden" name="kode_tdc" value="<?php echo $tdc->kode_tdc ?>" readonly required/>		
   
 						<div class="form-group form-float">
 							<div class="form-line">

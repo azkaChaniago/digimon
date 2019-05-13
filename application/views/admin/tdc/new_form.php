@@ -13,6 +13,12 @@
 	<section class="content">
 		<div class="container-fluid">
 
+			<?php if ($this->session->flashdata('error') !== null) : ?>
+				<div class="alert alert-danger">
+					<?= $this->session->flashdata('error') ?>
+				</div>
+			<?php endif; ?>
+
 			<!-- Card  -->
 			<div class="card">
 				<div class="header">

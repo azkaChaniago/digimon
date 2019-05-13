@@ -29,16 +29,20 @@ class TDC extends CI_Controller
         $validation = $this->form_validation;
         $validation->set_rules($user->rules());
 
-        if ($validation->run())
+        if (isset($_POST['btn']))
         {
-            $user->save();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
-            redirect(site_url('admin/tdc'));
+                if ($validation->run())
+            {
+                $user->save();
+                $this->session->set_flashdata('success', 'Berhasil disimpan');
+                redirect(site_url('admin/tdc'));
+            }
+            else
+            {
+                $this->session->set_flashdata('error', validation_errors());
+                redirect(site_url('admin/tdc/add/'));
+            }
         }
-        // else
-        // {
-        //     echo validation_errors();
-        // }
         $data['tdc'] = $this->tdc_model->getAll();
         $data['user'] = $this->tdc_model->getThisTableRecord('tbl_user');
         $this->load->view('admin/tdc/new_form', $data);
@@ -53,16 +57,20 @@ class TDC extends CI_Controller
         $validation = $this->form_validation;
         $validation->set_rules($user->rules());
 
-        if ($validation->run())
+        if (isset($_POST['btn']))
         {
-            $user->update($id);
-            $this->session->set_flashdata('success', 'Berhasil diubah');
-            redirect(site_url('admin/tdc'));
+            if ($validation->run())
+            {
+                $user->update($id);
+                $this->session->set_flashdata('success', 'Berhasil diubah');
+                redirect(site_url('admin/tdc'));
+            }
+            else
+            {
+                $this->session->set_flashdata('error', validation_errors());
+                redirect(site_url('admin/tdc/edit/' . $id));
+            }
         }
-        // else
-        // {
-        //     echo validation_errors();
-        // }
 
         $data['tdc'] = $user->getById($id);
         $data['related'] = $user->getRelated();

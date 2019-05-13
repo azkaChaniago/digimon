@@ -83,7 +83,6 @@ class Marketing_model extends CI_Model
     {
         $post = $this->input->post();
         $data = array(
-            //'kode_marketing' => $this->kode_marketing = strtoupper($post['kode_marketing']),
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
             'divisi' => $this->divisi = strtoupper($post['divisi']),
             'nama_marketing' => $this->nama_marketing = strtoupper($post['nama_marketing']),

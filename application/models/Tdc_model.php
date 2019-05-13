@@ -61,13 +61,12 @@ class Tdc_model extends CI_Model
     {
         $post = $this->input->post();
         $data = array(
-            'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'nama_tdc' => $this->nama_tdc = $post['nama_tdc'],
-            'manager' => $this->manager = $post['manager'],
-            'no_telepon' => $this->no_telepon = $post['no_telepon'],
-            'no_callcenter' => $this->no_callcenter = $post['no_callcenter'],
-            'alamat' => $this->alamat = $post['alamat'],
-            // 'kode_user' => $this->kode_user = $this->session->userdata('id'),
+            'kode_tdc' => $this->kode_tdc = strtoupper($post['kode_tdc']),
+            'nama_tdc' => $this->nama_tdc = strtoupper($post['nama_tdc']),
+            'manager' => $this->manager = strtoupper($post['manager']),
+            'no_telepon' => $this->no_telepon = strtoupper($post['no_telepon']),
+            'no_callcenter' => $this->no_callcenter = strtoupper($post['no_callcenter']),
+            'alamat' => $this->alamat = strtoupper($post['alamat'])
         );
         
         $this->db->set($data);
@@ -78,13 +77,11 @@ class Tdc_model extends CI_Model
     {
         $post = $this->input->post();
         $data = array(
-            // 'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'nama_tdc' => $this->nama_tdc = $post['nama_tdc'],
-            'manager' => $this->manager = $post['manager'],
-            'no_telepon' => $this->no_telepon = $post['no_telepon'],
-            'no_callcenter' => $this->no_callcenter = $post['no_callcenter'],
-            'alamat' => $this->alamat = $post['alamat'],
-            'kode_user' => $this->kode_user = $post['kode_user'],
+            'nama_tdc' => $this->nama_tdc = strtoupper($post['nama_tdc']),
+            'manager' => $this->manager = strtoupper($post['manager']),
+            'no_telepon' => $this->no_telepon = strtoupper($post['no_telepon']),
+            'no_callcenter' => $this->no_callcenter = strtoupper($post['no_callcenter']),
+            'alamat' => $this->alamat = strtoupper($post['alamat'])
         );
         
         $this->db->set($data);

@@ -28,16 +28,20 @@ class Marketing extends CI_Controller
         $validation = $this->form_validation;
         $validation->set_rules($marketing->rules());
 
-        if ($validation->run())
+        if (isset($_POST['btn']))
         {
-            $marketing->save();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
-            redirect(site_url('admin/marketing'));
+            if ($validation->run())
+            {
+                $marketing->save();
+                $this->session->set_flashdata('success', 'Berhasil disimpan');
+                redirect(site_url('admin/marketing'));
+            }
+            else
+            {
+                $this->session->set_flashdata('error', validation_errors());
+                redirect(site_url('admin/marketing/add/'));
+           }
         }
-        // else
-        // {
-        //     die(validation_errors());
-        // }
         
         $data['marketing'] = $this->marketing_model->getAll();
         $data['tdc'] = $this->marketing_model->getThisTableRecord('tbl_tdc');
@@ -54,22 +58,26 @@ class Marketing extends CI_Controller
         $validation = $this->form_validation;
         $validation->set_rules($marketing->rules());
 
-        if ($validation->run())
+        if (isset($_POST['btn']))
         {
-            $marketing->update($id);
-            $this->session->set_flashdata('success', 'Berhasil diubah');
-            redirect(site_url('admin/marketing'));
+            if ($validation->run())
+            {
+                $marketing->update($id);
+                $this->session->set_flashdata('success', 'Berhasil diubah');
+                redirect(site_url('admin/marketing'));
+            }
+            else
+            {
+                $this->session->set_flashdata('error', validation_errors());
+                redirect(site_url('admin/marketing/edit/' . $id));
+            }
         }
-        // else
-        // {
-        //     echo validation_errors();
-        // }
 
         $data['marketing'] = $marketing->getById($id);
         $data['related'] = $marketing->getRelated();
         $data['tdc'] = $this->marketing_model->getThisTableRecord('tbl_tdc');
         $data['user'] = $this->marketing_model->getThisTableRecord('tbl_user');
-        //if (!$data['marketing']) show_404();
+        if (!$data['marketing']) show_404();
 
         $this->load->view('admin/marketing/edit_form', $data);
     }
