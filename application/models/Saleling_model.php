@@ -81,7 +81,7 @@ class Saleling_model extends CI_Model
             'divisi' => $this->divisi = $post['divisi'],
             'tanggal' => $this->tanggal = date('Y-m-d', strtotime($post['tanggal'])),
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
-            'lokasi_saleling' => $this->lokasi_saleling = $post['lokasi_saleling'],
+            'lokasi_saleling' => $this->lokasi_saleling = strtoupper($post['lokasi_saleling']),
             'foto_kegiatan' => $this->foto_kegiatan,
             'kode_user' => $this->kode_user = $this->session->userdata['tdc'],
         );
@@ -107,7 +107,7 @@ class Saleling_model extends CI_Model
             'divisi' => $this->divisi = $post['divisi'],
             'tanggal' => $this->tanggal = date('Y-m-d', strtotime($post['tanggal'])),
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
-            'lokasi_saleling' => $this->lokasi_saleling = $post['lokasi_saleling'],
+            'lokasi_saleling' => $this->lokasi_saleling = strtoupper($post['lokasi_saleling']),
             'foto_kegiatan' => $this->foto_kegiatan,
         );
         

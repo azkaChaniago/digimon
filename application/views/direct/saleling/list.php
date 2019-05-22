@@ -50,7 +50,7 @@
 				<div class="header">
 					<div class="row">
 						<div class="col-md-6">
-							<h2>Saleling</h2>
+							<h2>Selling</h2>
 							<div class="clearfix"></div>
 						</div>
 						<div class="col-md-6" style='text-align: right'>							
