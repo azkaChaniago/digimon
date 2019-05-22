@@ -65,8 +65,8 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="col-md-6" style='text-align: right'>							
-									<h2><a href="<?php echo site_url('admindirect/mercent/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-									<span>Tambah</span></a></h2>
+									<!-- <h2><a href="<?php echo site_url('admindirect/mercent/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+									<span>Tambah</span></a></h2> -->
 								</div> 						
 							</div>
 						</div>
@@ -83,7 +83,7 @@
 											<th>Nama Pic</th>
 											<th>No HP Pic</th>
 											<th>Alamat</th>
-											<!-- <th>Aksi</th> -->
+											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -110,11 +110,11 @@
 											<td class="small">
 												<?php echo $mer->alamat ?>
 											</td>
-											<!-- <td width='180' class="text-center" >
-												<a href="<?php echo site_url('admindirect/mercent/edit/'.$mer->id_mercent) ?>"><i class="material-icons">edit</i></a>
-												<a onclick="deleteConfirm('<?php echo site_url('admindirect/mercent/remove/'.$mer->id_mercent) ?>')" href="#!"><i class="material-icons">delete</i></a>
+											<td width='180' class="text-center" >
+												<!-- <a href="<?php echo site_url('admindirect/mercent/edit/'.$mer->id_mercent) ?>"><i class="material-icons">edit</i></a>
+												<a onclick="deleteConfirm('<?php echo site_url('admindirect/mercent/remove/'.$mer->id_mercent) ?>')" href="#!"><i class="material-icons">delete</i></a> -->
 												<a href="<?php echo site_url('admindirect/mercent/detail/'.$mer->id_mercent) ?>"><i class="material-icons">description</i></a>	
-											</td> -->
+											</td>
 											<?php unset($mer->foto_mercent) ?>
 										</tr>
 										<?php endforeach; ?>

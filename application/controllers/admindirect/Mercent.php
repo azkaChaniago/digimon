@@ -40,74 +40,6 @@ class Mercent extends CI_Controller
         $this->load->view('admindirect/mercent/list', $data);
     }
 
-    public function add()
-    {
-        is_logged_in();
-        $mercent = $this->mercent_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($mercent->rules());
-        if (isset($_POST['btn']))
-        {
-            if ($validation->run())
-            {
-                $mercent->save();
-                $this->session->set_flashdata('success', 'Berhasil disimpan');
-                redirect(site_url('admindirect/mercent'));
-            }
-            else
-            {
-                die(validation_errors());
-            }
-        }
-        $data['mercent'] = $this->mercent_model->getAll();
-        $data['tdc'] = $this->mercent_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->mercent_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->mercent_model->getThisTableRecord('tbl_user');
-        $this->load->view('admindirect/mercent/new_form', $data);
-    }
-
-    public function edit($id)
-    {
-        is_logged_in();
-        if (!isset($id)) redirect(site_url('admindirect/mercent'));
-        
-        $mercent = $this->mercent_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($mercent->rules());
-        if (isset($_POST['btn']))
-        {
-            if ($validation->run())
-            {
-                $mercent->update($id);
-                $this->session->set_flashdata('success', 'Berhasil diubah');
-                redirect(site_url('admindirect/mercent'));
-            }
-            else
-            {
-                echo validation_errors();
-            }
-        }
-        $data = $this->userSession();
-        $data['mercent'] = $mercent->getById($id);
-        $data['related'] = $mercent->getRelated($data['tdc']);
-        $data['tdc'] = $this->mercent_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->mercent_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->mercent_model->getThisTableRecord('tbl_user');
-        if (!$data['mercent']) show_404();
-        
-        $this->load->view('admindirect/mercent/edit_form', $data);
-    }
-
-    public function remove($id)
-    {
-        if (!isset($id)) show_404();
-
-        if ($this->mercent_model->delete($id))
-        {
-            redirect(site_url('admindirect/mercent'));
-        }
-    }
-
     public function detail($id=null)
     {
         is_logged_in();
@@ -146,7 +78,7 @@ class Mercent extends CI_Controller
     public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->mercent_model->getRelated($data['tdc'], $start, $end);
+        $export = $this->mercent_model->getRelated(null, $start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()

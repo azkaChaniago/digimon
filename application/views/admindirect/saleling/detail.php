@@ -42,6 +42,7 @@
                                 <td>Foto Kegiatan<td>
                                 <th colspan="3">
                                 <?php 
+                                if ($saleling->foto_kegiatan != null && json_decode($saleling->foto_kegiatan) != JSON_ERROR_NONE) :
                                     $i = 0;
                                     foreach (json_decode($saleling->foto_kegiatan) as $im):?>
                                         <div class="col-md-3">
@@ -53,7 +54,12 @@
                                             echo "<div class='clearfix' ></div>";
                                             $i = 0;
                                         } 
-                                    endforeach; ?>
+                                    endforeach; 
+                                else : ?>
+                                    <div class="col-md-3">
+                                        <img src="<?php echo base_url('upload/saleling/default.png') ?>" class="img img-responsive" />
+                                    </div>
+                                <?php endif; ?>
                                 </th>
                             </tr>
                         </table>

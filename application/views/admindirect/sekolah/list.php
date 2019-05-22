@@ -55,11 +55,11 @@
 						</div>
 						<div class="col-md-6" style='text-align: right'>							
 							<h2>
-								<a href="<?php echo site_url('admindirect/sekolah/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-								<span>Tambah</span></a>
-								<a href="<?php echo site_url('admindirect/sekolah/export') ?>" class="btn btn-success waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
+								<!-- <a href="<?php echo site_url('admindirect/sekolah/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+								<span>Tambah</span></a> -->
+								<a href="<?php echo site_url('admindirect/sekolah/export') ?>" class="btn btn-success waves-effect" target="_blank"><i class="material-icons">save_alt</i>
 								<span>Excel</span></a>							
-								<a href="<?php echo site_url('admindirect/sekolah/exportpdf') ?>" class="btn btn-danger waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
+								<a href="<?php echo site_url('admindirect/sekolah/exportpdf') ?>" class="btn btn-danger waves-effect" target="_blank"><i class="material-icons" >save_alt</i>
 								<span>PDF</span></a>
 							</h2>
 						</div> 						
@@ -106,9 +106,9 @@
 										<?php echo $s->nama_marketing ?>
 									</td>
 									<td width='180' class="text-center" >
-										<a href="<?php echo site_url('admindirect/sekolah/edit/'.$s->npsn) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('admindirect/sekolah/remove/'.$s->npsn) ?>')" href="#!"><i class="material-icons">delete</i></a>
-										<a href="<?php echo site_url('admindirect/sekolah/detail/'.$s->npsn) ?>"><i class="material-icons">description</i></a>	
+										<!-- <a href="<?php echo site_url('admindirect/sekolah/edit/'.$s->npsn) ?>"><i class="material-icons">edit</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('admindirect/sekolah/remove/'.$s->npsn) ?>')" href="#!"><i class="material-icons">delete</i></a> -->
+										<a href="<?php echo site_url('admindirect/sekolah/detail/'.$s->npsn) ?>" ><i class="material-icons">description</i></a>	
 									</td>
 								</tr>
 								<?php endforeach; ?>

@@ -52,8 +52,8 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="col-md-6" style='text-align: right'>					
-							<h2><a href="<?php echo site_url('admindirect/penjualanharian/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-							<span>Tambah</span></a></h2>
+							<!-- <h2><a href="<?php echo site_url('admindirect/penjualanharian/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+							<span>Tambah</span></a></h2> -->
 						</div> 						
 					</div>
 				</div>
@@ -90,8 +90,8 @@
 										<?php echo $jual->lokasi_penjualan ?>
 									</td>
 									<td width='180' class="text-center" >
-										<a href="<?php echo site_url('admindirect/penjualanharian/edit/'.$jual->id_penjualan) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('admindirect/dpenjualanhariandelete/'.$jual->id_penjualan) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<!-- <a href="<?php echo site_url('admindirect/penjualanharian/edit/'.$jual->id_penjualan) ?>"><i class="material-icons">edit</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('admindirect/dpenjualanhariandelete/'.$jual->id_penjualan) ?>')" href="#!"><i class="material-icons">delete</i></a> -->
 										<a href="<?php echo site_url('admindirect/penjualanharian/detail/'.$jual->id_penjualan) ?>"><i class="material-icons">description</i></a>	
 									</td>
 								</tr>

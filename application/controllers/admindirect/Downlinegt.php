@@ -40,76 +40,6 @@ class Downlinegt extends CI_Controller
         $this->load->view('admindirect/downlinegt/list', $data);
     }
 
-    public function add()
-    {
-        is_logged_in();
-        $downlinegt = $this->downlinegt_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($downlinegt->rules());
-
-        if (isset($_POST['btn']))
-        {
-            if ($validation->run())
-            {
-                $downlinegt->save();
-                $this->session->set_flashdata('success', 'Berhasil disimpan');
-                redirect(site_url('admindirect/downlinegt'));
-            }
-            else
-            {
-                die(validation_errors());
-            }
-        }
-        $data['downlinegt'] = $this->downlinegt_model->getAll();
-        $data['tdc'] = $this->downlinegt_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->downlinegt_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->downlinegt_model->getThisTableRecord('tbl_user');
-        $this->load->view('admindirect/downlinegt/new_form', $data);
-    }
-
-    public function edit($id)
-    {
-        is_logged_in();
-        if (!isset($id)) redirect('admindirect/tdc');
-        
-        $downlinegt = $this->downlinegt_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($downlinegt->rules());
-
-        if (isset($_POST['btn']))
-        {
-            if ($validation->run())
-            {
-                $downlinegt->update($id);
-                $this->session->set_flashdata('success', 'Berhasil diubah');
-                redirect(site_url('admindirect/downlinegt'));
-            }
-            else
-            {
-                die(validation_errors());
-            }
-        }
-        $data = $this->userSession();
-        $data['downlinegt'] = $downlinegt->getById($id);
-        $data['related'] = $downlinegt->getRelated($data['tdc']);
-        $data['tdc'] = $this->downlinegt_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->downlinegt_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->downlinegt_model->getThisTableRecord('tbl_user');
-        if (!$data['downlinegt']) show_404();
-
-        $this->load->view('admindirect/downlinegt/edit_form', $data);
-    }
-
-    public function remove($id)
-    {
-        if (!isset($id)) show_404();
-
-        if ($this->downlinegt_model->delete($id))
-        {
-            redirect(site_url('admindirect/downlinegt'));
-        }
-    }
-
     public function detail($id=null)
     {
         is_logged_in();
@@ -139,7 +69,7 @@ class Downlinegt extends CI_Controller
         // die($start . $end);
         $data = $this->userSession();
         $data += [
-            'export' => $this->downlinegt_model->getRelated($data['tdc'], $start, $end)
+            'export' => $this->downlinegt_model->getRelated(null, $start, $end)
         ];
 
         $this->load->view('admindirect/downlinegt/pdf_export', $data);
@@ -148,7 +78,7 @@ class Downlinegt extends CI_Controller
     public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->downlinegt_model->getRelated($data['tdc'], $start, $end);
+        $export = $this->downlinegt_model->getRelated(null, $start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()

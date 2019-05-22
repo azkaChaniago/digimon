@@ -40,71 +40,6 @@ class Hvc extends CI_Controller
         $this->load->view('admindirect/hvc/list', $data);
     }
 
-    public function add()
-    {
-        is_logged_in();
-        $hvc = $this->hvc_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($hvc->rules());
-
-        if ($validation->run())
-        {
-            $hvc->save();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
-            redirect(site_url('admindirect/hvc'));
-        }
-        // else
-        // {
-        //     echo validation_errors();
-        // }
-        $data['hvc'] = $this->hvc_model->getAll();
-        $data['tdc'] = $this->hvc_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->hvc_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->hvc_model->getThisTableRecord('tbl_user');
-        $this->load->view('admindirect/hvc/new_form', $data);
-    }
-
-    public function edit($id)
-    {
-        is_logged_in();
-        if (!isset($id)) redirect('admindirect/tdc');
-        
-        $hvc = $this->hvc_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($hvc->rules());
-        if (isset($_POST['btn']))
-        {
-            if ($validation->run())
-            {
-                $hvc->update($id);
-                $this->session->set_flashdata('success', 'Berhasil diubah');
-                redirect(site_url('admindirect/hvc'));
-            }
-            else
-            {
-                die(validation_errors());
-            }
-        }
-        $data = $this->userSession();
-        $data['hvc'] = $hvc->getById($id);
-        $data['related'] = $hvc->getRelated($data['tdc']);
-        $data['tdc'] = $this->hvc_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->hvc_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->hvc_model->getThisTableRecord('tbl_user');
-        if (!$data['hvc']) show_404();
-
-        $this->load->view('admindirect/hvc/edit_form', $data);
-    }
-
-    public function remove($id)
-    {
-        if (!isset($id)) show_404();
-
-        if ($this->hvc_model->delete($id))
-        {
-            redirect(site_url('admindirect/hvc'));
-        }
-    }
 
     public function detail($id=null)
     {
@@ -135,7 +70,7 @@ class Hvc extends CI_Controller
         // die($start . $end);
         $data = $this->userSession();
         $data += [
-            'export' => $this->hvc_model->getRelated($data['tdc'], $start, $end)
+            'export' => $this->hvc_model->getRelated(null, $start, $end)
         ];
 
         $this->load->view('admindirect/hvc/pdf_export', $data);
@@ -144,7 +79,7 @@ class Hvc extends CI_Controller
     public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->hvc_model->getRelated($data['tdc'], $start, $end);
+        $export = $this->hvc_model->getRelated(null, $start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()

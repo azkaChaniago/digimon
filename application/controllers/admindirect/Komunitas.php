@@ -40,74 +40,6 @@ class Komunitas extends CI_Controller
         $this->load->view('admindirect/komunitas/list', $data);
     }
 
-    public function add()
-    {
-        is_logged_in();
-        $komunitas = $this->komunitas_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($komunitas->rules());
-        if (isset($_POST['btn']))
-        {
-            if ($validation->run())
-            {
-                $komunitas->save();
-                $this->session->set_flashdata('success', 'Berhasil disimpan');
-                redirect(site_url('admindirect/komunitas'));
-            }
-            else
-            {
-                die(validation_errors());
-            }
-        }
-        $data['komunitas'] = $this->komunitas_model->getAll();
-        $data['tdc'] = $this->komunitas_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->komunitas_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->komunitas_model->getThisTableRecord('tbl_user');
-        $this->load->view('admindirect/komunitas/new_form', $data);
-    }
-
-    public function edit($id)
-    {
-        is_logged_in();
-        if (!isset($id)) redirect('admindirect/komunitas');
-        
-        $komunitas = $this->komunitas_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($komunitas->rules());
-        if (isset($_POST['btn']))
-        {
-            if ($validation->run())
-            {
-                $komunitas->update($id);
-                $this->session->set_flashdata('success', 'Berhasil diubah');
-                redirect(site_url('admindirect/komunitas'));
-            }
-            else
-            {
-                die(validation_errors());
-            }
-        }
-
-        $data['komunitas'] = $komunitas->getById($id);
-        $data['related'] = $komunitas->getRelated();
-        $data['tdc'] = $this->komunitas_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->komunitas_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->komunitas_model->getThisTableRecord('tbl_user');
-        if (!$data['komunitas']) show_404();
-
-        $this->load->view('admindirect/komunitas/edit_form', $data);
-    }
-
-    public function remove($id)
-    {
-        if (!isset($id)) show_404();
-
-        if ($this->komunitas_model->delete($id))
-        {
-            redirect(site_url('admindirect/komunitas'));
-        }
-    }
-
     public function detail($id=null)
     {
         is_logged_in();
@@ -120,80 +52,54 @@ class Komunitas extends CI_Controller
         // die($start . $end);
         $data = $this->userSession();
         $data += [
-            'export' => $this->hvc_model->getRelated($data['tdc'])
+            'export' => $this->komunitas_model->getRelated()
         ];
 
-        $this->load->view('admindirect/hvc/pdf_export', $data);
+        $this->load->view('admindirect/komunitas/pdf_export', $data);
     }
 
     public function export()
     {
         $data = $this->userSession();
-        $export = $this->hvc_model->getRelated($data['tdc']);
+        $export = $this->komunitas_model->getRelated();
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()
             ->setCreator('Digimon')
             ->setLastModifiedBy($this->session->userdata('user'))
-            ->setTitle('Laporan HVC')
-            ->setSubject('Laporan HVC')
-            ->setDescription('Eksport HVC')
-            ->setKeywords('HVC')
-            ->setCategory('HVC');
+            ->setTitle('Laporan Komunitas')
+            ->setSubject('Laporan Komunitas')
+            ->setDescription('Eksport Komunitas')
+            ->setKeywords('Komunitas')
+            ->setCategory('Komunitas');
 
         $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue('A1', 'Nama TDC')
-            ->setCellValue('B1', 'Tanggal')
-            ->setCellValue('C1', 'Nama Mercent')
-            ->setCellValue('D1', 'Nama Marketing')
-            ->setCellValue('E1', 'Alamat')
-            ->setCellValue('F1', 'Longitude')
-            ->setCellValue('G1', 'Latitude')
-            ->setCellValue('H1', 'QTY 5K')
-            ->setCellValue('I1', 'QTY 10K')
-            ->setCellValue('J1', 'QTY 20K')
-            ->setCellValue('K1', 'QTY 25K')
-            ->setCellValue('L1', 'QTY 50K')
-            ->setCellValue('M1', 'QTY 100K')
-            ->setCellValue('N1', 'Mount Bulk')
-            ->setCellValue('O1', 'QTY Low NSB')
-            ->setCellValue('P1', 'QTY Middle NSB')
-            ->setCellValue('Q1', 'QTY High NSB')
-            ->setCellValue('R1', 'QTY AS NSB')
-            ->setCellValue('S1', 'QTY Simpati NSB')
-            ->setCellValue('T1', 'QTY Loop NSB')
-            ->setCellValue('U1', 'Keterangan Kegiatan');
+            ->setCellValue('B1', 'Nama Petugas')
+            ->setCellValue('C1', 'Nama Komunitas')
+            ->setCellValue('D1', 'Nama Ketua')
+            ->setCellValue('E1', 'No HP Ketua')
+            ->setCellValue('F1', 'Alamat')
+            ->setCellValue('G1', 'Jumlah Anggota')
+            ->setCellValue('H1', 'Sosial Media');
 
         $i = 2;
         foreach ($export as $ex)
         {
             $spreadsheet->setActiveSheetIndex(0)
                 ->setCellValue('A'. $i , $ex->nama_tdc)
-                ->setCellValue('B'. $i , date('Y-m-d', strtotime($ex->tgl_hvc)))
-                ->setCellValue('C'. $i , $ex->nama_mercent)
-                ->setCellValue('D'. $i , $ex->nama_marketing)
-                ->setCellValue('E'. $i , $ex->alamat)
-                ->setCellValue('F'. $i , $ex->longlat_lokasi_mercent)
-                ->setCellValue('G'. $i , $ex->latitude_lokasi_mercent)
-                ->setCellValue('H'. $i , $ex->qty_5k)
-                ->setCellValue('I'. $i , $ex->qty_10k)
-                ->setCellValue('J'. $i , $ex->qty_20k)
-                ->setCellValue('K'. $i , $ex->qty_25k)
-                ->setCellValue('L'. $i , $ex->qty_50k)
-                ->setCellValue('M'. $i , $ex->qty_100k)
-                ->setCellValue('N'. $i , $ex->mount_bulk)
-                ->setCellValue('O'. $i , $ex->qty_low_nsb)
-                ->setCellValue('P'. $i , $ex->qty_middle_nsb)
-                ->setCellValue('Q'. $i , $ex->qty_high_nsb)
-                ->setCellValue('R'. $i , $ex->qty_as_nsb)
-                ->setCellValue('S'. $i , $ex->qty_simpati_nsb)
-                ->setCellValue('T'. $i , $ex->qty_loop_nsb)
-                ->setCellValue('U'. $i , $ex->keterangan_kegiatan);
+                ->setCellValue('B'. $i , $ex->nama_petugas)
+                ->setCellValue('C'. $i , $ex->nama_komunitas)
+                ->setCellValue('D'. $i , $ex->nama_ketua)
+                ->setCellValue('E'. $i , $ex->no_hpketua)
+                ->setCellValue('F'. $i , $ex->alamat)
+                ->setCellValue('G'. $i , $ex->jumlah_anggota)
+                ->setCellValue('H'. $i , $ex->nama_sosmed);
             $i++;
         }
         
         // Rename worksheet
-        $spreadsheet->getActiveSheet()->setTitle('HVC '.date('d-m-Y H'));
+        $spreadsheet->getActiveSheet()->setTitle('komunitas '.date('d-m-Y H'));
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $spreadsheet->setActiveSheetIndex(0);
         // Redirect output to a client’s web browser (Xlsx)

@@ -54,8 +54,8 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="col-md-6" style='text-align: right'>							
-							<h2><a href="<?php echo site_url('admindirect/event/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-							<span>Tambah</span></a></h2>
+							<!-- <h2><a href="<?php echo site_url('admindirect/event/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+							<span>Tambah</span></a></h2> -->
 						</div> 						
 					</div>
 				</div>
@@ -88,8 +88,8 @@
 										<?php echo $ev->lokasi_penjualan ?>
 									</td>
 									<td width='180' class="text-center" >
-										<a href="<?php echo site_url('admindirect/event/edit/'.$ev->id_event) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('admindirect/event/remove/'.$ev->id_event) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<!-- <a href="<?php echo site_url('admindirect/event/edit/'.$ev->id_event) ?>"><i class="material-icons">edit</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('admindirect/event/remove/'.$ev->id_event) ?>')" href="#!"><i class="material-icons">delete</i></a> -->
 										<a href="<?php echo site_url('admindirect/event/detail/'.$ev->id_event) ?>"><i class="material-icons">description</i></a>	
 									</td>
 								</tr>

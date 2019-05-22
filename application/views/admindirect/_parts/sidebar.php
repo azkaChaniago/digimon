@@ -49,7 +49,7 @@
                 <li class="<?php echo $this->uri->segment(2) == 'saleling' ? 'active': ''?>">
                     <a href="<?php echo site_url('admindirect/saleling') ?>">
                         <i class="material-icons">store</i>
-                        <span>Foto Saleling</span>
+                        <span>Foto Selling</span>
                     </a>
                 </li>
                 <li class="<?php echo $this->uri->segment(2) == 'downlinegt' ? 'active': ''?>">

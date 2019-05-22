@@ -60,7 +60,7 @@
                                 <td>Foto Kegiatan<td>
                                 <th colspan="3">
                                 <?php 
-                                    if ($mercent->foto_mercent) :
+                                    if ($mercent->foto_mercent != null && json_decode($mercent->foto_mercent) != JSON_ERROR_NONE) :
                                         $i = 0;
                                         foreach (json_decode($mercent->foto_mercent) as $im):?>
                                             <div class="col-md-3">

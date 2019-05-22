@@ -39,76 +39,7 @@ class Marketsharesekolah extends CI_Controller
         $data['marketshare'] = $this->marketsharesekolah_model->getRelated();
         $this->load->view('admindirect/sharesekolah/list', $data);
     }
-
-    public function add()
-    {
-        is_logged_in();
-        $sekolah = $this->marketsharesekolah_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($sekolah->rules());
-        if (isset($_POST['btn']))
-        {
-            if ($validation->run())
-            {
-                $sekolah->save();
-                $this->session->set_flashdata('success', 'Berhasil disimpan');
-                redirect(site_url('admindirect/marketsharesekolah'));
-            }
-            else
-            {
-                die(validation_errors());
-            }
-        }
-        $data['marketshare'] = $this->marketsharesekolah_model->getAll();
-        $data['tdc'] = $this->marketsharesekolah_model->getThisTableRecord('tbl_tdc');
-        $data['sekolah'] = $this->marketsharesekolah_model->getThisTableRecord('tbl_sekolah');
-        $data['user'] = $this->marketsharesekolah_model->getThisTableRecord('tbl_user');
-        $this->load->view('admindirect/sharesekolah/new_form', $data);
-    }
-
-    public function edit($id)
-    {
-        is_logged_in();
-        if (!isset($id)) redirect('admindirect/marketsharesekolah');
-        
-        $sekolah = $this->marketsharesekolah_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($sekolah->rules());
-        if (isset($_POST['btn']))
-        {
-            if ($validation->run())
-            {
-                $sekolah->update($id);
-                $this->session->set_flashdata('success', 'Berhasil disimpan');
-                redirect(site_url('admindirect/marketsharesekolah'));
-            }
-            else
-            {
-                die(validation_errors());
-            }
-        }
-        $data = $this->userSession();
-        $data['marketshare'] = $sekolah->getById($id);
-        $data['related'] = $sekolah->getRelated($data['tdc']);
-        $data['sekolah'] = $this->marketsharesekolah_model->getThisTableRecord('tbl_sekolah');
-        $data['tdc'] = $this->marketsharesekolah_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->marketsharesekolah_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->marketsharesekolah_model->getThisTableRecord('tbl_user');
-        if (!$data['marketshare']) show_404();
-
-        $this->load->view('admindirect/sharesekolah/edit_form', $data);
-    }
-
-    public function remove($id)
-    {
-        if (!isset($id)) show_404();
-
-        if ($this->marketsharesekolah_model->delete($id))
-        {
-            redirect(site_url('admindirect/marketsharesekolah'));
-        }
-    }
-
+    
     public function detail($id=null)
     {
         is_logged_in();
@@ -138,7 +69,7 @@ class Marketsharesekolah extends CI_Controller
         // die($start . $end);
         $data = $this->userSession();
         $data += [
-            'export' => $this->marketsharesekolah_model->getRelated($data['tdc'], $start, $end)
+            'export' => $this->marketsharesekolah_model->getRelated(null, $start, $end)
         ];
 
         $this->load->view('admindirect/sharesekolah/pdf_export', $data);

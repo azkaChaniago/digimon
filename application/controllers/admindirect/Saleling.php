@@ -35,78 +35,8 @@ class Saleling extends CI_Controller
     {
         is_logged_in();
         $data = $this->userSession();  
-        $data['saleling'] = $this->saleling_model->getRelated($data['tdc']);
+        $data['saleling'] = $this->saleling_model->getRelated(null);
         $this->load->view('admindirect/saleling/list', $data);
-    }
-
-    public function add()
-    {
-        is_logged_in();
-        $saleling = $this->saleling_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($saleling->rules());
-        if (isset($_POST['btn']))
-        {
-            if ($validation->run())
-            {
-                $saleling->save();
-                $this->session->set_flashdata('success', 'Berhasil disimpan');
-                redirect(site_url('admindirect/saleling'));
-            }
-            else
-            {
-                die(validation_errors());
-            }
-        }
-        $data['saleling'] = $this->saleling_model->getAll();
-        $data['tdc'] = $this->saleling_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->saleling_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->saleling_model->getThisTableRecord('tbl_user');
-        $this->load->view('admindirect/saleling/new_form', $data);
-    }
-
-    public function edit($id)
-    {
-        is_logged_in();
-        if (!isset($id)) redirect('admindirect/tdc');
-        
-        $saleling = $this->saleling_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($saleling->rules());
-
-        if (isset($_POST['btn']))
-        {
-            if ($validation->run())
-            {
-                $saleling->update($id);
-                $this->session->set_flashdata('success', 'Berhasil diubah');
-                redirect(site_url('admindirect/saleling'));
-            }
-            else
-            {
-                die(validation_errors());
-            }
-        }
-
-        $data = $this->userSession();
-        $data['saleling'] = $saleling->getById($id);
-        $data['related'] = $saleling->getRelated($data['tdc']);
-        $data['tdc'] = $this->saleling_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->saleling_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->saleling_model->getThisTableRecord('tbl_user');
-        if (!$data['saleling']) show_404();
-
-        $this->load->view('admindirect/saleling/edit_form', $data);
-    }
-
-    public function remove($id)
-    {
-        if (!isset($id)) show_404();
-
-        if ($this->saleling_model->delete($id))
-        {
-            redirect(site_url('admindirect/saleling'));
-        }
     }
 
     public function detail($id=null)
@@ -138,7 +68,7 @@ class Saleling extends CI_Controller
         // die($start . $end);
         $data = $this->userSession();
         $data += [
-            'export' => $this->saleling_model->getRelated($data['tdc'], $start, $end)
+            'export' => $this->saleling_model->getRelated(null, $start, $end)
         ];
 
         $this->load->view('admindirect/saleling/pdf_export', $data);
@@ -147,7 +77,7 @@ class Saleling extends CI_Controller
     public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->saleling_model->getRelated($data['tdc'], $start, $end);
+        $export = $this->saleling_model->getRelated(null, $start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()

@@ -84,7 +84,7 @@
                                 <td>Foto Kegiatan<td>
                                 <th colspan="3">
                                     <?php 
-                                    if ($hvc->foto_kegiatan) :
+                                    if ($hvc->foto_kegiatan != null && json_decode($hvc->foto_kegiatan) != JSON_ERROR_NONE) :
                                         $i = 0;
                                         foreach (json_decode($hvc->foto_kegiatan) as $im):?>
                                             <div class="col-md-3">

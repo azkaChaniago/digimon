@@ -48,19 +48,24 @@
                                 <td>Foto Kegiatan<td>
                                 <th colspan="3">
                                     <?php 
-                                    $i = 0;
-                                    foreach (json_decode($downlinegt->foto) as $im):?>
+                                    if ($downlinegt->foto != null && json_decode($downlinegt->foto) != JSON_ERROR_NONE) :
+                                        $i = 0;
+                                        foreach (json_decode($downlinegt->foto) as $im):?>
+                                            <div class="col-md-3">
+                                                <img src="<?php echo base_url('upload/downlinegt/'.$im->file_name) ?>" class="img img-responsive" />
+                                            </div>
+                                            <?php
+                                            $i++;
+                                            if ($i == 4) {
+                                                echo "<div class='clearfix' ></div>";
+                                                $i = 0;
+                                            } 
+                                        endforeach; 
+                                    else: ?>
                                         <div class="col-md-3">
-                                            <img src="<?php echo base_url('upload/downlinegt/'.$im->file_name) ?>" class="img img-responsive" />
+                                            <img src="<?php echo base_url('upload/downlinegt/default.png') ?>" class="img img-responsive" />
                                         </div>
-                                        <?php
-                                        $i++;
-                                        if ($i == 4) {
-                                            echo "<div class='clearfix' ></div>";
-                                            $i = 0;
-                                        } 
-                                    endforeach; ?>
-                                    
+                                    <?php endif; ?>
                                 </th>
                             </tr>
                         </table>

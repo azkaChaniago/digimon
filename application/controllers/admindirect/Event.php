@@ -39,73 +39,6 @@ class Event extends CI_Controller
         $this->load->view('admindirect/event/list', $data);
     }
 
-    public function add()
-    {
-        is_logged_in();
-        $event = $this->event_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($event->rules());
-
-        if ($validation->run())
-        {
-            // die();
-            $event->save();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
-            redirect(site_url('admindirect/event'));
-        }
-        // else
-        // {
-        //     $this->session->set_flashdata('srrors', validation_errors());
-        //     die(validation_errors());
-        //     // redirect(site_url('admindirect/event'));
-        // }
-        $data['event'] = $this->event_model->getAll();
-        $data['tdc'] = $this->event_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->event_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->event_model->getThisTableRecord('tbl_user');
-        $this->load->view('admindirect/event/new_form', $data);
-    }
-
-    public function edit($id)
-    {
-        is_logged_in();
-        if (!isset($id)) redirect('admindirect/tdc');
-        
-        $event = $this->event_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($event->rules());
-
-        if ($validation->run())
-        {
-            $event->update($id);
-            $this->session->set_flashdata('success', 'Berhasil diubah');
-            redirect(site_url('admindirect/event'));
-        }
-        // else
-        // {
-        //     echo validation_errors();
-        // }
-
-        $data['event'] = $event->getById($id);
-        // $data['related'] = $event->getRelated();
-        $data['tdc'] = $this->event_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->event_model->getThisTableRecord('tbl_marketing');
-        $data['user'] = $this->event_model->getThisTableRecord('tbl_user');
-        if (!$data['event']) show_404();
-
-        $this->load->view('admindirect/event/edit_form', $data);
-    }
-
-    public function remove($id)
-    {
-        if (!isset($id)) show_404();
-
-        if ($this->event_model->delete($id))
-        {
-            redirect(site_url('admindirect/event'));
-        }
-    }
-
     public function detail($id=null)
     {
         is_logged_in();
@@ -135,7 +68,7 @@ class Event extends CI_Controller
         // die($start . $end);
         $data = $this->userSession();
         $data += [
-            'export' => $this->event_model->getRecord($data['tdc'], $start, $end)
+            'export' => $this->event_model->getRecord(null, $start, $end)
         ];
 
         $this->load->view('admindirect/event/pdf_export', $data);
@@ -144,7 +77,7 @@ class Event extends CI_Controller
     public function export($start, $end)
     {
         $data = $this->userSession();
-        $export = $this->event_model->getRecord($data['tdc'], $start, $end);
+        $export = $this->event_model->getRecord(null, $start, $end);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()

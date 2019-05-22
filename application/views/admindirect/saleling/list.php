@@ -50,12 +50,12 @@
 				<div class="header">
 					<div class="row">
 						<div class="col-md-6">
-							<h2>Saleling</h2>
+							<h2>Selling</h2>
 							<div class="clearfix"></div>
 						</div>
 						<div class="col-md-6" style='text-align: right'>							
-							<h2><a href="<?php echo site_url('admindirect/saleling/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-							<span>Tambah</span></a></h2>
+							<!-- <h2><a href="<?php echo site_url('admindirect/saleling/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+							<span>Tambah</span></a></h2> -->
 						</div> 						
 					</div>
 				</div>
@@ -92,8 +92,8 @@
 										<?php echo $sale->lokasi_saleling ?>
 									</td>
 									<td width='180' class="text-center" >
-										<a href="<?php echo site_url('admindirect/saleling/edit/'.$sale->id_saleling) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('admindirect/saleling/remove/'.$sale->id_saleling) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<!-- <a href="<?php echo site_url('admindirect/saleling/edit/'.$sale->id_saleling) ?>"><i class="material-icons">edit</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('admindirect/saleling/remove/'.$sale->id_saleling) ?>')" href="#!"><i class="material-icons">delete</i></a> -->
 										<a href="<?php echo site_url('admindirect/saleling/detail/'.$sale->id_saleling) ?>"><i class="material-icons">description</i></a>	
 									</td>
 								</tr>

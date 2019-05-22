@@ -84,7 +84,7 @@
 											<th>Alamat</th>
 											<th>Nomor GT</th>
 											<th>Deposit</th>
-											<!-- <th>Aksi</th> -->
+											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -114,11 +114,11 @@
 											<td class="small">
 												<?php echo $gt->deposit ?>
 											</td>
-											<!-- <td width='180' class="text-center" >
-												<a href="<?php echo site_url('admindirect/downlinegt/edit/'.$gt->id_downline_gt) ?>"><i class="material-icons">edit</i></a>
-												<a onclick="deleteConfirm('<?php echo site_url('admindirect/downlinegt/remove/'.$gt->id_downline_gt) ?>')" href="#!"><i class="material-icons">delete</i></a>
+											<td width='180' class="text-center" >
+												<!-- <a href="<?php echo site_url('admindirect/downlinegt/edit/'.$gt->id_downline_gt) ?>"><i class="material-icons">edit</i></a>
+												<a onclick="deleteConfirm('<?php echo site_url('admindirect/downlinegt/remove/'.$gt->id_downline_gt) ?>')" href="#!"><i class="material-icons">delete</i></a> -->
 												<a href="<?php echo site_url('admindirect/downlinegt/detail/'.$gt->id_downline_gt) ?>"><i class="material-icons">description</i></a>	
-											</td> -->
+											</td>
 											<?php unset($gt->foto) ?>
 										</tr>
 										<?php endforeach; ?>
