@@ -38,7 +38,7 @@
                             </tr>
                             <tr>
                                 <td>Alamat<td>
-                                <th><?php echo $komunitas->alamat ?></th>
+                                <th><?php echo $komunitas->alamat_komunitas ?></th>
                                 <td>Jumlah Anggota<td>
                                 <th><?php echo $komunitas->jumlah_anggota ?></th>
                             </tr>

@@ -68,7 +68,7 @@
 							
 								<div class="form-group form-float">
 									<div class="form-line">
-										<input class="form-control" type="text" name="alamat" value="<?= $komunitas->alamat ?>" required/>
+										<input class="form-control" type="text" name="alamat" value="<?= $komunitas->alamat_komunitas ?>" required/>
 										<label class="form-label" for="alamat">Alamat*</label>
 									</div>
 								</div>

@@ -18,7 +18,7 @@
 				<div class="header">
 					<div class="row">
 						<div class="col-md-6">
-							<h2>Mercent</h2>
+							<h2>Komunitas</h2>
 							<div class="clearfix"></div>
 						</div>
 						<div class="col-md-6" style='text-align: right'>							
@@ -26,7 +26,7 @@
 								<a href="<?php echo site_url('direct/komunitas/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i><span>Tambah</span></a>
 								<a href="<?php echo site_url('direct/komunitas/export') ?>" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
 								<span>Excel</span></a>							
-								<a href="<?php echo site_url('direct/komunitas/exportpdf') ?>" class="btn btn-danger waves-effect"><i class="material-icons">save_alt</i>
+								<a href="<?php echo site_url('direct/komunitas/exportpdf') ?>" class="btn btn-danger waves-effect" target="_blank"><i class="material-icons">save_alt</i>
 								<span>PDF</span></a>
 							</h2>
 						</div> 						
@@ -59,7 +59,7 @@
 										<?php echo $k->nama_komunitas ?>
 									</td>
 									<td class="small">
-										<?php echo $k->alamat ?>
+										<?php echo $k->alamat_komunitas ?>
 									</td>
 									<td class="small">
 										<?php echo $k->nama_sosmed ?>
