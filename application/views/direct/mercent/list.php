@@ -97,7 +97,7 @@
 										<?php echo $mer->no_hp_pic ?>
 									</td>
 									<td class="small">
-										<?php echo $mer->alamat ?>
+										<?php echo $mer->alamat_mercent ?>
 									</td>
 									<td width='180' class="text-center" >
 										<a href="<?php echo site_url('direct/mercent/edit/'.$mer->id_mercent) ?>"><i class="material-icons">edit</i></a>

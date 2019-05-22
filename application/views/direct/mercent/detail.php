@@ -14,7 +14,7 @@
             <div class="container">
                 <div class="card">
                     <div class="header">   
-                        <h2 class="text-center">Detail Target Assigment</h2>
+                        <h2 class="text-center">Detail Mercent</h2>
                         <a href="<?php echo site_url('direct/mercent') ?>" class="btn btn-danger waves-effect"><i class="material-icons">arrow_back</i>
                         <span>Kembali<span></a>
                     </div>
@@ -29,7 +29,7 @@
                             <tr>
                                 <td>Tanggal HVC<td>
                                 <th><?php echo $mercent->tanggal ?></th>
-                                <td>Nama Mercentt<td>
+                                <td>Nama Mercent<td>
                                 <th><?php echo $mercent->nama_mercent ?></th>
                             </tr>
                             <tr>
@@ -52,7 +52,7 @@
                             </tr>
                             <tr>
                                 <td>Alamat<td>
-                                <th><?php echo $mercent->alamat ?></th>
+                                <th><?php echo $mercent->alamat_mercent ?></th>
                                 <td>Produk Diajukan<td>
                                 <th><?php echo $mercent->produk_diajukan ?></th>
                             </tr>

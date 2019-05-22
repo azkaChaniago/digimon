@@ -102,7 +102,7 @@ class Mercent_model extends CI_Model
             'npwp' => $this->npwp = $post['npwp'],
             'longtitude' => $this->longtitude = $post['longtitude'],
             'latitude' => $this->latitude = $post['latitude'],
-            'alamat' => $this->alamat = strtoupper($post['alamat']),
+            'alamat_mercent' => $this->alamat = strtoupper($post['alamat']),
             'produk_diajukan' => $this->produk_diajukan = strtoupper($post['produk_diajukan']),
             'foto_mercent' => $this->foto_mercent,
             'kode_user' => $this->kode_user = $post['kode_user'],
@@ -124,6 +124,7 @@ class Mercent_model extends CI_Model
             $this->removeImage($id);
             $this->foto_mercent = $this->uploadMultipleImages();
         }
+        // die(date('Y-m-d', strtotime($post['tanggal'])));
         $data = array(
             // 'id_mercent' => $this->id_mercent = $post['id_mercent'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
@@ -136,7 +137,7 @@ class Mercent_model extends CI_Model
             'npwp' => $this->npwp = $post['npwp'],
             'longtitude' => $this->longtitude = $post['longtitude'],
             'latitude' => $this->latitude = $post['latitude'],
-            'alamat' => $this->alamat = strtoupper($post['alamat']),
+            'alamat_mercent' => $this->alamat = strtoupper($post['alamat']),
             'produk_diajukan' => $this->produk_diajukan = strtoupper($post['produk_diajukan']),
             'foto_mercent' => $this->foto_mercent,
             'kode_user' => $this->kode_user = $post['kode_user'],
