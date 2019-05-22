@@ -30,7 +30,7 @@
                                 <td>Nama Sekolah<td>
                                 <th><?php echo $sekolah->nama_sekolah ?></th>
                                 <td>Alamat<td>
-                                <th><?php echo $sekolah->alamat ?></th>
+                                <th><?php echo $sekolah->alamat_sekolah ?></th>
                             </tr>
                             <tr>
                                 <td>Kabupaten<td>

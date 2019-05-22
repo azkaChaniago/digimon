@@ -119,7 +119,7 @@ class Sekolah extends CI_Controller
         // die($start . $end);
         $data = $this->userSession();
         $data += [
-            'export' => $this->hvc_model->getRelated($data['tdc'])
+            'export' => $this->sekolah_model->getRelated($data['tdc'])
         ];
 
         $this->load->view('direct/sekolah/pdf_export', $data);
@@ -128,71 +128,45 @@ class Sekolah extends CI_Controller
     public function export()
     {
         $data = $this->userSession();
-        $export = $this->hvc_model->getRelated($data['tdc']);
+        $export = $this->sekolah_model->getRelated($data['tdc']);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()
             ->setCreator('Digimon')
             ->setLastModifiedBy($this->session->userdata('user'))
-            ->setTitle('Laporan HVC')
-            ->setSubject('Laporan HVC')
-            ->setDescription('Eksport HVC')
-            ->setKeywords('HVC')
-            ->setCategory('HVC');
+            ->setTitle('Laporan sekolah')
+            ->setSubject('Laporan sekolah')
+            ->setDescription('Eksport sekolah')
+            ->setKeywords('sekolah')
+            ->setCategory('sekolah');
 
         $spreadsheet->setActiveSheetIndex(0)
             ->setCellValue('A1', 'Nama TDC')
-            ->setCellValue('B1', 'Tanggal')
-            ->setCellValue('C1', 'Nama Mercent')
-            ->setCellValue('D1', 'Nama Marketing')
-            ->setCellValue('E1', 'Alamat')
-            ->setCellValue('F1', 'Longitude')
-            ->setCellValue('G1', 'Latitude')
-            ->setCellValue('H1', 'QTY 5K')
-            ->setCellValue('I1', 'QTY 10K')
-            ->setCellValue('J1', 'QTY 20K')
-            ->setCellValue('K1', 'QTY 25K')
-            ->setCellValue('L1', 'QTY 50K')
-            ->setCellValue('M1', 'QTY 100K')
-            ->setCellValue('N1', 'Mount Bulk')
-            ->setCellValue('O1', 'QTY Low NSB')
-            ->setCellValue('P1', 'QTY Middle NSB')
-            ->setCellValue('Q1', 'QTY High NSB')
-            ->setCellValue('R1', 'QTY AS NSB')
-            ->setCellValue('S1', 'QTY Simpati NSB')
-            ->setCellValue('T1', 'QTY Loop NSB')
-            ->setCellValue('U1', 'Keterangan Kegiatan');
+            ->setCellValue('B1', 'NPSN')
+            ->setCellValue('C1', 'Nama Sekolah')
+            ->setCellValue('D1', 'Kabupaten')
+            ->setCellValue('E1', 'Kecamatan')
+            ->setCellValue('F1', 'Alamat Sekolah')
+            ->setCellValue('G1', 'Jumlah Siswa')
+            ->setCellValue('H1', 'Nama Marketing');
 
         $i = 2;
         foreach ($export as $ex)
         {
             $spreadsheet->setActiveSheetIndex(0)
                 ->setCellValue('A'. $i , $ex->nama_tdc)
-                ->setCellValue('B'. $i , date('Y-m-d', strtotime($ex->tgl_hvc)))
-                ->setCellValue('C'. $i , $ex->nama_mercent)
-                ->setCellValue('D'. $i , $ex->nama_marketing)
-                ->setCellValue('E'. $i , $ex->alamat)
-                ->setCellValue('F'. $i , $ex->longlat_lokasi_mercent)
-                ->setCellValue('G'. $i , $ex->latitude_lokasi_mercent)
-                ->setCellValue('H'. $i , $ex->qty_5k)
-                ->setCellValue('I'. $i , $ex->qty_10k)
-                ->setCellValue('J'. $i , $ex->qty_20k)
-                ->setCellValue('K'. $i , $ex->qty_25k)
-                ->setCellValue('L'. $i , $ex->qty_50k)
-                ->setCellValue('M'. $i , $ex->qty_100k)
-                ->setCellValue('N'. $i , $ex->mount_bulk)
-                ->setCellValue('O'. $i , $ex->qty_low_nsb)
-                ->setCellValue('P'. $i , $ex->qty_middle_nsb)
-                ->setCellValue('Q'. $i , $ex->qty_high_nsb)
-                ->setCellValue('R'. $i , $ex->qty_as_nsb)
-                ->setCellValue('S'. $i , $ex->qty_simpati_nsb)
-                ->setCellValue('T'. $i , $ex->qty_loop_nsb)
-                ->setCellValue('U'. $i , $ex->keterangan_kegiatan);
+                ->setCellValue('B'. $i , $ex->npsn)
+                ->setCellValue('C'. $i , $ex->nama_sekolah)
+                ->setCellValue('D'. $i , $ex->kabupaten)
+                ->setCellValue('E'. $i , $ex->kecamatan)
+                ->setCellValue('F'. $i , $ex->alamat_sekolah)
+                ->setCellValue('G'. $i , $ex->jumlah_siswa)
+                ->setCellValue('H'. $i , $ex->nama_marketing);
             $i++;
         }
         
         // Rename worksheet
-        $spreadsheet->getActiveSheet()->setTitle('HVC '.date('d-m-Y H'));
+        $spreadsheet->getActiveSheet()->setTitle('sekolah '.date('d-m-Y H'));
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $spreadsheet->setActiveSheetIndex(0);
         // Redirect output to a client’s web browser (Xlsx)

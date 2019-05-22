@@ -59,7 +59,7 @@
 								<span>Tambah</span></a>
 								<a href="<?php echo site_url('direct/sekolah/export') ?>" class="btn btn-success waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
 								<span>Excel</span></a>							
-								<a href="<?php echo site_url('direct/sekolah/exportpdf') ?>" class="btn btn-danger waves-effect" formtarget="_blank"><i class="material-icons">save_alt</i>
+								<a href="<?php echo site_url('direct/sekolah/exportpdf') ?>" class="btn btn-danger waves-effect" target="_blank"><i class="material-icons">save_alt</i>
 								<span>PDF</span></a>
 							</h2>
 						</div> 						
@@ -97,7 +97,7 @@
 										<?php echo $s->nama_sekolah ?>
 									</td>
 									<td class="small">
-										<?php echo $s->alamat ?>
+										<?php echo $s->alamat_sekolah ?>
 									</td>
 									<td class="small">
 										<?php echo $s->jumlah_siswa ?>

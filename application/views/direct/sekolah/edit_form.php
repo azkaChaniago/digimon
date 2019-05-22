@@ -62,7 +62,7 @@
 							<div class="col-md-6">
 								<div class="form-group form-float">
 									<div class="form-line">
-										<input class="form-control" type="text" name="alamat" value="<?= $sekolah->alamat ?>" required/>
+										<input class="form-control" type="text" name="alamat" value="<?= $sekolah->alamat_sekolah ?>" required/>
 										<label class="form-label" for="alamat">Alamat*</label>
 									</div>
 								</div>
