@@ -35,7 +35,7 @@
 								<select class="form-control show-tick" 
 								name="kode_tdc" data-live-search="true">
 									<option value="">--- PILIH TDC ---</option>
-									<?php foreach($sekolah as $t) : ?>
+									<?php foreach($tdc as $t) : ?>
 										<option value="<?php echo $t->kode_tdc ?>" ><?php echo $t->nama_tdc ?></option>
 									<?php endforeach; ?>
 								</select>
