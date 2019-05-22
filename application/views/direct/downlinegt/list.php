@@ -85,22 +85,22 @@
 									<td>
 										<?php echo $gt->divisi ?>	
 									</td>
-									<td class="small">
+									<td>
 										<?php echo $gt->tanggal ?>
 									</td>
-									<td class="small">
+									<td>
 										<?php echo $gt->nama_marketing ?>
 									</td>
-									<td class="small">
+									<td>
 										<?php echo $gt->nama_downline ?>
 									</td>
-									<td class="small">
-										<?php echo $gt->alamat ?>
+									<td>
+										<?php echo $gt->alamat_gt ?>
 									</td>
-									<td class="small">
+									<td>
 										<?php echo $gt->nomor_gt ?>
 									</td>
-									<td class="small">
+									<td>
 										<?php echo $gt->deposit ?>
 									</td>
 									<td width='180' class="text-center" >

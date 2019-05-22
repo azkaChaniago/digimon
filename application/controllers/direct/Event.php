@@ -46,18 +46,21 @@ class Event extends CI_Controller
         $validation = $this->form_validation;
         $validation->set_rules($event->rules());
 
-        if ($validation->run())
+        if (isset($_POST['btn']))
         {
-            $event->save();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
-            redirect(site_url('direct/event'));
+            if ($validation->run())
+            {
+                $event->save();
+                $this->session->set_flashdata('success', 'Berhasil disimpan');
+                redirect(site_url('direct/event'));
+            }
+            else
+            {
+                $this->session->set_flashdata('srrors', validation_errors());
+                die(validation_errors());
+                // redirect(site_url('direct/event'));
+            }
         }
-        // else
-        // {
-        //     $this->session->set_flashdata('srrors', validation_errors());
-        //     die(validation_errors());
-        //     // redirect(site_url('direct/event'));
-        // }
         $data['event'] = $this->event_model->getAll();
         $data['tdc'] = $this->event_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->event_model->getThisTableRecord('tbl_marketing');
@@ -68,22 +71,25 @@ class Event extends CI_Controller
     public function edit($id)
     {
         is_logged_in();
-        if (!isset($id)) redirect('direct/tdc');
+        if (!isset($id)) redirect('direct/event');
         
         $event = $this->event_model;
         $validation = $this->form_validation;
         $validation->set_rules($event->rules());
 
-        if ($validation->run())
+        if (isset($_POST['btn']))
         {
-            $event->update($id);
-            $this->session->set_flashdata('success', 'Berhasil diubah');
-            redirect(site_url('direct/event'));
+            if ($validation->run())
+            {
+                $event->update($id);
+                $this->session->set_flashdata('success', 'Berhasil diubah');
+                redirect(site_url('direct/event'));
+            }
+            else
+            {
+                die(validation_errors());
+            }
         }
-        // else
-        // {
-        //     echo validation_errors();
-        // }
 
         $data['event'] = $event->getById($id);
         // $data['related'] = $event->getRelated();

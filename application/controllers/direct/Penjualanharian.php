@@ -90,8 +90,9 @@ class Penjualanharian extends CI_Controller
             }
         }
 
+        $data = $this->userSession();
         $data['penjualanharian'] = $penjualanharian->getById($id);
-        $data['related'] = $penjualanharian->getRelated();
+        $data['related'] = $penjualanharian->getRelated($data['tdc']);
         $data['tdc'] = $this->penjualanharian_model->getThisTableRecord('tbl_tdc');
         $data['marketing'] = $this->penjualanharian_model->getThisTableRecord('tbl_marketing');
         $data['user'] = $this->penjualanharian_model->getThisTableRecord('tbl_user');

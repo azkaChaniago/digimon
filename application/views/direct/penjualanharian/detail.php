@@ -83,20 +83,27 @@
                             <tr>
                                 <td>Foto Kegiatan<td>
                                 <th colspan="3">
-                                    <?php 
-                                    $i = 0;
-                                    // print_r(($penjualanharian->foto_kegiatan));
-                                    foreach (json_decode($penjualanharian->foto_kegiatan) as $im):?>
+                                    
+                                    <?php
+                                    if ($penjualanharian->foto_kegiatan == null && json_decode($penjualanharian->foto_kegiatan) == JSON_ERROR_NONE) : ?>
                                         <div class="col-md-3">
-                                            <img src="<?php echo base_url('upload/penjualanharian/'.$im->file_name) ?>" class="img img-responsive" />
+                                            <img src="<?php echo base_url('upload/penjualanharian/default.png') ?>" class="img img-responsive" />
                                         </div>
-                                        <?php
-                                        $i++;
-                                        if ($i == 4) {
-                                            echo "<div class='clearfix' ></div>";
-                                            $i = 0;
-                                        } 
-                                    endforeach; ?>
+                                    <?php else :
+                                        $i = 0;
+                                        // print_r(($penjualanharian->foto_kegiatan));
+                                        foreach (json_decode($penjualanharian->foto_kegiatan) as $im):?>
+                                            <div class="col-md-3">
+                                                <img src="<?php echo base_url('upload/penjualanharian/'.$im->file_name) ?>" class="img img-responsive" />
+                                            </div>
+                                            <?php
+                                            $i++;
+                                            if ($i == 4) {
+                                                echo "<div class='clearfix' ></div>";
+                                                $i = 0;
+                                            } 
+                                        endforeach; 
+                                    endif;?>
                                     
                                 </th>
                             </tr>

@@ -115,10 +115,10 @@ class Penjualanharian_model extends CI_Model
         }
         $data = array(
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'divisi' => $this->divisi = $post['divisi'],
+            'divisi' => $this->divisi = strtoupper($post['divisi']),
             'tgl_penjualan' => $this->tgl_penjualan = date('Y-m-d', strtotime($post['tgl_penjualan'])),
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
-            'lokasi_penjualan' => $this->lokasi_penjualan = $post['lokasi_penjualan'],
+            'lokasi_penjualan' => $this->lokasi_penjualan = strtoupper($post['lokasi_penjualan']),
             'qty_5k' => $this->qty_5k = $post['qty_5k'],
             'qty_10k' => $this->qty_10k = $post['qty_10k'],
             'qty_20k' => $this->qty_20k = $post['qty_20k'],
@@ -161,10 +161,10 @@ class Penjualanharian_model extends CI_Model
         }
         $data = array(
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'divisi' => $this->divisi = $post['divisi'],
+            'divisi' => $this->divisi = strtoupper($post['divisi']),
             'tgl_penjualan' => $this->tgl_penjualan = date('Y-m-d', strtotime($post['tgl_penjualan'])),
-            'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
-            'lokasi_penjualan' => $this->lokasi_penjualan = $post['lokasi_penjualan'],
+            'kode_marketing' => $this->kode_marketing = strtoupper($post['kode_marketing']),
+            'lokasi_penjualan' => $this->lokasi_penjualan = strtoupper($post['lokasi_penjualan']),
             'qty_5k' => $this->qty_5k = $post['qty_5k'],
             'qty_10k' => $this->qty_10k = $post['qty_10k'],
             'qty_20k' => $this->qty_20k = $post['qty_20k'],

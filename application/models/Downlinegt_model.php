@@ -53,7 +53,7 @@ class Downlinegt_model extends CI_Model
         $this->db->from($this->table . ' AS s');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = s.kode_tdc', 'left');
         $this->db->join('tbl_marketing AS m', 'm.kode_marketing = s.kode_marketing', 'left');
-        $this->db->join('tbl_user AS usr', 'usr.kode_user = s.kode_user', 'left');
+        // $this->db->join('tbl_user AS usr', 'usr.kode_user = s.kode_user', 'left');
         if ($start && $end) :   
             $this->db->where("s.tanggal BETWEEN '$start' AND '$end'");
         endif;
@@ -88,7 +88,7 @@ class Downlinegt_model extends CI_Model
             'id_downline_gt' => $this->id_downline_gt = $post['id_downline_gt'],
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
             'divisi' => $this->divisi = strtoupper($post['divisi']),
-            'tanggal' => $this->tanggal = $post['tanggal'],
+            'tanggal' => $this->tanggal = date('Y-m-d', strtotime($post['tanggal'])),
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
             'nama_downline' => $this->nama_downline = strtoupper($post['nama_downline']),
             'alamat' => $this->alamat = strtoupper($post['alamat']),
@@ -117,7 +117,7 @@ class Downlinegt_model extends CI_Model
         $data = array(
             'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
             'divisi' => $this->divisi = strtoupper($post['divisi']),
-            'tanggal' => $this->tanggal = $post['tanggal'],
+            'tanggal' => $this->tanggal = date('Y-m-d', strtotime($post['tanggal'])),
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
             'nama_downline' => $this->nama_downline = strtoupper($post['nama_downline']),
             'alamat' => $this->alamat = strtoupper($post['alamat']),

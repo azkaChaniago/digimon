@@ -91,9 +91,9 @@ class Event_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS e');
-        $this->db->join('tbl_tdc AS t', 't.kode_tdc = e.kode_tdc', 'left');
-        $this->db->join('tbl_marketing AS m', 'm.kode_marketing = e.kode_marketing', 'left');
-        $this->db->join('tbl_user AS u', 'u.kode_user = e.kode_user', 'left');
+        $this->db->join('tbl_tdc AS t', 't.kode_tdc = e.kode_tdc', 'inner');
+        $this->db->join('tbl_marketing AS m', 'm.kode_marketing = e.kode_marketing', 'inner');
+        // $this->db->join('tbl_user AS u', 'u.kode_user = e.kode_user', 'inner');
         $this->db->where('e.id_event', $id);
         return $this->db->get()->row();
     }
@@ -116,22 +116,22 @@ class Event_model extends CI_Model
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
             'nama_event' => $this->nama_event = strtoupper($post['nama_event']),
             'lokasi_penjualan' => $this->lokasi_penjualan = strtoupper($post['lokasi_penjualan']),
-            'qty_5k' => $this->qty_5k = $post['qty_5k'],
-            'qty_10k' => $this->qty_10k = $post['qty_10k'],
-            'qty_20k' => $this->qty_20k = $post['qty_20k'],
-            'qty_25k' => $this->qty_25k = $post['qty_25k'],
-            'qty_50k' => $this->qty_50k = $post['qty_50k'],
-            'qty_100k' => $this->qty_100k = $post['qty_100k'],
-            'mount_bulk' => $this->mount_bulk = $post['mount_bulk'],
-            'mount_legacy' => $this->mount_legacy = $post['mount_legacy'],
-            'mount_digital' => $this->mount_digital = $post['mount_digital'],
-            'mount_tcash' => $this->mount_tcash = $post['mount_tcash'],
-            'qty_low_nsb' => $this->qty_low_nsb = $post['qty_low_nsb'],
-            'qty_middle_nsb' => $this->qty_middle_nsb = $post['qty_middle_nsb'],
-            'qty_high_nsb' => $this->qty_high_nsb = $post['qty_high_nsb'],
-            'qty_as_nsb' => $this->qty_as_nsb = $post['qty_as_nsb'],
-            'qty_simpati_nsb' => $this->qty_simpati_nsb = $post['qty_simpati_nsb'],
-            'qty_loop_nsb' => $this->qty_loop_nsb = $post['qty_loop_nsb'],
+            'qty_5k' => $this->qty_5k = str_replace(".","",$post['qty_5k']),
+            'qty_10k' => $this->qty_10k = str_replace(".","",$post['qty_10k']),
+            'qty_20k' => $this->qty_20k = str_replace(".","",$post['qty_20k']),
+            'qty_25k' => $this->qty_25k = str_replace(".","",$post['qty_25k']),
+            'qty_50k' => $this->qty_50k = str_replace(".","",$post['qty_50k']),
+            'qty_100k' => $this->qty_100k = str_replace(".","",$post['qty_100k']),
+            'mount_bulk' => $this->mount_bulk = str_replace(".","",$post['mount_bulk']),
+            'mount_legacy' => $this->mount_legacy = str_replace(".","",$post['mount_legacy']),
+            'mount_digital' => $this->mount_digital = str_replace(".","",$post['mount_digital']),
+            'mount_tcash' => $this->mount_tcash = str_replace(".","",$post['mount_tcash']),
+            'qty_low_nsb' => $this->qty_low_nsb = str_replace(".","",$post['qty_low_nsb']),
+            'qty_middle_nsb' => $this->qty_middle_nsb = str_replace(".","",$post['qty_middle_nsb']),
+            'qty_high_nsb' => $this->qty_high_nsb = str_replace(".","",$post['qty_high_nsb']),
+            'qty_as_nsb' => $this->qty_as_nsb = str_replace(".","",$post['qty_as_nsb']),
+            'qty_simpati_nsb' => $this->qty_simpati_nsb = str_replace(".","",$post['qty_simpati_nsb']),
+            'qty_loop_nsb' => $this->qty_loop_nsb = str_replace(".","",$post['qty_loop_nsb']),
             'foto_kegiatan' => $this->foto_kegiatan,
             'kode_user' => $this->kode_user = $this->session->userdata['tdc'],
         );
@@ -143,14 +143,14 @@ class Event_model extends CI_Model
     public function update($id)
     {
         $post = $this->input->post();
-        if (!empty($_FILES['foto_kegiatan']['name']))
+        if ($_FILES['foto_kegiatan']['name'] == (array(0 => NULL)))
         {
-            $this->removeImage($id);
-            $this->foto_kegiatan = $this->uploadMultipleImages();
+            $this->foto_kegiatan = $post['old_image'];
         } 
         else
         {
-            $this->foto_kegiatan = $post['old_image'];
+            $this->removeImage($id);
+            $this->foto_kegiatan = $this->uploadMultipleImages();
         }
         $data = array(
             // 'id_event' => $this->id_event = $post['id_event'],
@@ -160,22 +160,22 @@ class Event_model extends CI_Model
             'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
             'nama_event' => $this->nama_event = strtoupper($post['nama_event']),
             'lokasi_penjualan' => $this->lokasi_penjualan = strtoupper($post['lokasi_penjualan']),
-            'qty_5k' => $this->qty_5k = $post['qty_5k'],
-            'qty_10k' => $this->qty_10k = $post['qty_10k'],
-            'qty_20k' => $this->qty_20k = $post['qty_20k'],
-            'qty_25k' => $this->qty_25k = $post['qty_25k'],
-            'qty_50k' => $this->qty_50k = $post['qty_50k'],
-            'qty_100k' => $this->qty_100k = $post['qty_100k'],
-            'mount_bulk' => $this->mount_bulk = $post['mount_bulk'],
-            'mount_legacy' => $this->mount_legacy = $post['mount_legacy'],
-            'mount_digital' => $this->mount_digital = $post['mount_digital'],
-            'mount_tcash' => $this->mount_tcash = $post['mount_tcash'],
-            'qty_low_nsb' => $this->qty_low_nsb = $post['qty_low_nsb'],
-            'qty_middle_nsb' => $this->qty_middle_nsb = $post['qty_middle_nsb'],
-            'qty_high_nsb' => $this->qty_high_nsb = $post['qty_high_nsb'],
-            'qty_as_nsb' => $this->qty_as_nsb = $post['qty_as_nsb'],
-            'qty_simpati_nsb' => $this->qty_simpati_nsb = $post['qty_simpati_nsb'],
-            'qty_loop_nsb' => $this->qty_loop_nsb = $post['qty_loop_nsb'],
+            'qty_5k' => $this->qty_5k = str_replace(".","",$post['qty_5k']),
+            'qty_10k' => $this->qty_10k = str_replace(".","",$post['qty_10k']),
+            'qty_20k' => $this->qty_20k = str_replace(".","",$post['qty_20k']),
+            'qty_25k' => $this->qty_25k = str_replace(".","",$post['qty_25k']),
+            'qty_50k' => $this->qty_50k = str_replace(".","",$post['qty_50k']),
+            'qty_100k' => $this->qty_100k = str_replace(".","",$post['qty_100k']),
+            'mount_bulk' => $this->mount_bulk = str_replace(".","",$post['mount_bulk']),
+            'mount_legacy' => $this->mount_legacy = str_replace(".","",$post['mount_legacy']),
+            'mount_digital' => $this->mount_digital = str_replace(".","",$post['mount_digital']),
+            'mount_tcash' => $this->mount_tcash = str_replace(".","",$post['mount_tcash']),
+            'qty_low_nsb' => $this->qty_low_nsb = str_replace(".","",$post['qty_low_nsb']),
+            'qty_middle_nsb' => $this->qty_middle_nsb = str_replace(".","",$post['qty_middle_nsb']),
+            'qty_high_nsb' => $this->qty_high_nsb = str_replace(".","",$post['qty_high_nsb']),
+            'qty_as_nsb' => $this->qty_as_nsb = str_replace(".","",$post['qty_as_nsb']),
+            'qty_simpati_nsb' => $this->qty_simpati_nsb = str_replace(".","",$post['qty_simpati_nsb']),
+            'qty_loop_nsb' => $this->qty_loop_nsb = str_replace(".","",$post['qty_loop_nsb']),
             'foto_kegiatan' => $this->foto_kegiatan,
         );
         
@@ -213,7 +213,7 @@ class Event_model extends CI_Model
             if (!$this->upload->do_upload('image'))
             {
                 $error = array('error' => $this->upload->display_errors());
-                $this->load->view('indirect/outlet/new_form', $error);
+                $this->load->view('direct/event/edit_form', $error);
             }
             else
             {

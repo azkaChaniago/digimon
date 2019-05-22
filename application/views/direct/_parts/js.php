@@ -67,19 +67,21 @@
 <script src="<?php echo base_url('assets/js/demo.js') ?>"></script>
 
 <script>
-function isNumberKey(evt)
-{
-    var charCode = (evt.which) ? evt.which : event.keyCode
-    if (charCode > 31 && (charCode < 48 || charCode > 57))
-        return false;
 
-    return true;
-}
+    function isNumberKey(evt)
+    {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
 
-$(document).ready(function(){
+        return true;
+    }
 
-    // Format mata uang.
-    $( '.uang' ).mask('000.000.000', {reverse: true});
+    $(document).ready(function(){
 
-})
+        // Format mata uang.
+        $( '.uang' ).mask('000.000.000', {reverse: true});
+
+    })
+
 </script>

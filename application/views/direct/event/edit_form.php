@@ -24,7 +24,7 @@
 					<span>Kembali<span></a></h2>
 				</div>
 				<div class="body">
-					<form action="<?php base_url('direct/event/add') ?>" id="form_advanced_validation" method="post" enctype="multipart/form-data" autocomplete="on">
+					<form action="<?php base_url('direct/event/edit') ?>" id="form_advanced_validation" method="post" enctype="multipart/form-data" autocomplete="on">
 
 						<div class="row">
 							<div class="col-md-6">													
@@ -85,9 +85,10 @@
 
 								<div class="form-group form-float">
 									<div class="form-line">
-									<input class="form-control" type="file" name="foto_kegiatan[]" value="<?php echo $event->foto_kegiatan ?>" multiple />
+									<input class="form-control" type="file" name="foto_kegiatan[]"  multiple />
 									</div>
 								</div>
+								<input type="hidden" name="old_image" value="<?= htmlspecialchars($event->foto_kegiatan) ?>" />
 
 							</div>
 						</div>
@@ -140,7 +141,7 @@
 							<div class="col-md-4">
 								<div class="form-group form-float">
 									<div class="form-line">
-										<input class="form-control <?php echo form_error('mount_bulk') ? 'is-invalid':'' ?>"
+										<input class="form-control uang"
 											type="text" name="mount_bulk" onkeypress="return isNumberKey(event)" value="<?php echo $event->mount_bulk ?>" required/>
 										<label class="form-label" for="mount_bulk">Mount Bulk*</label>
 									</div>
@@ -148,7 +149,7 @@
 								
 								<div class="form-group form-float">
 									<div class="form-line">
-										<input class="form-control <?php echo form_error('mount_legacy') ? 'is-invalid':'' ?>"
+										<input class="form-control uang"
 											type="text" name="mount_legacy" onkeypress="return isNumberKey(event)" value="<?php echo $event->mount_legacy ?>" required/>
 											<label class="form-label" for="mount_legacy">Mount Legacy*</label>
 									</div>
@@ -156,7 +157,7 @@
 							
 								<div class="form-group form-float">
 									<div class="form-line">
-										<input class="form-control <?php echo form_error('mount_digital') ? 'is-invalid':'' ?>"
+										<input class="form-control uang"
 											type="text" name="mount_digital" onkeypress="return isNumberKey(event)" value="<?php echo $event->mount_digital ?>" required/>
 											<label class="form-label" for="mount_digital">Mount Digital*</label>
 									</div>
@@ -164,7 +165,7 @@
 							
 								<div class="form-group form-float">
 									<div class="form-line">
-										<input class="form-control <?php echo form_error('mount_tcash') ? 'is-invalid':'' ?>"
+										<input class="form-control uang"
 											type="text" name="mount_tcash" onkeypress="return isNumberKey(event)" value="<?php echo $event->mount_tcash ?>" required/>
 											<label class="form-label" for="mount_tcash">Mount Tcash*</label>
 									</div>

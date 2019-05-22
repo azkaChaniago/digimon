@@ -140,7 +140,7 @@
 							<div class="col-md-4">
 								<div class="form-group form-float">
 									<div class="form-line">
-										<input class="form-control <?php echo form_error('mount_bulk') ? 'is-invalid':'' ?>"
+										<input class="form-control uang"
 											type="text" name="mount_bulk" onkeypress="return isNumberKey(event)" required/>
 										<label class="form-label" for="mount_bulk">Mount Bulk*</label>
 									</div>
@@ -148,7 +148,7 @@
 								
 								<div class="form-group form-float">
 									<div class="form-line">
-										<input class="form-control <?php echo form_error('mount_legacy') ? 'is-invalid':'' ?>"
+										<input class="form-control uang"
 											type="text" name="mount_legacy" onkeypress="return isNumberKey(event)" required/>
 											<label class="form-label" for="mount_legacy">Mount Legacy*</label>
 									</div>
@@ -156,7 +156,7 @@
 							
 								<div class="form-group form-float">
 									<div class="form-line">
-										<input class="form-control <?php echo form_error('mount_digital') ? 'is-invalid':'' ?>"
+										<input class="form-control uang"
 											type="text" name="mount_digital" onkeypress="return isNumberKey(event)" required/>
 											<label class="form-label" for="mount_digital">Mount Digital*</label>
 									</div>
@@ -164,7 +164,7 @@
 							
 								<div class="form-group form-float">
 									<div class="form-line">
-										<input class="form-control <?php echo form_error('mount_tcash') ? 'is-invalid':'' ?>"
+										<input class="form-control uang"
 											type="text" name="mount_tcash" onkeypress="return isNumberKey(event)" required/>
 											<label class="form-label" for="mount_tcash">Mount Tcash*</label>
 									</div>
