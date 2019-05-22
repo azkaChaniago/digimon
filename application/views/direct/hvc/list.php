@@ -97,7 +97,7 @@
 										<?php echo $h->latitude_lokasi_mercent ?>
 									</td>
 									<td class="small">
-										<?php echo $h->alamat ?>
+										<?php echo $h->alamat_hvc ?>
 									</td>
 									<td width='180' class="text-center" >
 										<a href="<?php echo site_url('direct/hvc/edit/'.$h->id_hvc) ?>"><i class="material-icons">edit</i></a>

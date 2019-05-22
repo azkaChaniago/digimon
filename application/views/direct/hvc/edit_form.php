@@ -79,7 +79,7 @@
 
 								<div class="form-group form-float">
 									<div class="form-line">
-										<input class="form-control" type="text" name="alamat" value="<?= $hvc->alamat ?>" required/>
+										<input class="form-control" type="text" name="alamat" value="<?= $hvc->alamat_hvc ?>" required/>
 										<label class="form-label" for="alamat">Alamat*</label>
 									</div>
 								</div>
