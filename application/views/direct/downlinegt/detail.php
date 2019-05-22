@@ -45,6 +45,10 @@
                                 <th><?php echo $downlinegt->nama_user ?></th>
                             </tr>
                             <tr>
+                                <td>Nama Downline<td>
+                                <th colspan="3"><?php echo $downlinegt->nama_downline?></th>
+                            </tr>
+                            <tr>
                                 <td>Foto Kegiatan<td>
                                 <th colspan="3">
                                     <?php 
