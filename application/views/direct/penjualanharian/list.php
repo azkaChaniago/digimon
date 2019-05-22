@@ -91,7 +91,7 @@
 									</td>
 									<td width='180' class="text-center" >
 										<a href="<?php echo site_url('direct/penjualanharian/edit/'.$jual->id_penjualan) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('direct/dpenjualanhariandelete/'.$jual->id_penjualan) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('direct/penjualanharian/remove/'.$jual->id_penjualan) ?>')" href="#!"><i class="material-icons">delete</i></a>
 										<a href="<?php echo site_url('direct/penjualanharian/detail/'.$jual->id_penjualan) ?>"><i class="material-icons">description</i></a>	
 									</td>
 								</tr>
