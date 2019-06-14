@@ -32,11 +32,19 @@ class Marketsharesekolah extends CI_Controller
         return $data;
     }
 
-    public function index()
+    public function index($kab=null)
     {
         is_logged_in();
         $data = $this->userSession();
         $data['marketshare'] = $this->marketsharesekolah_model->getRelated();
+        $data['chartSekolah'] = $this->marketsharesekolah_model->chartSharesekolah();
+        $data['chartKabupaten'] = $this->marketsharesekolah_model->chartShareKabupaten();
+        if ($kab)
+        {
+            $kab = str_replace('%20', ' ', $kab);
+            $data['chartKecamatan'] = $this->marketsharesekolah_model->chartShareKecamatan($kab);
+            $data['kab'] = str_replace(' ', '%20', $kab);
+        }
         $this->load->view('admindirect/sharesekolah/list', $data);
     }
     

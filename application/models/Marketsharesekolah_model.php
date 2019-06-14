@@ -127,4 +127,46 @@ class Marketsharesekolah_model extends CI_Model
         return $this->db->delete($this->table, array('id_market' => $id));
     }
 
+    // ADMIN DIRECT DATA
+    public function chartSharesekolah() 
+    {
+        $sql = $this->db->query("SELECT 
+                                    sum(qty_simpati + qty_as + qty_loop) AS Telkomsel,
+                                    sum(qty_mentari + qty_im3) AS Indosat,
+                                    sum(qty_xl) AS XL,
+                                    sum(qty_tri) AS Tri,
+                                    sum(qty_smartfrend) AS Smartfrend
+                                FROM tbl_marketshare");
+        return $sql->result();
+    }
+
+    public function chartShareKabupaten() 
+    {
+        $sql = $this->db->query("SELECT 
+                                    kabupaten,
+                                    sum(qty_simpati + qty_as + qty_loop) AS Telkomsel,
+                                    sum(qty_mentari + qty_im3) AS Indosat,
+                                    sum(qty_xl) AS XL,
+                                    sum(qty_tri) AS Tri,
+                                    sum(qty_smartfrend) AS Smartfrend
+                                FROM tbl_marketshare AS m INNER JOIN tbl_sekolah AS s
+                                ON m.npsn = s.npsn GROUP BY s.kabupaten");
+        return $sql->result();
+    }
+
+    public function chartShareKecamatan($kab)
+    {
+        $sql = $this->db->query("SELECT 
+                                    kecamatan,
+                                    sum(qty_simpati + qty_as + qty_loop) AS Telkomsel,
+                                    sum(qty_mentari + qty_im3) AS Indosat,
+                                    sum(qty_xl) AS XL,
+                                    sum(qty_tri) AS Tri,
+                                    sum(qty_smartfrend) AS Smartfrend
+                                FROM tbl_marketshare AS m INNER JOIN tbl_sekolah AS s
+                                ON m.npsn = s.npsn WHERE s.kabupaten = '$kab'
+                                GROUP BY s.kecamatan");
+        return $sql->result();
+    }
+
 }

@@ -239,7 +239,6 @@
 			},
 		});
 		
-
 		var kabupaten = JSON.parse(<?php echo "'" . json_encode($kabupaten) . "'" ?>);
 		// delete kabupaten[0].kabupaten;
 		
@@ -430,9 +429,7 @@
 					}]
 				}
 			}
-		});
-
-		
+		});		
 	</script>
 
 </body>

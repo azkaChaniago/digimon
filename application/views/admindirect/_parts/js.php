@@ -15,7 +15,7 @@
 <!-- Waves Effect Plugin Js -->
 <script src="<?php echo base_url('assets/plugins/node-waves/waves.js') ?>"></script>
 
-<?php if ($this->uri->segment(2) == 'mercent' || $this->uri->segment(2) == 'komunitas' || $this->uri->segment(2) == 'downlinegt') : ?>
+<?php if ($this->uri->segment(2) == 'mercent' || $this->uri->segment(2) == 'komunitas' || $this->uri->segment(2) == 'downlinegt' || $this->uri->segment(2) == 'marketsharesekolah') : ?>
     
     <!-- ChartJs -->
     <!-- <script src="<?php echo base_url('assets/plugins/chartjs/Chart.bundle.js') ?>"></script> -->
@@ -66,8 +66,6 @@
 <!-- Demo Js -->
 <script src="<?php echo base_url('assets/js/demo.js') ?>"></script>
 
-<!-- Pivot JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/c3_renderers.min.js"></script>
 <script>
 function isNumberKey(evt)
 {

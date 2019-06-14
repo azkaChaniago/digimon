@@ -64,11 +64,7 @@
 								<div class="col-md-6">
 									<h2>Downline GT</h2>
 									<div class="clearfix"></div>
-								</div>
-								<div class="col-md-6" style='text-align: right'>							
-									<h2><a href="<?php echo site_url('admindirect/downlinegt/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-									<span>Tambah</span></a></h2>
-								</div> 						
+								</div>		
 							</div>
 						</div>				
 						<div class="body">
