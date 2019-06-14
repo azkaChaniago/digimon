@@ -29,104 +29,93 @@ ob_start();
 <html>
     <head>
         <style>
-            table
-            {
-                border-spacing: 0;
-                /* border: 0.5px solid #000; */
-                /* border-collapse: collapse; */
-            }
-            td, th 
-            {
-                padding:0;
-                border: 0.2px solid #000;   
-            }
-            thead 
-            {
-                display: table-header-group;
-            }
-            tr > th {
-                background-color: #ddd;
-                text-align: center;
-                font-weight: bold;
-            }
-            .ttd > tr > td {
-                border: none;
-            }
+           table {
+            border-spacing: 0;
+            border: 0.2px solid #000;
+          }
+          td, th {
+            padding:0;
+            border: 0.2px solid #000;   
+          }
+          thead {
+            display: table-header-group;
+          }
+          tr > th {
+            background-color: #ddd;
+            text-align: center;
+            font-weight: bold;
+          }
+          .ttd > tr > td {
+            border: none;
+          }
+          .img-cell {
+            border: none;
+            height: 90px;
+          }
+          .no_border_bottom {
+            border: none;
+          }
         </style>
     <head>
     <body>
-        <h2>Laporan Penjualan Harian</h2>
-        <table>
-            <tr style="text-align: center">
-                <th rowspan="2">Tanggal</th>
-                <th rowspan="2">Nama TDC</th>
-                <th rowspan="2">Nama Mercent</th>
-                <th rowspan="2">Nama Petugas</th>
-                <th rowspan="2">Alamat</th>
-                <th colspan="7">MKIOS</th>
-            </tr>
-            <tr style="text-align: center">
-                <th>5K</th>
-                <th>10K</th>
-                <th>20K</th>
-                <th>25K</th>
-                <th>50K</th>
-                <th>100K</th>
-                <th>Mount BULK</th>
-            </tr>
-            <?php foreach($export as $exp) : ?>
+        <h2>Laporan HVC</h2>
+          <?php foreach($export as $exp) : ?>
+          <table>
             <tr>
-                <td><?php echo $exp->tgl_hvc ?></td>
-                <td><?php echo $exp->nama_tdc ?></td>
-                <td><?php echo $exp->nama_mercent ?></td>
-                <td><?php echo $exp->nama_marketing ?></td>
-                <td><?php echo $exp->alamat ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_5k ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_10k ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_20k ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_25k ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_50k ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_100k ?></td>
-                <td style="text-align:right"><?php echo $exp->mount_bulk ?></td>
+              <th colspan="8">Tanggal <?= date('dF Y', strtotime($exp->tgl_hvc)) ?></th>
             </tr>
-            <?php endforeach; ?>
-        </table>
-        <br><br><br>
-        <table>
-            <tr style="text-align: center">
-                <th rowspan="2">Tanggal</th>
-                <th rowspan="2">Nama TDC</th>
-                <th rowspan="2">Nama Mercent</th>
-                <th rowspan="2">Nama Petugas</th>
-                <th rowspan="2">Alamat</th>
-                <th colspan="6">NSB</th>
-            </tr>
-            <tr style="text-align: center">
-                <th>Low</th>
-                <th>Middle</th>
-                <th>High</th>
-                <th>AS</th>
-                <th>Simpati</th>
-                <th>Loop</th>
-            </tr>
-            <?php foreach($export as $exp) : ?>
+            <tr><th colspan="2"></th></tr>
             <tr>
-                <td><?php echo $exp->tgl_hvc ?></td>
-                <td><?php echo $exp->nama_tdc ?></td>
-                <td><?php echo $exp->nama_mercent ?></td>
-                <td><?php echo $exp->nama_marketing ?></td>
-                <td><?php echo $exp->alamat ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_low_nsb ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_middle_nsb ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_high_nsb ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_as_nsb ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_simpati_nsb ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_loop_nsb ?></td>
+              <th>Nama TDC</th>
+              <td><?= $exp->nama_tdc ?></td>
+              <?php
+              $i = 0;
+              if ($exp->foto_kegiatan != null && json_decode($exp->foto_kegiatan) != JSON_ERROR_NONE) :
+                foreach (json_decode($exp->foto_kegiatan) as $im):?>
+                  <?php 
+                  if ($i <= 5) : ?>
+                    <td class="img-cell" rowspan="4"><img src="<?= base_url('upload/hvc/'.$im->file_name) ?>" width="100" style="display:inline;margin:5px" /></td>
+                  <?php else : ?>
+                    <td class="img-cell" rowspan="4"><img src="<?= base_url('upload/hvc/default.png') ?>" width="100" style="display:inline;margin:5px" /></td>  
+                  <?php endif;
+                  $i++;
+                endforeach; 
+              else : ?>
+                <td class="img-cell" rowspan="4"><img src="<?= base_url('upload/hvc/default.png') ?>" width="100" style="display:inline;margin:5px" /></td>
+              <?php endif;?>  
+            </tr>           
+            <tr>
+              <th>Nama Mercent</th>
+              <td><?= $exp->nama_mercent ?></td>
             </tr>
-            <?php endforeach; ?>
-        </table>
+            <tr>
+              <th>Nama Petugas</th>
+              <td><?= $exp->nama_marketing ?></td>
+            </tr>
+            <tr>
+              <th>Alamat</th>
+              <td><?= $exp->alamat ?></td>
+            </tr>  
+            <tr>
+              <th rowspan="2">MKIOS</th>
+              <th>5K</th><th>10K</th><th>20K</th><th>25K</th><th>50K</th><th>100K</th><th>Mount BULK</th>
+            </tr>
+            <tr>
+              <td style="text-align:right"><?= $exp->qty_5k ?></td> <td style="text-align:right"><?= $exp->qty_10k ?></td> <td style="text-align:right"><?= $exp->qty_20k ?></td> <td style="text-align:right"><?= $exp->qty_25k ?></td> <td style="text-align:right"><?= $exp->qty_50k ?></td> <td style="text-align:right"><?= $exp->qty_100k ?></td> <td style="text-align:right"><?= $exp->mount_bulk ?></td>
+            </tr>
+            <tr>
+              <th rowspan="2">NSB</th>
+              <th>Low</th> <th>Middle</th> <th>High</th> <th>AS</th> <th>Simpati</th> <th>Loop</th> <th rowspan="2"></th>
+            </tr>
+            <tr>
+            <td style="text-align:right"><?= $exp->qty_low_nsb ?></td> <td style="text-align:right"><?= $exp->qty_middle_nsb ?></td> <td style="text-align:right"><?= $exp->qty_high_nsb ?></td> <td style="text-align:right"><?= $exp->qty_as_nsb ?></td> <td style="text-align:right"><?= $exp->qty_simpati_nsb ?></td> <td style="text-align:right"><?= $exp->qty_loop_nsb ?></td>
+            </tr>
+          </table>
+          <br><br>
+        <?php endforeach; ?>
+        
         <br><br><br>
-        <table class="ttd">
+        <table class="ttd" style="border:none !important">
             <tr><td colspan="7"></td><td colspan="2">Mengetahui,</td></tr>
             <tr><td colspan="7" height="50"></td><td colspan="2" height="50">Bendahara TDC Kedaton</td></tr>
             <tr><td colspan="7"></td><td colspan="2"><?php echo $user; ?></td></tr>

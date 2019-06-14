@@ -29,53 +29,79 @@ ob_start();
 <html>
     <head>
         <style>
-            table
-            {
-                border-spacing: 0;
-                /* border: 0.5px solid #000; */
-                /* border-collapse: collapse; */
+            table {
+            border-spacing: 0;
+            border: 0.2px solid #000;
+            /* border: 0.5px solid #000; */
+            /* border-collapse: collapse; */
             }
-            td, th 
-            {
-                padding:0;
-                border: 0.2px solid #000;   
+            td, th {
+            padding:0;
+            border: 0.2px solid #000;   
             }
-            thead 
-            {
-                display: table-header-group;
+            thead {
+            display: table-header-group;
             }
             tr > th {
-                background-color: #ddd;
-                text-align: center;
-                font-weight: bold;
+            background-color: #ddd;
+            text-align: center;
+            font-weight: bold;
             }
             .ttd > tr > td {
-                border: none;
+            border: none;
+            }
+            .img-cell {
+            border: none;
+            height: 90px;
+            }
+            .no_border_bottom {
+            border: none;
             }
         </style>
     <head>
     <body>
         <h2>Laporan Penjualan Harian</h2>
         <table>
-            <tr style="text-align: center">
-                <th>Nama TDC</th>
-                <th>Divisi</th>
-                <th>Tanggal</th>
-                <th>Nama Marketing</th>
-                <th>Lokasi Saleling</th>
-            </tr>
             <?php foreach($export as $exp) : ?>
             <tr>
-                <td><?php echo $exp->nama_tdc ?></td>
-                <td><?php echo $exp->divisi ?></td>
-                <td><?php echo $exp->tanggal ?></td>
-                <td><?php echo $exp->nama_marketing ?></td>
-                <td><?php echo $exp->lokasi_saleling ?></td>
+              <th colspan="7">Tanggal <?php echo $exp->tanggal ?></th>
+            </tr>
+            <tr><th colspan="2"></th></tr>
+            <tr>
+              <th>Nama TDC</th>
+              <td><?php echo $exp->nama_tdc ?></td>
+              <?php
+              $i = 0;
+              if ($exp->foto_kegiatan != null && json_decode($exp->foto_kegiatan) != JSON_ERROR_NONE) :
+                foreach (json_decode($exp->foto_kegiatan) as $im):?>
+                  <?php 
+                  if ($i <= 5) : ?>
+                    <td class="img-cell" rowspan="4"><img src="<?= base_url('upload/saleling/'.$im->file_name) ?>" width="100" style="display:inline;margin:5px" /></td>
+                  <?php else : ?>
+                    <td class="img-cell" rowspan="4"><img src="<?= base_url('upload/saleling/default.png') ?>" width="100" style="display:inline;margin:5px" /></td>  
+                  <?php endif;
+                  $i++;
+                endforeach; 
+              else : ?>
+                <td class="img-cell" rowspan="4"><img src="<?= base_url('upload/saleling/default.png') ?>" width="100" style="display:inline;margin:5px" /></td>
+              <?php endif;?>
+            </tr>
+            <tr>
+              <th>Divisi</th>
+              <td><?php echo $exp->divisi ?></td>
+            </tr>              
+            <tr>
+              <th>Nama Marketing</th>
+              <td><?php echo $exp->nama_marketing ?></td>
+            </tr>
+            <tr>
+              <th>Lokasi Saleling</th>
+              <td><?php echo $exp->lokasi_saleling ?></td>
             </tr>
             <?php endforeach; ?>
         </table>
         <br><br><br>
-        <table class="ttd">
+        <table class="ttd" style="border:none !important">
             <tr><td colspan="7"></td><td colspan="2">Mengetahui,</td></tr>
             <tr><td colspan="7" height="50"></td><td colspan="2" height="50">Bendahara TDC Kedaton</td></tr>
             <tr><td colspan="7"></td><td colspan="2"><?php echo $user; ?></td></tr>

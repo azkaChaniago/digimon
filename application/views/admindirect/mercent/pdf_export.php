@@ -29,67 +29,83 @@ ob_start();
 <html>
     <head>
         <style>
-            table
-            {
-                border-spacing: 0;
-                /* border: 0.5px solid #000; */
-                /* border-collapse: collapse; */
-            }
-            td, th 
-            {
-                padding:0;
-                border: 0.2px solid #000;   
-            }
-            thead 
-            {
-                display: table-header-group;
-            }
-            tr > th {
-                background-color: #ddd;
-                text-align: center;
-                font-weight: bold;
-            }
-            .ttd > tr > td {
-                border: none;
-            }
+          table {
+            border-spacing: 0;
+            border: 0.2px solid #000;
+          }
+          td, th {
+            padding:0;
+            border: 0.2px solid #000;   
+          }
+          thead {
+            display: table-header-group;
+          }
+          tr > th {
+            background-color: #ddd;
+            text-align: center;
+            font-weight: bold;
+          }
+          .ttd > tr > td {
+            border: none;
+          }
+          .img-cell {
+            border: none;
+            height: 90px;
+          }
+          .no_border_bottom {
+            border: none;
+          }
         </style>
     <head>
     <body>
         <h2>Laporan Mercent</h2>
-        <table>
-            <tr style="text-align: center">
-                <th>Tanggal</th>
-                <th>Nama TDC</th>
-                <th>Nama Marketing</th>
-                <th>Nama Mercent</th>
-                <th>Nama Pic</th>
-                <th>No HP Pic</th>
-                <th>No KTP</th>
-                <th>NPWP</th>
-                <th>Longtitude</th>
-                <th>Latitude</th>
-                <th>Alamat</th>
-                <th>Produk diajukan</th>
-            </tr>
-            <?php foreach($export as $exp) : ?>
+        <?php foreach($export as $exp) : ?>
+          <table>
             <tr>
-                <td><?php echo $exp->tanggal ?></td>
-                <td><?php echo $exp->nama_tdc ?></td>
-                <td><?php echo $exp->nama_marketing ?></td>
-                <td><?php echo $exp->nama_mercent ?></td>
-                <td><?php echo $exp->nama_pic ?></td>
-                <td style="text-align:right"><?php echo $exp->no_hp_pic ?></td>
-                <td style="text-align:right"><?php echo $exp->no_ktp ?></td>
-                <td style="text-align:right"><?php echo $exp->npwp ?></td>
-                <td style="text-align:right"><?php echo $exp->longtitude ?></td>
-                <td style="text-align:right"><?php echo $exp->latitude ?></td>
-                <td><?php echo $exp->alamat ?></td>
-                <td><?php echo $exp->produk_diajukan ?></td>
+              <th>Tanggal</th><td><?php echo $exp->tanggal ?></td>
+              <th>No HP Pic</th><td style="text-align:right"><?php echo $exp->no_hp_pic ?></td>
+              <th colspan="5">Gambar</th>
             </tr>
-            <?php endforeach; ?>
-        </table>
+            <tr>
+              <th>Nama TDC</th><td><?php echo $exp->nama_tdc ?></td>
+              <th>No KTP</th><td style="text-align:right"><?php echo $exp->no_ktp ?></td>
+            </tr>
+            <tr>
+              <th>Nama Marketing</th><td><?php echo $exp->nama_marketing ?></td>
+              <th>NPWP</th><td style="text-align:right"><?php echo $exp->npwp ?></td>
+              <?php
+              $i = 0;
+              if ($exp->foto_mercent != null && json_decode($exp->foto_mercent) != JSON_ERROR_NONE) :
+                foreach (json_decode($exp->foto_mercent) as $im):?>
+                  <?php 
+                  if ($i <= 5) : ?>
+                    <td class="img-cell" rowspan="4"><img src="<?= base_url('upload/mercent/'.$im->file_name) ?>" width="100" style="display:inline;margin:5px" /></td>
+                  <?php else : ?>
+                    <td class="img-cell" rowspan="4"><img src="<?= base_url('upload/mercent/default.png') ?>" width="100" style="display:inline;margin:5px" /></td>  
+                  <?php endif;
+                  $i++;
+                endforeach; 
+              else : ?>
+                <td class="img-cell" rowspan="4"><img src="<?= base_url('upload/mercent/default.png') ?>" width="100" style="display:inline;margin:5px" /></td>
+              <?php endif;?>
+            </tr>
+            <tr>
+              <th>Nama Mercent</th><td><?php echo $exp->nama_mercent ?></td>
+              <th>Longtitude</th><td style="text-align:right"><?php echo $exp->longtitude ?></td>
+            </tr>
+            <tr>
+              <th>Nama Pic</th><td><?php echo $exp->nama_pic ?></td>
+              <th>Latitude</th><td style="text-align:right"><?php echo $exp->latitude ?></td>
+            </tr>
+            <tr>
+              <th>Alamat</th><td><?php echo $exp->alamat ?></td>
+              <th>Produk diajukan</th><td><?php echo $exp->produk_diajukan ?></td>
+            </tr>
+          </table>
+          <br><br>
+        <?php endforeach; ?>
         <br><br><br>
-        <table class="ttd">
+        <table class="ttd" style="border:none !important">
             <tr><td colspan="7"></td><td colspan="2">Mengetahui,</td></tr>
             <tr><td colspan="7" height="50"></td><td colspan="2" height="50">Bendahara TDC Kedaton</td></tr>
             <tr><td colspan="7"></td><td colspan="2"><?php echo $user; ?></td></tr>
