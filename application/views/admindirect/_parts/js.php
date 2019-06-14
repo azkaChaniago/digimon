@@ -66,6 +66,8 @@
 <!-- Demo Js -->
 <script src="<?php echo base_url('assets/js/demo.js') ?>"></script>
 
+<!-- Pivot JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/c3_renderers.min.js"></script>
 <script>
 function isNumberKey(evt)
 {
