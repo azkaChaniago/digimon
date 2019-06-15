@@ -62,7 +62,11 @@
 
 				<div class="body">
 					<div class="table-responsive">
-						<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+						<!-- <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+							<thead><tr id="field"></tr></thead>
+							<tbody id="records"></tbody>
+						</table> -->
+						<!-- <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
 							<thead>
 								<tr>
 									<th>NAMA TDC</th>
@@ -88,19 +92,58 @@
 										<?php echo $ev->lokasi_penjualan ?>
 									</td>
 									<td width='180' class="text-center" >
-										<!-- <a href="<?php echo site_url('admindirect/event/edit/'.$ev->id_event) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('admindirect/event/remove/'.$ev->id_event) ?>')" href="#!"><i class="material-icons">delete</i></a> -->
 										<a href="<?php echo site_url('admindirect/event/detail/'.$ev->id_event) ?>"><i class="material-icons">description</i></a>	
 									</td>
 								</tr>
 								<?php endforeach; ?>
+							</tbody>
+						</table> -->
 
+						<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+							<thead>
+								<tr>
+									<th>kode_tdc</th>
+									<th>tanggal</th>
+									<th>bulan</th>
+									<th>kd_marketing</th>
+									<th>id_outlet</th>
+									<th>nama_marketing</th>
+									<th>nama_outlet</th>
+									<th>sum_of_as</th>
+									<th>sum_of_simpati</th>
+									<th>sum_of_loop</th>
+									<th>sum_of_nsb</th>
+									<th>sum_of_mkios_reguler</th>
+									<th>sum_of_mkios_bulk</th>
+									<th>sum_of_gt_pulsa</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach ($pivot as $rv): ?>
+								<tr>
+									<th><?= $rv->kode_tdc ?></th>
+									<td><?= $rv->tanggal ?></td>
+									<td><?= $rv->bulan ?></td>
+									<td><?= $rv->kd_marketing ?></td>
+									<td><?= $rv->id_outlet ?></td>
+									<td><?= $rv->nama_marketing ?></td>
+									<td><?= $rv->nama_outlet ?></td>
+									<td><?= $rv->sum_of_as ?></td>
+									<td><?= $rv->sum_of_simpati ?></td>
+									<td><?= $rv->sum_of_loop ?></td>
+									<td><?= $rv->sum_of_nsb ?></td>
+									<td><?= $rv->sum_of_mkios_reguler ?></td>
+									<td><?= $rv->sum_of_mkios_bulk ?></td>
+									<td><?= $rv->sum_of_gt_pulsa ?></td>
+								</tr>
+								<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>			
 			</div>
+
 
 		</div>
 	</section>
@@ -116,8 +159,42 @@
 			$('#btn-delete').attr('href', url);
 			$('#deleteModal').modal();
 		}
+
+		// const show_hide_column = (col_no, do_show) => {
+		// 	let tbl = document.getElementById('id_of_table');
+		// 	let col = tbl.getElementsByTagName('col')[col_no];
+		// 	console.log(do_show)
+		// 	if (col) {
+		// 		col.style.visibility = do_show ? "" : "collapse";
+		// 	}
+		// }
+
+		// show_hide_column(0, false);
+
+		const data = JSON.parse('<?= ($field) ?>');
+		const field = Object.keys(data[0]).map( k => k.replace(/_/g, ' ').toUpperCase());
+		
+		let head = '';
+		let rec = '';
+		// field.forEach( k => {
+		// 	head += `<th>${k}</th>`;
+		// });
+		// data.forEach( (item, key) => {
+		// 	rec += `<tr>`;
+		// 	console.log(Object.keys(item));
+		// 	Object.values(item).forEach(i => {
+		// 		rec += `<td>${i}</td>`;
+		// 	})
+		// 	rec += `</tr>`;
+		// })
+		// document.getElementById('field').innerHTML = head;
+		// document.getElementById('records').innerHTML = rec;
+		
 	</script>
 
 </body>
 
 </html>
+
+
+

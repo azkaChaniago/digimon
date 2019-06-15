@@ -44,70 +44,70 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="col-md-6">
-				<div class="card">
-					<div class="header">
-						<div class="text-center"><h2>Chart Marketshare Sekolah</h2></div>
-					</div>
-					<div class="body">
-						<canvas id="cluster" width="500" height="500"></canvas>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="header">
+							<div class="text-center"><h2>Chart Marketshare Sekolah</h2></div>
+						</div>
+						<div class="body">
+							<canvas id="cluster" width="500" height="500"></canvas>
+						</div>
 					</div>
 				</div>
-			</div>
-			<!-- DataTables -->
-			<div class="col-md-6">
-				<div class="card">
-					<div class="header">
-						<div class="row">
-							<div class="col-md-6">
-								<h2>Marketshare Sekolah</h2>
-								<div class="clearfix"></div>
+				<!-- DataTables -->
+				<div class="col-md-6">
+					<div class="card">
+						<div class="header">
+							<div class="row">
+								<div class="col-md-6">
+									<h2>Marketshare Sekolah</h2>
+									<div class="clearfix"></div>
+								</div>
+								<div class="col-md-6" style='text-align: right'>							
+									<!-- <h2><a href="<?php echo site_url('admindirect/marketsharesekolah/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+									<span>Tambah</span></a></h2> -->
+								</div> 						
 							</div>
-							<div class="col-md-6" style='text-align: right'>							
-								<!-- <h2><a href="<?php echo site_url('admindirect/marketsharesekolah/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-								<span>Tambah</span></a></h2> -->
-							</div> 						
 						</div>
-					</div>
 
-					<div class="body">
-						<div class="table-responsive">
-							<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-								<thead>
-									<tr>
-										<th>Nama TDC</th>
-										<th>Nama Sekolah</th>
-										<th>Tanggal Marketshare</th>
-										<th>Aksi</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($marketshare as $ms): ?>
-									<tr>
-										<td>
-											<?php echo $ms->nama_tdc ?>
-										</td>
-										<td>
-											<?php echo $ms->nama_sekolah ?>	
-										</td>
-										<td class="small">
-											<?php echo $ms->tgl_marketshare ?>
-										</td>
-										<td width='180' class="text-center" >
-											<!-- <a href="<?php echo site_url('admindirect/marketsharesekolah/edit/'.$ms->id_market) ?>"><i class="material-icons">edit</i></a>
-											<a onclick="deleteConfirm('<?php echo site_url('admindirect/marketsharesekolah/remove/'.$ms->id_market) ?>')" href="#!"><i class="material-icons">delete</i></a> -->
-											<a href="<?php echo site_url('admindirect/marketsharesekolah/detail/'.$ms->id_market) ?>"><i class="material-icons">description</i></a>	
-										</td>
-									</tr>
-									<?php endforeach; ?>
+						<div class="body">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+									<thead>
+										<tr>
+											<th>Nama TDC</th>
+											<th>Nama Sekolah</th>
+											<th>Tanggal Marketshare</th>
+											<th>Aksi</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php foreach ($marketshare as $ms): ?>
+										<tr>
+											<td>
+												<?php echo $ms->nama_tdc ?>
+											</td>
+											<td>
+												<?php echo $ms->nama_sekolah ?>	
+											</td>
+											<td class="small">
+												<?php echo $ms->tgl_marketshare ?>
+											</td>
+											<td width='180' class="text-center" >
+												<!-- <a href="<?php echo site_url('admindirect/marketsharesekolah/edit/'.$ms->id_market) ?>"><i class="material-icons">edit</i></a>
+												<a onclick="deleteConfirm('<?php echo site_url('admindirect/marketsharesekolah/remove/'.$ms->id_market) ?>')" href="#!"><i class="material-icons">delete</i></a> -->
+												<a href="<?php echo site_url('admindirect/marketsharesekolah/detail/'.$ms->id_market) ?>"><i class="material-icons">description</i></a>	
+											</td>
+										</tr>
+										<?php endforeach; ?>
 
-								</tbody>
-							</table>
+									</tbody>
+								</table>
+							</div>
 						</div>
-					</div>
-				</div>			
-			</div>
+					</div>			
+				</div>
 			</div>
 
 			<div class="row">
@@ -132,6 +132,7 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</section>
 	<!-- /#wrapper -->
