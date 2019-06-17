@@ -135,7 +135,7 @@ var methods = {
   },
   // Filters
   build_filter_list : function(){
-    var select = '<select id="select-constructor">'
+    var select = '<select id="select-constructor" class="form-control show-tick">'
     select += '<option></option>'
     $.each(pivot.fields().filterable, function(index, field){
       select += '<option>' + field.name + '</option>';
@@ -195,7 +195,7 @@ var methods = {
     })
   },
   build_select_filter_field : function(field, selectedValue){
-    var snip  = '<select class="filter span3" '+(field.filterType==='multiselect'?'multiple':'')+' data-field="' + field.name + '">' +
+    var snip  = '<select class="filter span3 form-control show-tick" '+(field.filterType==='multiselect'?'multiple':'')+' data-field="' + field.name + '">' +
                 '<option></option>',
         orderedValues = [];
 

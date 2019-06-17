@@ -45,17 +45,28 @@
 				</div>
 				<div class="body">
 				<div class="subnav">
-					<div class="btn-group" role="group">
+					<div class="btn-group">
 						<div class="btn-group" role="group">
-							<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Filter Fields
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu stop-propagation"><div id="filter-list"></div></ul>
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Filter Fields
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu stop-propagation"><div id="filter-list"></div></ul>
+							</div>
+						</div>
+						<div class="btn-group" role="group">
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Row Label Fields
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu stop-propagation"><div id="row-label-fields"></div></ul>
+							</div>
 						</div>
 					</div>
 					<ul class="nav nav-pills">
-						<li class="dropdown">
+						<!-- <li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 							Filter Fields
 							<b class="caret"></b>
@@ -63,8 +74,8 @@
 						<ul class="dropdown-menu stop-propagation" style="overflow:auto;max-height:450px;padding:10px;">
 							<div id="filter-list"></div>
 						</ul>
-						</li>
-						<li class="dropdown">
+						</li> -->
+						<!-- <li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 							Row Label Fields
 							<b class="caret"></b>
@@ -72,7 +83,7 @@
 						<ul class="dropdown-menu stop-propagation" style="overflow:auto;max-height:450px;padding:10px;">
 							<div id="row-label-fields"></div>
 						</ul>
-						</li>
+						</li -->>
 						<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 							Column Label Fields
