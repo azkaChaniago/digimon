@@ -135,7 +135,7 @@ var methods = {
   },
   // Filters
   build_filter_list : function(){
-    var select = '<select id="select-constructor">'
+    var select = '<select id="select-constructor" class="form-control show-tick">'
     select += '<option></option>'
     $.each(pivot.fields().filterable, function(index, field){
       select += '<option>' + field.name + '</option>';
@@ -169,7 +169,7 @@ var methods = {
     else
       snip = methods.build_select_filter_field(field, selectedValue);
 
-    remove_filter = '<a class="remove-filter-field" style="cursor:pointer;">(X)</a></label>';
+    remove_filter = '<a class="remove-filter-field" style="cursor:pointer;"><i class="material-icons">close</i></a></label>';
     $('#filter-list').append('<div><hr/><label>' + field.name + remove_filter + snip + '</div>');
 
     //Optional Chosen/Select2 integration

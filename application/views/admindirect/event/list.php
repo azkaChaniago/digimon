@@ -45,6 +45,15 @@
 				</div>
 				<div class="body">
 				<div class="subnav">
+					<div class="btn-group" role="group">
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Filter Fields
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu stop-propagation"><div id="filter-list"></div></ul>
+						</div>
+					</div>
 					<ul class="nav nav-pills">
 						<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -217,17 +226,6 @@
 			$('#deleteModal').modal();
 		}
 
-		// const show_hide_column = (col_no, do_show) => {
-		// 	let tbl = document.getElementById('id_of_table');
-		// 	let col = tbl.getElementsByTagName('col')[col_no];
-		// 	console.log(do_show)
-		// 	if (col) {
-		// 		col.style.visibility = do_show ? "" : "collapse";
-		// 	}
-		// }
-
-		// show_hide_column(0, false);
-
 		const data = <?= $field ?>;
 		const field = [Object.keys(data[0]).map( k => k.replace(/_/g, ' ').toUpperCase())];
 
@@ -235,23 +233,7 @@
 		
 		let dataArr = field;
 		let dataStr = JSON.stringify(dataArr);
-		console.log(dataStr);
-		// let head = '';
-		// let rec = '';
-		// field.forEach( k => {
-		// 	head += `<th>${k}</th>`;
-		// });
-		// data.forEach( (item, key) => {
-		// 	rec += `<tr>`;
-		// 	console.log(Object.keys(item));
-		// 	Object.values(item).forEach(i => {
-		// 		rec += `<td>${i}</td>`;
-		// 	})
-		// 	rec += `</tr>`;
-		// })
-		// document.getElementById('field').innerHTML = head;
-		// document.getElementById('records').innerHTML = rec;
-		
+		console.log(dataStr);		
 
 		function ageBucket(row, field){
 		var age = Math.abs(((new Date().getTime()) - row[field.dataSource])/1000/60/60/24);
@@ -318,20 +300,20 @@
 
 			// prevent dropdown from closing after selection
 			$('.stop-propagation').click(function(event){
-			event.stopPropagation();
+				event.stopPropagation();
 			});
 
 			// **Sexy** In your console type pivot.config() to view your current internal structure (the full initialize object).  Pass it to setup and you have a canned report.
 			$('#ar-aged-balance').click(function(event){
-			$('#pivot-demo').pivot_display('reprocess_display', {rowLabels:["employer"], columnLabels:["age_bucket"], summaries:["balance"]})
+				$('#pivot-demo').pivot_display('reprocess_display', {rowLabels:["employer"], columnLabels:["age_bucket"], summaries:["balance"]})
 			});
 
 			$('#acme-detail-report').click(function(event){
-			$('#pivot-demo').pivot_display('reprocess_display', {filters:{"employer":"Acme Corp"},rowLabels:["city","last_name","first_name","state","invoice_date"]})
+				$('#pivot-demo').pivot_display('reprocess_display', {filters:{"employer":"Acme Corp"},rowLabels:["city","last_name","first_name","state","invoice_date"]})
 			});
 
 			$('#miami-invoice-detail').click(function(event){
-			$('#pivot-demo').pivot_display('reprocess_display', {"filters":{"city":"Miami"},"rowLabels":["last_name","first_name","employer","invoice_date"],"summaries":["payment_amount"]})
+				$('#pivot-demo').pivot_display('reprocess_display', {"filters":{"city":"Miami"},"rowLabels":["last_name","first_name","employer","invoice_date"],"summaries":["payment_amount"]})
 			});
 		});
 	</script>

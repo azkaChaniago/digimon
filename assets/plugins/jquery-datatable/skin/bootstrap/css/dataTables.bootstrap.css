@@ -163,3 +163,28 @@ div.dataTables_scrollHead table.table-bordered {
 .dataTables_wrapper.form-inline > div.row {
   padding: 15px 30px;
 }
+
+.dataTables_paginate.paging_bootstrap.pagination > ul {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  list-style: none;
+}
+
+.dataTables_paginate.paging_bootstrap.pagination > ul > li {
+  display: inline;
+}
+
+.dataTables_paginate.paging_bootstrap.pagination > ul > li.active > a {
+  background-color: #2196F3;
+  
+  padding: 6px 12px;
+  margin: 2px;
+  line-height: 1.42857143;
+  color: #fff;
+  text-decoration: none;
+}
+
+.prev {
+  display: inline;
+}
