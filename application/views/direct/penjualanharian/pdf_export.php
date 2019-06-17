@@ -29,140 +29,105 @@ ob_start();
 <html>
     <head>
         <style>
-            table
-            {
-                border-spacing: 0;
-                /* border: 0.5px solid #000; */
-                /* border-collapse: collapse; */
-            }
-            td, th 
-            {
-                padding:0;
-                border: 0.2px solid #000;   
-            }
-            thead 
-            {
-                display: table-header-group;
-            }
-            tr > th {
-                background-color: #ddd;
-                text-align: center;
-                font-weight: bold;
-            }
-            .ttd > tr > td {
-                border: none;
-            }
+        table {
+          border-spacing: 0;
+          border: 0.2px solid #000;
+          /* border: 0.5px solid #000; */
+          /* border-collapse: collapse; */
+        }
+        td, th {
+          padding:0;
+          border: 0.2px solid #000;   
+        }
+        thead {
+          display: table-header-group;
+        }
+        tr > th {
+          background-color: #ddd;
+          text-align: center;
+          font-weight: bold;
+        }
+        .ttd > tr > td {
+          border: none;
+        }
+        .img-cell {
+          border: none;
+          height: 90px;
+        }
+        .no_border_bottom {
+          border: none;
+        }
         </style>
     <head>
     <body>
         <h2>Laporan Penjualan Harian</h2>
+        <?php foreach($export as $exp) : ?>
         <table>
-            <tr style="text-align: center">
-                <th rowspan="2">Tanggal Penjualan</th>
-                <th rowspan="2">Nama TDC</th>
-                <th rowspan="2">Divisi</th>
-                <th rowspan="2">Nama Marketing</th>
-                <th rowspan="2">Lokasi Penjualan</th>
-                <th colspan="8">MKIOS</th>
-            </tr>
-            <tr style="text-align: center">
-                <th>5K</th>
-                <th>10K</th>
-                <th>20K</th>
-                <th>25K</th>
-                <th>50K</th>
-                <th>100K</th>
-                <th>Mount BULK</th>
-                <th>Mount Legacy</th>
-            </tr>
-            <?php foreach($export as $exp) : ?>
-            <tr>
-                <td><?php echo $exp->tgl_penjualan ?></td>
-                <td><?php echo $exp->nama_tdc ?></td>
-                <td><?php echo $exp->divisi ?></td>
-                <td><?php echo $exp->nama_marketing ?></td>
-                <td><?php echo $exp->lokasi_penjualan ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_5k ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_10k ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_20k ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_25k ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_50k ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_100k ?></td>
-                <td style="text-align:right"><?php echo $exp->mount_bulk ?></td>
-                <td style="text-align:right"><?php echo $exp->mount_legacy ?></td>
-            </tr>
-            <?php endforeach; ?>
+          <tr>
+            <th colspan="9">Laporan Penjualan Harian <?= date('d F Y', strtotime($exp->tgl_penjualan)) ?></th>
+          </tr>
+          <tr>
+            <th colspan="2"></th>
+            <td colspan="7" class="no_border_bottom"></td>
+          </tr>
+          <tr>
+            <th>Nama TDC</th>
+            <td><?= $exp->nama_tdc ?></td>
+            <?php
+            $i = 0;
+            if ($exp->foto_kegiatan != null && json_decode($exp->foto_kegiatan) != JSON_ERROR_NONE) :
+              foreach (json_decode($exp->foto_kegiatan) as $im):?>
+                <?php 
+                if ($i <= 5) : ?>
+                  <td class="img-cell" rowspan="4"><img src="<?= base_url('upload/penjualanharian/'.$im->file_name) ?>" width="100" style="display:inline;margin:5px" /></td>
+                <?php else : ?>
+                  <td class="img-cell" rowspan="4"><img src="<?= base_url('upload/penjualanharian/default.png') ?>" width="100" style="display:inline;margin:5px" /></td>  
+                <?php endif;
+                $i++;
+              endforeach; 
+            else : ?>
+              <td class="img-cell" rowspan="4"><img src="<?= base_url('upload/penjualanharian/default.png') ?>" width="100" style="display:inline;margin:5px" /></td>
+            <?php endif;?>          
+          </tr>
+          <tr>
+            <th>Divisi</th>
+            <td><?= $exp->divisi ?></td>
+          </tr>
+          <tr>
+            <th>Nama Marketing</th>
+            <td><?= $exp->nama_marketing ?></td>
+          </tr>
+          <tr>
+            <th>Lokasi Penjualan</th>
+            <td><?= $exp->lokasi_penjualan ?></td>
+          </tr>
+          <tr>
+            <th rowspan="2">MKIOS</th>
+            <th>5K</th><th>10K</th><th>20K</th><th>25K</th><th>50K</th><th>100K</th><th>Bulk</th><th>Legacy</th>
+          </tr>
+          <tr>
+            <td style="text-align:right"><?= $exp->qty_5k ?></td><td style="text-align:right"><?= $exp->qty_10k ?></td><td style="text-align:right"><?= $exp->qty_20k ?></td><td style="text-align:right"><?= $exp->qty_25k ?></td><td style="text-align:right"><?= $exp->qty_50k ?></td><td style="text-align:right"><?= $exp->qty_100k ?></td><td style="text-align:right"><?= $exp->mount_bulk ?></td><td style="text-align:right"><?= $exp->mount_legacy ?></td>
+          </tr>
+          <tr>
+            <th rowspan="2">Financial Teknologi</th>
+            <th>Paket Max Digital</th> <th>No MDSN Digital</th> <th>Price Digital</th> <th>MDSN Tcash</th> <th>Cashin Tcash</th> <th>Status Tcash</th><th colspan="2"></th>
+          </tr>
+          <tr>
+          <td style="text-align:right"><?php echo $exp->paket_max_digital ?></td> <td style="text-align:right"><?php echo $exp->no_msdn_digital ?></td> <td style="text-align:right"><?php echo $exp->price_digital ?></td> <td style="text-align:right"><?php echo $exp->msdn_tcash ?></td> <td style="text-align:right"><?php echo $exp->cashin_tcash ?></td> <td style="text-align:right"><?php echo $exp->status_tcash ?></td><td colspan="2"></td>
+          </tr>
+          <tr>
+            <th rowspan="2">NSB</th>
+            <th>Low</th><th>Middle</th><th>High</th><th>Simpati</th><th>AS</th><th>LOOP</th><th colspan="2"></th>
+          </tr>
+          <tr>
+            <td style="text-align:right"><?= $exp->qty_low_nsb ?></td><td style="text-align:right"><?= $exp->qty_middle_nsb ?></td><td style="text-align:right"><?= $exp->qty_high_nsb ?></td><td style="text-align:right"><?= $exp->qty_simpati_nsb ?></td><td style="text-align:right"><?= $exp->qty_as_nsb ?></td><td style="text-align:right"><?= $exp->qty_loop_nsb ?></td><td colspan="2"></td>
+          </tr>
         </table>
         <br><br><br>
-        <table>
-            <tr style="text-align: center">
-                <th rowspan="2">Tanggal Penjualan</th>
-                <th rowspan="2">Nama TDC</th>
-                <th rowspan="2">Divisi</th>
-                <th rowspan="2">Nama Marketing</th>
-                <th rowspan="2">Lokasi Penjualan</th>
-                <th colspan="6">Financial Teknologi</th>
-            </tr>
-            <tr style="text-align: center">
-                <th>Paket Max Digital</th>
-                <th>No MDSN Digital</th>
-                <th>Price Digital</th>
-                <th>MDSN Tcash</th>
-                <th>Cashin Tcash</th>
-                <th>Status Tcash</th>
-            </tr>
-            <?php foreach($export as $exp) : ?>
-            <tr>
-                <td><?php echo $exp->tgl_penjualan ?></td>
-                <td><?php echo $exp->nama_tdc ?></td>
-                <td><?php echo $exp->divisi ?></td>
-                <td><?php echo $exp->nama_marketing ?></td>
-                <td><?php echo $exp->lokasi_penjualan ?></td>
-                <td style="text-align:right"><?php echo $exp->paket_max_digital ?></td>
-                <td style="text-align:right"><?php echo $exp->no_msdn_digital ?></td>
-                <td style="text-align:right"><?php echo $exp->price_digital ?></td>
-                <td style="text-align:right"><?php echo $exp->msdn_tcash ?></td>
-                <td style="text-align:right"><?php echo $exp->cashin_tcash ?></td>
-                <td style="text-align:right"><?php echo $exp->status_tcash ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
+        <?php endforeach; ?>
+       
         <br><br><br>
-        <table>
-            <tr style="text-align: center">
-                <th rowspan="2">Tanggal Penjualan</th>
-                <th rowspan="2">Nama TDC</th>
-                <th rowspan="2">Divisi</th>
-                <th rowspan="2">Nama Marketing</th>
-                <th rowspan="2">Lokasi Penjualan</th>
-                <th colspan="6">NSB</th>
-            </tr>
-            <tr style="text-align: center">
-                <th>Low</th>
-                <th>Middle</th>
-                <th>High</th>
-                <th>AS</th>
-                <th>Simpati</th>
-                <th>Loop</th>
-            </tr>
-            <?php foreach($export as $exp) : ?>
-            <tr>
-                <td><?php echo $exp->tgl_penjualan ?></td>
-                <td><?php echo $exp->nama_tdc ?></td>
-                <td><?php echo $exp->divisi ?></td>
-                <td><?php echo $exp->nama_marketing ?></td>
-                <td><?php echo $exp->lokasi_penjualan ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_low_nsb ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_middle_nsb ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_high_nsb ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_as_nsb ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_simpati_nsb ?></td>
-                <td style="text-align:right"><?php echo $exp->qty_loop_nsb ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <br><br><br>
-        <table class="ttd">
+        <table class="ttd" style="border:none !important">
             <tr><td colspan="7"></td><td colspan="2">Mengetahui,</td></tr>
             <tr><td colspan="7" height="50"></td><td colspan="2" height="50">Bendahara TDC Kedaton</td></tr>
             <tr><td colspan="7"></td><td colspan="2"><?php echo $user; ?></td></tr>

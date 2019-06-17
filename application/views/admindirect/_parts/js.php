@@ -58,13 +58,33 @@
 
 <!-- Custom Js -->
 <script src="<?php echo base_url('assets/js/admin.js') ?>"></script>
-<script src="<?php echo base_url('assets/js/pages/tables/jquery-datatable.js') ?>"></script>
+<!-- <script src="<?php echo base_url('assets/js/pages/tables/jquery-datatable.js') ?>"></script> -->
 <script src="<?php echo base_url('assets/js/pages/forms/form-validation.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/pages/forms/basic-form-elements.js') ?>"></script>
 <!-- <script src="<?php echo base_url('assets/js/pages/forms/advanced-form-elements.js') ?>"></script> -->
 
 <!-- Demo Js -->
 <script src="<?php echo base_url('assets/js/demo.js') ?>"></script>
+
+<!-- Pivot Scripts -->
+<script type="text/javascript" src="<?= base_url('assets/js/pivot.js/lib/javascripts/subnav.js') ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/pivot.js/lib/javascripts/accounting.min.js') ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/pivot.js/lib/javascripts/jquery.dataTables.min.js') ?>"></script>
+  <script type="text/javascript" src="<?= base_url('assets/js/pivot.js/lib/javascripts/dataTables.bootstrap.js') ?>"></script>
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-42535149-1', 'rjackson.github.io');
+    ga('send', 'pageview');
+</script>
+
+<!-- jquery_pivot must be loaded after pivot.js and jQuery -->
+<script type="text/javascript" src="<?= base_url('assets/js/pivot.js/pivot.js') ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/pivot.js/jquery_pivot.js') ?>"></script>
 
 <script>
 function isNumberKey(evt)

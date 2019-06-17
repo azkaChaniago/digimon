@@ -15,7 +15,7 @@
 <!-- Waves Effect Plugin Js -->
 <script src="<?php echo base_url('assets/plugins/node-waves/waves.js') ?>"></script>
 
-<?php if ($this->uri->segment(2) == 'indirect' || $this->uri->segment(2) == 'sharereguler' || $this->uri->segment(2) == 'sharebroadband' || $this->uri->segment(2) == 'home') : ?>
+<?php if ($this->uri->segment(2) == 'indirect' || $this->uri->segment(2) == 'sharereguler' || $this->uri->segment(2) == 'sharebroadband' || $this->uri->segment(2) == 'home' || $this->uri->segment(2) == 'marketchart') : ?>
     
     <!-- ChartJs -->
     <!-- <script src="<?php echo base_url('assets/plugins/chartjs/Chart.bundle.js') ?>"></script> -->

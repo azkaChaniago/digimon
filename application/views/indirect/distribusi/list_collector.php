@@ -49,7 +49,7 @@
 				<div class="header">
 					<div class="row">
 						<div class="col-md-6">
-							<h2 style="margin-bottom: 17px">Target Assignment Canvasser</h2>
+							<h2 style="margin-bottom: 17px">Target Assignment Collector	</h2>
 						</div>
 						<div class="col-md-6" style='text-align: right'>
 							<h2><a href="<?php echo site_url('indirect/distribusicollector/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>

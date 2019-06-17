@@ -258,7 +258,7 @@ class Event_model extends CI_Model
 
     public function getAllJSON($tdc=null) 
     {
-        $this->db->select('id_event, nama_tdc, m.divisi, tgl_event, nama_marketing, nama_event, lokasi_penjualan, qty_5k, qty_10k, qty_20k, qty_25k, qty_50k, qty_100k, mount_bulk, mount_legacy, mount_digital, mount_tcash, qty_low_nsb, qty_middle_nsb, qty_high_nsb, qty_as_nsb, qty_simpati_nsb, qty_loop_nsb, nama_user');
+        $this->db->select('nama_tdc, m.divisi, tgl_event, nama_marketing, nama_event, lokasi_penjualan, qty_5k, qty_10k, qty_20k, qty_25k, qty_50k, qty_100k, mount_bulk, mount_legacy, mount_digital, mount_tcash, qty_low_nsb, qty_middle_nsb, qty_high_nsb, qty_as_nsb, qty_simpati_nsb, qty_loop_nsb');
         $this->db->from($this->table . ' AS ev');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = ev.kode_tdc', 'left');
         $this->db->join('tbl_marketing AS m', 'm.kode_marketing = ev.kode_marketing', 'left');
