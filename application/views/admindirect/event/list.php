@@ -45,64 +45,45 @@
 				</div>
 				<div class="body">
 				<div class="subnav">
-					<div class="btn-group" role="group">
+					<div class="btn-group">
 						<div class="btn-group" role="group">
-							<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Filter Fields
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu stop-propagation"><div id="filter-list"></div></ul>
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Filter Fields
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu stop-propagation"><div id="filter-list"></div></ul>
+							</div>
 						</div>
+						<div class="btn-group" role="group">
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Row Label Fields
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu stop-propagation"><div id="row-label-fields"></div></ul>
+							</div>
+						</div>
+						<div class="btn-group" role="group">
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Column Label Fields
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu stop-propagation"><div id="column-label-fields"></div></ul>
+							</div>
+						</div>
+						<div class="btn-group" role="group">
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Summary Fields
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu stop-propagation"><div id="summary-fields"></div></ul>
+							</div>
+						</div>						
 					</div>
-					<ul class="nav nav-pills">
-						<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							Filter Fields
-							<b class="caret"></b>
-						</a>
-						<ul class="dropdown-menu stop-propagation" style="overflow:auto;max-height:450px;padding:10px;">
-							<div id="filter-list"></div>
-						</ul>
-						</li>
-						<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							Row Label Fields
-							<b class="caret"></b>
-						</a>
-						<ul class="dropdown-menu stop-propagation" style="overflow:auto;max-height:450px;padding:10px;">
-							<div id="row-label-fields"></div>
-						</ul>
-						</li>
-						<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							Column Label Fields
-							<b class="caret"></b>
-						</a>
-						<ul class="dropdown-menu stop-propagation" style="overflow:auto;max-height:450px;padding:10px;">
-							<div id="column-label-fields"></div>
-						</ul>
-						</li>
-						<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							Summary Fields
-							<b class="caret"></b>
-						</a>
-						<ul class="dropdown-menu stop-propagation" style="overflow:auto;max-height:450px;padding:10px;">
-							<div id="summary-fields"></div>
-						</ul>
-						</li>
-						<li class="dropdown pull-right">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							Canned Reports
-							<b class="caret"></b>
-						</a>
-						<ul class="dropdown-menu">
-						<li><a id="ar-aged-balance" href="#">AR Aged Balance</a></li>
-						<li><a id="acme-detail-report" href="#">Acme Corp Detail</a></li>
-						<li><a id="miami-invoice-detail" href="#">Miami Invoice Detail</a></li>
-						</ul>
-						</li>
-					</ul>
+					
 				</div>
 				</div>
 			</div>
@@ -252,7 +233,7 @@
 		};
 		var fields = [
 			// filterable fields
-			{name: 'NAMA TDC', type: 'string', filterable: true, columnLabelable: true},
+			{name: 'NAMA TDC', type: 'string', filterable: true, rowLabelable:false, columnLabelable: true},
 			{name: 'DIVISI', type: 'string', filterable: true},
 			{name: 'TGL EVENT', type: 'date', filterable: true},
 			{name: 'NAMA MARKETING',  type: 'string', filterable: true},
@@ -265,12 +246,14 @@
 			{name: 'QTY 20K', type: 'integer', filterable: true},
 
 			// summary fields
-			{name: 'QTY 25K',     type: 'integer',  rowLabelable: false},
-			{name: 'QTY 50K',     type: 'integer',  rowLabelable: false},
-			{name: 'QTY 100K',    type: 'integer',  rowLabelable: false},
+			{name: 'QTY 25K',     type: 'integer',  filterable: false},
+			{name: 'QTY 50K',     type: 'integer',  filterable: false},
+			{name: 'QTY 100K',    type: 'integer',  filterable: false},
+
 			{name: 'MOUNT BULK', type: 'integer', rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
-			{name: 'MOUNT DIGITAL',  type: 'integer',  filterable: true, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
-			{name: 'MOUNT TCASH',      type: 'integer',   filterable: true, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
+			{name: 'MOUNT LEGACY', type: 'integer', rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
+			{name: 'MOUNT DIGITAL',  type: 'integer',  rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
+			{name: 'MOUNT TCASH',      type: 'integer',   rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
 			{name: 'QTY LOW NSB',      type: 'integer',   filterable: true},
 			{name: 'QTY MIDDLE NSB',      type: 'integer',   filterable: true},
 			{name: 'QTY HIGH NSB',      type: 'integer',   filterable: true},
@@ -296,7 +279,7 @@
 
 		$(document).ready(function() {
 
-			setupPivot({json: dataStr, fields: fields, rowLabels:["NAMA TDC", "MOUNT BULK", "MOUNT DIGITAL", "MOUNT TCASH"]})
+			setupPivot({json: dataStr, fields: fields, rowLabels:["MOUNT BULK", "MOUNT DIGITAL", "MOUNT TCASH"], columnLabels:["NAMA TDC"]})
 
 			// prevent dropdown from closing after selection
 			$('.stop-propagation').click(function(event){
@@ -304,17 +287,17 @@
 			});
 
 			// **Sexy** In your console type pivot.config() to view your current internal structure (the full initialize object).  Pass it to setup and you have a canned report.
-			$('#ar-aged-balance').click(function(event){
-				$('#pivot-demo').pivot_display('reprocess_display', {rowLabels:["employer"], columnLabels:["age_bucket"], summaries:["balance"]})
-			});
+			// $('#ar-aged-balance').click(function(event){
+			// 	$('#pivot-demo').pivot_display('reprocess_display', {rowLabels:["employer"], columnLabels:["age_bucket"], summaries:["balance"]})
+			// });
 
-			$('#acme-detail-report').click(function(event){
-				$('#pivot-demo').pivot_display('reprocess_display', {filters:{"employer":"Acme Corp"},rowLabels:["city","last_name","first_name","state","invoice_date"]})
-			});
+			// $('#acme-detail-report').click(function(event){
+			// 	$('#pivot-demo').pivot_display('reprocess_display', {filters:{"employer":"Acme Corp"},rowLabels:["city","last_name","first_name","state","invoice_date"]})
+			// });
 
-			$('#miami-invoice-detail').click(function(event){
-				$('#pivot-demo').pivot_display('reprocess_display', {"filters":{"city":"Miami"},"rowLabels":["last_name","first_name","employer","invoice_date"],"summaries":["payment_amount"]})
-			});
+			// $('#miami-invoice-detail').click(function(event){
+			// 	$('#pivot-demo').pivot_display('reprocess_display', {"filters":{"city":"Miami"},"rowLabels":["last_name","first_name","employer","invoice_date"],"summaries":["payment_amount"]})
+			// });
 		});
 	</script>
 

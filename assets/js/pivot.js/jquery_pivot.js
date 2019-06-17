@@ -169,8 +169,8 @@ var methods = {
     else
       snip = methods.build_select_filter_field(field, selectedValue);
 
-    remove_filter = '<a class="remove-filter-field" style="cursor:pointer;"><i class="material-icons">close</i></a></label>';
-    $('#filter-list').append('<div><hr/><label>' + field.name + remove_filter + snip + '</div>');
+    remove_filter = '<span style="vertical-align:super">' + field.name + '</span><a class="remove-filter-field" style="cursor:pointer;vertical-align:middle"><i class="material-icons">close</i></a>';
+    $('#filter-list').append('<div style="margin: 20px auto">' + remove_filter + snip + '</div>');
 
     //Optional Chosen/Select2 integration
     if($.fn.chosen!==undefined) $('select.filter').chosen();
@@ -195,7 +195,7 @@ var methods = {
     })
   },
   build_select_filter_field : function(field, selectedValue){
-    var snip  = '<select class="filter span3" '+(field.filterType==='multiselect'?'multiple':'')+' data-field="' + field.name + '">' +
+    var snip  = '<select class="filter span3 form-control show-tick" '+(field.filterType==='multiselect'?'multiple':'')+' data-field="' + field.name + '">' +
                 '<option></option>',
         orderedValues = [];
 
@@ -241,11 +241,11 @@ var methods = {
   build_toggle_fields : function(div, fields, klass){
     $(div).empty();
     $.each(fields, function(index, field){
-      $(div).append('<label class="checkbox">' +
-                    '<input type="checkbox" class="' + klass + '" ' +
+      $(div).append('<div style="display:inline-block; margin-right: 15px">' +
+                    '<input type="checkbox" id="basic_checkbox_1 '+ field.name +'" class="' + klass + '" ' +
                       'data-field="' + field.name + '" ' +
-                    '> ' + field.name +
-                    '</label>');
+                    '><label class="checkbox" for="basic_checkbox_1 '+ field.name +'">' + field.name +
+                    '</label></div>');
     });
 
     var displayFields;
