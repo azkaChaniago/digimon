@@ -11,21 +11,23 @@
 
     <?php $this->load->view("admindirect/_parts/sidebar.php") ?>
 
-      <div class="content">
+      <section class="content">
         <div class="container-fluid">
          <!-- Area Chart Example-->
-          <div class="card mb-3">
-            <div class="card-header">
-              <i class="fas fa-chart-area"></i>
-              Performansi : Januari 2019
+          <div class="row">
+            <div class="card mb-3">
+              <div class="header">
+                <i class="material-icons"></i>
+                Performansi : Januari 2019
+              </div>
+              <div class="body">
+                <canvas id="myBarChart" width="100%" height="30"></canvas>
+              </div>
             </div>
-            <div class="card-body">
-              <canvas id="myBarChart" width="100%" height="30"></canvas>
-            </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
         </div>
-      </div>
+      </section>
+
       <?php $this->load->view("admindirect/_parts/js.php") ?>
     <script>
       // Set new default font family and font color to mimic Bootstrap's default styling

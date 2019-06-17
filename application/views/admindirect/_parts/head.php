@@ -57,3 +57,6 @@ if ($this->session->userdata('access') != 'adm_direct' && $this->session->userda
 <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
 <link href="<?php echo base_url('assets/css/themes/all-themes.css') ?>" rel="stylesheet" />
 
+<!-- Pivot stylesheet -->
+<link rel="stylesheet" href="<?= base_url('assets/js/pivot.js/lib/css/subnav.css') ?>" type="text/css" />
+<link rel="stylesheet" href="<?= base_url('assets/js/pivot.js/lib/css/pivot.css') ?>" type="text/css" />

@@ -14,7 +14,7 @@
             <div class="container">
                 <div class="card">
                     <div class="header">   
-                        <h2 class="text-center">Detail Target Assigment</h2>
+                        <h2 class="text-center">Detail Penjualan Harian</h2>
                         <a href="<?php echo site_url('direct/penjualanharian') ?>" class="btn btn-danger waves-effect"><i class="material-icons">arrow_back</i>
                         <span>Kembali<span></a>
                     </div>

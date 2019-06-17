@@ -44,7 +44,7 @@ class Marketchart extends CI_Controller
         if ($kab)
         {
             $kab = str_replace('%20', ' ', $kab);
-            $data['kecamatan'] = $this->sharereguler_model->listGraphKecamaatan($kab);
+            $data['kecamatan'] = $this->sharereguler_model->chartMarketKec($kab);
             $data['kab'] = str_replace(' ', '%20', $kab);
         }
         $this->load->view('adminindirect/marketsharecharts/main', $data);

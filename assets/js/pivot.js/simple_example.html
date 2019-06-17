@@ -1,6 +1,10 @@
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pivot.js</title>
   <link rel="stylesheet" href="./lib/css/pivot.css" type="text/css" />
   
@@ -10,6 +14,7 @@
   <div>
     <div id="pivot-menu-container"></div>
     <div id="results"></div>
+    <div id="raw-data"></div>
   </div>
 </div>
 
@@ -24,23 +29,138 @@
 <script type="text/javascript" src="./pivot.js"></script>
 <script type="text/javascript" src="./jquery_pivot.js"></script>
 <script type="text/javascript">
+
+  const data = [
+  {
+    "nama_tdc": "Tanjung Bintang",
+    "divisi": "collector",
+    "tgl_event": "2019-04-02",
+    "qty_5k": "464",
+    "qty_10k": "9999",
+    "qty_20k": "999",
+    "qty_25k": "9999",
+    "qty_50k": "88888",
+    "qty_100k": "8888"
+  },
+  {
+    "nama_tdc": "TDC TELUK BETUNG",
+    "divisi": "canvasser",
+    "tgl_event": "2019-04-10",
+    "qty_5k": "80000",
+    "qty_10k": "70000",
+    "qty_20k": "32000",
+    "qty_25k": "80000",
+    "qty_50k": "30000",
+    "qty_100k": "100000"
+  },
+  {
+    "nama_tdc": "IYI",
+    "divisi": "canvasser",
+    "tgl_event": "2019-04-03",
+    "qty_5k": "40000",
+    "qty_10k": "40000",
+    "qty_20k": "40000",
+    "qty_25k": "50000",
+    "qty_50k": "60000",
+    "qty_100k": "80000"
+  },
+  {
+    "nama_tdc": "Keratoon",
+    "divisi": "administrator",
+    "tgl_event": "2019-05-24",
+    "qty_5k": "80000",
+    "qty_10k": "70000",
+    "qty_20k": "32000",
+    "qty_25k": "80000",
+    "qty_50k": "30000",
+    "qty_100k": "100000"
+  },
+  {
+    "nama_tdc": "Natar",
+    "divisi": "direct",
+    "tgl_event": "2019-05-24",
+    "qty_5k": "80000",
+    "qty_10k": "70000",
+    "qty_20k": "32000",
+    "qty_25k": "80000",
+    "qty_50k": "30000",
+    "qty_100k": "100000"
+  },
+  {
+    "nama_tdc": "Tanjung Bintang",
+    "divisi": "Direct",
+    "tgl_event": "2019-05-11",
+    "qty_5k": "80000",
+    "qty_10k": "70000",
+    "qty_20k": "32000",
+    "qty_25k": "80000",
+    "qty_50k": "30000",
+    "qty_100k": "100000"
+  },
+  {
+    "nama_tdc": "Tanjung Bintang",
+    "divisi": "collector",
+    "tgl_event": "2019-05-14",
+    "qty_5k": "4000",
+    "qty_10k": "70000",
+    "qty_20k": "32000",
+    "qty_25k": "80000",
+    "qty_50k": "30000",
+    "qty_100k": "100000"
+  },
+  {
+    "nama_tdc": "Tanjung Bintang",
+    "divisi": "canvasser",
+    "tgl_event": "1922-03-23",
+    "qty_5k": "80000",
+    "qty_10k": "70000",
+    "qty_20k": "32000",
+    "qty_25k": "80000",
+    "qty_50k": "30000",
+    "qty_100k": "100000"
+  },
+  {
+    "nama_tdc": "Kedaton",
+    "divisi": "CANVASSER",
+    "tgl_event": "2019-05-23",
+    "qty_5k": "80000",
+    "qty_10k": "70000",
+    "qty_20k": "32000",
+    "qty_25k": "80000",
+    "qty_50k": "30000",
+    "qty_100k": "100000"
+  }
+];
+  const field = [Object.keys(data[0]).map( k => k.replace(/_/g, ' ').toUpperCase())];
+  let dataArr = field;
+  let rowArr = [];
+
+  const dataVal = data.map(({nama_tdc, divisi, tgl_event, qty_5k, qty_10k, qty_20k, qty_25k, qty_50k, qty_100k}) => field.push([nama_tdc, divisi, tgl_event, parseInt(qty_5k), parseInt(qty_10k), parseInt(qty_20k), parseInt(qty_25k), parseInt(qty_50k), parseInt(qty_100k)]))
+  
+  const dataStr = JSON.stringify(field);
+  
+  // document.getElementById('raw-data').innerHTML = dataStr
+
   $(document).ready(function() {
-    csv = "last_name,first_name,email,date_ordered,date_delivered,sale_price,unit_identifier\n" +
-        "doo, scooby, scoobydoo12512@gmail.com,2012-02-12,2012-02-17,9.99,big-bang-rpsls\n" +
-        "flinstone,fred,freddyf12516@gmail.com,2012-02-12,2012-02-17,9.99,dr-who-bad-wolf\n" +
-        "spiegel,spike,bebop1256@gmail.com,2012-02-12,2012-02-17,9.99,tng-engage\n" +
-        "spiegel,spike,bebop1256@gmail.com,2012-02-12,2012-02-17,9.99,tng-engage\n" +
-        "spiegel,spike,bebop1256@gmail.com,2012-02-12,2012-02-17,9.99,tng-engage\n"; 
+    str_str = '[["NAMA TDC","DIVISI","TGL EVENT","QTY 5K","QTY 10K","QTY 20K","QTY 25K","QTY 50K","QTY 100K"],["Tanjung Bintang","collector","2019-04-02",464,9999,999,9999,88888,8888],["TDC TELUK BETUNG","canvasser","2019-04-10",80000,70000,32000,80000,30000,100000],["IYI","canvasser","2019-04-03",40000,40000,40000,50000,60000,80000],["Keratoon","administrator","2019-05-24",80000,70000,32000,80000,30000,100000],["Natar","direct","2019-05-24",80000,70000,32000,80000,30000,100000],["Tanjung Bintang","Direct","2019-05-11",80000,70000,32000,80000,30000,100000],["Tanjung Bintang","collector","2019-05-14",4000,70000,32000,80000,30000,100000],["Tanjung Bintang","canvasser","1922-03-23",80000,70000,32000,80000,30000,100000],["Kedaton","CANVASSER","2019-05-23",80000,70000,32000,80000,30000,100000]]';
+    
+    console.log(dataStr)
+    
+    fields =[
+      {name: 'NAMA TDC', type: 'string', filterable: true, columnLabelable: true},
+			{name: 'DIVISI', type: 'string', filterable: true},
+			{name: 'TGL EVENT', type: 'date', filterable: true},
+			// psuedo fields
+			{name: 'QTY 5K', type: 'integer', rowLabelable: true, summarizable: 'sum'},
+			{name: 'QTY 10K', type: 'integer', rowLabelable: true},
+			{name: 'QTY 20K', type: 'integer', rowLabelable: true},
+			{name: 'QTY 25K', type: 'integer', rowLabelable: true},
+			// summary fields
+			{name: 'QTY 50K',     type: 'integer',  rowLabelable: true},
+			{name: 'QTY 100K',    type: 'integer',  rowLabelable: true}];
+      
 
-    fields =[{name: 'last_name',      type: 'string',   filterable: true},
-              {name: 'first_name',     type: 'string',   filterable: true},
-              {name: 'email',          type: 'string',   filterable: true},
-              {name: 'date_ordered',   type: 'date',     filterable: true},
-              {name: 'date_delivered', type: 'date',     rowLabelable: false},
-              {name: 'sale_price',     type: 'float',    filterable: true},
-              {name: 'unit_identifier',type: 'string',   filterable: true, summarizable: 'count' }];
-
-    $('#pivot-menu-container').pivot_display('setup', {csv:csv,fields:fields});
+    $('#pivot-menu-container').pivot_display('setup', {json: dataStr, fields:fields});
   });
 </script>
 </body>
