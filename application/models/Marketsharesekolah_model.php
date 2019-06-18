@@ -169,4 +169,36 @@ class Marketsharesekolah_model extends CI_Model
         return $sql->result();
     }
 
+    public function getAllJSON($tdc=null, $start=null, $end=null)
+    {
+        $this->db->select('
+            nama_tdc,
+            s.npsn,
+            nama_sekolah,
+            kabupaten,
+            kecamatan,
+            tgl_marketshare,
+            qty_simpati,
+            qty_as,
+            qty_loop,
+            qty_mentari,
+            qty_im3,
+            qty_xl,
+            qty_axsis,
+            qty_tri,
+            qty_smartfrend,
+            nama_user
+        ');
+        $this->db->from($this->table . ' AS ms');
+        $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = ms.kode_tdc', 'left');
+        $this->db->join('tbl_sekolah AS s', 's.npsn = ms.npsn', 'left');
+        $this->db->join('tbl_user AS usr', 'usr.kode_user = ms.kode_user', 'left');
+        if ($start && $end) :
+            $this->db->where("ms.tgl_marketshare BETWEEN '$start' AND '$end'");
+        endif;
+        if ($tdc)
+            $this->db->where('ms.kode_tdc', $tdc);
+        return json_encode($this->db->get()->result());
+    }
+
 }

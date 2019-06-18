@@ -82,8 +82,7 @@
 								<ul class="dropdown-menu stop-propagation"><div id="summary-fields"></div></ul>
 							</div>
 						</div>						
-					</div>
-					
+					</div>					
 				</div>
 				</div>
 			</div>

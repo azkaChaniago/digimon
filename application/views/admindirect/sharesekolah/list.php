@@ -60,50 +60,58 @@
 					<div class="card">
 						<div class="header">
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<h2>Marketshare Sekolah</h2>
 									<div class="clearfix"></div>
+								</div>			
+							</div>
+							<div class="row">
+								<div class="subnav">
+									<div class="btn-group">
+										<div class="btn-group" role="group">
+											<div class="btn-group" role="group">
+												<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Filter Fields
+													<span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu stop-propagation"><div id="filter-list"></div></ul>
+											</div>
+										</div>
+										<div class="btn-group" role="group">
+											<div class="btn-group" role="group">
+												<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Row Label Fields
+													<span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu stop-propagation"><div id="row-label-fields"></div></ul>
+											</div>
+										</div>
+										<div class="btn-group" role="group">
+											<div class="btn-group" role="group">
+												<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Column Label Fields
+													<span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu stop-propagation"><div id="column-label-fields"></div></ul>
+											</div>
+										</div>
+										<div class="btn-group" role="group">
+											<div class="btn-group" role="group">
+												<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													Summary Fields
+													<span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu stop-propagation"><div id="summary-fields"></div></ul>
+											</div>
+										</div>						
+									</div>					
 								</div>
-								<div class="col-md-6" style='text-align: right'>							
-									<!-- <h2><a href="<?php echo site_url('admindirect/marketsharesekolah/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-									<span>Tambah</span></a></h2> -->
-								</div> 						
 							</div>
 						</div>
 
 						<div class="body">
 							<div class="table-responsive">
-								<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-									<thead>
-										<tr>
-											<th>Nama TDC</th>
-											<th>Nama Sekolah</th>
-											<th>Tanggal Marketshare</th>
-											<th>Aksi</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php foreach ($marketshare as $ms): ?>
-										<tr>
-											<td>
-												<?php echo $ms->nama_tdc ?>
-											</td>
-											<td>
-												<?php echo $ms->nama_sekolah ?>	
-											</td>
-											<td class="small">
-												<?php echo $ms->tgl_marketshare ?>
-											</td>
-											<td width='180' class="text-center" >
-												<!-- <a href="<?php echo site_url('admindirect/marketsharesekolah/edit/'.$ms->id_market) ?>"><i class="material-icons">edit</i></a>
-												<a onclick="deleteConfirm('<?php echo site_url('admindirect/marketsharesekolah/remove/'.$ms->id_market) ?>')" href="#!"><i class="material-icons">delete</i></a> -->
-												<a href="<?php echo site_url('admindirect/marketsharesekolah/detail/'.$ms->id_market) ?>"><i class="material-icons">description</i></a>	
-											</td>
-										</tr>
-										<?php endforeach; ?>
-
-									</tbody>
-								</table>
+								<table id="results" class="table table-bordered table-striped table-hover js-basic-example dataTable"></table>
 							</div>
 						</div>
 					</div>			
@@ -147,6 +155,58 @@
 			$('#btn-delete').attr('href', url);
 			$('#deleteModal').modal();
 		}
+
+		const data = <?= $json ?>;
+		const val = [Object.keys(data[0]).map( k => k.replace(/_/g, ' ').toUpperCase())];
+		console.log(val)
+		const dataVal = data.map(({nama_tdc, npsn, nama_sekolah, kabupaten, kecamatan, tgl_marketshare, qty_simpati, qty_as, qty_loop, qty_mentari, qty_im3, qty_xl, qty_axsis, qty_tri, qty_smartfrend, nama_user}) => val.push([nama_tdc, npsn, nama_sekolah, kabupaten, kecamatan, tgl_marketshare, parseInt(qty_simpati), parseInt(qty_as), parseInt(qty_loop), parseInt(qty_mentari), parseInt(qty_im3), parseInt(qty_xl), parseInt(qty_axsis), parseInt(qty_tri), parseInt(qty_smartfrend), nama_user]));
+
+		let dataStr = JSON.stringify(val);
+
+		const fields = [			
+			{name:'NAMA TDC', type:'string', filterable:true},
+            {name:'NPSN', type:'string', filterable:true},
+            {name:'NAMA SEKOLAH', type:'string', filterable:true},
+            {name:'KABUPATEN', type:'string', filterable:true},
+            {name:'KECAMATAN', type:'string', filterable:true},
+            {name:'TGL MARKETSHARE', type:'string', filterable:true},
+            {name:'QTY SIMPATI', type:'string', filterable:true},
+            {name:'QTY AS', type:'string', filterable:true},
+            {name:'QTY LOOP', type:'string', filterable:true},
+            {name:'QTY MENTARI', type:'string', filterable:true},
+            {name:'QTY IM3', type:'string', filterable:true},
+            {name:'QTY XL', type:'string', filterable:true},
+            {name:'QTY AXSIS', type:'string', filterable:true},
+            {name:'QTY TRI', type:'string', filterable:true},
+            {name:'QTY SMARTFREND', type:'string', filterable:true},
+            {name:'NAMA USER', type:'string', filterable:true}
+		];		
+
+		function setupPivot(input){
+			input.callbacks = {afterUpdateResults: function(){
+				$('#results > table').dataTable({
+					"sDom": "<'row'<'span6'l><'span6'f>>t<'row'<'span6'i><'span6'p>>",
+					"iDisplayLength": 10,
+					"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+					"sPaginationType": "bootstrap",
+					"oLanguage": {
+						"sLengthMenu": "_MENU_ records per page"
+					}
+				});
+			}};
+			$('#pivot-demo').pivot_display('setup', input);
+		};
+
+		$(document).ready(function() {
+
+			setupPivot({json: dataStr, fields: fields, rowLabels:["NAMA TDC", "NAMA SEKOLAH", "QTY SIMPATI", "QTY AS", "QTY LOOP", "QTY MENTARI", "QTY IM3", "QTY XL", "QTY AXSIS", "QTY TRI", "QTY SMARTFREND"]})
+
+			// prevent dropdown from closing after selection
+			$('.stop-propagation').click(function(event){
+				event.stopPropagation();
+			});
+
+		});
 
 		const cluster = JSON.parse('<?= json_encode($chartSekolah) ?>');
 
@@ -408,8 +468,7 @@
 				}
 			}
 		});
-
-
+		
 	</script>
 
 </body>
