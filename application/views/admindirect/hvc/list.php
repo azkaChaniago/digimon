@@ -43,6 +43,49 @@
 						</form>
 					</div>
 				</div>
+				<div class="body">
+				<div class="subnav">
+					<div class="btn-group">
+						<div class="btn-group" role="group">
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Filter Fields
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu stop-propagation"><div id="filter-list"></div></ul>
+							</div>
+						</div>
+						<div class="btn-group" role="group">
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Row Label Fields
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu stop-propagation"><div id="row-label-fields"></div></ul>
+							</div>
+						</div>
+						<div class="btn-group" role="group">
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Column Label Fields
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu stop-propagation"><div id="column-label-fields"></div></ul>
+							</div>
+						</div>
+						<div class="btn-group" role="group">
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Summary Fields
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu stop-propagation"><div id="summary-fields"></div></ul>
+							</div>
+						</div>						
+					</div>
+					
+				</div>
+				</div>
 			</div>
 
 			<!-- DataTables -->
@@ -62,53 +105,7 @@
 
 				<div class="body">
 					<div class="table-responsive">
-						<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-							<thead>
-								<tr>
-									<th>Nama TDC</th>
-									<th>Tanggal HVC</th>
-									<th>Nama Canvasser</th>
-									<th>Nama Mercent</th>
-									<th>Longlat</th>
-									<th>Latitude</th>
-									<th>Alamat</th>
-									<th>Aksi</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php foreach ($hvc as $h): ?>
-								<tr>
-									<td>
-										<?php echo $h->nama_tdc ?>
-									</td>
-									<td>
-										<?php echo $h->tgl_hvc ?>	
-									</td>
-									<td class="small">
-										<?php echo $h->nama_marketing ?>
-									</td>
-									<td class="small">
-										<?php echo $h->nama_mercent ?>
-									</td>
-									<td class="small">
-										<?php echo $h->longlat_lokasi_mercent ?>
-									</td>
-									<td class="small">
-										<?php echo $h->latitude_lokasi_mercent ?>
-									</td>
-									<td class="small">
-										<?php echo $h->alamat ?>
-									</td>
-									<td width='180' class="text-center" >
-										<!-- <a href="<?php echo site_url('admindirect/hvc/edit/'.$h->id_hvc) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('admindirect/hvc/remove/'.$h->id_hvc) ?>')" href="#!"><i class="material-icons">delete</i></a> -->
-										<a href="<?php echo site_url('admindirect/hvc/detail/'.$h->id_hvc) ?>"><i class="material-icons">description</i></a>	
-									</td>
-								</tr>
-								<?php endforeach; ?>
-
-							</tbody>
-						</table>
+						<table id="results" class="table table-bordered table-striped table-hover js-basic-example dataTable"></table>
 					</div>
 				</div>
 			</div>			
@@ -128,6 +125,78 @@
 			$('#btn-delete').attr('href', url);
 			$('#deleteModal').modal();
 		}
+
+		const data = <?= $json ?>;
+		const field = [Object.keys(data[0]).map( k => k.replace(/_/g, ' ').toUpperCase())];
+		console.log(field)
+		const dataVal = data.map(({nama_tdc, tgl_hvc, nama_marketing, nama_mercent, longlat_lokasi_mercent, latitude_lokasi_mercent, alamat_hvc, qty_5k, qty_10k, qty_20k, qty_25k, qty_50k, qty_100k, mount_bulk, qty_low_nsb, qty_middle_nsb, qty_high_nsb, qty_as_nsb, qty_simpati_nsb, qty_loop_nsb, keterangan_kegiatan, nama_user}) => field.push([nama_tdc, tgl_hvc, nama_marketing, nama_mercent, longlat_lokasi_mercent, latitude_lokasi_mercent, alamat_hvc, parseInt(qty_5k), parseInt(qty_10k), parseInt(qty_20k), parseInt(qty_25k), parseInt(qty_50k), parseInt(qty_100k), parseInt(mount_bulk), parseInt(qty_low_nsb), parseInt(qty_middle_nsb), parseInt(qty_high_nsb), parseInt(qty_as_nsb), parseInt(qty_simpati_nsb), parseInt(qty_loop_nsb), keterangan_kegiatan, nama_user]));
+
+		let dataStr = JSON.stringify(field);
+
+		const fields = [
+			{name:'NAMA TDC', type:'string', filterable:true},
+			{name:'TGL HVC', type:'date', filterable:true},
+			{name:'NAMA MARKETING', type:'string', filterable:true},
+			{name:'NAMA MERCENT', type:'string', filterable:true},
+			{name:'LONGLAT LOKASI MERCENT', type:'string', filterable:true},
+			{name:'LATITUDE LOKASI MERCENT', type:'string', filterable:true},
+			{name:'ALAMAT HVC', type:'string', filterable:true},
+			{name:'QTY 5K', type:'integer', filterable:true},
+			{name:'QTY 10K', type:'integer', filterable:true},
+			{name:'QTY 20K', type:'integer', filterable:true},
+			{name:'QTY 25K', type:'integer', filterable:true},
+			{name:'QTY 50K', type:'integer', filterable:true},
+			{name:'QTY 100K', type:'integer', filterable:true},
+			{name:'MOUNT BULK', type:'integer', filterable:true, displayFunction: value => accounting.formatMoney(value)},
+			{name:'QTY LOW NSB', type:'integer', filterable:true},
+			{name:'QTY MIDDLE NSB', type:'integer', filterable:true},
+			{name:'QTY HIGH NSB', type:'integer', filterable:true},
+			{name:'QTY AS NSB', type:'integer', filterable:true},
+			{name:'QTY SIMPATI NSB', type:'integer', filterable:true},
+			{name:'QTY LOOP NSB', type:'integer', filterable:true},
+			{name:'KETERANGAN KEGIATAN', type:'string', filterable:true},
+			{name:'NAMA USER', type:'string', filterable:true},
+			
+			{name:'MOUNT BULK SUM', type:'integer', dataSource: 'MOUNT BULK', rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)}
+		];		
+
+		function setupPivot(input){
+			input.callbacks = {afterUpdateResults: function(){
+			$('#results > table').dataTable({
+				"sDom": "<'row'<'span6'l><'span6'f>>t<'row'<'span6'i><'span6'p>>",
+				"iDisplayLength": 10,
+				"aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+				"sPaginationType": "bootstrap",
+				"oLanguage": {
+				"sLengthMenu": "_MENU_ records per page"
+				}
+			});
+			}};
+			$('#pivot-demo').pivot_display('setup', input);
+		};
+
+		$(document).ready(function() {
+
+			setupPivot({json: dataStr, fields: fields, rowLabels:["NAMA TDC"], summaries:["MOUNT BULK SUM"]})
+
+			// prevent dropdown from closing after selection
+			$('.stop-propagation').click(function(event){
+				event.stopPropagation();
+			});
+
+			// **Sexy** In your console type pivot.config() to view your current internal structure (the full initialize object).  Pass it to setup and you have a canned report.
+			// $('#ar-aged-balance').click(function(event){
+			// 	$('#pivot-demo').pivot_display('reprocess_display', {rowLabels:["employer"], columnLabels:["age_bucket"], summaries:["balance"]})
+			// });
+
+			// $('#acme-detail-report').click(function(event){
+			// 	$('#pivot-demo').pivot_display('reprocess_display', {filters:{"employer":"Acme Corp"},rowLabels:["city","last_name","first_name","state","invoice_date"]})
+			// });
+
+			// $('#miami-invoice-detail').click(function(event){
+			// 	$('#pivot-demo').pivot_display('reprocess_display', {"filters":{"city":"Miami"},"rowLabels":["last_name","first_name","employer","invoice_date"],"summaries":["payment_amount"]})
+			// });
+		});
 	</script>
 
 </body>

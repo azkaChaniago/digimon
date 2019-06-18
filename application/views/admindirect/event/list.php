@@ -216,21 +216,6 @@
 		let dataStr = JSON.stringify(dataArr);
 		console.log(dataStr);		
 
-		function ageBucket(row, field){
-		var age = Math.abs(((new Date().getTime()) - row[field.dataSource])/1000/60/60/24);
-		switch (true){
-			case (age < 31):
-			return '000 - 030'
-			case (age < 61):
-			return '031 - 060'
-			case (age < 91):
-			return '061 - 090'
-			case (age < 121):
-			return '091 - 120'
-			default:
-			return '121+'
-		}
-		};
 		var fields = [
 			// filterable fields
 			{name: 'NAMA TDC', type: 'string', filterable: true, rowLabelable:false, columnLabelable: true},
@@ -238,7 +223,7 @@
 			{name: 'TGL EVENT', type: 'date', filterable: true},
 			{name: 'NAMA MARKETING',  type: 'string', filterable: true},
 			{name: 'NAMA EVENT', type: 'string', filterable: true},
-			{name: 'LOKASI PENJUALAN', type: 'date', filterable: true},
+			{name: 'LOKASI PENJUALAN', type: 'string', filterable: true},
 
 			// psuedo fields
 			{name: 'QTY 5K', type: 'integer', filterable: true},
@@ -246,14 +231,18 @@
 			{name: 'QTY 20K', type: 'integer', filterable: true},
 
 			// summary fields
+			{name: 'MOUNT BULK SUM', type: 'integer', dataSource: 'MOUNT BULK', rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
+			{name: 'MOUNT LEGACY SUM', type: 'integer', dataSource: 'MOUNT LEGACY', rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
+			{name: 'MOUNT DIGITAL SUM',  type: 'integer',  dataSource: 'MOUNT DIGITAL', rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
+			{name: 'MOUNT TCASH SUM',      type: 'integer',   dataSource: 'MOUNT TCASH', rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
+
+			{name: 'MOUNT BULK', type: 'integer', filterable: false, displayFunction: value => accounting.formatMoney(value)},
+			{name: 'MOUNT LEGACY', type: 'integer', filterable: false, displayFunction: value => accounting.formatMoney(value)},
+			{name: 'MOUNT DIGITAL',  type: 'integer',  filterable: false, displayFunction: value => accounting.formatMoney(value)},
+			{name: 'MOUNT TCASH',      type: 'integer',   filterable: false, displayFunction: value => accounting.formatMoney(value)},
 			{name: 'QTY 25K',     type: 'integer',  filterable: false},
 			{name: 'QTY 50K',     type: 'integer',  filterable: false},
 			{name: 'QTY 100K',    type: 'integer',  filterable: false},
-
-			{name: 'MOUNT BULK', type: 'integer', rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
-			{name: 'MOUNT LEGACY', type: 'integer', rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
-			{name: 'MOUNT DIGITAL',  type: 'integer',  rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
-			{name: 'MOUNT TCASH',      type: 'integer',   rowLabelable: false, summarizable: 'sum', displayFunction: value => accounting.formatMoney(value)},
 			{name: 'QTY LOW NSB',      type: 'integer',   filterable: true},
 			{name: 'QTY MIDDLE NSB',      type: 'integer',   filterable: true},
 			{name: 'QTY HIGH NSB',      type: 'integer',   filterable: true},
@@ -279,7 +268,7 @@
 
 		$(document).ready(function() {
 
-			setupPivot({json: dataStr, fields: fields, rowLabels:["MOUNT BULK", "MOUNT DIGITAL", "MOUNT TCASH"], columnLabels:["NAMA TDC"]})
+			setupPivot({json: dataStr, fields: fields, summaries:["MOUNT BULK SUM", "MOUNT DIGITAL SUM", "MOUNT TCASH SUM"], columnLabels:["NAMA TDC"]})
 
 			// prevent dropdown from closing after selection
 			$('.stop-propagation').click(function(event){

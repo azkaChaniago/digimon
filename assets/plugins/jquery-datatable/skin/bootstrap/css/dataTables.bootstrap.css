@@ -173,18 +173,28 @@ div.dataTables_scrollHead table.table-bordered {
 
 .dataTables_paginate.paging_bootstrap.pagination > ul > li {
   display: inline;
+  /* background-color: rgba(0,0,0,0.5); */
+}
+
+.dataTables_paginate.paging_bootstrap.pagination > ul > li > a {
+  background-color: #67ADE4;  
+  padding: 6px 12px;
+  line-height: 1.42857143;
+  color: #aad0ed;
+  text-decoration: none;
 }
 
 .dataTables_paginate.paging_bootstrap.pagination > ul > li.active > a {
-  background-color: #2196F3;
-  
+  background-color: #2196F3;  
   padding: 6px 12px;
-  margin: 2px;
   line-height: 1.42857143;
   color: #fff;
   text-decoration: none;
 }
 
-.prev {
+.dataTables_paginate.paging_bootstrap.pagination > ul > li.next > a,
+.dataTables_paginate.paging_bootstrap.pagination > ul > li.prev > a {
   display: inline;
+  background-color: rgba(0,0,0,0.0);
+  color: #959090;
 }

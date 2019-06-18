@@ -255,4 +255,48 @@ class Penjualanharian_model extends CI_Model
         }
     }
 
+    public function getAllJSON($tdc=null, $start=null, $end=null)
+    {
+        $this->db->select(
+            'tgl_penjualan,
+            status_tcash,
+            qty_simpati_nsb,
+            qty_middle_nsb,
+            qty_low_nsb,
+            qty_loop_nsb,
+            qty_high_nsb,
+            qty_as_nsb,
+            qty_5k,
+            qty_50k,
+            qty_25k,
+            qty_20k,
+            qty_10k,
+            qty_100k,
+            price_digital,
+            paket_max_digital,
+            no_msdn_digital,
+            msdn_tcash,
+            mount_legacy,
+            mount_bulk,
+            lokasi_penjualan,
+            nama_user,
+            nama_tdc,
+            nama_marketing,
+            m.divisi,
+            cashin_tcash'
+        );
+        $this->db->from($this->table . ' AS ev');
+        $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = ev.kode_tdc', 'left');
+        $this->db->join('tbl_marketing AS m', 'm.kode_marketing = ev.kode_marketing', 'left');
+        $this->db->join('tbl_user AS usr', 'usr.kode_user = ev.kode_user', 'left');
+        if ($start && $end) :
+            $this->db->where("ev.tgl_penjualan BETWEEN '$start' AND '$end'");
+        endif;
+        if ($tdc) :
+            $this->db->where('tdc.kode_tdc', $tdc);
+        endif;
+        return json_encode($this->db->get()->result());
+    }
+
 }
+

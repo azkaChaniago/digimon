@@ -36,6 +36,7 @@ class Saleling extends CI_Controller
         is_logged_in();
         $data = $this->userSession();  
         $data['saleling'] = $this->saleling_model->getRelated(null);
+        $data['json'] = $this->saleling_model->getAllJSON(null);
         $this->load->view('admindirect/saleling/list', $data);
     }
 

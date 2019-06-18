@@ -37,6 +37,7 @@ class Hvc extends CI_Controller
         is_logged_in();
         $data = $this->userSession();    
         $data['hvc'] = $this->hvc_model->getRelated();
+        $data['json'] = $this->hvc_model->getAllJSON();
         $this->load->view('admindirect/hvc/list', $data);
     }
 

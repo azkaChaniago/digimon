@@ -210,4 +210,27 @@ class Saleling_model extends CI_Model
         }
     }
 
+    public function getAllJSON($tdc=null, $start=null, $end=null)
+    {
+        $this->db->select('
+            nama_tdc,
+            m.divisi,
+            tanggal,
+            nama_marketing,
+            lokasi_saleling,
+            nama_user
+        ');
+        $this->db->from($this->table . ' AS s');
+        $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = s.kode_tdc', 'left');
+        $this->db->join('tbl_marketing AS m', 'm.kode_marketing = s.kode_marketing', 'left');
+        $this->db->join('tbl_user AS usr', 'usr.kode_user = s.kode_user', 'left');
+        if ($start && $end) :
+            $this->db->where("s.tanggal BETWEEN '$start' AND '$end'");
+        endif;
+        if ($tdc):
+            $this->db->where('tdc.kode_tdc', $tdc);
+        endif;
+        return json_encode($this->db->get()->result());
+    }
+
 }

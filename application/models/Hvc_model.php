@@ -278,4 +278,42 @@ class Hvc_model extends CI_Model
         }
     }
 
+    public function getAllJSON($tdc=null, $start=null, $end=null)
+    {
+        $this->db->select('
+            nama_tdc,
+            tgl_hvc,
+            nama_marketing,
+            nama_mercent,
+            longlat_lokasi_mercent,
+            latitude_lokasi_mercent,
+            alamat_hvc,
+            qty_5k,
+            qty_10k,
+            qty_20k,
+            qty_25k,
+            qty_50k,
+            qty_100k,
+            mount_bulk,
+            qty_low_nsb,
+            qty_middle_nsb,
+            qty_high_nsb,
+            qty_as_nsb,
+            qty_simpati_nsb,
+            qty_loop_nsb,
+            keterangan_kegiatan,
+            nama_user
+        ');
+        $this->db->from($this->table . ' AS ev');
+        $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = ev.kode_tdc', 'left');
+        $this->db->join('tbl_marketing AS m', 'm.kode_marketing = ev.kode_marketing', 'left');
+        $this->db->join('tbl_user AS usr', 'usr.kode_user = ev.kode_user', 'left');
+        if ($start && $end) :
+            $this->db->where("ev.tgl_hvc BETWEEN '$start' AND '$end'");
+        endif;
+        if ($tdc)
+            $this->db->where('ev.kode_tdc', $tdc);
+        return json_encode($this->db->get()->result());
+    }
+
 }

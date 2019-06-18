@@ -2,15 +2,12 @@
 .subnav {
   width: 100%;
   height: 36px;
-<<<<<<< HEAD
   background-color: #fff; /* Old browsers */
   background-repeat: repeat-x; /* Repeat the gradient */
   
   -webkit-border-radius: 0px;
      -moz-border-radius: 0px;
           border-radius: 0px;
-=======
->>>>>>> e4fee6631ca22c3e229b108098e86b0e6ff5d587
 }
 .subnav .nav {
   margin-bottom: 0;

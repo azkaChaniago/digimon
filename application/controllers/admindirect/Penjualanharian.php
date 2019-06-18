@@ -36,6 +36,7 @@ class Penjualanharian extends CI_Controller
         is_logged_in();
         $data = $this->userSession();
         $data['penjualanharian'] = $this->penjualanharian_model->getRelated(null);
+        $data['json'] = $this->penjualanharian_model->getAllJSON();
         $this->load->view('admindirect/penjualanharian/list', $data);
     }
 
