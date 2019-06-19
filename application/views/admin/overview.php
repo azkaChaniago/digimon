@@ -14,7 +14,7 @@
         <div class="container-fluid">
 
          <!-- Area Chart Example-->
-          <div class="card">
+          <!-- <div class="card">
             <div class="header">
             <h2><i class="material-icons">bar_chart</i> Performansi : <?php echo date('F Y') ?></h2>
             <div id="responsecontainer" text-align="center"></div>
@@ -49,10 +49,7 @@
               <canvas id="canvas" width="100%" height="30"></canvas>  
             </div>
           </div>
-        </div>
-        <!-- <?php foreach ($chart as $c):
-          echo $c->nama_marketing;
-        endforeach; ?> -->
+        </div> -->
     </section>
     <!-- /#wrapper -->
 

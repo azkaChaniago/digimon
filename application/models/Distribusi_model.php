@@ -100,7 +100,7 @@ class Distribusi_model extends CI_Model {
         $tanggal = date('Y-m-d', strtotime($post['tanggal']));
         $data = array(
             'tanggal' => $this->tanggal = $tanggal,
-            'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
+            'kode_marketing' => $this->kode_marketing = strtoupper($post['kode_marketing']),
             'new_opening_outlet' => $this->new_opening_outlet = $post['new_opening_outlet'],
             'outlet_aktif_digital' => $this->outlet_aktif_digital = $post['outlet_aktif_digital'],
             'outlet_aktif_voucher' => $this->outlet_aktif_voucher = $post['outlet_aktif_voucher'],
@@ -122,7 +122,7 @@ class Distribusi_model extends CI_Model {
         $tanggal = date('Y-m-d', strtotime($post['tanggal']));
         $data = array(
             'tanggal' => $this->tanggal = $tanggal,
-            'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
+            'kode_marketing' => $this->kode_marketing = strtoupper($post['kode_marketing']),
             'new_opening_outlet' => $this->new_opening_outlet = $post['new_opening_outlet'],
             'outlet_aktif_digital' => $this->outlet_aktif_digital = $post['outlet_aktif_digital'],
             'outlet_aktif_voucher' => $this->outlet_aktif_voucher = $post['outlet_aktif_voucher'],

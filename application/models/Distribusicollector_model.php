@@ -86,7 +86,7 @@ class Distribusicollector_model extends CI_Model {
         $tanggal = date('Y-m-d', strtotime($post['tanggal']));
         $data = array(
             'tanggal' => $this->tanggal = $tanggal,
-            'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
+            'kode_marketing' => $this->kode_marketing = strtoupper($post['kode_marketing']),
             'new_rs_non_outlet' => $this->new_rs_non_outlet = $post['new_rs_non_outlet'],
             'nsb' => $this->nsb = $post['nsb'],
             'gt_pulsa' => $this->gt_pulsa = $post['gt_pulsa'],
@@ -103,7 +103,7 @@ class Distribusicollector_model extends CI_Model {
         $tanggal = date('Y-m-d', strtotime($post['tanggal']));
         $data = array(
             'tanggal' => $this->tanggal = $tanggal,
-            'kode_marketing' => $this->kode_marketing = $post['kode_marketing'],
+            'kode_marketing' => $this->kode_marketing = strtoupper($post['kode_marketing']),
             'new_rs_non_outlet' => $this->new_rs_non_outlet = $post['new_rs_non_outlet'],
             'nsb' => $this->nsb = $post['nsb'],
             'gt_pulsa' => $this->gt_pulsa = $post['gt_pulsa'],
