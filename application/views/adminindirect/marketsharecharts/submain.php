@@ -79,6 +79,15 @@
 				maintainAspectRatio: false,
 				legend: {
 					position: 'right'
+				},
+				plugins: {
+					datalabels: {
+						color: '#000',
+						display: true,
+						align: 'center',
+						anchor: 'center',
+                        formatter: val => Math.round(val) + '%'
+					}
 				}
 			}
 		});

@@ -164,7 +164,16 @@
                             max: 1
                         }
                     }]
-                }
+                },
+				plugins: {
+					datalabels: {
+						color: '#000',
+						display: true,
+						align: 'center',
+						anchor: 'center',
+                        formatter: val => Math.round(val*100) + '%'
+					}
+				}
             }
         });
         // var can_month = data_kpi.map(k => k.bulan)[0];
@@ -231,7 +240,16 @@
                             max: 1
                         }
                     }]
-                }
+                },
+				plugins: {
+					datalabels: {
+						color: '#000',
+						display: true,
+						align: 'center',
+						anchor: 'center',
+                        formatter: val => Math.round(val*100) + '%'
+					}
+				}
             }
         });
         var col_month = data_collector.map(k => k.bulan)[0];

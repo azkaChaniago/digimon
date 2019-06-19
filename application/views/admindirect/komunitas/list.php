@@ -147,7 +147,16 @@
                             beginAtZero:true,
                         }
                     }]
-                }
+                },
+				plugins: {
+					// Change options for ALL labels of THIS CHART
+					datalabels: {
+						color: '#000',
+						display: true,
+						align: 'center',
+						anchor: 'center',
+					}
+				}
             }
         });
 	</script>

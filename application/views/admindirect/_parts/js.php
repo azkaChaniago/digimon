@@ -18,9 +18,8 @@
 <?php if ($this->uri->segment(2) == 'mercent' || $this->uri->segment(2) == 'komunitas' || $this->uri->segment(2) == 'downlinegt' || $this->uri->segment(2) == 'marketsharesekolah') : ?>
     
     <!-- ChartJs -->
-    <!-- <script src="<?php echo base_url('assets/plugins/chartjs/Chart.bundle.js') ?>"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@1" type="module"></script>     -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.6.0/dist/chartjs-plugin-datalabels.min.js"></script>
     
 <?php endif; ?>
 

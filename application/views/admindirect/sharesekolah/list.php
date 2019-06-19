@@ -282,6 +282,12 @@
 				        }
 				      });               
 				    }
+				},
+				plugins: {
+					datalabels: {
+						color: '#000',
+						display: false,
+					}
 				}				
 			},
 		});
@@ -368,6 +374,16 @@
 					yAxes: [{
 						stacked: true
 					}]
+				},
+				plugins: {
+					// Change options for ALL labels of THIS CHART
+					datalabels: {
+						color: '#000',
+						display: true,
+						align: 'center',
+						anchor: 'center',
+						formatter: val => val + '%',
+					}
 				}
 			}
 		});
@@ -465,6 +481,16 @@
 					yAxes: [{
 						stacked: true
 					}]
+				},
+				plugins: {
+					// Change options for ALL labels of THIS CHART
+					datalabels: {
+						color: '#000',
+						display: true,
+						align: 'center',
+						anchor: 'center',
+						formatter: val => val + '%',
+					}
 				}
 			}
 		});
