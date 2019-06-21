@@ -31,6 +31,20 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="body">
+                        <canvas id="progress" width="100%" height="30"></canvas>
+                        </div>
+                    </div>       
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><i class="material-icons">bar_chart</i> Performansi : <?php echo isset($perform->nama_marketing) ? $perform->nama_marketing . " Bulan " . $perform->bulan : "" ?></h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -71,6 +85,7 @@
                         </div>
                     </div>        
                 </div>
+            </div>
             </div>
         </div>
     </section>
@@ -131,14 +146,31 @@
             }
         });
 
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const target_assignment = <?= $ta ?>;
+        const score_card = <?= $sc ?>;
+        const d = new Date(target_assignment[2].tanggal);
+        console.log(monthNames[new Date(target_assignment[2].tanggal).getMonth()])
+
+        const kpi = target_assignment.map( (item, k) => {
+            if (typeof score_card[k] === 'undefined') {
+                return 0;
+            } else {
+                return Number(((((item.new_rs_non_outlet / score_card[k].new_rs_non_outlet) * 25) / 100) +
+                    (((item.nsb / score_card[k].nsb) * 25) / 100) +
+                    (((item.gt_pulsa / score_card[k].gt_pulsa) * 25) / 100) +
+                    (((item.collecting  / score_card[k].collecting ) * 25) / 100)).toFixed(2));
+            }
+        })
+
         var cty = document.getElementById("progress").getContext('2d');
         var myLineChart = new Chart(cty, {
             type: 'line',
             data: {
-                labels: Object.keys(perf_json),
+                labels: target_assignment.map(k => monthNames[new Date(k.tanggal).getMonth()]),
                 datasets: [{
-                    label: 'Performansi <?php echo isset($perform->nama_marketing) ? $perform->nama_marketing : "" ?> ',
-                    data: Object.values(perf_json),
+                    label: 'Performansi <?php echo isset($progress->bulan) ? $progress->bulan : "" ?> ',
+                    data: kpi.map(k => k),
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgba(255,99,132,1)',
                     borderWidth: 1,
@@ -160,7 +192,15 @@
                             max: 100
                         }
                     }]
-                }
+                },
+                plugins: {
+					datalabels: {
+						color: '#000',
+						display: true,
+						align: 'center',
+						anchor: 'center',
+					}
+				}
             }
         });
 

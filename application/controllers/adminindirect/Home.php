@@ -107,6 +107,9 @@ class Home extends CI_Controller {
         $data['perform'] = $this->admin_model->performanceCollector($kode, $bulan);
         $data['targetassignment'] = $this->admin_model->getThisTableRecord('tbl_target_assignment_collector', $condition);
         $data['scorecard'] = $this->admin_model->getThisTableRecord('tbl_score_card_collector', $condition);
+
+        $data['ta'] = $this->admin_model->getTargetAssignmentCollector($kode, $tahun);
+        $data['sc'] = $this->admin_model->getScoreCardCollector($kode, $tahun);
         
         if ($data['perform'])
         {

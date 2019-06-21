@@ -233,6 +233,40 @@ class Admin_model extends CI_Model
         return json_encode($this->db->query($query)->result());
     }
 
+    public function getTargetAssignmentCollector($kode, $tanggal)
+    {
+        $query = "SELECT 
+                        tanggal,
+                        m.kode_marketing,
+                        new_rs_non_outlet,
+                        nsb,
+                        gt_pulsa,
+                        collecting
+                    FROM tbl_target_assignment_collector ta
+                    INNER JOIN tbl_marketing m ON ta.kode_marketing = m.kode_marketing
+                    WHERE m.kode_marketing = '" . $kode . "' AND year(tanggal) = '" . date('Y', strtotime($tanggal)) . "' GROUP BY monthname(tanggal)
+                    ORDER BY tanggal ASC";
+        
+        return json_encode($this->db->query($query)->result());
+    }
+
+    public function getScoreCardCollector($kode, $tanggal)
+    {
+        $query = "SELECT 
+                        tanggal,
+                        m.kode_marketing,
+                        sum(new_rs_non_outlet) new_rs_non_outlet,
+                        sum(nsb) nsb,
+                        sum(gt_pulsa) gt_pulsa,
+                        sum(collecting) collecting
+                    FROM tbl_score_card_collector ta
+                    INNER JOIN tbl_marketing m ON ta.kode_marketing = m.kode_marketing
+                    WHERE m.kode_marketing = '" . $kode . "' AND year(tanggal) = " . date('Y', strtotime($tanggal)) . " GROUP BY monthname(tanggal)
+                    ORDER BY tanggal ASC";
+        
+        return json_encode($this->db->query($query)->result());
+    }
+
 }
 
 
