@@ -127,7 +127,7 @@
             labels = data_kpi.map(k => k.nama_marketing);
         }
         
-        console.log(data_kpi);
+        // console.log(data_kpi);
 
         var backgroundColor = [];
 		var borderColor = [];
@@ -204,7 +204,7 @@
             labels = data_collector.map(k => k.nama_marketing);
         }
 
-        console.log(data_collector);
+        // console.log(data_collector);
         var backgroundColor = [];
 		var borderColor = [];
 		var i = 0;
@@ -271,6 +271,23 @@
                 }
             });
         };
+
+        const target_assignment = <?= $target_assignment ?>;
+        const score_card = <?= $score_card ?>;
+
+        const kpi = target_assignment.map( (item, k) => {
+           return Number(((((item.new_opening_outlet / score_card[k].new_opening_outlet) * 3) / 100) +
+                    (((item.outlet_aktif_digital / score_card[k].outlet_aktif_digital) * 9) / 100) +
+                    (((item.outlet_aktif_voucher / score_card[k].outlet_aktif_voucher) * 5) / 100) +
+                    (((item.outlet_aktif_bang_tcash  / score_card[k].outlet_aktif_bang_tcash ) * 5) / 100) +
+                    (((item.sales_perdana / score_card[k].sales_perdana) * 3) / 100) +
+                    (((item.nsb / score_card[k].nsb) * 15) / 100) +
+                    (((item.mkios_bulk / score_card[k].mkios_bulk) * 25) / 100) +
+                    (((item.gt_pulsa / score_card[k].gt_pulsa) * 15) / 100) +
+                    (((item.mkios_reguler / score_card[k].mkios_reguler) * 20) / 100)).toFixed(2));
+        // console.log(Number(graph.toFixed(2)));
+        })
+        console.log(kpi);
 
     </script>
     

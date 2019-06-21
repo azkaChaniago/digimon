@@ -59,7 +59,9 @@ class Home extends CI_Controller {
             'id' => $this->session->userdata('id'),
             'user' => $this->session->userdata('user'),
             'kpi_canvasser' => $kpi_canvasser,
-            'kpi_collector' => $kpi_collector
+            'kpi_collector' => $kpi_collector,
+            'target_assignment' => $this->admin_model->getTargetAssignment('012', '2019-02-01'),
+            'score_card' => $this->admin_model->getScoreCard('012', '2019-02-01')
             // 'perform' => $this->admin_model->performance($div, $lim),
         );
 
@@ -80,6 +82,8 @@ class Home extends CI_Controller {
         $data['targetassignment'] = $this->admin_model->getThisTableRecord('tbl_target_assignment', $condition);
         $data['scorecard'] = $this->admin_model->getThisTableRecord('tbl_score_card', $condition);
         $data['progress'] = $this->admin_model->getKPIProgress($awal, $akhir, $kode);
+        $data['target_assignment'] = $this->admin_model->getTargetAssignment($kode, $tahun);
+        $data['score_card'] = $this->admin_model->getScoreCard($kode, $tahun);
 
         if ($data['perform'])
         {
@@ -116,3 +120,4 @@ class Home extends CI_Controller {
     }
 
 }
+

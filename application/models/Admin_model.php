@@ -188,4 +188,51 @@ class Admin_model extends CI_Model
 
         return $res;
     }
+
+    public function getTargetAssignment($kode, $tanggal)
+    {
+        $query = "SELECT 
+                    tanggal,
+                    nama_marketing,
+                    new_opening_outlet,
+                    outlet_aktif_digital,
+                    outlet_aktif_voucher,
+                    outlet_aktif_bang_tcash, 
+                    sales_perdana,
+                    nsb,
+                    mkios_bulk,
+                    gt_pulsa,
+                    mkios_reguler
+                FROM tbl_target_assignment ta 
+                INNER JOIN tbl_marketing m ON ta.kode_marketing = m.kode_marketing
+                WHERE m.kode_marketing = '" . $kode . "' AND year(tanggal) = " . date('Y', strtotime($tanggal)) . " GROUP BY monthname(tanggal)
+                ORDER BY tanggal ASC";
+        
+        return json_encode($this->db->query($query)->result());
+    }
+
+    public function getScoreCard($kode, $tanggal)
+    {
+        $query = "SELECT 
+                    tanggal,
+                    nama_marketing,
+                    sum(new_opening_outlet) new_opening_outlet,
+                    sum(outlet_aktif_digital) outlet_aktif_digital,
+                    sum(outlet_aktif_voucher) outlet_aktif_voucher,
+                    sum(outlet_aktif_bang_tcash) outlet_aktif_bang_tcash, 
+                    sum(sales_perdana) sales_perdana,
+                    sum(nsb) nsb,
+                    sum(mkios_bulk) mkios_bulk,
+                    sum(gt_pulsa) gt_pulsa,
+                    sum(mkios_reguler) mkios_reguler
+                FROM tbl_score_card ta 
+                INNER JOIN tbl_marketing m ON ta.kode_marketing = m.kode_marketing
+                WHERE m.kode_marketing = '" . $kode . "' AND year(tanggal) = " . date('Y', strtotime($tanggal)) . " GROUP BY monthname(tanggal)
+                ORDER BY tanggal ASC";
+        
+        return json_encode($this->db->query($query)->result());
+    }
+
 }
+
+

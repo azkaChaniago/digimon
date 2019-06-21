@@ -157,16 +157,36 @@
 
         var progress_json = JSON.parse(<?php echo "'" . json_encode(isset($progress) ? $progress : false) . "'" ?>);
 
-        console.log(progress_json);
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const target_assignment = <?= $target_assignment ?>;
+        const score_card = <?= $score_card ?>;
+        const d = new Date(target_assignment[2].tanggal);
+        console.log(monthNames[new Date(target_assignment[2].tanggal).getMonth()])
+
+        const kpi = target_assignment.map( (item, k) => {
+            if (typeof score_card[k] === 'undefined') {
+                return 0;
+            } else {
+                return Number(((((item.new_opening_outlet / score_card[k].new_opening_outlet) * 3) / 100) +
+                    (((item.outlet_aktif_digital / score_card[k].outlet_aktif_digital) * 9) / 100) +
+                    (((item.outlet_aktif_voucher / score_card[k].outlet_aktif_voucher) * 5) / 100) +
+                    (((item.outlet_aktif_bang_tcash  / score_card[k].outlet_aktif_bang_tcash ) * 5) / 100) +
+                    (((item.sales_perdana / score_card[k].sales_perdana) * 3) / 100) +
+                    (((item.nsb / score_card[k].nsb) * 15) / 100) +
+                    (((item.mkios_bulk / score_card[k].mkios_bulk) * 25) / 100) +
+                    (((item.gt_pulsa / score_card[k].gt_pulsa) * 15) / 100) +
+                    (((item.mkios_reguler / score_card[k].mkios_reguler) * 20) / 100)).toFixed(2));
+            }
+        })
 
         var cty = document.getElementById("progress").getContext('2d');
         var myLineChart = new Chart(cty, {
             type: 'line',
             data: {
-                labels: progress_json.map(k => k.bulan),
+                labels: target_assignment.map(k => monthNames[new Date(k.tanggal).getMonth()]),
                 datasets: [{
                     label: 'Performansi <?php echo isset($progress->bulan) ? $progress->bulan : "" ?> ',
-                    data: progress_json.map(k => k.total_kpi),
+                    data: kpi.map(k => k),
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgba(255,99,132,1)',
                     borderWidth: 1,
@@ -199,8 +219,6 @@
 				}
             }
         });
-
-
     </script>
     
 </body>
