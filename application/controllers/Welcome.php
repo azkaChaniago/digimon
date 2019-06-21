@@ -29,7 +29,7 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('all_posts', $data);
+		redirect(site_url('login'));
 	}
 
 }

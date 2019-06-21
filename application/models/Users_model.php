@@ -29,7 +29,7 @@ class Users_model extends CI_Model
         // return $this->db->get($this->table)->result();
         $this->db->select('*');
         $this->db->from($this->table . ' AS u');
-        $this->db->join('tbl_tdc AS t', 'u.kode_user = t.kode_user', 'inner');
+        $this->db->join('tbl_tdc AS t', 'u.kode_tdc = t.kode_tdc', 'inner');
         return $this->db->get()->result();
     }
 
