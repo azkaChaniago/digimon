@@ -84,7 +84,7 @@
 								<!-- <p>With Search Bar</p> -->
 								<select class="form-control show-tick" name="level" data-live-search="true">
 									<option value="">--- Pilih TDC ---</option>
-									<option value="ADMIN">ADMIN</option>
+									<option value="ADMINISTRATOR">ADMIN</option>
 									<option value="ADM_DIRECT">VIEW DIRECT</option>
 									<option value="ADM_INDIRECT">VIEW INDIRECT</option>
 									<option value="DIRECT">DIRECT</option>

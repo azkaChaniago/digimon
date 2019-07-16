@@ -40,18 +40,18 @@
 								</div>
 							</div>
 
-							<div class="form-group form-float">
+							<!-- <div class="form-group form-float">
 								<div class="form-line">
 								<input class="form-control"	type="text" name="level" value="<?php echo $user->level ?>" required/>
 									<label class="form-label" for="level">Level*</label>
 								</div>
-							</div>
+							</div> -->
 
 							<div class="form-group form-float">
 								<!-- <p>With Search Bar</p> -->
 								<select class="form-control show-tick" name="level" data-live-search="true">
 									<option value="">--- Pilih TDC ---</option>
-									<option value="ADMIN" <?= $user->level == 'ADMIN' ? "selected" : "" ?>>ADMIN</option>
+									<option value="ADMINISTRATOR" <?= $user->level == 'ADMIN' ? "selected" : "" ?>>ADMIN</option>
 									<option value="ADM_DIRECT" <?= $user->level == 'VIEW DIRECT' ? "selected" : "" ?>>VIEW DIRECT</option>
 									<option value="ADM_INDIRECT" <?= $user->level == 'VIEW INDIRECT' ? "selected" : "" ?>>VIEW INDIRECT</option>
 									<option value="DIRECT" <?= $user->level == 'DIRECT' ? "selected" : "" ?>>DIRECT</option>
