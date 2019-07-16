@@ -18,20 +18,8 @@
 				<div class="row">
 					<div class="col-md-6"><h2>User Management</h2></div>
 					<div class="col-md-6" style="text-align: right">
-						<?php
-						// print_r(array_filter($tdc));
-						// echo "<br>sdasdasdasdasd<br>";
-						// print_r($tdc);
-						
-						if($tdc) { ?>
-							
-							<h2><a href="<?php echo site_url('admin/user/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-							<span>Tambah<span></a></h2>
-						<?php
-						} else { ?>
-							<h2><a href="#" class="btn btn-warning waves-effect"><i class="material-icons" disabled>add</i>
-							<span>Tambah<span></a></h2>
-						<?php } ?>
+						<h2><a href="<?php echo site_url('admin/user/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+						<span>Tambah<span></a></h2>
 						<!-- <a href="<?php echo site_url('admin/user/export') ?>" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
 						<span>Export Excel<span></a>
 						<a href="<?php echo site_url('admin/user/exportpdf') ?>" class="btn btn-danger waves-effect" target="blank"><i class="material-icons">save_alt</i>
@@ -43,7 +31,6 @@
 					<?php echo $this->session->userdata('error') ?>
 				<?php endif; ?>
 
-				<!-- <?php print_r($user) ?> -->
 				<div class="body">
 					<div class="table-responsive">
 						<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
@@ -69,7 +56,7 @@
 									</td>
 									<td width='180' class="text-center" >
 										<a href="<?php echo site_url('admin/user/edit/'.$u->kode_user) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('admin/user/delete/'.$u->kode_user) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('admin/user/remove/'.$u->kode_user) ?>')" href="#!"><i class="material-icons">delete</i></a>
 										<a href="<?php echo site_url('admin/user/detail/'.$u->kode_user) ?>"><i class="material-icons">description</i></a>	
 									</td>
 								</tr>

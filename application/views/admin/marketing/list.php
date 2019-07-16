@@ -69,7 +69,7 @@
 									</td>
 									<td width='180' class="text-center" >
 										<a href="<?php echo site_url('admin/marketing/edit/'.$mar->kode_marketing) ?>"><i class="material-icons">edit</i></a>
-										<a onclick="deleteConfirm('<?php echo site_url('admin/marketing/delete/'.$mar->kode_marketing) ?>')" href="#!"><i class="material-icons">delete</i></a>
+										<a onclick="deleteConfirm('<?php echo site_url('admin/marketing/remove/'.$mar->kode_marketing) ?>')" href="#!"><i class="material-icons">delete</i></a>
 										<a href="<?php echo site_url('admin/marketing/detail/'.$mar->kode_marketing) ?>"><i class="material-icons">description</i></a>	
 									</td>
 								</tr>

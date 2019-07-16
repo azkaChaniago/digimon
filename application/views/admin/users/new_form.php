@@ -73,11 +73,23 @@
 								</div>
 							</div>
 
-							<div class="form-group form-float">
+							<!-- <div class="form-group form-float">
 								<div class="form-line">
 								<input class="form-control"	type="text" name="level" required/>
 									<label class="form-label" for="level">Level*</label>
 								</div>
+							</div> -->
+
+							<div class="form-group form-float">
+								<!-- <p>With Search Bar</p> -->
+								<select class="form-control show-tick" name="level" data-live-search="true">
+									<option value="">--- Pilih TDC ---</option>
+									<option value="ADMIN">ADMIN</option>
+									<option value="ADM_DIRECT">VIEW DIRECT</option>
+									<option value="ADM_INDIRECT">VIEW INDIRECT</option>
+									<option value="DIRECT">DIRECT</option>
+									<option value="INDIRECT">INDIRECT</option>
+								</select>
 							</div>
 
 							<div class="form-group form-float">
@@ -107,7 +119,7 @@
 								<select class="form-control show-tick" 
 								name="kode_tdc" data-live-search="true">
 									<option value="">--- Pilih TDC ---</option>
-									<?php foreach($empty as $e) : ?>
+									<?php foreach($tdc as $e) : ?>
 										<option value="<?php echo $e->kode_tdc ?>" ><?php echo $e->nama_tdc ?></option>
 									<?php endforeach; ?>
 								</select>

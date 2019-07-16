@@ -115,13 +115,13 @@
 								</div>
 							</div>
 
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<div class="form-line">
 									<input class="form-control" name="images[]" type="file" multiple />
 								</div>
-							</div>
+							</div> -->
 
-							<input type="text" value="<?php print_r(json_decode($outlet->galeri_foto)) ?>" name="galeri_lama"/>
+							<!-- <input type="text" value="<?php print_r(json_decode($outlet->galeri_foto)) ?>" name="galeri_lama"/> -->
 
 
 						</div>

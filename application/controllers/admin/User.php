@@ -18,7 +18,7 @@ class User extends CI_Controller
         is_logged_in();
         
         $data['user'] = $this->users_model->getAll();        
-        $data['tdc'] = $this->users_model->hasEmptyField('tbl_tdc', 'kode_user');
+        // $data['tdc'] = $this->users_model->hasEmptyField('tbl_tdc', 'kode_user');
         $this->load->view('admin/users/list', $data);
     }
 
@@ -31,6 +31,7 @@ class User extends CI_Controller
 
         if ($validation->run())
         {
+            // die("sdsd");
             $user->save();
             // if (!$user->save())
             // {
@@ -43,7 +44,7 @@ class User extends CI_Controller
 
         $data['user'] = $this->users_model->getTDC();
         $data['tdc'] = $this->users_model->getThisTableRecord('tbl_tdc');
-        $data['empty'] = $this->users_model->hasEmptyField('tbl_tdc', 'kode_user');
+        // $data['empty'] = $this->users_model->hasEmptyField('tbl_tdc', 'kode_user');
         $this->load->view('admin/users/new_form', $data);
     }
 
@@ -65,7 +66,7 @@ class User extends CI_Controller
 
         $data['user'] = $user->getById($id);
         $data['tdc'] = $user->getThisTableRecord('tbl_tdc');
-        $data['empty'] = $this->users_model->hasEmptyField('tbl_tdc', 'kode_user');
+        // $data['empty'] = $this->users_model->hasEmptyField('tbl_tdc', 'kode_user');
         if (!$data['user']) show_404();
 
         $this->load->view('admin/users/edit_form', $data);

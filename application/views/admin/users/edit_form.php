@@ -48,6 +48,18 @@
 							</div>
 
 							<div class="form-group form-float">
+								<!-- <p>With Search Bar</p> -->
+								<select class="form-control show-tick" name="level" data-live-search="true">
+									<option value="">--- Pilih TDC ---</option>
+									<option value="ADMIN" <?= $user->level == 'ADMIN' ? "selected" : "" ?>>ADMIN</option>
+									<option value="ADM_DIRECT" <?= $user->level == 'VIEW DIRECT' ? "selected" : "" ?>>VIEW DIRECT</option>
+									<option value="ADM_INDIRECT" <?= $user->level == 'VIEW INDIRECT' ? "selected" : "" ?>>VIEW INDIRECT</option>
+									<option value="DIRECT" <?= $user->level == 'DIRECT' ? "selected" : "" ?>>DIRECT</option>
+									<option value="INDIRECT" <?= $user->level == 'INDIRECT' ? "selected" : "" ?>>INDIRECT</option>
+								</select>
+							</div>
+
+							<div class="form-group form-float">
 								<div class="form-line">
 								<input class="form-control"	type="password" name="password" value="<?php echo $user->password ?>" required/>
 									<label class="form-label" for="password">Password*</label>

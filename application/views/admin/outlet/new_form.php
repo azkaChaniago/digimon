@@ -115,11 +115,11 @@
 								</div>
 							</div>
 
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<div class="form-line">
 									<input class="form-control" name="images[]" type="file" multiple />
 								</div>
-							</div>
+							</div> -->
 						</div>
 						<div class="clearfix"></div>
 						<input class="btn btn-primary waves-effect" type="submit" name="btn" value="Simpan" />

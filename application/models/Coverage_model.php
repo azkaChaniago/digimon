@@ -65,7 +65,7 @@ class Coverage_model extends CI_Model
         }
     }
 
-    public function getRelated($tdc)
+    public function getRelated($tdc=null)
     {
         $this->db->select('*');
         $this->db->from($this->table . ' AS o');
@@ -172,19 +172,19 @@ class Coverage_model extends CI_Model
             $_FILES['image']['error'] = $_FILES['images']['error'][$i];
             $_FILES['image']['size'] = $_FILES['images']['size'][$i];
             
-            $config['upload_path'] = './upload/outlet/';
+            $config['upload_path'] = '/upload/outlet/';
             $config['allowed_types'] = 'gif|jpg|png';
             $config['file_name'] = strtoupper($_POST['id_outlet']) . "_" . uniqid();
             $config['overwrite'] = true;
             $config['max_size'] = 5120;
-
+            
             $this->load->library('upload', $config);            
             $this->upload->initialize($config);
 
             if (!$this->upload->do_upload('image'))
-            {
+            {   
                 $error = array('error' => $this->upload->display_errors());
-                $this->load->view('indirect/outlet/new_form', $error);
+                $this->load->view('admin/outlet/new_form', $error);
             }
             else
             {
