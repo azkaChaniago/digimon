@@ -56,12 +56,13 @@ class Historiorder_model extends CI_Model
         return $this->db->get_where($this->table, ['id_histori_order' => $id])->row();
     }
 
-    public function getThisTableRecord($table, $where)
+    public function getThisTableRecord($table, $condition=null)
     {   
-        $this->db->select('*');
-        $this->db->from($table);
-        $this->db->where('kode_tdc', $where);
-        return $this->db->get()->result(); 
+        if ($condition) {
+            return $this->db->query("SELECT * FROM $table WHERE $condition")->result();
+        } else {
+            return $this->db->query("SELECT * FROM $table")->result();
+        }
     }
 
     public function save()

@@ -19,7 +19,8 @@ class Historiorder extends CI_Controller
             'status' => $this->session->userdata('login'),
             'access' => $this->session->userdata('access'),
             'id' => $this->session->userdata('id'),
-            'user' => $this->session->userdata('user')
+            'user' => $this->session->userdata('user'),
+            'tdc' => $this->session->userdata('tdc'),
         );
 
         return $data;
@@ -53,10 +54,10 @@ class Historiorder extends CI_Controller
         // {
         //     echo validation_errors();
         // }
-        // $data = $this->userSession();
-        $data['users'] = $this->historiorder_model->userList();
-        $data['marketing'] = $this->historiorder_model->getThisTableRecord('tbl_marketing');
-        $data['outlet'] = $this->historiorder_model->getThisTableRecord('tbl_outlet');
+        $data = $this->userSession();
+        
+        $data['marketing'] = $this->historiorder_model->getThisTableRecord('tbl_marketing', $condition);
+        $data['outlet'] = $this->historiorder_model->getThisTableRecord('tbl_outlet', null);
         $this->load->view('admin/historiorder/new_form', $data);
     }
 

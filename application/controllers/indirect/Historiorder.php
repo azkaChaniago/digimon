@@ -62,8 +62,9 @@ class Historiorder extends CI_Controller
         }
         $data = $this->userSession();
         $data['users'] = $this->historiorder_model->userList();
-        $data['marketing'] = $this->historiorder_model->getThisTableRecord('tbl_marketing', $data['tdc']);
-        $data['outlet'] = $this->historiorder_model->getThisTableRecord('tbl_outlet', $data['tdc']);
+        $condition = "kode_tdc = '$data[tdc]' AND (divisi = 'canvasser' OR divisi = 'collector')";
+        $data['marketing'] = $this->historiorder_model->getThisTableRecord('tbl_marketing', $condition);
+        $data['outlet'] = $this->historiorder_model->getThisTableRecord('tbl_outlet', "kode_tdc = $data[tdc]");
         $this->load->view('indirect/historiorder/new_form', $data);
     }
 
