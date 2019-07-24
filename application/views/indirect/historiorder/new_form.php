@@ -98,13 +98,13 @@
 								<label class="form-label" for="mkios_bulk">MKIOS Bulk*</label>
 							</div>
 						</div>
-						<div class="form-group form-float">
+						<!-- <div class="form-group form-float">
 							<div class="form-line">
 							<input class="form-control <?php echo form_error('gt_pulsa') ? 'is-invalid':'' ?>"
 								type="text" name="gt_pulsa" onkeypress="return isNumberKey(event)" required/>
 								<label class="form-label" for="gt_pulsa">GT Pulsa*</label>
 							</div>
-						</div>						
+						</div>						 -->
 						<input class="btn btn-primary waves-effect" type="submit" name="btn" value="Simpan" />
 					</form>
 

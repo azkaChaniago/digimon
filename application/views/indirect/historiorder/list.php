@@ -17,7 +17,7 @@
 		<div class="card">
 			<div class="header">
 				<div class="row">
-					<form action="<?php echo site_url('indirect/historiorder/fetchperiode') ?>" method="post">
+					<form action="<?= site_url('indirect/historiorder/fetchperiode') ?>" method="post">
 						<div class="col-md-5">
 							<div class="form-group form-float">
 								<div class="form-line" id="bs_datepicker_container">
@@ -51,11 +51,11 @@
 				<div class="row">
 					<div class="col-md-6"><h2>Histori Order</h2></div>
 					<div class="col-md-6" style="text-align: right">
-						<h2><a href="<?php echo site_url('indirect/historiorder/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+						<h2><a href="<?= site_url('indirect/historiorder/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
 						<span>Tambah<span></a>
-						<!-- <a href="<?php echo site_url('indirect/historiorder/export') ?>" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
+						<!-- <a href="<?= site_url('indirect/historiorder/export') ?>" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
 						<span>Export Excel<span></a>
-						<a href="<?php echo site_url('indirect/historiorder/exportpdf') ?>" class="btn btn-danger waves-effect" target="blank"><i class="material-icons">save_alt</i>
+						<a href="<?= site_url('indirect/historiorder/exportpdf') ?>" class="btn btn-danger waves-effect" target="blank"><i class="material-icons">save_alt</i>
 						<span>Export PDF<span></a></h2> -->
 					</div>
 				</div>						
@@ -74,7 +74,7 @@
 								<th>NSB</th>
 								<th>MKIOS Regular</th>
 								<th>MKIOS Bulk</th>
-								<th>GT Pulsa</th>
+								<!-- <th>GT Pulsa</th> -->
 								<th>Aksi</th>
 							</tr>
 						</thead>
@@ -82,39 +82,39 @@
 							<?php foreach ($histori as $hist): ?>
 							<tr>
 								<td>
-									<?php echo $hist->tanggal ?>
+									<?= $hist->tanggal ?>
 								</td>
 								<td>
-									<?php echo $hist->nama_marketing ?>	
+									<?= $hist->nama_marketing ?>	
 								</td>
 								<td class="small">
-									<?php echo $hist->nama_outlet ?>
+									<?= $hist->nama_outlet ?>
 								</td>
 								<td class="small">
-									<?php echo $hist->as ?>
+									<?= $hist->as ?>
 								</td>
 								<td class="small">
-									<?php echo $hist->simpati ?>
+									<?= $hist->simpati ?>
 								</td>
 								<td class="small">
-									<?php echo $hist->loop ?>
+									<?= $hist->loop ?>
 								</td>
 								<td class="small">
-									<?php echo $hist->nsb ?>
+									<?= $hist->nsb ?>
 								</td>
 								<td class="small">
-									<?php echo $hist->mkios_reguler ?>
+									<?= $hist->mkios_reguler ?>
 								</td>
 								<td class="small">
-									<?php echo $hist->mkios_bulk ?>
+									<?= $hist->mkios_bulk ?>
 								</td>
-								<td class="small">
-									<?php echo $hist->gt_pulsa ?>
-								</td>
+								<!-- <td class="small">
+									<?= $hist->gt_pulsa ?>
+								</td> -->
 								<td width='180' class="text-center" >
-									<a href="<?php echo site_url('indirect/historiorder/edit/'.$hist->id_histori_order) ?>"><i class="material-icons">edit</i></a>
-									<a onclick="deleteConfirm('<?php echo site_url('indirect/historiorder/delete/'.$hist->id_histori_order) ?>')" href="#!"><i class="material-icons">delete</i></a>
-									<a href="<?php echo site_url('indirect/historiorder/detail/'.$hist->id_histori_order) ?>"><i class="material-icons">description</i></a>	
+									<a href="<?= site_url('indirect/historiorder/edit/'.$hist->id_histori_order) ?>"><i class="material-icons">edit</i></a>
+									<a onclick="deleteConfirm('<?= site_url('indirect/historiorder/delete/'.$hist->id_histori_order) ?>')" href="#!"><i class="material-icons">delete</i></a>
+									<a href="<?= site_url('indirect/historiorder/detail/'.$hist->id_histori_order) ?>"><i class="material-icons">description</i></a>	
 								</td>
 							</tr>
 							<?php endforeach; ?>

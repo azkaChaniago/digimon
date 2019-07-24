@@ -47,15 +47,10 @@
                             <tr>
                                 <td>MKIOS Bulk<td>
                                 <th><?php echo $histori->mkios_bulk ?></th>
-                                <td>GT Pulsa<td>
-                                <th><?php echo $histori->gt_pulsa ?></th>
-                            </tr>
-                            <tr>
                                 <td>Nama User<td>
                                 <th><?php echo $histori->nama_user ?></th>
-                                <td> <td>
-                                <th></th>
                             </tr>
+                            
                         </table>
                     </div>
                 </div>

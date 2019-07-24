@@ -28,7 +28,7 @@ class Historiorder_model extends CI_Model
             ['field' => 'nsb', 'label' => 'NSB','rules' => 'required'],
             ['field' => 'mkios_reguler', 'label' => 'MKIOS Reguler','rules' => 'required'],
             ['field' => 'mkios_bulk', 'label' => 'MKIOS Bulk','rules' => 'required'],
-            ['field' => 'gt_pulsa', 'label' => 'GT Pulsa','rules' => 'required']
+            // ['field' => 'gt_pulsa', 'label' => 'GT Pulsa','rules' => 'required']
         ];
     }
 
@@ -79,7 +79,7 @@ class Historiorder_model extends CI_Model
             'nsb' => $this->nsb = $post['nsb'],
             'mkios_reguler' => $this->mkios_reguler = $post['mkios_reguler'],
             'mkios_bulk' => $this->mkios_bulk = $post['mkios_bulk'],
-            'gt_pulsa' => $this->gt_pulsa = $post['gt_pulsa'],
+            // 'gt_pulsa' => $this->gt_pulsa = $post['gt_pulsa'],
             'kode_user' => $this->kode_user = $this->session->userdata('id')
         );
         
@@ -101,7 +101,7 @@ class Historiorder_model extends CI_Model
             'nsb' => $this->nsb = $post['nsb'],
             'mkios_reguler' => $this->mkios_reguler = $post['mkios_reguler'],
             'mkios_bulk' => $this->mkios_bulk = $post['mkios_bulk'],
-            'gt_pulsa' => $this->gt_pulsa = $post['gt_pulsa'],
+            // 'gt_pulsa' => $this->gt_pulsa = $post['gt_pulsa'],
             // 'kode_user' => $this->kode_user = $post['kode_user']
         );
         

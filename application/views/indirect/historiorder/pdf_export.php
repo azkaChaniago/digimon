@@ -59,7 +59,7 @@ ob_start();
     <table>
         <tr style="text-align: center"> 
             <thead>
-            <th>Tahun</th><th>Bulan</th><th>Nama Marketing</th><th>Nama Outlet</th><th>Simpati</th><th>AS</th><th>Loop</th><th>NSB</th><th>MKIOS Reguler</th><th>MKIOS Bulk</th><th>GT Pulsa</th>
+            <th>Tahun</th><th>Bulan</th><th>Nama Marketing</th><th>Nama Outlet</th><th>Simpati</th><th>AS</th><th>Loop</th><th>NSB</th><th>MKIOS Reguler</th><th>MKIOS Bulk</th>
             </thead>
         </tr>
         <?php foreach($histori as $hist) : ?>
@@ -74,7 +74,6 @@ ob_start();
             <td style="text-align:right"><?php echo $hist->nsb ?></td>
             <td style="text-align:right"><?php echo $hist->mkios_reguler ?></td>
             <td style="text-align:right"><?php echo $hist->mkios_bulk ?></td>
-            <td style="text-align:right"><?php echo $hist->gt_pulsa ?></td>
         </tr>
         <?php endforeach; ?>
     </table>
