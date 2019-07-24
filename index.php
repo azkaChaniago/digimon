@@ -34,6 +34,10 @@
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
+ * 
+ * @hostinger
+ * temp_domain = http://op1.sintalbc.net/
+ * db_pass = 9lgBwPL0qHcQ48B8Jj
  */
 
 /*

@@ -20,43 +20,27 @@
 					<?php echo $this->session->flashdata('status_msg') ?>
 				</div>
 			<?php endif; ?>
-			<!-- <div class="card">
-				<div class="header">
-					<div class="row">
-						<form action="<?php echo site_url('indirect/outlet/fetchperiode') ?>" method="post">
-							<div class="col-md-5">
-								<div class="form-group form-float">
-									<div class="form-line" id="bs_datepicker_container">
-										<input class="form-control" type="text" name="start" required/>
-										<label class="form-label" for="start">Periode Awal*</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-5">
-								<div class="form-group form-float">
-									<div class="form-line" id="bs_datepicker_container">
-										<input class="form-control" type="text" name="end" required/>
-										<label class="form-label" for="end">Periode Akhir*</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-2">
-								<button name="xls" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
-								<span>Export Excel</span></button>
-								<button name="pdf" class="btn btn-danger waves-effect" target="blank"><i class="material-icons">save_alt</i>
-								<span>Export PDF</span></button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div> -->
-			<!-- DataTables -->
 			<div class="card">
 				<div class="header">
 					<div class="row">
-						<div class="col-md-6"><h2>Outlet</h2></div>
+						<div class="col-md-6">
+							<form action="<?php echo site_url('indirect/outlet/import') ?>" method="post" enctype="multipart/form-data">
+								<div class="col-md-9">
+									<div class="form-group form-float">
+										<div class="form-line">
+											<input class="form-control" type="file" name="import" required/>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<button class="btn btn-success waves-effect">
+										<i class="material-icons">publish</i>
+										<span>Import Excel</span>
+									</button>
+								</div>
+							</form>
+						</div>
 						<div class="col-md-6" style="text-align: right">
-							<h2>
 							<a href="<?php echo site_url('indirect/outlet/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
 							<span>Tambah<span></a>
 
@@ -65,8 +49,15 @@
 							
 							<a href="<?php echo site_url('indirect/outlet/exportpdf') ?>" class="btn btn-danger waves-effect" target="blank"><i class="material-icons">save_alt</i>
 							<span>Export PDF<span></a>
-							</h2>
 						</div>
+					</div>
+				</div>
+			</div>
+			<!-- DataTables -->
+			<div class="card">
+				<div class="header">
+					<div class="row">
+						<div class="col-md-6"><h2>Outlet</h2></div>
 					</div>
 				</div>
 

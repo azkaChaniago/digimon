@@ -20,6 +20,8 @@ class Coverage_model extends CI_Model
     private $galeri_foto;
     private $kode_user;
 
+    private $_batchImport;
+
     public function rules()
     {
         return [
@@ -71,7 +73,9 @@ class Coverage_model extends CI_Model
         $this->db->from($this->table . ' AS o');
         $this->db->join('tbl_marketing AS mar', 'mar.kode_marketing = o.kode_marketing', 'left');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = o.kode_tdc', 'left');
-        $this->db->where('tdc.kode_tdc', $tdc);
+        if ($tdc) {
+            $this->db->where('tdc.kode_tdc', $tdc);
+        }
         return $this->db->get()->result();
     }
 
@@ -223,36 +227,17 @@ class Coverage_model extends CI_Model
         }
     }
 
-    // private function uploadImage()
-    // {
-        // $config['upload_path'] = './upload/event/';
-        // $config['allowed_types'] = 'gif|jpg|png';
-        // $config['file_name'] = uniqid();
-        // $config['overwrite'] = true;
-        // $config['max_size'] = 5120;
-
-    //     $this->load->library('upload', $config);
-
-    //     if (!$this->upload->do_upload('foto_kegiatan'))
-    //     {
-            // $error = array('error' => $this->upload->display_errors());
-            // $this->load->view('admin/direct/event/add', $error);
-            // return "default.png";
-    //     } 
-    //     else
-    //     {
-    //         return $this->upload->data('file_name');
-    //     }        
-    // }
-
-    // private function deleteImage($id)
-    // {
-    //     $post = $this->getById($id);
-    //     if ($post->foto_kegiatan != 'default.png')
-    //     {
-    //         $filename = explode('.', $post->foto_kegiatan)[0];
-    //         return array_map('unlink', glob(FCPATH."upload/event/$filename.*"));
-    //     }
-    // }
+    // IMPORT XLS/CSV 
+    public function setBatchImport($batchImport) 
+    {
+        $this->_batchImport = $batchImport;
+    }
+ 
+    // save data
+    public function importData() 
+    {
+        $data = $this->_batchImport;
+        $this->db->insert_batch($this->table, $data);
+    }
 }
 
