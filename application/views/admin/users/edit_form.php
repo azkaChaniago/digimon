@@ -50,10 +50,10 @@
 							<div class="form-group form-float">
 								<!-- <p>With Search Bar</p> -->
 								<select class="form-control show-tick" name="level" data-live-search="true">
-									<option value="">--- Pilih TDC ---</option>
-									<option value="ADMINISTRATOR" <?= $user->level == 'ADMIN' ? "selected" : "" ?>>ADMIN</option>
-									<option value="ADM_DIRECT" <?= $user->level == 'VIEW DIRECT' ? "selected" : "" ?>>VIEW DIRECT</option>
-									<option value="ADM_INDIRECT" <?= $user->level == 'VIEW INDIRECT' ? "selected" : "" ?>>VIEW INDIRECT</option>
+									<option value="">--- HAK AKSES ---</option>
+									<option value="ADMINISTRATOR" <?= $user->level == 'ADMINISTRATOR' ? "selected" : "" ?>>ADMIN</option>
+									<option value="ADM_DIRECT" <?= $user->level == 'ADM_DIRECT' ? "selected" : "" ?>>VIEW DIRECT</option>
+									<option value="ADM_INDIRECT" <?= $user->level == 'ADM_INDIRECT' ? "selected" : "" ?>>VIEW INDIRECT</option>
 									<option value="DIRECT" <?= $user->level == 'DIRECT' ? "selected" : "" ?>>DIRECT</option>
 									<option value="INDIRECT" <?= $user->level == 'INDIRECT' ? "selected" : "" ?>>INDIRECT</option>
 								</select>
@@ -71,26 +71,21 @@
 									<label class="form-label" for="password-repeat">Ulangi Password*</label>
 								</div>
 							</div>
-							<!-- <?php print_r(array_merge($tdc, $empty)) ?> -->
+							
 							<div class="form-group form-float">
 								<select class="form-control show-tick" 
 								name="kode_tdc" data-live-search="true">
 									<option value="">--- Pilih TDC ---</option>
-									<?php foreach($tdc as $e) : ?>
-										<?php 
-										if ($e->kode_user == '' || $e->kode_user == null || $e->kode_user == $user->kode_user) 
+									<?php foreach($tdc as $e) : 
+										if ($e->kode_tdc == $user->kode_tdc)
 										{
-											if ($e->kode_user == $user->kode_user)
-											{
-												echo "<option value='".$e->kode_tdc."' selected>". $e->nama_tdc . "</option>";
-											}
-											else
-											{
-												echo "<option value='".$e->kode_tdc."'>". $e->nama_tdc . "</option>"; 
-											} 
-										} 
-										?>
-									<?php endforeach; ?>
+											echo "<option value='".$e->kode_tdc."' selected>". $e->nama_tdc . "</option>";
+										}
+										else
+										{
+											echo "<option value='".$e->kode_tdc."'>". $e->nama_tdc . "</option>"; 
+										}
+									endforeach; ?>
 								</select>
 							</div>
 						<div class="clearfix"></div>

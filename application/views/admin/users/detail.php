@@ -14,8 +14,8 @@
             <div class="container">
                 <div class="card">
                     <div class="header">   
-                        <h2 class="text-center">Detail Outlet</h2>
-                        <a href="<?php echo site_url('admin/outlet') ?>" class="btn btn-danger waves-effect"><i class="material-icons">arrow_back</i>
+                        <h2 class="text-center">Detail User</h2>
+                        <a href="<?php echo site_url('admin/user') ?>" class="btn btn-danger waves-effect"><i class="material-icons">arrow_back</i>
                         <span>Kembali<span></a>
                     </div>
                     <div class="body">

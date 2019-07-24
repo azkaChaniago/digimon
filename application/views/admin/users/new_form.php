@@ -61,7 +61,7 @@
 						
 							<div class="form-group form-float">
 								<div class="form-line">
-								<input class="form-control" type="text" name="kode_user" required/>
+								<input class="form-control" type="text" name="kode_user" value="<?= $kode_user ?>" required/>
 									<label class="form-label" for="kode_user">Kode User*</label>
 								</div>
 							</div>
@@ -83,7 +83,7 @@
 							<div class="form-group form-float">
 								<!-- <p>With Search Bar</p> -->
 								<select class="form-control show-tick" name="level" data-live-search="true">
-									<option value="">--- Pilih TDC ---</option>
+									<option value="">--- HAK AKSES ---</option>
 									<option value="ADMINISTRATOR">ADMIN</option>
 									<option value="ADM_DIRECT">VIEW DIRECT</option>
 									<option value="ADM_INDIRECT">VIEW INDIRECT</option>

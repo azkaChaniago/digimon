@@ -45,6 +45,7 @@ class User extends CI_Controller
         $data['user'] = $this->users_model->getTDC();
         $data['tdc'] = $this->users_model->getThisTableRecord('tbl_tdc');
         // $data['empty'] = $this->users_model->hasEmptyField('tbl_tdc', 'kode_user');
+        $data['kode_user'] = $this->users_model->generateKodeUser();
         $this->load->view('admin/users/new_form', $data);
     }
 

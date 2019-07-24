@@ -70,11 +70,11 @@ class Users_model extends CI_Model
     {
         $post = $this->input->post();
         $data = array(
-            'kode_user' => $this->kode_user = $post['kode_user'],
-            'nama_user' => $this->nama_user = $post['nama_user'],
-            'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'level' => $this->level = $post['level'],
-            'password' => $this->password = $post['password'],
+            'kode_user' => $this->kode_user = strtoupper($post['kode_user']),
+            'nama_user' => $this->nama_user = strtoupper($post['nama_user']),
+            'kode_tdc' => $this->kode_tdc = strtoupper($post['kode_tdc']),
+            'level' => $this->level = strtoupper($post['level']),
+            'password' => $this->password = strtoupper($post['password']),
         );
         
         $this->db->set($data);
@@ -85,11 +85,11 @@ class Users_model extends CI_Model
     {
         $post = $this->input->post();
         $data = array(
-            //'kode_user' => $this->kode_user = $post['kode_user'],
-            'nama_user' => $this->nama_user = $post['nama_user'],
-            'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'level' => $this->level = $post['level'],
-            'password' => $this->password = $post['password'],
+            //'kode_user' => $this->kode_user = strtoupper($post['kode_user']),
+            'nama_user' => $this->nama_user = strtoupper($post['nama_user']),
+            'kode_tdc' => $this->kode_tdc = strtoupper($post['kode_tdc']),
+            'level' => $this->level = strtoupper($post['level']),
+            'password' => $this->password = strtoupper($post['password']),
         );
         
         $this->db->set($data);
@@ -110,4 +110,34 @@ class Users_model extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function generateKodeUser() {
+        $query = $this->db->select('kode_user')
+                          ->from('tbl_user')
+                          ->get();
+        $row = $query->last_row();
+        if($row){
+            $idPostfix = (int)substr($row->kode_user, 2) + 1;
+            $nextId = 'U-'.STR_PAD((string)$idPostfix, 3, "0",STR_PAD_LEFT);
+        }
+        else{$nextId = 'U-001';} // For the first time
+        return $nextId;
+    }
+
 }
+
+
+
+// Line Number: 119
+
+// Backtrace:
+
+// File: D:\xampp\htdocs\digimon\application\models\Users_model.php
+// Line: 119
+// Function: _error_handler
+
+// File: D:\xampp\htdocs\digimon\application\controllers\admin\User.php
+// Line: 48
+// Function: generateKodeUser
+
+// File: D:\xampp\htdocs\digimon\index.php
+// Line: 319
