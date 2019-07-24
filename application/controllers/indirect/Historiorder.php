@@ -96,10 +96,10 @@ class Historiorder extends CI_Controller
         $data += [
             'histori' => $histori->getById($id),
             'users' => $histori->userList(),
-            'outlet' => $histori->getThisTableRecord('tbl_outlet', $data['tdc']),
-            'marketing' => $histori->getThisTableRecord('tbl_marketing', $data['tdc']),
+            'outlet' => $histori->getThisTableRecord('tbl_outlet', "kode_tdc = $data[tdc]"),
+            'marketing' => $histori->getThisTableRecord('tbl_marketing', "kode_tdc = '$data[tdc]' AND (divisi = 'canvasser' OR divisi = 'collector')"),
         ];
-
+        
         if (!$data['histori']) show_404();
 
         $this->load->view('indirect/historiorder/edit_form', $data);
