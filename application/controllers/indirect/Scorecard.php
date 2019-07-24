@@ -84,7 +84,7 @@ class Scorecard extends CI_Controller
         }
         $data = $this->userSession();
         $data['users'] = $this->scorecard_model->userList();
-        $data['marketing'] = $this->scorecard_model->getScorecard($data['tdc']);
+        $data['marketing'] = $this->scorecard_model->getScorecard($data['id']);
         $this->load->view('indirect/scorecard/new_form', $data);
     }
 

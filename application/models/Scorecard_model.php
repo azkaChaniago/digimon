@@ -50,10 +50,9 @@ class Scorecard_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_marketing AS m');
-        // $this->db->join('tbl_marketing AS m', 'm.kode_marketing = t.kode_marketing', 'left');
         $this->db->join('tbl_user AS u', 'u.kode_tdc = m.kode_tdc', 'left');
         $this->db->where('m.divisi', 'canvasser');
-        $this->db->where('u.kode_tdc', $kode);
+        $this->db->where('u.kode_user', $kode);
         return $this->db->get()->result();
     }
 
