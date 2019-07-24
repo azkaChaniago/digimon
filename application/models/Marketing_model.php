@@ -45,7 +45,17 @@ class Marketing_model extends CI_Model
 
     public function getRelated()
     {
-        $this->db->select('*');
+        $this->db->select('
+            kode_marketing,
+            t.kode_tdc,
+            divisi,
+            nama_marketing,
+            nama_tdc,
+            mkios,
+            no_hp,
+            m.alamat as alamat,
+            email
+        ');
         $this->db->from($this->table . ' AS m');
         $this->db->join('tbl_tdc AS t', 'm.kode_tdc = t.kode_tdc', 'inner');
         // $this->db->where('o.id_target', $id);

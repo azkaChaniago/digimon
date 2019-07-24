@@ -32,7 +32,7 @@
 						</div> 						
 					</div>
 				</div>
-
+	
 				<div class="body">
 					<div class="table-responsive">
 						<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
@@ -53,7 +53,7 @@
 										<?php echo $k->nama_tdc ?>
 									</td>
 									<td>
-										<?php echo $k->nama_petugas ?>	
+										<?php echo $k->nama_marketing ?>	
 									</td>
 									<td class="small">
 										<?php echo $k->nama_komunitas ?>

@@ -28,7 +28,7 @@
 
 						<div class="row">
 							<div class="col-md-6">
-								<div class="form-group form-float">
+								<!-- <div class="form-group form-float">
 									<select class="form-control show-tick" 
 									name="kode_tdc" data-live-search="true">
 										<option value="">--- PILIH TDC ---</option>
@@ -36,14 +36,17 @@
 											<option value="<?php echo $t->kode_tdc ?>" <?= $t->kode_tdc == $komunitas->kode_tdc ? "selected" : "" ?> ><?php echo $t->nama_tdc ?></option>
 										<?php endforeach; ?>
 									</select>
+								</div> -->
+								
+								<div class="form-group form-float">
+									<select class="form-control show-tick" name="nama_petugas" data-live-search="true">
+										<option value="">--- PILIH PETUGAS ---</option>
+										<?php foreach($marketing as $m) : ?>
+											<option value="<?= $m->kode_marketing ?>" <?= $m->kode_marketing == $komunitas->kode_marketing ? "selected" : "" ?> ><?= $m->nama_marketing ?></option>
+										<?php endforeach; ?>
+									</select>
 								</div>
 
-								<div class="form-group form-float">
-									<div class="form-line">
-										<input class="form-control" type="text" name="nama_petugas" value="<?= $komunitas->nama_petugas ?>" required/>
-										<label class="form-label" for="nama_petugas">Nama Petugas*</label>
-									</div>
-								</div>
 
 								<div class="form-group form-float">
 									<div class="form-line">

@@ -26,7 +26,7 @@ class Komunitas extends CI_Controller
             'access' => $this->session->userdata('access'),
             'id' => $this->session->userdata('id'),
             'user' => $this->session->userdata('user'),
-            'tdc' => $this->session->userdata('tdc')
+            'kode_tdc' => $this->session->userdata('tdc')
         );
 
         return $data;
@@ -36,7 +36,7 @@ class Komunitas extends CI_Controller
     {
         is_logged_in();
         $data = $this->userSession();
-        $data['komunitas'] = $this->komunitas_model->getRelated($data['tdc']);
+        $data['komunitas'] = $this->komunitas_model->getRelated($data['kode_tdc']);
         $this->load->view('direct/komunitas/list', $data);
     }
 
@@ -59,9 +59,11 @@ class Komunitas extends CI_Controller
                 die(validation_errors());
             }
         }
+        $data = $this->userSession();
         $data['komunitas'] = $this->komunitas_model->getAll();
         $data['tdc'] = $this->komunitas_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->komunitas_model->getThisTableRecord('tbl_marketing');
+        $condition = "kode_tdc = '$data[kode_tdc]' AND (divisi = 'AO YNC' OR divisi = 'EVENT OFFICER' OR divisi = 'PROMOTOR')";
+        $data['marketing'] = $this->komunitas_model->getThisTableRecord('tbl_marketing', $condition);
         $data['user'] = $this->komunitas_model->getThisTableRecord('tbl_user');
         $this->load->view('direct/komunitas/new_form', $data);
     }
@@ -88,10 +90,12 @@ class Komunitas extends CI_Controller
             }
         }
 
+        $data = $this->userSession();
         $data['komunitas'] = $komunitas->getById($id);
         $data['related'] = $komunitas->getRelated();
         $data['tdc'] = $this->komunitas_model->getThisTableRecord('tbl_tdc');
-        $data['marketing'] = $this->komunitas_model->getThisTableRecord('tbl_marketing');
+        $condition = "kode_tdc = '$data[kode_tdc]' AND (divisi = 'AO YNC' OR divisi = 'EVENT OFFICER' OR divisi = 'PROMOTOR')";
+        $data['marketing'] = $this->komunitas_model->getThisTableRecord('tbl_marketing', $condition);
         $data['user'] = $this->komunitas_model->getThisTableRecord('tbl_user');
         if (!$data['komunitas']) show_404();
 
@@ -120,7 +124,7 @@ class Komunitas extends CI_Controller
         // die($start . $end);
         $data = $this->userSession();
         $data += [
-            'export' => $this->komunitas_model->getRelated($data['tdc'])
+            'export' => $this->komunitas_model->getRelated($data['kode_tdc'])
         ];
 
         $this->load->view('direct/komunitas/pdf_export', $data);
@@ -129,7 +133,7 @@ class Komunitas extends CI_Controller
     public function export()
     {
         $data = $this->userSession();
-        $export = $this->komunitas_model->getRelated($data['tdc']);
+        $export = $this->komunitas_model->getRelated($data['kode_tdc']);
         $spreadsheet = new Spreadsheet();
 
         $spreadsheet->getProperties()

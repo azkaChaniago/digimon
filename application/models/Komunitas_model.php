@@ -19,7 +19,7 @@ class Komunitas_model extends CI_Model
     public function rules()
     {
         return [
-            ['field' => 'kode_tdc', 'label' => 'Kode TDC','rules' => 'required'],
+            // ['field' => 'kode_tdc', 'label' => 'Kode TDC','rules' => 'required'],
             ['field' => 'nama_petugas', 'label' => 'Nama Petugas','rules' => 'required'],
             ['field' => 'nama_komunitas', 'label' => 'Nama Komunitas','rules' => 'required'],
             ['field' => 'nama_ketua', 'label' => 'Nama Ketua','rules' => 'required'],   
@@ -40,9 +40,13 @@ class Komunitas_model extends CI_Model
         return $this->db->get_where($this->table, ['id_komunitas' => $id])->row();
     }
 
-    public function getThisTableRecord($table)
+    public function getThisTableRecord($table, $condition=null)
     {
-        return $this->db->get($table)->result();
+        if ($condition) {
+            return $this->db->query("SELECT * FROM $table WHERE $condition")->result();
+        } else {
+            return $this->db->query("SELECT * FROM $table")->result();
+        }
     }
 
     public function getRelated($tdc=null)
@@ -50,7 +54,7 @@ class Komunitas_model extends CI_Model
         $this->db->select('*');
         $this->db->from($this->table . ' AS k');
         $this->db->join('tbl_tdc AS tdc', 'tdc.kode_tdc = k.kode_tdc', 'left');
-        $this->db->join('tbl_user AS usr', 'usr.kode_user = k.kode_user', 'left');
+        $this->db->join('tbl_marketing AS m', 'm.kode_marketing = k.kode_marketing', 'left');
         if ($tdc)
             $this->db->where('k.kode_tdc', $tdc);
         return $this->db->get()->result();
@@ -70,8 +74,8 @@ class Komunitas_model extends CI_Model
     {
         $post = $this->input->post();
         $data = array(
-            'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'nama_petugas' => $this->nama_petugas = strtoupper($post['nama_petugas']),
+            'kode_tdc' => $this->kode_tdc = $this->session->userdata['tdc'],
+            'kode_marketing' => $this->nama_petugas = strtoupper($post['nama_petugas']),
             'nama_komunitas' => $this->nama_komunitas = strtoupper($post['nama_komunitas']),
             'nama_ketua' => $this->nama_ketua = strtoupper($post['nama_ketua']),
             'alamat_komunitas' => $this->alamat = strtoupper($post['alamat']),
@@ -89,8 +93,8 @@ class Komunitas_model extends CI_Model
     {
         $post = $this->input->post();
         $data = array(
-            'kode_tdc' => $this->kode_tdc = $post['kode_tdc'],
-            'nama_petugas' => $this->nama_petugas = strtoupper($post['nama_petugas']),
+            'kode_tdc' => $this->kode_tdc = $this->session->userdata['tdc'],
+            'kode_marketing' => $this->nama_petugas = strtoupper($post['nama_petugas']),
             'nama_komunitas' => $this->nama_komunitas = strtoupper($post['nama_komunitas']),
             'nama_ketua' => $this->nama_ketua = strtoupper($post['nama_ketua']),
             'alamat_komunitas' => $this->alamat = strtoupper($post['alamat']),
