@@ -73,7 +73,7 @@ class TDC extends CI_Controller
         }
 
         $data['tdc'] = $user->getById($id);
-        $data['related'] = $user->getRelated();
+        // $data['related'] = $user->getRelated();
         $data['user'] = $this->tdc_model->getThisTableRecord('tbl_user');
         if (!$data['tdc']) show_404();
 
