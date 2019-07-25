@@ -315,7 +315,7 @@ class Outlet extends CI_Controller
                 $filtered = array_filter($fetchData, function($v){return array_filter($v) != array();});
                 $test = array();
                 foreach ($filtered as $f => $filt) {
-                    $temp = $filt + array('id_outlet' => $this->coverage_model->generateKodeOutlet($f), 'kode_user' => $this->session->userdata('id'));
+                    $temp = $filt + array('id_outlet' => $this->coverage_model->generateKodeOutlet($f+1), 'kode_user' => $this->session->userdata('id'));
                     array_push($test, $temp);
                     $temp = null;
                 }

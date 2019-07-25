@@ -247,7 +247,7 @@ class Coverage_model extends CI_Model
             $idPostfix = (int)substr($row->id_outlet, 2) + $i;
             $nextId = 'O-'.STR_PAD((string)$idPostfix, 3, "0",STR_PAD_LEFT);
         }
-        else{$nextId = 'O-001';} // For the first time
+        else{$nextId = 'O-00'. $i;} // For the first time
         return $nextId;
     }
 }
