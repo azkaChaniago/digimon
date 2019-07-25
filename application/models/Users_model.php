@@ -124,20 +124,3 @@ class Users_model extends CI_Model
     }
 
 }
-
-
-
-// Line Number: 119
-
-// Backtrace:
-
-// File: D:\xampp\htdocs\digimon\application\models\Users_model.php
-// Line: 119
-// Function: _error_handler
-
-// File: D:\xampp\htdocs\digimon\application\controllers\admin\User.php
-// Line: 48
-// Function: generateKodeUser
-
-// File: D:\xampp\htdocs\digimon\index.php
-// Line: 319

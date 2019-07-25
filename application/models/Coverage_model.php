@@ -239,5 +239,16 @@ class Coverage_model extends CI_Model
         $data = $this->_batchImport;
         $this->db->insert_batch($this->table, $data);
     }
+
+    public function generateKodeOutlet($i) {
+        $query = $this->db->select('id_outlet')->from($this->table)->get();
+        $row = $query->last_row();
+        if($row){
+            $idPostfix = (int)substr($row->id_outlet, 2) + $i;
+            $nextId = 'O-'.STR_PAD((string)$idPostfix, 3, "0",STR_PAD_LEFT);
+        }
+        else{$nextId = 'O-001';} // For the first time
+        return $nextId;
+    }
 }
 

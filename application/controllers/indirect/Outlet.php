@@ -314,12 +314,12 @@ class Outlet extends CI_Controller
                 $data['dataInfo'] = $fetchData;
                 $filtered = array_filter($fetchData, function($v){return array_filter($v) != array();});
                 $test = array();
-                foreach ($filtered as $f) {
-                    array_push($test, $f);
+                foreach ($filtered as $f => $filt) {
+                    $temp = $filt + array('id_outlet' => $this->coverage_model->generateKodeOutlet($f), 'kode_user' => $this->session->userdata('id'));
+                    array_push($test, $temp);
+                    $temp = null;
                 }
-
-                die(print_r($test));
-                $this->coverage_model->setBatchImport($filtered);
+                $this->coverage_model->setBatchImport($test);
                 $this->coverage_model->importData();
             } else {
                 echo "Please import correct file, did not match excel sheet column";
