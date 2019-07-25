@@ -23,16 +23,16 @@
 								<div class="col-md-5">
 									<div class="form-group form-float">
 										<div class="form-line" id="bs_datepicker_container">
-											<input class="form-control" type="text" name="start" required/>
-											<label class="form-label" for="start">Periode Awal*</label>
+											<input class="form-control" type="text" name="start" placeholder="Tanggal periode awal" required/>
+											<!-- <label class="form-label" for="start">Periode Awal*</label> -->
 										</div>
 									</div>
 								</div>
 								<div class="col-md-5">
 									<div class="form-group form-float">
 										<div class="form-line" id="bs_datepicker_container">
-											<input class="form-control" type="text" name="end" required/>
-											<label class="form-label" for="end">Periode Akhir*</label>
+											<input class="form-control" type="text" name="end" placeholder="Tanggal periode akhir" required/>
+											<!-- <label class="form-label" for="end">Periode Akhir*</label> -->
 										</div>
 									</div>
 								</div>

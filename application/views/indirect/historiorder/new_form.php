@@ -28,8 +28,8 @@
 					
 						<div class="form-group form-float">
 							<div class="form-line" id="bs_datepicker_container">
-								<input class="form-control <?php echo form_error('tanggal') ? 'is-invalid':'' ?>" type="text" name="tanggal"  required/>
-								<label class="form-label" for="tanggal">Tanggal*</label>
+								<input class="form-control <?php echo form_error('tanggal') ? 'is-invalid':'' ?>" type="text" name="tanggal" placeholder="Tanggal" required/>
+								<!-- <label class="form-label" for="tanggal">Tanggal*</label> -->
 							</div>
 						</div>
 

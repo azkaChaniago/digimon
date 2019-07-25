@@ -40,8 +40,8 @@
 
 								<div class="form-group form-float">
 									<div class="form-line" id="bs_datepicker_container">
-										<input class="form-control <?php echo form_error('tgl_penjualan') ? 'is-invalid':'' ?>" type="text" name="tgl_penjualan" required/>
-										<label class="form-label" for="tgl_penjualan">Tanggal Penjualan</label>
+										<input class="form-control <?php echo form_error('tgl_penjualan') ? 'is-invalid':'' ?>" type="text" name="tgl_penjualan" placeholder="Tanggal" required/>
+										<!-- <label class="form-label" for="tgl_penjualan">Tanggal Penjualan</label> -->
 									</div>
 								</div>
 

@@ -40,8 +40,8 @@
 
 								<div class="form-group form-float">
 									<div class="form-line" id="bs_datepicker_container">
-										<input class="form-control" type="text" name="tanggal" value="<?= date('d/m/Y', strtotime($mercent->tanggal)) ?>" required/>
-										<label class="form-label" for="tanggal">Tanggal HVC</label>
+										<input class="form-control" type="text" name="tanggal" value="<?= date('d/m/Y', strtotime($mercent->tanggal)) ?>" placeholder="Tanggal" required/>
+										<!-- <label class="form-label" for="tanggal">Tanggal HVC</label> -->
 									</div>
 								</div>
 

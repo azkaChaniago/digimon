@@ -40,8 +40,8 @@
 
 								<div class="form-group form-float">
 									<div class="form-line" id="bs_datepicker_container">
-										<input class="form-control" type="text" name="tgl_hvc" required/>
-										<label class="form-label" for="tgl_hvc">Tanggal HVC</label>
+										<input class="form-control" type="text" name="tgl_hvc" placeholder="Tanggal HVC" required/>
+										<!-- <label class="form-label" for="tgl_hvc">Tanggal HVC</label> -->
 									</div>
 								</div>
 

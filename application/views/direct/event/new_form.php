@@ -40,8 +40,8 @@
 
 								<div class="form-group form-float">
 									<div class="form-line" id="bs_datepicker_container">
-										<input class="form-control <?php echo form_error('tgl_event') ? 'is-invalid':'' ?>" type="text" name="tgl_event" required/>
-										<label class="form-label" for="tgl_event">Tanggal Event</label>
+										<input class="form-control <?php echo form_error('tgl_event') ? 'is-invalid':'' ?>" type="text" name="tgl_event" placeholder="Tanggal Event" required/>
+										<!-- <label class="form-label" for="tgl_event">Tanggal Event</label> -->
 									</div>
 								</div>
 
@@ -58,8 +58,7 @@
 
 								<div class="form-group form-float">
 									<div class="form-line">
-									<input class="form-control <?php echo form_error('divisi') ? 'is-invalid':'' ?>"
-										type="text" name="divisi" required/>
+									<input class="form-control <?php echo form_error('divisi') ? 'is-invalid':'' ?>" type="text" name="divisi" required/>
 										<label class="form-label" for="divisi">Divisi*</label>
 									</div>
 								</div>
@@ -69,8 +68,7 @@
 												
 								<div class="form-group form-float">
 									<div class="form-line">
-									<input class="form-control <?php echo form_error('nama_event') ? 'is-invalid':'' ?>"
-										type="text" name="nama_event" required/>
+									<input class="form-control <?php echo form_error('nama_event') ? 'is-invalid':'' ?>" type="text" name="nama_event" required/>
 										<label class="form-label" for="nama_event">Nama Event*</label>
 									</div>
 								</div>
