@@ -157,7 +157,7 @@ class Outlet extends CI_Controller
             ->setCategory('Outlet');
 
         $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A1', 'Nama  Outlet')
+            ->setCellValue('A1', 'Nama_Outlet')
             ->setCellValue('B1', 'Kabupaten')
             ->setCellValue('C1', 'Kecamatan')
             ->setCellValue('D1', 'Alamat')

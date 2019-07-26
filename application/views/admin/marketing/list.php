@@ -18,12 +18,12 @@
 				<div class="row">
 					<div class="col-md-6"><h2>Data Petugas</h2></div>
 					<div class="col-md-6" style="text-align: right">
-						<h2><a href="<?php echo site_url('admin/marketing/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
-						<span>Tambah<span></a></h2>
-						<!-- <a href="<?php echo site_url('admin/marketing/export') ?>" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
-						<span>Export Excel<span></a>
-						<a href="<?php echo site_url('admin/marketing/exportpdf') ?>" class="btn btn-danger waves-effect" target="blank"><i class="material-icons">save_alt</i>
-						<span>Export PDF<span></a></h2> -->
+						<h2>
+							<a href="<?php echo site_url('admin/marketing/add') ?>" class="btn btn-warning waves-effect"><i class="material-icons">add</i>
+							<span>Tambah<span></a>
+							<a href="<?php echo site_url('admin/marketing/export') ?>" class="btn btn-success waves-effect"><i class="material-icons">save_alt</i>
+							<span>Export Excel<span></a>
+						</h2>
 					</div>
 				</div>
 				</div>
