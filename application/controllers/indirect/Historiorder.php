@@ -43,6 +43,14 @@ class Historiorder extends CI_Controller
         $this->load->view('indirect/historiorder/list', $data);
     }
 
+    // Select Option in add/edit form
+    public function getOutlet()
+    {
+        $category_id = $this->input->post('id');
+        $data = $this->historiorder_model->getThisTableRecord('tbl_outlet', "kode_marketing = '$category_id'");
+        echo json_encode($data);
+    }
+
     public function add()
     {
         is_logged_in();
@@ -65,16 +73,9 @@ class Historiorder extends CI_Controller
         $condition = "kode_tdc = '$data[tdc]' AND (divisi = 'canvasser' OR divisi = 'collector')";
         $data['marketing'] = $this->historiorder_model->getThisTableRecord('tbl_marketing', $condition);
         $data['outlet'] = $this->historiorder_model->getThisTableRecord('tbl_outlet', "kode_tdc = $data[tdc]");
+        // $this->load->view('indirect/historiorder/test', $data);
         $this->load->view('indirect/historiorder/new_form', $data);
     }
-
-    // public function addProcess()
-    // {
-    //     $histori = $this->historiorder_model;
-    //     $histori->save();
-    //     echo "good";    
-
-    // }
 
     public function edit($id=null)
     {
